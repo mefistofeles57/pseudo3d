@@ -3,6 +3,7 @@ from Camera import Camera
 from Point import Point
 from Road import VisibleSegment
 from Road import Road
+from Object import Object
 
 class DefaultDrawer:
     def draw(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2):
@@ -67,14 +68,46 @@ class DefaultDrawer:
                 if color!=None:
                     self.pinta(surface,puntos,color)
 
-    def drawObj(self,surface:pygame.Surface,c:Camera,cache,obj):
+    def drawObj(self,surface:pygame.Surface,c:Camera,obj:Object,vs:VisibleSegment,shadow=False):
         #proyecta cada punto... tal vez haya que usar la LUT
         p1=c.project(Point(obj.x,obj.y,obj.z))
+        cache=vs.visualProfile.cache
         img=cache.getImage(obj.img,p1.z)
         anchor=cache.anchor[obj.img]
         if img!=None:
-            punto=(p1.x-(img.get_width()*anchor),p1.y-img.get_height())
-            surface.blit(img,punto)
+            if shadow:
+                self.drawShadow(surface,img,p1,vs)
+            else:
+                punto=(p1.x-(img.get_width()*anchor),p1.y-img.get_height())
+                surface.blit(img,punto)
+
+    def drawShadow(self,surface:pygame.Surface,img,p:Point,obj:VisibleSegment):
+        #calcula el tamaño de la sombra en función al ancho del objeto y a un tamaño fijo
+        #dibuja una elipse en el punto p con el ancho calculado y el color y alfa indicados en el vp
+        profile=obj.visualProfile
+        shadow_color=profile.shadow_color
+        shadow_alpha=profile.shadow_alpha
+        shadow_width_factor=profile.shadow_width_factor
+        shadow_height=profile.shadow_height
+
+
+        scale=p.z
+        width=img.get_width()*shadow_width_factor
+        height=shadow_height*scale
+
+
+        shadow = pygame.Surface((width, height), pygame.SRCALPHA)
+
+        pygame.draw.ellipse(
+            shadow,
+            (shadow_color[0], shadow_color[1], shadow_color[2], shadow_alpha),      # RGBA
+            (0, 0, width, height)
+        )
+
+        surface.blit(shadow, (p.x - width // 2, p.y - height // 2))
+
+
+
 
     def pinta(self,surface,puntos,color):
         pygame.draw.polygon(surface,color,puntos,0)

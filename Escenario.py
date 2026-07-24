@@ -1,11 +1,15 @@
 import pygame
 from ImageCache import ImageCache
 from DefaultDrawer import DefaultDrawer
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from GameContext import GameContext
 
 class Escenario:
 
 
-    def __init__(self,LUTh,LUTm,LUTl):
+    def __init__(self,context:"GameContext"):
         self.name="Escenario"
         #carretera
         self.half_width=0.8
@@ -19,12 +23,11 @@ class Escenario:
         self.arcen_width=0.15
         self.arcen_freq=1
         self.arcen_color=[(102,102,102)]
-#        self.lineas=[]
-#        self.lineas.append({"name":"arcen izq","color":(102,102,102),"start":-self.half_width-0.15,"width":0.15,"offset":0,"freq":1})
-#        self.lineas.append({"name":"arcen der","color":(102,102,102),"start":self.half_width,"width":0.15,"offset":0,"freq":1})
-#        self.lineas.append({"name":"ext izquierda","color":(255,255,255),"start":-self.half_width,"width":0.01,"offset":0,"freq":1})
-#        self.lineas.append({"name":"ext derecha","color":(255,255,255),"start":self.half_width-0.01,"width":0.01,"offset":0,"freq":1})
-#        self.lineas.append({"name":"central","color":(255,255,255),"start":-0.0025,"width":0.005,"offset":0,"freq":2})
+        #sombra
+        self.shadow_color=(0,0,0)
+        self.shadow_alpha=60
+        self.shadow_width_factor=1.2
+        self.shadow_height=0.05
 
         #fondo
         self.f_img1=pygame.image.load("img/hills.png").convert_alpha()
@@ -32,13 +35,13 @@ class Escenario:
         self.bgcolor=(28,40,52)
 
         #cache
-        self.cache=ImageCache(LUTh,LUTm,LUTl)
-        self.cache.addImage("signal.arrow","signal.arrow.png",ImageCache.HIGH,0.5)
-        self.cache.addImage("arbol","arbol.png",ImageCache.HIGH,0.5)
-        self.cache.addImage("arbusto","arbusto.png",ImageCache.HIGH,0.5)
-        self.cache.addImage("farola","farola.png",ImageCache.HIGH,0.7)
-        self.cache.addImage("palmera","palmera.png",ImageCache.HIGH,0.5)
-        self.cache.addImage("piedra","piedra.png",ImageCache.HIGH,0.5)
+        self.cache=ImageCache(context)
+        self.cache.addImage("signal.arrow","signal.arrow.png",0.5)
+        self.cache.addImage("arbol","arbol.png",0.5)
+        self.cache.addImage("arbusto","arbusto.png",0.5)
+        self.cache.addImage("farola","farola.png",0.7)
+        self.cache.addImage("palmera","palmera.png",0.5)
+        self.cache.addImage("piedra","piedra.png",0.5)
 
         self.drawer=DefaultDrawer()
 

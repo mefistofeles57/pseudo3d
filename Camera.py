@@ -2,12 +2,14 @@ import pygame
 import math
 import copy
 import time
-from Juego import Player
-from Juego import Juego
 from Road import Road
 from Road import VisibleSegment
 from Point import Point
+from Player import Player
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from GameContext import GameContext
 
 
 class Camera:
@@ -29,9 +31,6 @@ class Camera:
 
         self.focal=(self.w/2)/math.tan(math.radians(self.fov)/2)
 
-        self.LUTh=self.getScaleTable(150)
-        self.LUTm=self.getScaleTable(100)
-        self.LUTl=self.getScaleTable(50)
         self.buffer=[]
         self.objbuffer=[]
 
@@ -45,45 +44,14 @@ class Camera:
         self.road=road
 
 
-
-    def getScaleTable(self,numtramos):
-        escalas=[]
-        distancia=(self.h+(numtramos))-self.horizon
-        delta=distancia/numtramos
-
-        for i in range(numtramos):
-            y=(delta*(i))+self.horizon
-            #se usa la y del centro del tramo para minimizar el error
-            y_centro=(delta*(i+0.5))+self.horizon
-            z=self.unproject(y_centro)
-
-            if z>0.0:
-                p1=self.project(Point(0.0,0.0,z))
-                escalas.append({"index":i,"z":z,"y":y,"scale":p1.z})
-
-        return escalas
-
-    def unproject(self,target_y):
-        z0=0
-        z1=self.view_distance
-
-        while z1-z0 > 0.001:
-            zm = (z0+z1) /2
-            if self.project(Point(0.0,0.0,zm)).y < target_y:
-                z1=zm
-            else:
-                z0=zm
-        return zm
-
-
     def follow(self,car:Player):
         pass
 
 
-    def update(self,dt,j:Juego):
+    def update(self,dt,context: "GameContext"):
 
         #ajuste de camara
-        keys=j.keys
+        keys=context.keys
 
         current_time=time.time()
         last_time=self.time_button
@@ -93,38 +61,38 @@ class Camera:
             self.time_button=current_time
         #altura        
             if keys[pygame.K_1]:
-                j.camera.height-=0.1
+                context.camera.height-=0.1
             elif keys[pygame.K_2]:
-                j.camera.height+=0.1
+                context.camera.height+=0.1
     #pitch
             elif keys[pygame.K_3]:
-                j.camera.pitch-=0.01
+                context.camera.pitch-=0.01
             elif keys[pygame.K_4]:
-                j.camera.pitch+=0.01
+                context.camera.pitch+=0.01
     #fov
             elif keys[pygame.K_5]:
-                j.camera.fov-=1.0
+                context.camera.fov-=1.0
             elif keys[pygame.K_6]:
-                j.camera.fov+=1.0
+                context.camera.fov+=1.0
     #distance
             elif keys[pygame.K_7]:
-                j.camera.view_distance-=1.0
+                context.camera.view_distance-=1.0
             elif keys[pygame.K_8]:
-                j.camera.view_distance+=1.0
+                context.camera.view_distance+=1.0
     #horizon
             elif keys[pygame.K_9]:
-                j.camera.horizon-=1.0
+                context.camera.horizon-=1.0
             elif keys[pygame.K_0]:
-                j.camera.horizon+=1.0
+                context.camera.horizon+=1.0
             else:
                 self.time_button=last_time
 
 
         #posicion de camara
-        self.z+=j.player.speed*dt
+        self.z+=context.player.speed*dt
 
-        self.getBuffer(self.buffer,j.road)
-        self.getObjBuffer(self.objbuffer,j.road)
+        self.getBuffer(self.buffer,context.road)
+        self.getObjBuffer(self.objbuffer,context.road)
 
         if len(self.buffer)==0:
             return
@@ -264,7 +232,10 @@ class Camera:
             #para cada objeto visible en esa franja
             for item in reversed(self.objbuffer):
                 if item.z>=vs.start.z and item.z<vs.end.z:
-                    vs.visualProfile.drawer.drawObj(s,self,vs.visualProfile.cache,item)
+                    vs.visualProfile.drawer.drawObj(s,self,item,vs,True)
+            for item in reversed(self.objbuffer):
+                if item.z>=vs.start.z and item.z<vs.end.z:
+                    vs.visualProfile.drawer.drawObj(s,self,item,vs,False)
 
 
 
