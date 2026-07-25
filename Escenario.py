@@ -23,7 +23,7 @@ class Escenario:
         self.arcen_width=0.15
         self.arcen_freq=1
         self.arcen_color=[(102,102,102)]
-        #sombra
+        #sombra(
         self.shadow_color=(0,0,0)
         self.shadow_alpha=60
         self.shadow_width_factor=1.2
@@ -36,12 +36,12 @@ class Escenario:
 
         #cache
         self.cache=ImageCache(context)
-        self.cache.addImage("signal.arrow","signal.arrow.png",0.5)
-        self.cache.addImage("arbol","arbol.png",0.5)
-        self.cache.addImage("arbusto","arbusto.png",0.5)
-        self.cache.addImage("farola","farola.png",0.7)
-        self.cache.addImage("palmera","palmera.png",0.5)
-        self.cache.addImage("piedra","piedra.png",0.5)
+        self.cache.addImage("signal.arrow","signal.arrow.png",(0.5,1.0),True,True)
+        self.cache.addImage("arbol","arbol.png",(0.5,1.0),True,True)
+        self.cache.addImage("arbusto","arbusto.png",(0.5,1.0),True,True)
+        self.cache.addImage("farola","farola.png",(0.7,0.98),True,True)
+        self.cache.addImage("palmera","palmera.png",(0.5,1.0),True,True)
+        self.cache.addImage("piedra","piedra.png",(0.5,1.0),True,False)
 
         self.drawer=DefaultDrawer()
 

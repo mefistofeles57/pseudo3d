@@ -67,7 +67,7 @@ class GameContext:
             objects=MapGenerator.objects(objects,road.segments[-390:],"arbusto",1.0,0.4,3.5,0.3,0.3)
             objects=MapGenerator.objects(objects,road.segments[-390:],"arbusto",1.0,0.4,-4.0,0.3,0.3)
             objects=MapGenerator.objects(objects,road.segments[-390:],"arbusto",1.0,0.4,4.0,0.3,0.3)
-            objects=MapGenerator.objects(objects,road.segments[-390:],"piedra",10.0,0.3,-1.5,0.3,0.3)
+            objects=MapGenerator.objects(objects,road.segments[-390:],"piedra",10.0,0.2,-1.5,0.3,0.3)
             objects=MapGenerator.objects(objects,road.segments[-390:],"piedra.flip",10.0,0.3,1.5,0.3,0.3)
 
         ##position,x,width,offset,freq,color

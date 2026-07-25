@@ -1,6 +1,7 @@
 import pygame
 import math
 from Point import Point
+from Image import Image
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -15,7 +16,7 @@ class ImageCache:
 
     def __init__(self,context:"GameContext"):
         self.images={}
-        self.anchor={}
+        self.metadata={}
         self.inv_log_ratio=0.0
         self.LUT=[]
         self.getScaleTable()
@@ -25,24 +26,22 @@ class ImageCache:
         p=context.camera.project(Point(0.0,0.0,1.0))
         self.resizeFactor=p.z/ImageCache.resize_at_1
 
-    def addImage(self,name,file,anchor,flip=True):
+    def addImage(self,name,file,anchor,flip=True,shadow=False):
         img=pygame.image.load("img/"+file).convert_alpha()
-        self.newImage(name,img,anchor)
+        self.newImage(name,img,anchor,shadow)
         if flip==True:
             img=pygame.transform.flip(img,True,False)
-            self.newImage(name+".flip",img,1-anchor)
+            anchor_x=anchor[0]
+            anchor_y=anchor[1]
+            self.newImage(name+".flip",img,(1-anchor_x,anchor_y),shadow)
 
-    def newImage(self,name,img,anchor):
+    def newImage(self,name,img,anchor,shadow):
         self.images[name]=[]
-        self.anchor[name]=anchor
+        metadata=Image(name,anchor[0],anchor[1],shadow)
+        self.metadata[name]=metadata
         #escalados
         w = img.get_width()
         h = img.get_height()
-        #temporalmente hasta que tenga mejores imagenes
-        #img= pygame.transform.scale(img,(int(w * 0.5), int(h * 0.5)))
-        w = img.get_width()
-        h = img.get_height()
-
 
 
         for scale in self.LUT:

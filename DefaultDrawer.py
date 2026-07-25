@@ -6,6 +6,19 @@ from Road import Road
 from Object import Object
 
 class DefaultDrawer:
+
+    def brillo(self,distancia,max):
+        min_brillo=1.0
+        max_brillo=0.1
+        min_distancia=0.0
+        max_distancia=max
+
+        #y = y₁ + (x - x₁) × (y₂ - y₁) / (x₂ - x₁)
+
+        y=min_brillo +(((distancia-min_distancia)*(max_brillo-min_brillo))/(max_distancia-min_distancia))
+        return y
+
+
     def draw(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2):
         borde_i=-1
         borde_d=c.w
@@ -23,8 +36,13 @@ class DefaultDrawer:
         p3=Point( pc2.x-(profile.half_width*pc2.z) , pc2.y )
         p4=Point( pc2.x+(profile.half_width*pc2.z) , pc2.y )
 
-        road_color=profile.road_colors[vs.index%2]
-        outside_color=profile.outside_colors[vs.index%2]
+        #road_color=profile.road_colors[vs.index%2]
+        #outside_color=profile.outside_colors[vs.index%2]
+        road_color=profile.road_colors[0]
+        outside_color=profile.outside_colors[0]
+        b=self.brillo(vs.start.z-c.z,c.view_distance)
+        road_color=(road_color[0]*b,road_color[1]*b,road_color[2]*b)
+        outside_color=(outside_color[0]*b,outside_color[1]*b,outside_color[2]*b)
 
 
         #dibuja el exterior izquierdo
@@ -69,17 +87,18 @@ class DefaultDrawer:
                     self.pinta(surface,puntos,color)
 
     def drawObj(self,surface:pygame.Surface,c:Camera,obj:Object,vs:VisibleSegment,shadow=False):
-        #proyecta cada punto... tal vez haya que usar la LUT
+        if (obj.img=="piedra" or obj.img=="piedra.flip") and shadow:
+            pass
         p1=c.project(Point(obj.x,obj.y,obj.z))
         cache=vs.visualProfile.cache
         img=cache.getImage(obj.img,p1.z)
-        anchor=cache.anchor[obj.img]
+        metadata=cache.metadata[obj.img]
         if img!=None:
-            if shadow:
-                self.drawShadow(surface,img,p1,vs)
-            else:
-                punto=(p1.x-(img.get_width()*anchor),p1.y-img.get_height())
+            if shadow==False:
+                punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
                 surface.blit(img,punto)
+            elif metadata.shadow:
+                self.drawShadow(surface,img,p1,vs)
 
     def drawShadow(self,surface:pygame.Surface,img,p:Point,obj:VisibleSegment):
         #calcula el tamaño de la sombra en función al ancho del objeto y a un tamaño fijo
