@@ -75,7 +75,7 @@ class MapGenerator:
     def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0):
         objects=[]
         z_pos=tramo[0].start.z+offset
-        if random_x>0 or random_step>0:
+        if random_x!=0 or random_step!=0:
             rng=random.Random(z_pos)
         z_end=tramo[-1].end.z
         s_pointer=0
@@ -99,12 +99,12 @@ class MapGenerator:
                     #interpolar x e y
                     pct=(z_pos-seg.start.z)/seg.length
                     obj.x=seg.start.x+((seg.end.x-seg.start.x)*pct)+x
-                    if random_x>0:
+                    if random_x!=0:
                         obj.x+=rng.uniform(0,random_x)
                     obj.y=seg.start.y+((seg.end.y-seg.start.y)*pct)
                     obj.z=z_pos
                     #añadir un random no acumulable a la posicion z
-                    if random_step>0:
+                    if random_step!=0:
                         obj.z+=rng.uniform(0,random_step)
 
                     objects.append(obj)

@@ -9,7 +9,7 @@ class DefaultDrawer:
 
     def brillo(self,distancia,max):
         min_brillo=1.0
-        max_brillo=0.1
+        max_brillo=0.3
         min_distancia=0.0
         max_distancia=max
 
@@ -26,8 +26,6 @@ class DefaultDrawer:
         profile=vs.visualProfile
         #la coordenada z es la escala
 
-
-
         # se produce cierto jitter subpixel en la cuantización alrededor de la distancia 15. Se ha podido comprobar forzando la monotonía,
         # pero no es aplicable a otras geometrias, como las elevaciones
 
@@ -40,9 +38,9 @@ class DefaultDrawer:
         #outside_color=profile.outside_colors[vs.index%2]
         road_color=profile.road_colors[0]
         outside_color=profile.outside_colors[0]
-        b=self.brillo(vs.start.z-c.z,c.view_distance)
-        road_color=(road_color[0]*b,road_color[1]*b,road_color[2]*b)
-        outside_color=(outside_color[0]*b,outside_color[1]*b,outside_color[2]*b)
+        brillo=self.brillo(vs.start.z-c.z,c.view_distance)
+        road_color=(road_color[0]*brillo,road_color[1]*brillo,road_color[2]*brillo)
+        outside_color=(outside_color[0]*brillo,outside_color[1]*brillo,outside_color[2]*brillo)
 
 
         #dibuja el exterior izquierdo
@@ -63,6 +61,7 @@ class DefaultDrawer:
         if profile.arcen_width>0.0:
             mod=vs.index%profile.arcen_freq
             color=profile.arcen_color[mod]
+            color=(color[0]*brillo,color[1]*brillo,color[2]*brillo)
             if color!=None:
                 #izquierdo
                 pl1=Point(pc1.x-((profile.half_width+profile.arcen_width)*pc1.z),pc1.y)

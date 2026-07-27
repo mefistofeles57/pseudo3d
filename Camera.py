@@ -13,6 +13,9 @@ if TYPE_CHECKING:
 
 
 class Camera:
+
+    near_plane=0.01
+
     def __init__(self,screen,road:Road):
         self.x=0.0
         self.y=0.5
@@ -28,6 +31,7 @@ class Camera:
         self.height=0.5
         self.horizon=2*self.h/3
         self.lookahead=1.5
+        self.bgahead=0.5
 
         self.focal=(self.w/2)/math.tan(math.radians(self.fov)/2)
 
@@ -36,12 +40,14 @@ class Camera:
 
         self.time_button=0
 
+        #fondos
         self.fondo=None
         self.color_fondo_l=None
         self.color_fondo_d=None
-        self.pos_fondo1=0.0
 
         self.road=road
+
+        self.current_horizon=self.horizon
 
 
     def follow(self,car:Player):
@@ -104,6 +110,7 @@ class Camera:
         #calcular posicion x del looking ahead para posicionar la camara
         for i in range(len(self.buffer)-1):
             seg=self.buffer[i]
+
             if seg.end.z-inicio>=self.lookahead:
                 pto=inicio+self.lookahead-seg.start.z
                 pct=pto/seg.length
@@ -113,21 +120,28 @@ class Camera:
                 break
 
 
-        dif=posx-self.x
-        self.pos_fondo1+=dif*-25
-        img=self.buffer[-1].visualProfile.f_img1
+        #para el movimiento del fondo necesito la curva del segundo segmento y su escala
 
-        if self.pos_fondo1+img.get_width()<self.w:
-            self.pos_fondo1+=img.get_width()
-            self.buffer[-1].visualProfile.swapFondo()
-        elif self.pos_fondo1-img.get_width()>0:
-            self.pos_fondo1-=img.get_width()
-            self.buffer[-1].visualProfile.swapFondo()
-        self.x=posx
+        desp_x=self.buffer[2].curve-self.buffer[1].curve
+        if desp_x!=0:
+            pc=self.project(self.buffer[1].end)
+            desp_x*=pc.z    
 
-        self.y=p0.start.y+self.height
+        #proyecto el ultimo segmento
+        pn=self.project(self.buffer[-1].end)
+        f_y=pn.y
+        if f_y<self.horizon:
+            f_y=self.horizon
+
+        for fondo in self.buffer[-1].visualProfile.fondos:
+            fondo.update(desp_x,f_y)
 
         self.update_sky()
+
+        #actualiza la posicion de la camara
+        self.x=posx
+        self.y=p0.start.y+self.height
+
 
         #self.fondo=j.fondo
 
@@ -158,14 +172,16 @@ class Camera:
 
             if vs.start.z<=self.z:
                 #clipping cercano
-                vs.start=self.clip(vs.start,vs.end,self.z)
+                vs.start=self.clip(vs.start,vs.end,self.z+Camera.near_plane)
             elif vs.end.z>(self.z+distancia):
                 #clipping lejano
                 vs.end=self.clip(vs.start,vs.end,self.z+distancia)
+
                 fin=True
             buffer.append(vs)
             if fin:
                 break
+
         if len(buffer)>0:
             road.current_segment=buffer[0].index
 
@@ -212,13 +228,12 @@ class Camera:
         if self.fondo!=None:
             s.blit(self.fondo, (0, 0))
 
+        if self.buffer==None or len(self.buffer)==0:
+            return
+
         #parallax
-        if len(self.buffer)>0:
-            fondo1=self.buffer[-1].visualProfile.f_img1
-            fondo2=self.buffer[-1].visualProfile.f_img2
-            posicion=self.pos_fondo1
-            s.blit(fondo1, (posicion-fondo1.get_width(),self.horizon-fondo1.get_height()))
-            s.blit(fondo2, (posicion,self.horizon-fondo2.get_height()))
+        for fondo in self.buffer[-1].visualProfile.fondos:
+            fondo.draw(s)
 
         for vs in reversed(self.buffer):
             pc1=self.project(vs.end)

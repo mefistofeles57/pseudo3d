@@ -35,11 +35,11 @@ class Juego:
 
     def update(self,dt):
         self.context.camera.update(dt,self.context)
-        if len(self.context.camera.buffer)>0:
-            self.bg_color=self.context.camera.buffer[-1].visualProfile.bgcolor
+#        if len(self.context.camera.buffer)>0:
+#            self.bg_color=self.context.camera.buffer[-1].visualProfile.bgcolor
 
     def draw(self):
-        self.screen.fill(self.bg_color)
+        #self.screen.fill(self.bg_color)
 
         #self.screen.blit(self.fondo, (0, 0))
 
