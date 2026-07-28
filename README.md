@@ -6,4 +6,4 @@ Motor pseudo-3D inspirado en los juegos de conducción arcade de finales de los 
 
 Motor de dibujado de carretera, generador de circuitos y assets básicos
 
-![Captura de la fase 1](assets/screenshots/phase1.png)
+![Captura de la fase 1](img/screenshots/phase1.png)
