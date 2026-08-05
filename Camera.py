@@ -139,8 +139,8 @@ class Camera:
         #construir el buffer de carreta
         offset=self.getBuffer(self.buffer,self.z+self.near_plane,offset=self.context.player.z)
 
-        if offset.x>0:
-            pass
+        if offset==None:
+            return
 
         self.getBuffer(self.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
         self.getObjBuffer(self.objbuffer,self.buffer)

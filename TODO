@@ -4,6 +4,12 @@
 -jitter
 -sprites coches
 -postes de quitamiedos
--acelerador/freno
+-acelerador/freno -> OK
+-derrapes laterales -> OK
+-derrapes freno -> OK
+-derrapes salida -> OK
+-perdida de friccion burnout
 -terreno
--derrapes
+-marchas
+-acelerador y freno progresivos
+
