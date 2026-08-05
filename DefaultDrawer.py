@@ -3,7 +3,12 @@ from Camera import Camera
 from Point import Point
 from Road import VisibleSegment
 from Road import Road
-from Object import Object
+from Object import VisibleObject
+from ImageCache import ImageCache
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from Escenario import Escenario
 
 class DefaultDrawer:
 
@@ -39,8 +44,16 @@ class DefaultDrawer:
         road_color=profile.road_colors[0]
         outside_color=profile.outside_colors[0]
         brillo=self.brillo(vs.start.z-c.z,c.view_distance)
-        road_color=(road_color[0]*brillo,road_color[1]*brillo,road_color[2]*brillo)
-        outside_color=(outside_color[0]*brillo,outside_color[1]*brillo,outside_color[2]*brillo)
+        road_color=(
+            min(255,road_color[0]*brillo),
+            min(255,road_color[1]*brillo),
+            min(255,road_color[2]*brillo)
+        )
+        outside_color=(
+            min(255,outside_color[0]*brillo),
+            min(255,outside_color[1]*brillo),
+            min(255,outside_color[2]*brillo)
+        )
 
 
         #dibuja el exterior izquierdo
@@ -56,53 +69,57 @@ class DefaultDrawer:
         if p1.y<c.h:
             puntos=((p1.x,p1.y),(p2.x,p2.y),(p4.x,p4.y),(p3.x,p3.y))
             self.pinta(surface,puntos,road_color)
-
         #arcenes
         if profile.arcen_width>0.0:
             mod=vs.index%profile.arcen_freq
-            color=profile.arcen_color[mod]
-            color=(color[0]*brillo,color[1]*brillo,color[2]*brillo)
-            if color!=None:
+            color_arcen=profile.arcen_color[mod]
+            if color_arcen!=None:
+                color_arcen=(
+                    min(255,color_arcen[0]*brillo),
+                    min(255,color_arcen[1]*brillo),
+                    min(255,color_arcen[2]*brillo)
+                )
                 #izquierdo
                 pl1=Point(pc1.x-((profile.half_width+profile.arcen_width)*pc1.z),pc1.y)
                 pl2=Point(pc1.x-((profile.half_width)*pc1.z),pc1.y)
                 pl4=Point(pc2.x-((profile.half_width+profile.arcen_width)*pc2.z),pc2.y)
                 pl3=Point(pc2.x-((profile.half_width)*pc2.z),pc2.y)
                 puntos=(pl1.list2d(),pl2.list2d(),pl3.list2d(),pl4.list2d())
-                self.pinta(surface,puntos,color)
+                self.pinta(surface,puntos,color_arcen)
                 #derecho
                 pl1=Point(pc1.x+((profile.half_width+profile.arcen_width)*pc1.z),pc1.y)
                 pl2=Point(pc1.x+((profile.half_width)*pc1.z),pc1.y)
                 pl4=Point(pc2.x+((profile.half_width+profile.arcen_width)*pc2.z),pc2.y)
                 pl3=Point(pc2.x+((profile.half_width)*pc2.z),pc2.y)
                 puntos=(pl1.list2d(),pl2.list2d(),pl3.list2d(),pl4.list2d())
-                self.pinta(surface,puntos,color)
+                self.pinta(surface,puntos,color_arcen)
         #lineas
-        for linea in c.road.getLines(vs.index):
+        for linea in c.context.road.getLines(vs.index):
             item=linea.getPoints(vs,pc1,pc2)
             if item!=None:
                 (puntos,color)=item
                 if color!=None:
                     self.pinta(surface,puntos,color)
 
-    def drawObj(self,surface:pygame.Surface,c:Camera,obj:Object,vs:VisibleSegment,shadow=False):
-        if (obj.img=="piedra" or obj.img=="piedra.flip") and shadow:
-            pass
-        p1=c.project(Point(obj.x,obj.y,obj.z))
-        cache=vs.visualProfile.cache
+    def drawObj(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",shadow=False):
+        #p1=c.project(Point(obj.x,obj.y,obj.z))
+        #cache=vs.visualProfile.cache
+        if  obj.profile.cache==None:
+            cache=p.cache
+        else:
+            cache=obj.profile.cache
         img=cache.getImage(obj.img,p1.z)
-        metadata=cache.metadata[obj.img]
         if img!=None:
+            metadata=cache.metadata[obj.img]
             if shadow==False:
-                punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
-                surface.blit(img,punto)
+                    punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
+                    surface.blit(img,punto)
             elif metadata.shadow:
-                self.drawShadow(surface,img,p1,vs)
+                self.drawShadow(surface,img,p1,obj.profile)
 
-    def drawShadow(self,surface:pygame.Surface,img,p:Point,obj:VisibleSegment):
+    def drawShadow(self,surface:pygame.Surface,img,p:Point,profile:"Escenario"):
         #calcula el tamaño de la sombra en función al ancho del objeto y a un tamaño fijo
         #dibuja una elipse en el punto p con el ancho calculado y el color y alfa indicados en el vp
-        profile=obj.visualProfile
         shadow_color=profile.shadow_color
         shadow_alpha=profile.shadow_alpha
         shadow_width_factor=profile.shadow_width_factor

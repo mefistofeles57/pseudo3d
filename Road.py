@@ -1,3 +1,4 @@
+import math
 from Point import Point
 
 class Segment:
@@ -5,18 +6,30 @@ class Segment:
         self.length=length
         self.curve=curve
         self.height=height
-        self.start=Point()
-        self.end=Point()
         self.visualProfile=profile
         self.index=0
+        self.z=0.0
+        self.heading=math.atan2(curve,height)
 
 class VisibleSegment:
-    def __init__(self,s:Segment):
-        self.length=s.length
-        self.curve=s.curve
-        self.height=s.height
-        self.start=s.start
-        self.end=s.end
+    def __init__(self,s:Segment,origin,playerx=None,playery=None):
+        if origin!=None:
+            x=origin.end.x
+            y=origin.end.y
+            c=origin.curve
+            h=origin.height
+        else:
+            x=y=c=h=0.0
+            if playerx!=None:
+                x=-playerx
+            if playery!=None:
+                y=-playery
+
+        self.segment=s
+        self.curve=c+s.curve
+        self.height=h+s.height
+        self.start=Point(x,y,s.z)
+        self.end=Point(x+self.curve,y+self.height,s.z+s.length)
         self.visualProfile=s.visualProfile
         self.index=s.index
 
@@ -65,12 +78,14 @@ class Road:
             segment.index=len(self.segments)
             if segment.index>0:
                 s_ant=self.segments[segment.index-1]
-                segment.start.z=s_ant.end.z
-                segment.start.x=s_ant.end.x
-                segment.start.y=s_ant.end.y
-            segment.end.x=segment.start.x+segment.curve
-            segment.end.y=segment.start.y+segment.height
-            segment.end.z=segment.start.z+segment.length
+                segment.z=s_ant.z+segment.length
+                #segment.start.z=s_ant.end.z
+                #segment.start.x=s_ant.end.x
+                #segment.start.y=s_ant.end.y
+            #segment.end.x=segment.start.x+segment.curve
+            #segment.end.y=segment.start.y+segment.height
+            #segment.end.z=segment.start.z+segment.length
+            
             self.segments.append(segment)
 
     def addLine(self,line:Line,firstIndex,lastIndex):

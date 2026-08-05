@@ -24,27 +24,25 @@ class Escenario:
         self.arcen_width=0.15
         self.arcen_freq=1
         self.arcen_color=[(102,102,102)]
-        #sombra(
-        self.shadow_color=(0,0,0)
-        self.shadow_alpha=60
-        self.shadow_width_factor=1.4
-        self.shadow_height=0.05
 
         #fondo
+
+        mov=75
+
         self.fondos=[]
-        b=Background("img/nube1.png",False,False,0.02,context,None,x=400,y=400)
+        b=Background("img/nube1.png",False,False,mov*0.05,context,None,x=400,y=400)
         self.fondos.append(b)
-        b=Background("img/nube2.png",False,False,0.02,context,None,x=800,y=200)
+        b=Background("img/nube2.png",False,False,mov*0.05,context,None,x=800,y=200)
         self.fondos.append(b)
-        b=Background("img/hills.png",True,False,0.05,context,(27,41,53),y=context.camera.horizon)
+        b=Background("img/hills.png",True,False,mov*0.1,context,(27,41,53),y=context.camera.horizon)
         self.fondos.append(b)
-        b=Background("img/near_hills.png",True,True,0.25,context,(31,159,68),y=context.camera.horizon)
+        b=Background("img/near_hills.png",True,True,mov*0.5,context,(31,159,68),y=context.camera.horizon)
         self.fondos.append(b)
 
 
 
         #cache
-        self.cache=ImageCache(context)
+        self.cache=ImageCache(None,context)
         self.cache.addImage("signal.arrow","signal.arrow.png",(0.5,1.0),True,True)
         self.cache.addImage("arbol","arbol.png",(0.5,1.0),True,True)
         self.cache.addImage("arbusto","arbusto.png",(0.5,1.0),True,True)

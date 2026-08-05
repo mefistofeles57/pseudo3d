@@ -1,7 +1,7 @@
 import pygame
 import math
 from GameContext import GameContext
-from Point import *
+from Point import Point
 
 class Juego:
     def __init__(self, width=1280, height=720, title="Outrun prototype",fps=60):
@@ -13,19 +13,22 @@ class Juego:
         self.fps=fps
 
         self.screen=pygame.display.set_mode((self.width,self.height))
+
+
+
         self.clock=pygame.time.Clock()
         self.running=True
 
-        #fondo
-        self.bg_color=(0,0,230)
         self.font = pygame.font.Font(None, 36)
         #objetos de juego
 
         self.context=GameContext(self.screen)
 
+        # situar el coche en la carretera y la camara detrás
 
-
-        #self.fondo=self.create_vertical_gradient(self.width,self.height,(40, 120, 255),(180, 235, 255))
+        self.context.player.x=0.0
+        self.context.player.y=0.0
+        self.context.player.z=self.context.camera.player_z
 
 
     def handle_events(self):
@@ -34,14 +37,9 @@ class Juego:
                 self.running = False
 
     def update(self,dt):
-        self.context.camera.update(dt,self.context)
-#        if len(self.context.camera.buffer)>0:
-#            self.bg_color=self.context.camera.buffer[-1].visualProfile.bgcolor
+        self.context.camera.update(dt)
 
     def draw(self):
-        #self.screen.fill(self.bg_color)
-
-        #self.screen.blit(self.fondo, (0, 0))
 
         self.context.camera.draw(self.screen)
 

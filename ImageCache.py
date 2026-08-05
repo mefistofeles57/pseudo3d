@@ -7,14 +7,30 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from GameContext import GameContext
 
+class CacheConfig:
+    def __init__(self):
+        self.num_samples=150
+        self.scale_max=1500
+        self.scale_min=80
+        self.resize_at_1=1.5
+
 class ImageCache:
 
-    num_samples=100
-    scale_max=1500
-    scale_min=80
-    resize_at_1=1.5
+    @staticmethod
+    def getPlayerConfig():
+        c=CacheConfig()
+        c.num_samples=2
+        c.scale_max=1500
+        c.scale_min=80
+        c.resize_at_1=3
+        return c
 
-    def __init__(self,context:"GameContext"):
+    def __init__(self,config:CacheConfig,context:"GameContext"):
+        self.context=context
+        if config==None:
+            self.config=CacheConfig()
+        else:
+            self.config=config
         self.images={}
         self.metadata={}
         self.inv_log_ratio=0.0
@@ -24,7 +40,7 @@ class ImageCache:
         #resize factor
         #necesito la escala en (0,0,1)
         p=context.camera.project(Point(0.0,0.0,1.0))
-        self.resizeFactor=p.z/ImageCache.resize_at_1
+        self.resizeFactor=p.z/self.config.resize_at_1
 
     def addImage(self,name,file,anchor,flip=True,shadow=False):
         img=pygame.image.load("img/"+file).convert_alpha()
@@ -52,29 +68,10 @@ class ImageCache:
             self.images[name].append(new_img)
 
 
-
-
-#    def getScaleTableOLD(self,numtramos):
-#        escalas=[]
-#        distancia=(self.h+(numtramos))-self.horizon
-#        delta=distancia/numtramos
-#
-#        for i in range(numtramos):
-#            y=(delta*(i))+self.horizon
-#            #se usa la y del centro del tramo para minimizar el error
-#            y_centro=(delta*(i+0.5))+self.horizon
-#            z=self.unproject(y_centro)
-#
-#            if z>0.0:
-#                p1=self.project(Point(0.0,0.0,z))
-#                escalas.append({"index":i,"z":z,"y":y,"scale":p1.z})
-#
-#        return escalas
-
     def getScaleTable(self):
-        num_samples=ImageCache.num_samples
-        scale_max=ImageCache.scale_max
-        scale_min=ImageCache.scale_min
+        num_samples=self.config.num_samples
+        scale_max=self.config.scale_max
+        scale_min=self.config.scale_min
         ratio = (scale_max / scale_min) ** (1.0 / (num_samples - 1))
         self.inv_log_ratio = 1.0 / math.log(ratio)
         self.LUT.clear()
@@ -83,24 +80,12 @@ class ImageCache:
             self.LUT.append(scale)
 
     def getImage(self,name,escala):
-        num_samples=ImageCache.num_samples
-        scale_min=ImageCache.scale_min
+        num_samples=self.config.num_samples
+        scale_min=self.config.scale_min
 
         i =round(math.log(escala / scale_min) * self.inv_log_ratio)
         if i>=num_samples:
-            i=num_samples-1
+            return None
 
         return self.images[name][i]
 
-
-#    def unproject(self,target_y):
-#        z0=0
-#        z1=self.view_distance
-#
-#        while z1-z0 > 0.001:
-#            zm = (z0+z1) /2
-#            if self.project(Point(0.0,0.0,zm)).y < target_y:
-#                z1=zm
-#            else:
-#                z0=zm
-#        return zm

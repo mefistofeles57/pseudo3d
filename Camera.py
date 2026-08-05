@@ -6,29 +6,61 @@ from Road import Road
 from Road import VisibleSegment
 from Point import Point
 from Player import Player
+from Object import VisibleObject
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from GameContext import GameContext
 
+class Follower:
+
+    def __init__(self,acceleration=0.05,max_speed=0.5,damping=0.5):
+        self.speed = 0.0
+
+        self.acceleration = acceleration
+        self.max_speed = max_speed
+        #self.damping = 0.92
+        self.damping = damping
+
+    def update(self, current_position, target_position):
+
+        error = target_position - current_position
+
+        self.speed += error * self.acceleration
+
+        self.speed = max(
+            -self.max_speed,
+            min(self.max_speed, self.speed)
+        )
+
+        new_position = current_position + self.speed
+
+        self.speed *= self.damping
+
+        return new_position
+
+    def reset(self):
+        self.speed=0
+
 
 class Camera:
 
-    near_plane=0.01
+    near_plane=0.5
 
-    def __init__(self,screen,road:Road):
+    def __init__(self,context:"GameContext"):
         self.x=0.0
-        self.y=0.5
-        self.z=-0.1
+        self.y=0.0
+        self.z=0.0
 
-        self.w=screen.get_width()
-        self.h=screen.get_height()
+        self.w=context.screen.get_width()
+        self.h=context.screen.get_height()
 
 
+        #self.pitch=-0.04
         self.pitch=-0.04
         self.fov=55.0
         self.view_distance=15.0
-        self.height=0.5
+        self.height=0.3
         self.horizon=2*self.h/3
         self.lookahead=1.5
         self.bgahead=0.5
@@ -45,19 +77,20 @@ class Camera:
         self.color_fondo_l=None
         self.color_fondo_d=None
 
-        self.road=road
+        self.context=context
 
         self.current_horizon=self.horizon
 
+        self.player_z=1.5
+        self.x_follower=Follower()
+        self.y_follower=Follower()
 
-    def follow(self,car:Player):
-        pass
 
 
-    def update(self,dt,context: "GameContext"):
+    def update(self,dt):
 
         #ajuste de camara
-        keys=context.keys
+        keys=self.context.keys
 
         current_time=time.time()
         last_time=self.time_button
@@ -67,83 +100,89 @@ class Camera:
             self.time_button=current_time
         #altura        
             if keys[pygame.K_1]:
-                context.camera.height-=0.1
+                self.context.camera.height-=0.1
             elif keys[pygame.K_2]:
-                context.camera.height+=0.1
+                self.context.camera.height+=0.1
     #pitch
             elif keys[pygame.K_3]:
-                context.camera.pitch-=0.01
+                self.context.camera.pitch-=0.01
             elif keys[pygame.K_4]:
-                context.camera.pitch+=0.01
+                self.context.camera.pitch+=0.01
     #fov
             elif keys[pygame.K_5]:
-                context.camera.fov-=1.0
+                self.context.camera.fov-=1.0
             elif keys[pygame.K_6]:
-                context.camera.fov+=1.0
+                self.context.camera.fov+=1.0
     #distance
             elif keys[pygame.K_7]:
-                context.camera.view_distance-=1.0
+                self.context.camera.view_distance-=1.0
             elif keys[pygame.K_8]:
-                context.camera.view_distance+=1.0
+                self.context.camera.view_distance+=1.0
     #horizon
             elif keys[pygame.K_9]:
-                context.camera.horizon-=1.0
+                self.context.camera.horizon-=1.0
             elif keys[pygame.K_0]:
-                context.camera.horizon+=1.0
+                self.context.camera.horizon+=1.0
             else:
                 self.time_button=last_time
 
 
-        #posicion de camara
-        self.z+=context.player.speed*dt
+        ############################################
 
-        self.getBuffer(self.buffer,context.road)
-        self.getObjBuffer(self.objbuffer,context.road)
+        #mover el coche
+        self.context.player.update(dt)
+        self.z=self.context.player.z-self.player_z
+        self.x=self.context.player.x_rel
+        self.y=self.height
 
-        if len(self.buffer)==0:
+
+        #construir el buffer de carreta
+        offset=self.getBuffer(self.buffer,self.z+self.near_plane,offset=self.context.player.z)
+
+        if offset.x>0:
+            pass
+
+        self.getBuffer(self.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
+        self.getObjBuffer(self.objbuffer,self.buffer)
+
+        if len(self.buffer)<3:
             return
        
-        p0=self.buffer[0]
-
-
-        inicio=self.z
-        #calcular posicion x del looking ahead para posicionar la camara
+        road_y=0.0
+        #encontrar el segmento sobre el que se apoya el coche para calcular dx en ese punto
         for i in range(len(self.buffer)-1):
             seg=self.buffer[i]
 
-            if seg.end.z-inicio>=self.lookahead:
-                pto=inicio+self.lookahead-seg.start.z
-                pct=pto/seg.length
-                x1=seg.start.x
-                x2=seg.end.x
-                posx=x1+((x2-x1)*pct)
+
+            #interpolar el frame actual
+            if seg.start.z<=self.context.player.z and seg.end.z>self.context.player.z:
+                #interpola x e y de la carretera
+                pto=self.context.player.z-seg.start.z
+                pct=pto/seg.segment.length
+                y1=seg.start.y
+                y2=seg.end.y
+                road_y=y1+((y2-y1)*pct)
+
+                #posicion en la carretera
+                #self.y=road_y+self.height
+                #self.context.player.road_heading=road_heading
+                #self.context.player.vx-=seg.segment.curve*dt
+                #print(self.context.player.vx,self.context.player.x_rel)
                 break
-
-
-        #para el movimiento del fondo necesito la curva del segundo segmento y su escala
-
-        desp_x=self.buffer[2].curve-self.buffer[1].curve
-        if desp_x!=0:
-            pc=self.project(self.buffer[1].end)
-            desp_x*=pc.z    
 
         #proyecto el ultimo segmento
         pn=self.project(self.buffer[-1].end)
         f_y=pn.y
-        if f_y<self.horizon:
-            f_y=self.horizon
+        if f_y<(self.horizon-50):
+            f_y=self.horizon-50
+        if f_y>(self.horizon+50):
+            f_y=self.horizon+50
 
         for fondo in self.buffer[-1].visualProfile.fondos:
-            fondo.update(desp_x,f_y)
+            fondo.update(0.0,f_y)
 
         self.update_sky()
 
-        #actualiza la posicion de la camara
-        self.x=posx
-        self.y=p0.start.y+self.height
-
-
-        #self.fondo=j.fondo
 
 
 
@@ -156,48 +195,72 @@ class Camera:
         )
 
 
-    def getBuffer(self,buffer,road):
-
-
-        segments=road.segments[road.current_segment:]
+    def getBuffer(self,buffer,frontera,offset=None,x=None,y=None):
+        segments=self.context.road.segments[self.context.road.current_segment:]
         distancia=self.view_distance
         buffer.clear()
 
         fin=False
 
+        vs_prev=None
         for s in segments:
-            vs=VisibleSegment(copy.copy(s))
-            if vs.end.z<=self.z:
+            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y)
+            if vs.end.z<=frontera:
                 continue
 
-            if vs.start.z<=self.z:
+            if vs.start.z<frontera:
                 #clipping cercano
-                vs.start=self.clip(vs.start,vs.end,self.z+Camera.near_plane)
+                p=self.clip(vs.start,vs.end,frontera)
+                vs.start.z=frontera
+                vs.curve=vs.end.x-p.x
+                vs.height=vs.end.y-p.y
+                vs.end.x=vs.start.x+vs.curve
+                vs.end.y=vs.start.y+vs.height
+                vs.acum_curve=vs.curve
+                vs.acum_height=vs.height
+
+                #end x e y deben interpolarse
+
             elif vs.end.z>(self.z+distancia):
                 #clipping lejano
                 vs.end=self.clip(vs.start,vs.end,self.z+distancia)
 
                 fin=True
+            vs_prev=vs
+            if offset!=None:
+                if vs.start.z<=offset and vs.end.z>offset:
+                    pct=(offset-vs.start.z)/(vs.end.z-vs.start.z)
+                    p=Point(vs.start.x+pct*vs.curve,vs.start.y+pct*vs.height,offset)
+                    return p
             buffer.append(vs)
             if fin:
                 break
 
-        if len(buffer)>0:
-            road.current_segment=buffer[0].index
+        if len(buffer)>0 and offset==None:
+            self.context.road.current_segment=buffer[0].index
 
 
-    def getObjBuffer(self,buffer,road):
-        objects=road.objects[road.current_object:]
-        distancia=self.view_distance
+    def getObjBuffer(self,buffer,road_buffer):
+        objects=self.context.road.objects[self.context.road.current_object:]
+        player=self.context.player
         buffer.clear()
 
-        for o in objects:
-            if o.z<=self.z:
-                road.current_object+=1
-                continue
-            if o.z>(self.z+distancia):
-                break
-            buffer.append(o)
+        for vs in road_buffer:
+            for o in objects:
+                if o.z<=vs.start.z:
+                    if vs==road_buffer[0]:
+                        self.context.road.current_object+=1
+                    continue
+                if o.z>vs.end.z:
+                    break
+                buffer.append(VisibleObject(o,vs))
+            if player.z>vs.start.z and player.z<=vs.end.z:
+                vo=VisibleObject(player,vs)
+                player.vs=vs
+
+                buffer.append(vo)
+
+
 
 
     def project(self,p:Point):
@@ -224,7 +287,8 @@ class Camera:
 
 
     def draw(self,s:pygame.Surface):
-        
+
+            
         if self.fondo!=None:
             s.blit(self.fondo, (0, 0))
 
@@ -235,9 +299,11 @@ class Camera:
         for fondo in self.buffer[-1].visualProfile.fondos:
             fondo.draw(s)
 
+
         for vs in reversed(self.buffer):
             pc1=self.project(vs.end)
             pc2=self.project(vs.start)
+
 
             #cuando hay líneas de grosor negativo no pinto porque es un polígono no visible
             if pc2.y-pc1.y<0:
@@ -245,12 +311,31 @@ class Camera:
 
             vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
             #para cada objeto visible en esa franja
+            #surface:pygame.Surface,p1:Point,obj:Object,cache:ImageCache,vp:VisualProfile,shadow=False
+                #p1=c.project(Point(obj.x,obj.y,obj.z))
+                #cache=vs.visualProfile.cache
+
             for item in reversed(self.objbuffer):
                 if item.z>=vs.start.z and item.z<vs.end.z:
-                    vs.visualProfile.drawer.drawObj(s,self,item,vs,True)
+                    p1=self.project(Point(item.x,item.y,item.z))
+                    #if p1.z>self.z+self.near_plane:
+                    profile=vs.visualProfile
+                    profile.drawer.drawObj(s,p1,item,profile,True)
             for item in reversed(self.objbuffer):
                 if item.z>=vs.start.z and item.z<vs.end.z:
-                    vs.visualProfile.drawer.drawObj(s,self,item,vs,False)
+                    p1=self.project(Point(item.x,item.y,item.z))
+                    #if p1.z>self.z+self.near_plane:
+                    profile=vs.visualProfile
+                    profile.drawer.drawObj(s,p1,item,profile,False)
+
+
+            #player draw
+#            player=self.context.player
+#            p1=self.project(Point(player.x,player.y,player.z))
+            #if p1.z>self.z+self.near_plane:
+#            profile=vs.visualProfile
+#            profile.drawer.drawObj(s,p1,player,player.cache,profile,True)
+#            profile.drawer.drawObj(s,p1,player,player.cache,profile,False)
 
 
 
