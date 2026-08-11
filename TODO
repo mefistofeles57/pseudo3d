@@ -1,15 +1,10 @@
--sombras en varios segmentos
--scroll parallax
--colisiones laterales
--jitter
--sprites coches
--postes de quitamiedos
--acelerador/freno -> OK
--derrapes laterales -> OK
--derrapes freno -> OK
--derrapes salida -> OK
--perdida de friccion burnout
--terreno
--marchas
--acelerador y freno progresivos
+-colisiones laterales (F2)
+-jitter (F3)
+-sprites coches (F3)
+-terreno (F2)
+-potencia desniveles (F2)
+-rpm (F2)
+-marcas en carretera (F3)
+-limites (F2)
+-medianas (F3)
 

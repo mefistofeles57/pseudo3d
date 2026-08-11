@@ -1,4 +1,5 @@
 import pygame
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -6,8 +7,9 @@ if TYPE_CHECKING:
 
 class Background:
     def __init__(self,img,rolling,v_mov,mov,context:"GameContext",bg_color=(0,0,0),x=0.0,y=0.0):
+        base = Path(__file__).resolve().parent
         self.img=img
-        self.f_img1=pygame.image.load(img).convert_alpha()
+        self.f_img1=pygame.image.load(base/img).convert_alpha()
         self.rolling=rolling
         self.mov=mov
         self.x=x

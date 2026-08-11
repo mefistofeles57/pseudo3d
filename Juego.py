@@ -43,11 +43,11 @@ class Juego:
 
         self.context.camera.draw(self.screen)
 
-        txt="altura: "+str(self.context.camera.height)+" : "+ \
-        "pitch: "+str(self.context.camera.pitch)+" : "+ \
-        "fov: "+str(round(self.context.camera.fov))+" : "+ \
-        "distance: "+str(self.context.camera.view_distance)+" : "+ \
-        "horizon: "+str(self.context.camera.horizon)
+        txt="speed: "+str(round(self.context.player.speed*20,2))+ \
+            " acel: "+str(round(self.context.player.p_acelerador,2))+ \
+            " freno: "+str(round(self.context.player.p_freno,2))+ \
+            " volante: "+str(round(self.context.player.volante,2))+ \
+            " marcha: "+str(self.context.player.marcha)
         texto = self.font.render(
         txt,
         True,              # antialiasing

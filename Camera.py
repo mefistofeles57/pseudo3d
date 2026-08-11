@@ -7,6 +7,7 @@ from Road import VisibleSegment
 from Point import Point
 from Player import Player
 from Object import VisibleObject
+from FrameData import FrameData
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -67,8 +68,6 @@ class Camera:
 
         self.focal=(self.w/2)/math.tan(math.radians(self.fov)/2)
 
-        self.buffer=[]
-        self.objbuffer=[]
 
         self.time_button=0
 
@@ -78,12 +77,12 @@ class Camera:
         self.color_fondo_d=None
 
         self.context=context
+        self.frame_data=context.frame_data
+
 
         self.current_horizon=self.horizon
 
         self.player_z=1.5
-        self.x_follower=Follower()
-        self.y_follower=Follower()
 
 
 
@@ -135,55 +134,47 @@ class Camera:
         self.x=self.context.player.x_rel
         self.y=self.height
 
+        #actualizar objetos temporales
+        for obj in self.context.frame_data.tempobjbuffer:
+            obj.update(dt)
+
+        #eliminar objetos temporales muertos
+        self.remove_dead_objects()
 
         #construir el buffer de carreta
-        offset=self.getBuffer(self.buffer,self.z+self.near_plane,offset=self.context.player.z)
+        offset=self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,offset=self.context.player.z)
 
         if offset==None:
             return
 
-        self.getBuffer(self.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
-        self.getObjBuffer(self.objbuffer,self.buffer)
+        self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
+        self.getObjBuffer(self.frame_data)
 
-        if len(self.buffer)<3:
+        if len(self.frame_data.buffer)<3:
             return
        
-        road_y=0.0
-        #encontrar el segmento sobre el que se apoya el coche para calcular dx en ese punto
-        for i in range(len(self.buffer)-1):
-            seg=self.buffer[i]
-
-
-            #interpolar el frame actual
-            if seg.start.z<=self.context.player.z and seg.end.z>self.context.player.z:
-                #interpola x e y de la carretera
-                pto=self.context.player.z-seg.start.z
-                pct=pto/seg.segment.length
-                y1=seg.start.y
-                y2=seg.end.y
-                road_y=y1+((y2-y1)*pct)
-
-                #posicion en la carretera
-                #self.y=road_y+self.height
-                #self.context.player.road_heading=road_heading
-                #self.context.player.vx-=seg.segment.curve*dt
-                #print(self.context.player.vx,self.context.player.x_rel)
-                break
 
         #proyecto el ultimo segmento
-        pn=self.project(self.buffer[-1].end)
+        pn=self.project(self.frame_data.buffer[-1].end)
         f_y=pn.y
         if f_y<(self.horizon-50):
             f_y=self.horizon-50
         if f_y>(self.horizon+50):
             f_y=self.horizon+50
 
-        for fondo in self.buffer[-1].visualProfile.fondos:
-            fondo.update(0.0,f_y)
+        for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
+            fondo.update(self.context.player.vs.curve,f_y)
 
         self.update_sky()
 
+    def remove_dead_objects(self):
+        alive_objects = []
 
+        for obj in self.frame_data.tempobjbuffer:
+            if not obj.dead:
+                alive_objects.append(obj)
+
+        self.frame_data.tempobjbuffer = alive_objects
 
 
     def clip(self,a:Point,b:Point,z_clip):
@@ -240,25 +231,72 @@ class Camera:
             self.context.road.current_segment=buffer[0].index
 
 
-    def getObjBuffer(self,buffer,road_buffer):
+
+
+
+
+    def getObjBuffer(self,frame_data):
         objects=self.context.road.objects[self.context.road.current_object:]
         player=self.context.player
-        buffer.clear()
+        frame_data.objbuffer.clear()
 
-        for vs in road_buffer:
-            for o in objects:
-                if o.z<=vs.start.z:
-                    if vs==road_buffer[0]:
+        #construyo el buffer haciendo merge de objetos del mapa, objetos temporales y coche del jugador
+        #aprovecho la pasada para calcular sombras
+
+
+
+        for vs in frame_data.buffer:
+            #selecciono la parte del mapa a dibujar
+            sublist1=[]
+            for i,o in enumerate(objects):
+                if o.z<vs.start.z:
+                    if vs==frame_data.buffer[0]:
                         self.context.road.current_object+=1
                     continue
                 if o.z>vs.end.z:
                     break
-                buffer.append(VisibleObject(o,vs))
-            if player.z>vs.start.z and player.z<=vs.end.z:
-                vo=VisibleObject(player,vs)
-                player.vs=vs
+                sublist1.append(o)
+            #selecciono los objetos temporales a dibujar
+            sublist2=[]
+            for i,o in enumerate(frame_data.tempobjbuffer):
+                if o.z<vs.start.z:
+                    continue
+                if o.z>vs.end.z:
+                    break
+                sublist2.append(o)
+            
+            sublist2.sort(key=lambda obj: obj.z)
 
-                buffer.append(vo)
+            #hay que recorrer todos los elementos en las listas
+            sublist3=[]
+            if player.z>=vs.start.z and player.z<vs.end.z:
+                sublist3.append(player)
+
+            listas=[sublist1,sublist2,sublist3]
+            indices=[0,0,0]
+
+
+            #buscar el menor de todas las listas y añadirlo al obj buffer
+            finalizado=False
+            while finalizado==False:
+                min_indice=-1
+                min_val=99999
+                for i,lista in enumerate(listas):
+                    if indices[i]<len(lista) and lista[indices[i]].z<min_val:
+                        min_val=lista[indices[i]].z
+                        min_indice=i
+                if min_indice!=-1:
+                    o=listas[min_indice][indices[min_indice]]
+                    indices[min_indice]+=1
+                    if o.img=="coche":
+                        o.vs=vs
+                    frame_data.objbuffer.append(VisibleObject(o,vs))
+                #ver si se han recorrido todas las listas
+                finalizado=True
+                for i,lista in enumerate(listas):
+                    if indices[i]<len(listas[i]):
+                        finalizado=False
+                        break
 
 
 
@@ -292,15 +330,15 @@ class Camera:
         if self.fondo!=None:
             s.blit(self.fondo, (0, 0))
 
-        if self.buffer==None or len(self.buffer)==0:
+        if self.frame_data.buffer==None or len(self.frame_data.buffer)==0:
             return
 
         #parallax
-        for fondo in self.buffer[-1].visualProfile.fondos:
+        for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
             fondo.draw(s)
 
 
-        for vs in reversed(self.buffer):
+        for vs in reversed(self.frame_data.buffer):
             pc1=self.project(vs.end)
             pc2=self.project(vs.start)
 
@@ -310,32 +348,23 @@ class Camera:
                 continue
 
             vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
-            #para cada objeto visible en esa franja
-            #surface:pygame.Surface,p1:Point,obj:Object,cache:ImageCache,vp:VisualProfile,shadow=False
-                #p1=c.project(Point(obj.x,obj.y,obj.z))
-                #cache=vs.visualProfile.cache
 
-            for item in reversed(self.objbuffer):
+
+            #primero se pintan las sombras del vs. Cualquier objeto puede proyectar
+            vs.visualProfile.drawer.clear_shadow_surface()
+            for item in reversed(self.frame_data.objbuffer):
+                p1=self.project(Point(item.x,item.y,item.z))
+                profile=vs.visualProfile
+                profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
+            vs.visualProfile.drawer.blitShadows(s,pc1,pc2)
+            #despues los objetos. Solo los que estén situados dentro del segmento
+            for item in reversed(self.frame_data.objbuffer):
                 if item.z>=vs.start.z and item.z<vs.end.z:
                     p1=self.project(Point(item.x,item.y,item.z))
-                    #if p1.z>self.z+self.near_plane:
                     profile=vs.visualProfile
-                    profile.drawer.drawObj(s,p1,item,profile,True)
-            for item in reversed(self.objbuffer):
-                if item.z>=vs.start.z and item.z<vs.end.z:
-                    p1=self.project(Point(item.x,item.y,item.z))
-                    #if p1.z>self.z+self.near_plane:
-                    profile=vs.visualProfile
-                    profile.drawer.drawObj(s,p1,item,profile,False)
+                    profile.drawer.drawObj(s,p1,item,profile)
 
 
-            #player draw
-#            player=self.context.player
-#            p1=self.project(Point(player.x,player.y,player.z))
-            #if p1.z>self.z+self.near_plane:
-#            profile=vs.visualProfile
-#            profile.drawer.drawObj(s,p1,player,player.cache,profile,True)
-#            profile.drawer.drawObj(s,p1,player,player.cache,profile,False)
 
 
 
@@ -369,7 +398,7 @@ class Camera:
     def update_sky(self):
         #color del cielo
         #buscar los colores del cielo en el buffer
-        if len(self.buffer)==0:
+        if len(self.frame_data.buffer)==0:
             return
         num_primer_color=0
         primer_color_l=None
@@ -377,7 +406,7 @@ class Camera:
         num_segundo_color=0
         segundo_color_l=None
         segundo_color_d=None
-        for item in reversed(self.buffer):
+        for item in reversed(self.frame_data.buffer):
             if num_segundo_color==0:
                 if num_primer_color==0:
                     #primer color

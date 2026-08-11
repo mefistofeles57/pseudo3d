@@ -5,35 +5,57 @@ from Road import Road
 from Road import Line
 from Camera import Camera
 from Player import Player
+from Material import Material
 from VisualObjProfile import VisualObjProfile
+from FrameData import FrameData
 
 class GameContext:
     def __init__(self,screen:pygame.Surface):
         self.screen=screen
         self.road=Road()
+        self.frame_data=FrameData()
         self.camera=Camera(self)
         self.player=Player(self)
         self.keys=None
+        self.default_profile=None
+        self.materials={}
+        hierba=Material()
+        hierba.friccion_x=0.5
+        hierba.friccion_y=0.5
+        hierba.friccion_z=0.5
+        self.materials["HIERBA"]=hierba
+        asfalto=Material()
+        self.materials["ASFALTO"]=asfalto
+        arcen=Material()
+        arcen.friccion_x=0.1
+        arcen.friccion_y=0.1
+        arcen.friccion_z=0.1
+        self.materials["ARCEN"]=arcen
+
         self.createMap()
 
     def createMap(self):
         objects=[]
 
+
+
         MapGenerator.setProfile(Escenario(self))
 
         default_profile=VisualObjProfile()
+        self.default_profile=default_profile
         #sombra estrecha
         default_profile.shadow_color=(0,0,0)
         default_profile.shadow_alpha=60
         default_profile.shadow_width_factor=1.4
-        default_profile.shadow_height=0.05
+        default_profile.shadow_height=0.2
 
         poste_profile=VisualObjProfile()
         #sombra ancha
         poste_profile.shadow_color=(0,0,0)
         poste_profile.shadow_alpha=60
         poste_profile.shadow_width_factor=2.0
-        poste_profile.shadow_height=0.05
+        poste_profile.shadow_height=0.2
+        poste_profile.shadow_offset_z=-0.01
 
         MapGenerator.setObjProfile(default_profile)
 
@@ -54,8 +76,8 @@ class GameContext:
             #quitamiedos
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.1,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.1,0.03,1.3)
-            objects=MapGenerator.objects(objects,self.road.segments[-8:],"poste",3.5,0.5,-1.3,profile=poste_profile)
-            objects=MapGenerator.objects(objects,self.road.segments[-8:],"poste",3.5,0.5,1.3,profile=poste_profile)
+            objects=MapGenerator.objects(objects,self.road.segments[-10:],"poste",1.0,0.1,-1.3,profile=poste_profile)
+            objects=MapGenerator.objects(objects,self.road.segments[-10:],"poste",1.0,0.1,1.3,profile=poste_profile)
             #recta
             self.road.add(MapGenerator.pattern(MapGenerator.NONE,0.0,10))
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"arbol",2.5,0.6,1.5)
@@ -77,8 +99,8 @@ class GameContext:
             #quitamiedos
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,1.3)
-            objects=MapGenerator.objects(objects,self.road.segments[-45:],"poste",4.0,0.5,-1.3,profile=poste_profile)
-            objects=MapGenerator.objects(objects,self.road.segments[-45:],"poste",4.0,0.5,1.3,profile=poste_profile)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,-1.3,profile=poste_profile)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,1.3,profile=poste_profile)
             #map,count,image,step,offset,x
             #recta
             self.road.add(MapGenerator.pattern(MapGenerator.NONE,0.0,20))
@@ -97,8 +119,8 @@ class GameContext:
             #quitamiedos
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,1.3)
-            objects=MapGenerator.objects(objects,self.road.segments[-45:],"poste",4.0,0.5,-1.3,profile=poste_profile)
-            objects=MapGenerator.objects(objects,self.road.segments[-45:],"poste",4.0,0.5,1.3,profile=poste_profile)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,-1.3,profile=poste_profile)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,1.3,profile=poste_profile)
 
         objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-2.0,-0.3,-0.3)
         objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,2.0,0.3,0.3)

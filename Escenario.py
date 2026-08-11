@@ -30,13 +30,13 @@ class Escenario:
         mov=75
 
         self.fondos=[]
-        b=Background("img/nube1.png",False,False,mov*0.05,context,None,x=400,y=400)
+        b=Background("img/nube1.png",False,False,mov*0.15,context,None,x=400,y=400)
         self.fondos.append(b)
-        b=Background("img/nube2.png",False,False,mov*0.05,context,None,x=800,y=200)
+        b=Background("img/nube2.png",False,False,mov*0.15,context,None,x=800,y=200)
         self.fondos.append(b)
-        b=Background("img/hills.png",True,False,mov*0.1,context,(27,41,53),y=context.camera.horizon)
+        b=Background("img/hills.png",True,False,mov*0.3,context,(27,41,53),y=context.camera.horizon)
         self.fondos.append(b)
-        b=Background("img/near_hills.png",True,True,mov*0.5,context,(31,159,68),y=context.camera.horizon)
+        b=Background("img/near_hills.png",True,True,mov*0.7,context,(31,159,68),y=context.camera.horizon)
         self.fondos.append(b)
 
 
@@ -46,13 +46,14 @@ class Escenario:
         self.cache.addImage("signal.arrow","signal.arrow.png",(0.5,1.0),True,True)
         self.cache.addImage("arbol","arbol.png",(0.5,1.0),True,True)
         self.cache.addImage("arbusto","arbusto.png",(0.5,1.0),True,True)
-        self.cache.addImage("farola","farola.png",(0.7,0.98),True,True)
+        self.cache.addImage("farola","farola.png",(0.7,1.0),True,True)
         self.cache.addImage("palmera","palmera.png",(0.5,1.0),True,True)
         self.cache.addImage("piedra","piedra.png",(0.5,1.0),True,False)
         self.cache.addImage("quitamiedos","quitamiedos.png",(0.5,2.0),False,False)
         self.cache.addImage("poste","poste.2.png",(0.5,1.0),False,True)
 
-        self.drawer=DefaultDrawer()
+
+        self.drawer=DefaultDrawer(context)
 
 
 

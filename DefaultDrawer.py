@@ -10,7 +10,38 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from Escenario import Escenario
 
+
 class DefaultDrawer:
+
+    def __init__(self,context):
+        # Superficie temporal reutilizable para sombras
+        self.context=context
+        self.shadow_surface = pygame.Surface(
+            (context.screen.get_width(), context.screen.get_height()),
+            pygame.SRCALPHA
+        ).convert_alpha()
+
+
+    def clear_shadow_surface(self):
+        self.shadow_surface.fill((0, 0, 0, 0))
+
+    def blitShadows(self,s:pygame.Surface,pc1:Point,pc2:Point):
+        y1 = pc1.y
+        y2 = min(pc2.y,s.get_height())
+
+
+        area = pygame.Rect(
+            0,
+            y1,
+            self.shadow_surface.get_width(),
+            y2 - y1 +1
+        )
+
+        s.blit(
+            self.shadow_surface,
+            (0, y1),
+            area
+        )
 
     def brillo(self,distancia,max):
         min_brillo=1.0
@@ -101,45 +132,85 @@ class DefaultDrawer:
                 if color!=None:
                     self.pinta(surface,puntos,color)
 
-    def drawObj(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",shadow=False):
+
+    def drawShadow(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",vs:VisibleSegment,pc1:Point,pc2:Point):
+        self.drawItem(surface,p1,obj,p,True,vs=vs,pc1=pc1,pc2=pc2)
+
+    def drawObj(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario"):
+        self.drawItem(surface,p1,obj,p,False)
+
+    def drawItem(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",shadow,vs=None,pc1=None,pc2=None):
         #p1=c.project(Point(obj.x,obj.y,obj.z))
         #cache=vs.visualProfile.cache
-        if  obj.profile.cache==None:
+        if  obj.profile==None or obj.profile.cache==None:
             cache=p.cache
         else:
             cache=obj.profile.cache
-        img=cache.getImage(obj.img,p1.z)
-        if img!=None:
-            metadata=cache.metadata[obj.img]
-            if shadow==False:
+        metadata=cache.metadata[obj.img]
+        if metadata!=None:
+            if metadata.type==ImageCache.IMAGE:
+                img=cache.getImage(obj.img,p1.z)
+            else:
+                anim=cache.getAnimation(obj.img,p1.z)
+                if anim!=None:
+                    img=anim[obj.frame]
+                else:
+                    img=None
+                #de momento ni alpha ni scale
+            if img!=None:
+                if shadow==False:
                     punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
                     surface.blit(img,punto)
-            elif metadata.shadow:
-                self.drawShadow(surface,img,p1,obj.profile)
+                elif metadata.shadow:
+                    #filtrar por z
+                    shadow_height=obj.profile.shadow_height
+                    shadow_offset_z=obj.profile.shadow_offset_z
+                    #calcular z de sombra
+                    z=obj.z+shadow_offset_z
+                    #if metadata.name=="coche" and vs.index<=4:
+                    #    print(vs.index,z+shadow_height,">=",vs.start.z,vs.index,z+shadow_height>=vs.start.z,z-shadow_height,"<=",vs.end.z,z-shadow_height<=vs.end.z)
+                    if z+shadow_height>=vs.start.z and z-shadow_height<=vs.end.z:
+                        self.drawItemShadow(surface,img,obj.profile,obj,vs,pc1,pc2)
 
-    def drawShadow(self,surface:pygame.Surface,img,p:Point,profile:"Escenario"):
+    def drawItemShadow(self,surface:pygame.Surface,img,profile:"Escenario",obj:VisibleObject,vs:VisibleSegment,pc1:Point,pc2:Point):
         #calcula el tamaño de la sombra en función al ancho del objeto y a un tamaño fijo
         #dibuja una elipse en el punto p con el ancho calculado y el color y alfa indicados en el vp
         shadow_color=profile.shadow_color
         shadow_alpha=profile.shadow_alpha
         shadow_width_factor=profile.shadow_width_factor
         shadow_height=profile.shadow_height
+        shadow_offset_z=profile.shadow_offset_z
+
+        #necesito proyectar 3 punto, el centro, el max z y el min z
+
+        p1=Point(obj.x,obj.y,obj.z+shadow_offset_z)
+        p2=Point(obj.x,obj.y,obj.z+shadow_offset_z-shadow_height)
+        p3=Point(obj.x,obj.y,obj.z+shadow_offset_z+shadow_height)
+
+        p=self.context.camera.project(p1)
+        pc=self.context.camera.project(p2)
+        pl=self.context.camera.project(p3)
 
 
         scale=p.z
         width=img.get_width()*shadow_width_factor
-        height=shadow_height*scale
+        #height=shadow_height*scale
+        height=max(2,pc.y-pl.y)
 
+        #dibuja en la superfice
 
-        shadow = pygame.Surface((width, height), pygame.SRCALPHA)
+        #shadow = pygame.Surface((width, height), pygame.SRCALPHA)
+
+#        if obj.img=="coche":
+#            print("h2d: ",height,"h3d: ",shadow_height,"scale: ",scale)
+#            print("h2d: ",pc2.y-pc1.y,"scale1: ",pc1.z,"scale2: ",pc2.z)
 
         pygame.draw.ellipse(
-            shadow,
+            self.shadow_surface,
             (shadow_color[0], shadow_color[1], shadow_color[2], shadow_alpha),      # RGBA
-            (0, 0, width, height)
+            (p.x - width // 2, p.y - height // 2, width, height)
         )
-
-        surface.blit(shadow, (p.x - width // 2, p.y - height // 2))
+        #surface.blit(shadow, (p.x - width // 2, p.y - height // 2))
 
 
 

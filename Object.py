@@ -13,6 +13,7 @@ class VisibleObject(Object):
     def __init__(self,obj: Object,seg: VisibleSegment):
         super().__init__()
         self.__dict__.update(obj.__dict__)
+        self.obj=obj
 
 
         #interpolar x e y
@@ -25,8 +26,6 @@ class VisibleObject(Object):
         dx=seg.start.x+((seg.end.x-seg.start.x)*pct)
         self.x=x+dx
         self.y=seg.start.y+((seg.end.y-seg.start.y)*pct)
-        if self.img=="coche" and dx>0.0:
-            pass
 
 
 

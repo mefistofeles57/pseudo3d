@@ -9,7 +9,7 @@ class Segment:
         self.visualProfile=profile
         self.index=0
         self.z=0.0
-        self.heading=math.atan2(curve,height)
+        #self.heading=math.atan2(curve,height)
 
 class VisibleSegment:
     def __init__(self,s:Segment,origin,playerx=None,playery=None):
@@ -41,6 +41,7 @@ class Line:
         self.offset=offset
         self.freq=freq
         self.color=color
+        self.material=None
 
     def getPoints(self,vs:VisibleSegment,pc1:Point,pc2:Point):
         mod=(vs.index+self.offset)%self.freq
