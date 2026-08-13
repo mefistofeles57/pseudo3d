@@ -5,7 +5,6 @@ from Road import Road
 from Road import Line
 from Camera import Camera
 from Player import Player
-from Material import Material
 from VisualObjProfile import VisualObjProfile
 from FrameData import FrameData
 
@@ -18,20 +17,6 @@ class GameContext:
         self.player=Player(self)
         self.keys=None
         self.default_profile=None
-        self.materials={}
-        hierba=Material()
-        hierba.friccion_x=0.5
-        hierba.friccion_y=0.5
-        hierba.friccion_z=0.5
-        self.materials["HIERBA"]=hierba
-        asfalto=Material()
-        self.materials["ASFALTO"]=asfalto
-        arcen=Material()
-        arcen.friccion_x=0.1
-        arcen.friccion_y=0.1
-        arcen.friccion_z=0.1
-        self.materials["ARCEN"]=arcen
-
         self.createMap()
 
     def createMap(self):

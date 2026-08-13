@@ -133,6 +133,7 @@ class Camera:
         self.z=self.context.player.z-self.player_z
         self.x=self.context.player.x_rel
         self.y=self.height
+        dz=self.context.player.speed*dt
 
         #actualizar objetos temporales
         for obj in self.context.frame_data.tempobjbuffer:
@@ -163,7 +164,7 @@ class Camera:
             f_y=self.horizon+50
 
         for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
-            fondo.update(self.context.player.vs.curve,f_y)
+            fondo.update(self.context.player.vs.segment.curve*dz,f_y)
 
         self.update_sky()
 

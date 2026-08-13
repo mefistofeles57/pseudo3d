@@ -55,6 +55,15 @@ class Juego:
         )
 
         self.screen.blit(texto, (10, 10))
+        txt="FPS: "+str(round(self.clock.get_fps(),2))
+            #" frame gen: "+str(round(self.clock.tick(),2))
+        texto = self.font.render(
+        txt,
+        True,              # antialiasing
+        (255, 255, 255)    # color blanco
+        )
+
+        self.screen.blit(texto, (10, 35))
 
         pygame.display.flip()
 

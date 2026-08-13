@@ -3,6 +3,7 @@ from ImageCache import ImageCache
 from Object import Object,VisibleObject
 from VisualObjProfile import VisualObjProfile
 from TempObject import Humo
+from Material import Material
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -69,9 +70,8 @@ class Player(Object):
         self.RESISTENCIA_AIRE=0.0001
         self.FRENO_MOTOR=1.0
         self.INTENSIDAD_CURVA=12.0
-        self.FUERZA_VOLANTE=2.0
+        self.FUERZA_VOLANTE=6.0
         self.LIMITE_AGARRE=0.4
-        self.AGILIDAD_PARADO=2.0
 
 
 
@@ -83,18 +83,22 @@ class Player(Object):
         dz=self.speed*dt
 
         #disipa algo de energía del movimiento lateral
-        self.vx*=0.95
+        self.vx *= 0.95 ** (dt * 60.0)
 
+
+        #material
+        material=self.getMaterial()
 
         #acelerador/freno
-        freno=self.get_freno(dt)
+        freno=self.get_freno(dt)*material.friccion_z
         acelerador=self.get_acelerador(dt)
-        giro=self.get_volante(dt)
+        giro=self.get_volante(dt)####*material.agarre_x
         if self.context.keys[pygame.K_SPACE] and self.tecla_marcha==False:
             self.tecla_marcha=True
             self.cambio_marcha()
         elif self.context.keys[pygame.K_SPACE]==False:
             self.tecla_marcha=False
+
 
         #velocidad y torque
         (vmax_marcha,torque)=self.marchas[self.marcha]
@@ -107,13 +111,26 @@ class Player(Object):
         else:
             fuerza_motor=0.0
 
+        #desnivel
+        if self.vs!=None:
+            pte=10*self.vs.segment.height/self.vs.segment.length
+            if pte<-0.5:
+                pte=-0.5
+            elif pte>0.5:
+                pte=0.5
+
+            fuerza_pte=-pte*self.POTENCIA_MOTOR
+        else:
+            fuerza_pte=0.0
+            print("segment None")
+
+
         #giro y fuerzas laterales
-        factor_agilidad=self.AGILIDAD_PARADO-(self.AGILIDAD_PARADO-1.0)*factor_v
         dz_segura=max(0.001,dz)
-        giro_player=giro*self.FUERZA_VOLANTE*dz_segura*factor_agilidad
+        giro_player=giro*self.FUERZA_VOLANTE*dz_segura
         curva_pista=0.0
         if self.vs!=None:
-            curva_pista=self.vs.curve*self.INTENSIDAD_CURVA
+            curva_pista=self.vs.segment.curve*self.INTENSIDAD_CURVA
         self.target_c=giro_player-curva_pista
         #si se suelta el acelerador el coche se agarra más
         if acelerador<0.1:
@@ -162,9 +179,10 @@ class Player(Object):
         fuerza_z=0.0
         #potencia efectiva (transmision a ruedas)
         if acelerador>0.0:
-            fuerza_base=acelerador*fuerza_motor
+            fuerza_base=acelerador*fuerza_motor*material.friccion_z
             fuerza_z+=fuerza_base*(1.0-factor_humo_salida*0.5)
-        fuerza_z+=freno
+        fuerza_z+=freno-material.freno_z
+        fuerza_z+=fuerza_pte
         #resistencia al viento
         r_aire=self.speed*self.speed*self.RESISTENCIA_AIRE
         fuerza_z-=r_aire
@@ -239,3 +257,36 @@ class Player(Object):
         else:
             self.marcha=0    
 
+    def getMaterial(self):
+        #material
+        rueda_i=(self.x_rel-0.05)*-1
+        rueda_d=self.x_rel+0.05
+        profile=None
+        if self.vs!=None:
+            profile=self.vs.visualProfile
+        if profile==None:
+            return Material()
+        
+        if rueda_i<profile.half_width:
+            material_i=0
+        elif rueda_i<profile.half_width+profile.arcen_width:
+            material_i=1
+        else:
+            material_i=2
+        if rueda_d<profile.half_width:
+            material_d=0
+        elif rueda_d<profile.half_width+profile.arcen_width:
+            material_d=1
+        else:
+            material_d=2
+        nummaterial=max(material_i,material_d)
+        if nummaterial==0:
+            material=profile.road_material
+        elif nummaterial==1:
+            material=profile.arcen_material
+            print("arcen")
+        else:
+            material=profile.outside_material
+            print("hierba")
+
+        return material
