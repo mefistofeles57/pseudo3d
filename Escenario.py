@@ -16,16 +16,17 @@ class Escenario:
         #materiales
         hierba=Material()
         hierba.agarre_x=0.5
-        hierba.bache_y=0.05
+        hierba.amplitud=0.005
+        hierba.frecuencia=3.0
         hierba.friccion_z=0.5
         hierba.freno_z=3.0
         asfalto=Material()
         arcen=Material()
         arcen.agarre_x=0.9
-        arcen.bache_y=0.0
         arcen.friccion_z=0.9
         #carretera
         self.half_width=1.0
+        self.road_limit=1.5
         self.road_colors=[(102,102,102),(88,88,88)]
         self.road_material=asfalto
         #exterior

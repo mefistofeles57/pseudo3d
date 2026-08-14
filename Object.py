@@ -7,6 +7,7 @@ class Object:
         self.profile=None
         self.z=0.0
         self.x_rel=0.0
+        self.collidable=True
 
 
 class VisibleObject(Object):

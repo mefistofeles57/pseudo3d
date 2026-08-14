@@ -40,6 +40,7 @@ class Humo(TempObject):
         self.drift_x = 0.0      # un pelín hacia fuera si quieres
         self.life = 0.35
         self.numframes=metadata.frames
+        self.collidable=False
 
     def update(self, dt):
         super().update(dt)

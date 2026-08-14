@@ -33,6 +33,7 @@ class GameContext:
         default_profile.shadow_alpha=60
         default_profile.shadow_width_factor=1.4
         default_profile.shadow_height=0.2
+        default_profile.collide_radius2=0.1*0.1
 
         poste_profile=VisualObjProfile()
         #sombra ancha
@@ -41,6 +42,7 @@ class GameContext:
         poste_profile.shadow_width_factor=2.0
         poste_profile.shadow_height=0.2
         poste_profile.shadow_offset_z=-0.01
+        poste_profile.collide_radius2=0.1*0.1
 
         MapGenerator.setObjProfile(default_profile)
 
@@ -59,6 +61,8 @@ class GameContext:
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"farola",4.0,0.6,1.5)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"farola.flip",4.0,0.6,-1.5)
             #quitamiedos
+            objects=MapGenerator.objects(objects,self.road.segments[-10:-9],"piedra",10.0,0.0,-1.4)
+            objects=MapGenerator.objects(objects,self.road.segments[-10:-9],"piedra",10.0,0.0,1.4)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.1,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.1,0.03,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"poste",1.0,0.1,-1.3,profile=poste_profile)
@@ -82,6 +86,8 @@ class GameContext:
             #curva izq
             self.road.add(MapGenerator.pattern(MapGenerator.CURVE,-0.05,50))
             #quitamiedos
+            objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,-1.4)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,1.4)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,-1.3,profile=poste_profile)
@@ -102,25 +108,27 @@ class GameContext:
             #curva der
             self.road.add(MapGenerator.pattern(MapGenerator.CURVE,0.05,50))
             #quitamiedos
+            objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,-1.4)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,1.4)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,-1.3,profile=poste_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,1.3,profile=poste_profile)
 
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-2.0,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,2.0,0.3,0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,-2.5,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,2.5,0.3,0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-3.0,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,3.0,0.3,0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,-3.5,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,3.5,0.3,0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-4.0,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,4.0,0.3,0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,-4.5,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,4.5,0.3,0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-5.0,-0.3,-0.3)
-        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,5.0,0.3,0.3)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-2.0,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,2.0,0.3,0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,-2.5,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,2.5,0.3,0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-3.0,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,3.0,0.3,0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,-3.5,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,3.5,0.3,0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-4.0,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,4.0,0.3,0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,-4.5,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto.flip",1.0,0.4,4.5,0.3,0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,-5.0,-0.3,-0.3,collidable=False)
+        objects=MapGenerator.objects(objects,self.road.segments,"arbusto",1.0,0.4,5.0,0.3,0.3,collidable=False)
         objects=MapGenerator.objects(objects,self.road.segments,"piedra",10.0,0.1,-1.5,-0.3,-0.3)
         objects=MapGenerator.objects(objects,self.road.segments,"piedra.flip",10.0,0.4,1.5,0.3,0.3)
         self.road.objects=objects

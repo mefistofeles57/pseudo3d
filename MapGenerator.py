@@ -67,15 +67,13 @@ class MapGenerator:
         return base
 
     @staticmethod
-    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None):
+    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True):
         objects=[]
         z_pos=tramo[0].z+offset
         if random_x!=0 or random_step!=0:
             rng=random.Random(z_pos)
         z_end=tramo[-1].z+tramo[-1].length
-        s_pointer=0
         obj_pointer=0
-        count=len(tramo)
         while z_pos<z_end:
             #copiar en object todos los elementos de objetos anteriores a z_pos
             for item in objetos[obj_pointer:]:
@@ -99,6 +97,7 @@ class MapGenerator:
                 obj.z+=rng.uniform(0,random_step)
             if random_x!=0:
                 obj.x_rel+=rng.uniform(0,random_x)
+            obj.collidable=collidable
 
             objects.append(obj)
 

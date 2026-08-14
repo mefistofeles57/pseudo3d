@@ -63,8 +63,7 @@ class Camera:
         self.view_distance=15.0
         self.height=0.3
         self.horizon=2*self.h/3
-        self.lookahead=1.5
-        self.bgahead=0.5
+        self.y_move=0.0
 
         self.focal=(self.w/2)/math.tan(math.radians(self.fov)/2)
 
@@ -132,7 +131,7 @@ class Camera:
         self.context.player.update(dt)
         self.z=self.context.player.z-self.player_z
         self.x=self.context.player.x_rel
-        self.y=self.height
+        self.y=self.height+self.y_move
         dz=self.context.player.speed*dt
 
         #actualizar objetos temporales
@@ -164,7 +163,7 @@ class Camera:
             f_y=self.horizon+50
 
         for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
-            fondo.update(self.context.player.vs.segment.curve*dz,f_y)
+            fondo.update(self.context.player.getVS().segment.curve*dz,f_y)
 
         self.update_sky()
 
@@ -246,7 +245,7 @@ class Camera:
 
 
 
-        for vs in frame_data.buffer:
+        for vs_index,vs in enumerate(frame_data.buffer):
             #selecciono la parte del mapa a dibujar
             sublist1=[]
             for i,o in enumerate(objects):
@@ -290,7 +289,7 @@ class Camera:
                     o=listas[min_indice][indices[min_indice]]
                     indices[min_indice]+=1
                     if o.img=="coche":
-                        o.vs=vs
+                        o.vs_index=vs_index
                     frame_data.objbuffer.append(VisibleObject(o,vs))
                 #ver si se han recorrido todas las listas
                 finalizado=True
@@ -440,3 +439,5 @@ class Camera:
             self.color_fondo_d=color_d
             self.fondo=self.create_vertical_gradient(self.w, int(self.horizon), color_d, color_l )
 
+    def move_camera(self,mov):
+        self.y_move=mov
