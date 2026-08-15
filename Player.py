@@ -48,8 +48,8 @@ class Player(Object):
         profile.shadow_width_factor=1.2
         profile.shadow_height=0.5
         profile.shadow_offset_z=0.2
-        profile.collide_radius=0.2
-        profile.collide_radius2=0.2*0.2
+        profile.collide_radius=0.15
+        profile.collide_radius2=0.15*0.15
 
         profile.cache=self.cache
         self.profile=profile
@@ -236,7 +236,7 @@ class Player(Object):
             self.vx+=self.c*dz#*factor_v
             self.vx-=centrifuga*dz
 
-            self.collide(dz,self.vx)
+            self.collide(dz,self.vx*dt)
 
             dz=self.speed*dt
             self.z+=dz
@@ -358,9 +358,9 @@ class Player(Object):
             return None
         return self.context.frame_data.buffer[self.vs_index+index]
 
-    def getDistance(self,obj1,obj2):
-        dx = obj2.x_rel - obj1.x_rel
-        dz = obj2.z - obj1.z
+    def getDistance(self,obj1,x_rel,z):
+        dx = x_rel - obj1.x_rel
+        dz = z - obj1.z
 
         distance_squared = dx * dx + dz * dz
 
@@ -385,12 +385,18 @@ class Player(Object):
         #buscar en el buffer los objetos
         for obj in self.context.frame_data.objbuffer:
             if obj.collidable and obj.z>=inicio and obj.z<=fin:
-                if obj.x + obj.profile.collide_radius >= x_min \
-                    and obj.x - obj.profile.collide_radius <= x_max \
+                if obj.x_rel + obj.profile.collide_radius >= x_min \
+                    and obj.x_rel - obj.profile.collide_radius <= x_max \
                     and obj.z + obj.profile.collide_radius >= z_min \
                     and obj.z - obj.profile.collide_radius <= z_max:
                     #candidato a colision
-                    distance2=self.getDistance(obj,self)
+                    #interpolación de posición
+                    impact_dz=obj.z-self.z
+                    pct=impact_dz/dz
+                    impact_dx=vx*pct
+                    impact_z=obj.z
+                    impact_x=self.x_rel+impact_dx
+                    distance2=self.getDistance(self,impact_x,impact_z)
                     col_distance2=obj.profile.collide_radius2+self.profile.collide_radius2
                     #si está dentro del radio
                     if distance2<=col_distance2:
@@ -405,17 +411,19 @@ class Player(Object):
             self.x_rel=self.prev_x_rel
             self.z=self.prev_z
             #tipo de colision
-            dz=collide_obj.z-self.z
-            dx=collide_obj.x_rel-self.x_rel
-            ratio_z = dz * dz / distance2
+            distance2=self.getDistance(self,collide_obj.x_rel,collide_obj.z)
+            col_dz=collide_obj.z-self.z
+            col_dx=collide_obj.x_rel-self.x_rel
+            ratio_z = col_dz * col_dz / distance2
             lateral=False
-            if dz<0 or ratio_z<0.5:
+            
+            if col_dz<0 or ratio_z<0.5:
                 #lateral
                 #si el choque es fuera de la carretera por el lado exterior
                 #se considera frontal
                 profile=self.getVS().visualProfile
                 offroad=abs(self.x_rel)>=profile.half_width+profile.arcen_width
-                if offroad==False or -dx*self.x_rel<=0:
+                if offroad==False or -col_dx*self.x_rel<=0:
                     lateral=True
 
             if lateral==False:
@@ -425,8 +433,8 @@ class Player(Object):
                 self.changeStatus(Player.STUCK)
                 pass
             else:
-                self.c = -math.copysign(abs(self.c), dx)
-                self.vx = -math.copysign(abs(self.vx), dx)
+                self.c = -math.copysign(abs(self.c), col_dx)
+                self.vx = -math.copysign(abs(self.vx), col_dx)
                 #self.c*=0.5
                 self.speed*=0.85
 
