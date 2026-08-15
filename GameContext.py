@@ -9,7 +9,8 @@ from VisualObjProfile import VisualObjProfile
 from FrameData import FrameData
 
 class GameContext:
-    def __init__(self,screen:pygame.Surface):
+    def __init__(self,screen:pygame.Surface,root):
+        self.root=root
         self.screen=screen
         self.road=Road()
         self.frame_data=FrameData()
@@ -17,14 +18,15 @@ class GameContext:
         self.player=Player(self)
         self.keys=None
         self.default_profile=None
-        self.createMap()
+        self.escenario=Escenario(self)
+        self.createMap(self.escenario)
 
-    def createMap(self):
+    def createMap(self,escenario):
         objects=[]
 
 
 
-        MapGenerator.setProfile(Escenario(self))
+        MapGenerator.setProfile(escenario)
 
         default_profile=VisualObjProfile()
         self.default_profile=default_profile
@@ -33,6 +35,7 @@ class GameContext:
         default_profile.shadow_alpha=60
         default_profile.shadow_width_factor=1.4
         default_profile.shadow_height=0.2
+        default_profile.collide_radius=0.1
         default_profile.collide_radius2=0.1*0.1
 
         poste_profile=VisualObjProfile()
@@ -42,6 +45,7 @@ class GameContext:
         poste_profile.shadow_width_factor=2.0
         poste_profile.shadow_height=0.2
         poste_profile.shadow_offset_z=-0.01
+        poste_profile.collide_radius=0.1
         poste_profile.collide_radius2=0.1*0.1
 
         MapGenerator.setObjProfile(default_profile)

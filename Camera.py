@@ -13,35 +13,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from GameContext import GameContext
 
-class Follower:
-
-    def __init__(self,acceleration=0.05,max_speed=0.5,damping=0.5):
-        self.speed = 0.0
-
-        self.acceleration = acceleration
-        self.max_speed = max_speed
-        #self.damping = 0.92
-        self.damping = damping
-
-    def update(self, current_position, target_position):
-
-        error = target_position - current_position
-
-        self.speed += error * self.acceleration
-
-        self.speed = max(
-            -self.max_speed,
-            min(self.max_speed, self.speed)
-        )
-
-        new_position = current_position + self.speed
-
-        self.speed *= self.damping
-
-        return new_position
-
-    def reset(self):
-        self.speed=0
 
 
 class Camera:
@@ -54,11 +25,15 @@ class Camera:
         self.z=0.0
 
         self.w=context.screen.get_width()
+        self.halfw=self.w/2
         self.h=context.screen.get_height()
 
 
         #self.pitch=-0.04
-        self.pitch=-0.04
+        self.pitch=0.0
+        self.sin_pitch = 0.0
+        self.cos_pitch = 0.0
+        self.setPitch(-0.04)
         self.fov=55.0
         self.view_distance=15.0
         self.height=0.3
@@ -84,6 +59,10 @@ class Camera:
         self.player_z=1.5
 
 
+    def setPitch(self, pitch):
+        self.pitch = pitch
+        self.sin_pitch = math.sin(pitch)
+        self.cos_pitch = math.cos(pitch)
 
     def update(self,dt):
 
@@ -103,9 +82,11 @@ class Camera:
                 self.context.camera.height+=0.1
     #pitch
             elif keys[pygame.K_3]:
-                self.context.camera.pitch-=0.01
+                pitch=self.pitch
+                self.setPitch(pitch-0.01)
             elif keys[pygame.K_4]:
-                self.context.camera.pitch+=0.01
+                pitch=self.pitch
+                self.setPitch(pitch+0.01)
     #fov
             elif keys[pygame.K_5]:
                 self.context.camera.fov-=1.0
@@ -305,11 +286,11 @@ class Camera:
         dx=p.x-self.x
         dy=p.y-self.y
         dz=p.z-self.z
-        y2=dy*math.cos(self.pitch) - dz*math.sin(self.pitch)
-        z2=dy*math.sin(self.pitch) + dz*math.cos(self.pitch)
+        y2=dy*self.cos_pitch - dz*self.sin_pitch
+        z2=dy*self.sin_pitch + dz*self.cos_pitch
         scale=self.focal/z2
 
-        screen_x=(self.w/2)+dx*scale
+        screen_x=(self.halfw)+dx*scale
         screen_y=(self.horizon)-y2*scale
         return Point(screen_x,screen_y,scale)
 
@@ -326,6 +307,7 @@ class Camera:
 
     def draw(self,s:pygame.Surface):
 
+        t0 = time.perf_counter()
             
         if self.fondo!=None:
             s.blit(self.fondo, (0, 0))
@@ -338,25 +320,47 @@ class Camera:
             fondo.draw(s)
 
 
+        t1 = time.perf_counter()
+
+        acum_shadow=0.0
+        acum_draw=0.0
+
+        shadow_objects=[]
+        profile=self.frame_data.buffer[0].visualProfile
+        for obj in self.frame_data.objbuffer:
+            metadata=obj.metadata
+            if metadata.shadow:
+                shadow_objects.append(obj)
+
+
+
         for vs in reversed(self.frame_data.buffer):
             pc1=self.project(vs.end)
             pc2=self.project(vs.start)
 
 
             #cuando hay líneas de grosor negativo no pinto porque es un polígono no visible
-            if pc2.y-pc1.y<0:
-                continue
+            if pc2.y-pc1.y>=0:
+                vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
 
-            vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
 
+            t0_acum = time.perf_counter()
 
             #primero se pintan las sombras del vs. Cualquier objeto puede proyectar
-            vs.visualProfile.drawer.clear_shadow_surface()
-            for item in reversed(self.frame_data.objbuffer):
-                p1=self.project(Point(item.x,item.y,item.z))
+            vs.visualProfile.drawer.clear_shadow_surface(pc1,pc2)
+            for item in reversed(shadow_objects):
                 profile=vs.visualProfile
+                p1=self.project(Point(item.x,item.y,item.z))
+                t0_acum_draw = time.perf_counter()
                 profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
+                t1_acum_draw = time.perf_counter()
+                acum_draw+=(t1_acum_draw-t0_acum_draw)
             vs.visualProfile.drawer.blitShadows(s,pc1,pc2)
+
+            t1_acum = time.perf_counter()
+            acum_shadow+=(t1_acum-t0_acum)
+
+
             #despues los objetos. Solo los que estén situados dentro del segmento
             for item in reversed(self.frame_data.objbuffer):
                 if item.z>=vs.start.z and item.z<vs.end.z:
@@ -364,6 +368,10 @@ class Camera:
                     profile=vs.visualProfile
                     profile.drawer.drawObj(s,p1,item,profile)
 
+
+        t2 = time.perf_counter()
+        self.context.root.debug_text="fondo: "+str(round((t1-t0)*1000,3))+" escena: "+str(round((t2-t1)*1000,3))+ \
+            " shadow: "+str(round(acum_shadow*1000,3))+" draw: "+str(round(acum_draw*1000,3))
 
 
 

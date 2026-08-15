@@ -98,6 +98,12 @@ class MapGenerator:
             if random_x!=0:
                 obj.x_rel+=rng.uniform(0,random_x)
             obj.collidable=collidable
+            #cargar los metadatos
+            if obj.profile.cache!=None:
+                cache=obj.profile.cache
+            else:
+                cache=MapGenerator.visualProfile.cache
+            obj.metadata=cache.metadata[obj.img]
 
             objects.append(obj)
 

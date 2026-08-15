@@ -62,7 +62,7 @@ class Escenario:
         self.cache=ImageCache(None,context)
         self.cache.addImage("signal.arrow","signal.arrow.png",(0.5,1.0),True,True)
         self.cache.addImage("arbol","arbol.png",(0.5,1.0),True,True)
-        self.cache.addImage("arbusto","arbusto.png",(0.5,1.0),True,True)
+        self.cache.addImage("arbusto","arbusto.png",(0.5,1.0),True,False)
         self.cache.addImage("farola","farola.png",(0.7,1.0),True,True)
         self.cache.addImage("palmera","palmera.png",(0.5,1.0),True,True)
         self.cache.addImage("piedra","piedra.png",(0.5,1.0),True,False)

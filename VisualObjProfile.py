@@ -7,3 +7,5 @@ class VisualObjProfile:
         self.shadow_offset_x=0.0
         self.shadow_offset_z=0.0
         self.cache=None
+        self.collide_radius=0.0
+        self.collide_radius2=0.0

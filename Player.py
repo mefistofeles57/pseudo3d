@@ -37,6 +37,7 @@ class Player(Object):
         #cache para el coche
         self.cache=ImageCache(ImageCache.getPlayerConfig(),context)
         self.cache.addImage("coche","coche.png",(0.5,1.0),False,True)
+        self.load_metadata(self.cache)
         #propiedades
         self.estado=Player.STARTING
         self.stuck_time=0.0
@@ -47,7 +48,8 @@ class Player(Object):
         profile.shadow_width_factor=1.2
         profile.shadow_height=0.5
         profile.shadow_offset_z=0.2
-        profile.collide_radius2=0.1*0.1
+        profile.collide_radius=0.2
+        profile.collide_radius2=0.2*0.2
 
         profile.cache=self.cache
         self.profile=profile
@@ -82,13 +84,13 @@ class Player(Object):
         self.smoke_interval=0.1
         self.smoke_timer=0.0
         #params
-        self.PENALIZACION_CURVA=5.0
+        self.PENALIZACION_CURVA=3.0
         self.POTENCIA_MOTOR=7.0
         self.FUERZA_FRENADO=7.0
         self.RESISTENCIA_AIRE=0.0001
         self.FRENO_MOTOR=1.0
-        self.INTENSIDAD_CURVA=15.0
-        self.FUERZA_VOLANTE=6.0
+        self.INTENSIDAD_CURVA=30.0
+        self.FUERZA_VOLANTE=5.0
         self.LIMITE_AGARRE=0.4
 
 
@@ -154,8 +156,10 @@ class Player(Object):
             giro_player=giro*self.FUERZA_VOLANTE*dz_segura
             curva_pista=0.0
             if self.getVS()!=None:
-                curva_pista=self.getVS().segment.curve*self.INTENSIDAD_CURVA
-            self.target_c=giro_player-curva_pista
+                curva_pista=self.getVS().segment.curve
+            centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA
+            
+            self.target_c=giro_player
             #si se suelta el acelerador el coche se agarra más
             if acelerador<0.1:
                 K_curva_final=K_curva*4.0
@@ -228,11 +232,14 @@ class Player(Object):
 
             self.mueve_camera(material)
 
-            self.collide()
+            dz=self.speed*dt
+            self.vx+=self.c*dz#*factor_v
+            self.vx-=centrifuga*dz
+
+            self.collide(dz,self.vx)
 
             dz=self.speed*dt
             self.z+=dz
-            self.vx+=self.c*dz*factor_v
             self.x_rel+=self.vx*dt
 
             #posicion anterior
@@ -360,26 +367,36 @@ class Player(Object):
         return distance_squared
 
 
-    def collide(self):
+    def collide(self,dz,vx):
         inicio=self.z-0.5
         vs=self.getVS(1)
         if vs==None:
             return
         fin=vs.end.z
 
-        min_distance2=999999
+        x_min = min(self.x_rel, self.x_rel + vx) - self.profile.collide_radius
+        x_max = max(self.x_rel, self.x_rel + vx) + self.profile.collide_radius
+
+        z_min = self.z
+        z_max = self.z + dz + self.profile.collide_radius
+
         collide_obj=None
 
         #buscar en el buffer los objetos
         for obj in self.context.frame_data.objbuffer:
             if obj.collidable and obj.z>=inicio and obj.z<=fin:
-                #candidato a colision
-                distance2=self.getDistance(obj,self)
-                col_distance2=obj.profile.collide_radius2+self.profile.collide_radius2
-                #si está dentro del radio y más cerca que colisiones anteriores
-                if distance2<=col_distance2 and distance2<min_distance2:
-                    min_distance2=distance2
-                    collide_obj=obj
+                if obj.x + obj.profile.collide_radius >= x_min \
+                    and obj.x - obj.profile.collide_radius <= x_max \
+                    and obj.z + obj.profile.collide_radius >= z_min \
+                    and obj.z - obj.profile.collide_radius <= z_max:
+                    #candidato a colision
+                    distance2=self.getDistance(obj,self)
+                    col_distance2=obj.profile.collide_radius2+self.profile.collide_radius2
+                    #si está dentro del radio
+                    if distance2<=col_distance2:
+                        collide_obj=obj
+                        #no se buscan más colisiones. No interesa contra que colisiona, con saber que colisiona es suficiente
+                        break
             elif obj.z>fin:
                 break
 
@@ -390,7 +407,7 @@ class Player(Object):
             #tipo de colision
             dz=collide_obj.z-self.z
             dx=collide_obj.x_rel-self.x_rel
-            ratio_z = dz * dz / min_distance2
+            ratio_z = dz * dz / distance2
             lateral=False
             if dz<0 or ratio_z<0.5:
                 #lateral

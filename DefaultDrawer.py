@@ -1,4 +1,5 @@
 import pygame
+import time
 from Camera import Camera
 from Point import Point
 from Road import VisibleSegment
@@ -22,8 +23,18 @@ class DefaultDrawer:
         ).convert_alpha()
 
 
-    def clear_shadow_surface(self):
-        self.shadow_surface.fill((0, 0, 0, 0))
+    def clear_shadow_surface(self,p1:Point,p2:Point):
+        y1 = p1.y
+        y2 = min(p2.y,self.shadow_surface.get_height())
+
+
+        rect = pygame.Rect(
+            0,
+            y1,
+            self.shadow_surface.get_width(),
+            y2 - y1 +1
+        )
+        self.shadow_surface.fill((0, 0, 0, 0),rect)
 
     def blitShadows(self,s:pygame.Surface,pc1:Point,pc2:Point):
         y1 = pc1.y
@@ -146,7 +157,8 @@ class DefaultDrawer:
             cache=p.cache
         else:
             cache=obj.profile.cache
-        metadata=cache.metadata[obj.img]
+        #metadata=cache.metadata[obj.img]
+        metadata=obj.metadata
         if metadata!=None:
             if metadata.type==ImageCache.IMAGE:
                 img=cache.getImage(obj.img,p1.z)
@@ -185,17 +197,16 @@ class DefaultDrawer:
 
         p1=Point(obj.x,obj.y,obj.z+shadow_offset_z)
         p2=Point(obj.x,obj.y,obj.z+shadow_offset_z-shadow_height)
-        p3=Point(obj.x,obj.y,obj.z+shadow_offset_z+shadow_height)
+        #p3=Point(obj.x,obj.y,obj.z+shadow_offset_z+shadow_height)
 
         p=self.context.camera.project(p1)
         pc=self.context.camera.project(p2)
-        pl=self.context.camera.project(p3)
+        #pl=self.context.camera.project(p3)
 
 
-        scale=p.z
         width=img.get_width()*shadow_width_factor
         #height=shadow_height*scale
-        height=max(2,pc.y-pl.y)
+        height=max(2,(pc.y-p.y)*2)
 
         #dibuja en la superfice
 
@@ -204,6 +215,7 @@ class DefaultDrawer:
 #        if obj.img=="coche":
 #            print("h2d: ",height,"h3d: ",shadow_height,"scale: ",scale)
 #            print("h2d: ",pc2.y-pc1.y,"scale1: ",pc1.z,"scale2: ",pc2.z)
+
 
         pygame.draw.ellipse(
             self.shadow_surface,

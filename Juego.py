@@ -22,13 +22,14 @@ class Juego:
         self.font = pygame.font.Font(None, 36)
         #objetos de juego
 
-        self.context=GameContext(self.screen)
+        self.context=GameContext(self.screen,self)
 
         # situar el coche en la carretera y la camara detrás
 
         self.context.player.x=0.0
         self.context.player.y=0.0
         self.context.player.z=self.context.camera.player_z
+        self.debug_text=""
 
 
     def handle_events(self):
@@ -55,8 +56,8 @@ class Juego:
         )
 
         self.screen.blit(texto, (10, 10))
-        txt="FPS: "+str(round(self.clock.get_fps(),2))
-            #" frame gen: "+str(round(self.clock.tick(),2))
+        txt="FPS: "+str(round(self.clock.get_fps(),2))+ \
+            " debug: "+self.debug_text
         texto = self.font.render(
         txt,
         True,              # antialiasing
@@ -76,7 +77,6 @@ class Juego:
 
             self.handle_events()
             self.context.keys=pygame.key.get_pressed()
-
             self.update(dt)
             self.draw()
 

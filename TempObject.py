@@ -41,6 +41,7 @@ class Humo(TempObject):
         self.life = 0.35
         self.numframes=metadata.frames
         self.collidable=False
+        self.metadata=metadata
 
     def update(self, dt):
         super().update(dt)

@@ -8,6 +8,9 @@ class Object:
         self.z=0.0
         self.x_rel=0.0
         self.collidable=True
+        
+    def load_metadata(self,cache):
+        self.metadata=cache.metadata[self.img]
 
 
 class VisibleObject(Object):
