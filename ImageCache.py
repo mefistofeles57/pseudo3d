@@ -9,11 +9,11 @@ if TYPE_CHECKING:
     from GameContext import GameContext
 
 class CacheConfig:
-    def __init__(self):
+    def __init__(self,resize=1.0):
         self.num_samples=150
-        self.scale_max=1500
-        self.scale_min=80
-        self.resize_at_1=1.5
+        self.scale_max=1500*resize
+        self.scale_min=80*resize
+        self.resize_at_1=1.5*resize
 
 class ImageCache:
 
@@ -21,28 +21,28 @@ class ImageCache:
     IMAGE=1
 
     @staticmethod
-    def getPlayerConfig():
+    def getPlayerConfig(resize=1.0):
         c=CacheConfig()
         c.num_samples=2
-        c.scale_max=1500
-        c.scale_min=80
-        c.resize_at_1=3
+        c.scale_max=1500*resize
+        c.scale_min=80*resize
+        c.resize_at_1=3*resize
         return c
 
     @staticmethod
-    def getHumoConfig():
+    def getHumoConfig(resize=1.0):
         c=CacheConfig()
         c.num_samples=20
-        c.scale_max=1500
-        c.scale_min=20
-        c.resize_at_1=7
+        c.scale_max=1500*resize
+        c.scale_min=20*resize
+        c.resize_at_1=7*resize
         return c
 
 
     def __init__(self,config:CacheConfig,context:"GameContext"):
         self.context=context
         if config==None:
-            self.config=CacheConfig()
+            self.config=CacheConfig(resize=self.context.gen_scale)
         else:
             self.config=config
         self.images={}

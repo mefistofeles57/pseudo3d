@@ -1,4 +1,5 @@
 import random
+from RoadMark import RoadMark
 from Road import Segment
 from Object import Object
 
@@ -28,7 +29,7 @@ class MapGenerator:
     @staticmethod
     def pattern(type,curvature,length):
         segments=[]
-        for i in range(length):
+        for _ in range(length):
             segments.append(MapGenerator.genSegment(type,curvature))
         return segments
 
@@ -38,7 +39,7 @@ class MapGenerator:
         at=0.0
         dt=1.0/length
         prev=0.0
-        for i in range(length):
+        for _ in range(length):
             at+=dt
             value=-max*MapGenerator.smoothstep(at)
             values.append(value-prev)
@@ -112,5 +113,16 @@ class MapGenerator:
         for item in objetos[obj_pointer:]:
             objects.append(item)
         return objects
+
+    @staticmethod
+    def addMark(s:Segment,img,x,z,w,h):
+        rm=RoadMark()
+        rm.img=img
+        rm.offset_x=x
+        rm.offset_z=z
+        rm.width=w
+        rm.height=h
+        s.road_marks.append(rm)
+
 
 

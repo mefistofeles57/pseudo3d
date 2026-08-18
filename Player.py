@@ -19,23 +19,24 @@ class Player(Object):
     DESTUCKING=3
 
     def __init__(self,context:"GameContext"):
+        super().__init__()
         self.context=context
         self.speed=0.0
         self.img="coche"
-        self.metadata=None
-        self.vs_index=-1
+        #self.metadata=None
+        #self.vs_index=-1
         #posicion
-        self.x_rel=0.0
+        #self.x_rel=0.0
         self.vx=0.0
         self.c=0.0
         self.target_c=0.0
-        self.z=0.0
+        #self.z=0.0
         #posicion previa
         self.prev_z=0.0
         self.prev_x_rel=0.0
         self.prev_c=0.0
         #cache para el coche
-        self.cache=ImageCache(ImageCache.getPlayerConfig(),context)
+        self.cache=ImageCache(ImageCache.getPlayerConfig(resize=self.context.gen_scale),context)
         self.cache.addImage("coche","coche.png",(0.5,1.0),False,True)
         self.load_metadata(self.cache)
         #propiedades
@@ -56,7 +57,7 @@ class Player(Object):
 
         #cache para el humo
         #animaciones
-        self.cache_humo=ImageCache(ImageCache.getHumoConfig(),context)
+        self.cache_humo=ImageCache(ImageCache.getHumoConfig(resize=self.context.gen_scale),context)
         self.cache_humo.addAnimation("humo","humo.png",(0.0,1.0),True,False)
         profile=VisualObjProfile()
         profile.shadow_color=(0,0,0)

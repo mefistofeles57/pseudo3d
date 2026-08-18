@@ -4,25 +4,29 @@ from GameContext import GameContext
 from Point import Point
 
 class Juego:
-    def __init__(self, width=1280, height=720, title="Outrun prototype",fps=60):
+    def __init__(self, width=800, height=450, screen_w=1280, screen_h=720, gen_scale=1, title="Outrun prototype",fps=60):
         pygame.init()
         pygame.display.set_caption(title)
 
         self.width=width
         self.height=height
+        self.screen_w=screen_w
+        self.screen_h=screen_h
         self.fps=fps
 
-        self.screen=pygame.display.set_mode((self.width,self.height))
+        #self.screen=pygame.Surface((self.width, self.height))
+        
+        self.screen=pygame.display.set_mode((self.screen_w,self.screen_h),pygame.SCALED | pygame.RESIZABLE)
 
 
 
         self.clock=pygame.time.Clock()
         self.running=True
 
-        self.font = pygame.font.Font(None, 36)
+        self.font = pygame.font.Font(None, 18)
         #objetos de juego
 
-        self.context=GameContext(self.screen,self)
+        self.context=GameContext(self.screen,self,gen_scale=(1/gen_scale))
 
         # situar el coche en la carretera y la camara detrás
 
@@ -66,6 +70,7 @@ class Juego:
 
         self.screen.blit(texto, (10, 35))
 
+        #pygame.transform.scale(self.screen, (self.screen_w, self.screen_h), self.escalated_screen)
         pygame.display.flip()
 
 

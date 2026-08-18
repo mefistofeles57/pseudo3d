@@ -9,10 +9,11 @@ class Segment:
         self.visualProfile=profile
         self.index=0
         self.z=0.0
+        self.road_marks=[]
         #self.heading=math.atan2(curve,height)
 
 class VisibleSegment:
-    def __init__(self,s:Segment,origin,playerx=None,playery=None):
+    def __init__(self,s:Segment,origin,playerx=None,playery=None,vs_index=-1):
         if origin!=None:
             x=origin.end.x
             y=origin.end.y
@@ -32,6 +33,9 @@ class VisibleSegment:
         self.end=Point(x+self.curve,y+self.height,s.z+s.length)
         self.visualProfile=s.visualProfile
         self.index=s.index
+        self.length=self.end.z-self.start.z
+        self.road_marks=s.road_marks
+        self.vs_index=vs_index
 
 class Line:
     def __init__(self,position,x,width,offset,freq,color):

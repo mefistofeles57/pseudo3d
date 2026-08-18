@@ -9,7 +9,9 @@ from VisualObjProfile import VisualObjProfile
 from FrameData import FrameData
 
 class GameContext:
-    def __init__(self,screen:pygame.Surface,root):
+
+    def __init__(self,screen:pygame.Surface,root,gen_scale=1.0):
+        self.gen_scale=gen_scale
         self.root=root
         self.screen=screen
         self.road=Road()
@@ -59,6 +61,12 @@ class GameContext:
             self.road.add(MapGenerator.pattern(MapGenerator.NONE,0.0,10))
             objects=MapGenerator.objects(objects,self.road.segments[-5:],"signal.arrow.flip",2.5,0.5,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-5:],"signal.arrow.flip",2.5,0.5,-1.3)
+            MapGenerator.addMark(self.road.segments[-1],"flecha.1",x=-0.25,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-2],"flecha.2",x=-0.25,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-1],"flecha.1",x=-0.9,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-2],"flecha.2",x=-0.9,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-1],"flecha.1",x=0.4,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-2],"flecha.2",x=0.4,z=0.0,w=0.5,h=1.0)
             #bajada
             #tramo1=MapGenerator.pattern(MapGenerator.HILL,0.02,20)
             #curva der
@@ -72,7 +80,7 @@ class GameContext:
             objects=MapGenerator.objects(objects,self.road.segments[-10:-9],"piedra",10.0,0.0,-1.4,profile=piedra_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-10:-9],"piedra",10.0,0.0,1.4,profile=piedra_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.1,0.03,-1.3)
-            objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.1,0.03,1.3)
+            objects=MapGenerator.objects(objects,self.road.segments[-10:],"quitamiedos",0.15,0.03,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"poste",1.0,0.1,-1.3,profile=poste_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-10:],"poste",1.0,0.1,1.3,profile=poste_profile)
             #recta
@@ -83,6 +91,12 @@ class GameContext:
             objects=MapGenerator.objects(objects,self.road.segments[-20:],"arbol",2.5,0.6,-2.0,-0.5,0.5)
             #subida
             self.road.add(MapGenerator.pattern(MapGenerator.HILL,0.02,20))
+            MapGenerator.addMark(self.road.segments[-1],"flecha.1",x=-0.25,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-2],"flecha.2",x=-0.25,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-1],"flecha.1",x=-0.9,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-2],"flecha.2",x=-0.9,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-1],"flecha.1",x=0.4,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-2],"flecha.2",x=0.4,z=0.0,w=0.5,h=1.0)
             objects=MapGenerator.objects(objects,self.road.segments[-20:],"arbol",2.5,0.6,1.5)
             objects=MapGenerator.objects(objects,self.road.segments[-20:],"arbol",2.5,0.6,-1.5)
             objects=MapGenerator.objects(objects,self.road.segments[-20:],"arbol",2.5,0.6,2.0,0.5,0.5)
@@ -96,7 +110,7 @@ class GameContext:
             #quitamiedos
             objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,-1.4,profile=piedra_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,1.4,profile=piedra_profile)
-            objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,-1.3)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.15,0.03,-1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,-1.3,profile=poste_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,1.3,profile=poste_profile)
@@ -109,6 +123,12 @@ class GameContext:
             objects=MapGenerator.objects(objects,self.road.segments[-20:],"arbol",2.5,0.6,-2.0,-0.5,0.5)
             #bajada
             self.road.add(MapGenerator.pattern(MapGenerator.HILL,-0.01,20))
+            MapGenerator.addMark(self.road.segments[-10],"flecha.1",x=-0.25,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-11],"flecha.2",x=-0.25,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-10],"flecha.1",x=-0.9,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-11],"flecha.2",x=-0.9,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-10],"flecha.1",x=0.4,z=0.0,w=0.5,h=1.0)
+            MapGenerator.addMark(self.road.segments[-11],"flecha.2",x=0.4,z=0.0,w=0.5,h=1.0)
             #recta
             self.road.add(MapGenerator.pattern(MapGenerator.NONE,0.0,20))
             objects=MapGenerator.objects(objects,self.road.segments[-5:],"signal.arrow.flip",2.5,0.5,1.3)
@@ -119,7 +139,7 @@ class GameContext:
             objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,-1.4,profile=piedra_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-50:-49],"piedra",10.0,0.0,1.4,profile=piedra_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,-1.3)
-            objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.1,0.03,1.3)
+            objects=MapGenerator.objects(objects,self.road.segments[-50:],"quitamiedos",0.15,0.03,1.3)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,-1.3,profile=poste_profile)
             objects=MapGenerator.objects(objects,self.road.segments[-50:],"poste",1.0,0.1,1.3,profile=poste_profile)
 

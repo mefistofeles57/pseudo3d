@@ -175,8 +175,9 @@ class Camera:
         fin=False
 
         vs_prev=None
+        numitems=0
         for s in segments:
-            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y)
+            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y,vs_index=numitems)
             if vs.end.z<=frontera:
                 continue
 
@@ -186,16 +187,18 @@ class Camera:
                 vs.start.z=frontera
                 vs.curve=vs.end.x-p.x
                 vs.height=vs.end.y-p.y
+                vs.length=vs.end.z-p.z
                 vs.end.x=vs.start.x+vs.curve
                 vs.end.y=vs.start.y+vs.height
-                vs.acum_curve=vs.curve
-                vs.acum_height=vs.height
 
                 #end x e y deben interpolarse
 
             elif vs.end.z>(self.z+distancia):
                 #clipping lejano
                 vs.end=self.clip(vs.start,vs.end,self.z+distancia)
+                vs.curve=vs.end.x-vs.start.x
+                vs.height=vs.end.y-vs.start.y
+                vs.length=vs.end.z-vs.start.z
 
                 fin=True
             vs_prev=vs
@@ -205,6 +208,7 @@ class Camera:
                     p=Point(vs.start.x+pct*vs.curve,vs.start.y+pct*vs.height,offset)
                     return p
             buffer.append(vs)
+            numitems+=1
             if fin:
                 break
 
@@ -223,8 +227,6 @@ class Camera:
 
         #construyo el buffer haciendo merge de objetos del mapa, objetos temporales y coche del jugador
         #aprovecho la pasada para calcular sombras
-
-
 
         for vs_index,vs in enumerate(frame_data.buffer):
             #selecciono la parte del mapa a dibujar
@@ -269,8 +271,7 @@ class Camera:
                 if min_indice!=-1:
                     o=listas[min_indice][indices[min_indice]]
                     indices[min_indice]+=1
-                    if o.img=="coche":
-                        o.vs_index=vs_index
+                    o.vs_index=vs_index
                     frame_data.objbuffer.append(VisibleObject(o,vs))
                 #ver si se han recorrido todas las listas
                 finalizado=True

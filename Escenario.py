@@ -1,4 +1,5 @@
 import pygame
+from pathlib import Path
 from ImageCache import ImageCache
 from DefaultDrawer import DefaultDrawer
 from Background import Background
@@ -13,6 +14,7 @@ class Escenario:
 
     def __init__(self,context:"GameContext"):
         self.name="Escenario"
+        self.context=context
         #materiales
         hierba=Material()
         hierba.agarre_x=0.5
@@ -46,14 +48,16 @@ class Escenario:
 
         mov=75
 
+        sprite_resize=self.context.gen_scale
+
         self.fondos=[]
-        b=Background("img/nube1.png",False,False,mov*0.5,context,None,x=400,y=400)
+        b=Background("img/nube1.png",False,False,mov*0.5,context,None,x=400,y=400,resize=sprite_resize)
         self.fondos.append(b)
-        b=Background("img/nube2.png",False,False,mov*0.5,context,None,x=800,y=200)
+        b=Background("img/nube2.png",False,False,mov*0.5,context,None,x=800,y=200,resize=sprite_resize)
         self.fondos.append(b)
-        b=Background("img/hills.png",True,False,mov*1.0,context,(27,41,53),y=context.camera.horizon)
+        b=Background("img/hills.png",True,False,mov*1.0,context,(27,41,53),y=context.camera.horizon,resize=sprite_resize)
         self.fondos.append(b)
-        b=Background("img/near_hills.png",True,True,mov*4.0,context,(31,159,68),y=context.camera.horizon)
+        b=Background("img/near_hills.png",True,True,mov*4.0,context,(31,159,68),y=context.camera.horizon,resize=sprite_resize)
         self.fondos.append(b)
 
 
@@ -68,6 +72,12 @@ class Escenario:
         self.cache.addImage("piedra","piedra.png",(0.5,1.0),True,False)
         self.cache.addImage("quitamiedos","quitamiedos.png",(0.5,2.0),False,False)
         self.cache.addImage("poste","poste.2.png",(0.5,1.0),False,True)
+
+        self.images={}
+        base = Path(__file__).resolve().parent
+        self.images["flecha.1"]=pygame.image.load(base/"img"/"flecha.1.png").convert_alpha()
+        self.images["flecha.2"]=pygame.image.load(base/"img"/"flecha.2.png").convert_alpha()
+
 
 
         self.drawer=DefaultDrawer(context)

@@ -1,5 +1,6 @@
 import pygame
 import time
+import math
 from Camera import Camera
 from Point import Point
 from Road import VisibleSegment
@@ -67,6 +68,10 @@ class DefaultDrawer:
 
 
     def draw(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2):
+
+        if vs.length<=0.0:
+            return
+
         borde_i=-1
         borde_d=c.w
 
@@ -142,6 +147,10 @@ class DefaultDrawer:
                 (puntos,color)=item
                 if color!=None:
                     self.pinta(surface,puntos,color)
+        #dibujos
+        #solo no tiene clipping
+        for marca in vs.road_marks:
+            self.drawRoadMark(vs,marca)
 
 
     def drawShadow(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",vs:VisibleSegment,pc1:Point,pc2:Point):
@@ -230,3 +239,77 @@ class DefaultDrawer:
     def pinta(self,surface,puntos,color):
         pygame.draw.polygon(surface,color,puntos,0)
 
+    def drawRoadMark(self,vs,road_mark):
+        #numstripes según distancia
+        vd=self.context.camera.view_distance
+        
+        n=vd/3
+
+        if (vs.start.z-self.context.camera.z)>2*n:
+            numstripes=4
+        elif (vs.start.z-self.context.camera.z)>n:
+            numstripes=8
+        else:
+            numstripes=16
+
+
+
+        #parte la imagen en numstripstrozos
+        stripesize=road_mark.height/numstripes
+        #proyecta los puntos
+        #punto de inicio
+        #clip lejano
+
+        p=Point(vs.start.x+road_mark.offset_x,vs.start.y,vs.start.z+road_mark.offset_z)
+        p_ant=p
+        
+        for i in range(numstripes):
+            #calcular los extremos (interpolar x e y)
+            z=((i+1)*stripesize)
+            pct=(z+road_mark.offset_z)/vs.length
+            x=vs.curve*pct
+            y=vs.height*pct
+
+            #tiene que usar el inicio y fin sin clipping para calcular la posición de las franjas
+            if (vs.start.z-self.context.camera.z)==Camera.near_plane:
+                #primer vs con clipping cercano
+                s_ini=Point(vs.end.x-vs.segment.curve,vs.end.y-vs.segment.height,vs.end.z-vs.segment.length)
+            else:
+                s_ini=vs.start
+
+
+            p=Point(s_ini.x+road_mark.offset_x+x,s_ini.y+y,s_ini.z+road_mark.offset_z+z)
+            #si el punto anterior está entre el inicio y el fin del segmento con clipping
+            if p_ant.z>=vs.start.z and p_ant.z<=vs.end.z:
+                #si tiene clipping lejano
+                if p.z>vs.end.z:
+                    p.x=vs.end.x
+                    p.y=vs.end.y
+                    p.z=vs.end.z
+                #si el punto anterior está antes del actual
+                if p.z>=p_ant.z:
+                    #calcular ancho y alto
+                    pc1=self.context.camera.project(p_ant)
+                    pc2=self.context.camera.project(p)
+                    y1=math.ceil(pc1.y)
+                    y2=math.floor(pc2.y)
+                    width=round(pc1.z*road_mark.width)
+                    height=max(y1-y2,1)
+                    #redimiensionar
+                    img=vs.visualProfile.images[road_mark.img]
+                    img_stripe=img.get_height()/numstripes
+                    area = pygame.Rect(
+                        0,
+                        round(img_stripe*(numstripes-i-1)),
+                        img.get_width(),
+                        round(img_stripe)
+                    )
+                    stripe = img.subsurface(area)
+
+                    stripe_redim=pygame.transform.scale(stripe, (width,height))
+                    #dibujar en pantalla el fragmento de la imagen correspondiente a la franja
+
+                    x=round(pc1.x)
+
+                    self.context.screen.blit(stripe_redim,(x,y2))
+            p_ant=p

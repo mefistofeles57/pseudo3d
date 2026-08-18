@@ -1,10 +1,13 @@
--colisiones laterales (F2)
--jitter (F3)
 -sprites coches (F3)
--terreno (F2)
--potencia desniveles (F2)
--rpm (F2)
--marcas en carretera (F3)
--limites (F2)
+-rpm (F3)
 -medianas (F3)
+-sonido
+-enemigos
+-panel
+-timer
+-checkpoint
+-bifucaciones
+-escenarios
+-transiciones
+-inercia humo
 
