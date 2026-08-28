@@ -1,6 +1,11 @@
 from Road import VisibleSegment
 
 class Object:
+
+    NONE=0
+    CAR=1
+    PLAYER=2
+
     def __init__(self):
         self.img=""
         self.metadata=None
@@ -9,9 +14,15 @@ class Object:
         self.x_rel=0.0
         self.collidable=True
         self.vs_index=-1
+        self.type=Object.NONE
         
     def load_metadata(self,cache):
         self.metadata=cache.metadata[self.img]
+
+    def getVS(self, context, index=0):
+        if self.vs_index==-1 or self.vs_index+index>len(context.frame_data.buffer)-1:
+            return None
+        return context.frame_data.buffer[self.vs_index+index]
 
 
 class VisibleObject(Object):

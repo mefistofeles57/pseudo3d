@@ -61,15 +61,15 @@ class ImageCache:
         self.base = Path(__file__).resolve().parent
 
 
-    def addAnimation(self,name,file,anchor,flip=True,shadow=False):
+    def addAnimation(self,name,file,anchor,flip=True,shadow=False,ancho=32,alto=32):
         img=pygame.image.load(self.base/"img"/file).convert_alpha()
-        frames=self.load_frames(img, 32, 32)
+        frames=self.load_frames(img, ancho, alto)
         self.newAnimation(name,frames,anchor,shadow)
         if flip==True:
             img=pygame.image.load(self.base/"img"/file).convert_alpha()
             img=pygame.transform.flip(img,True,False)
             frames=[]
-            for item in reversed(self.load_frames(img, 32, 32)):
+            for item in reversed(self.load_frames(img, ancho, alto)):
                 frames.append(item)
             anchor_x=anchor[0]
             anchor_y=anchor[1]

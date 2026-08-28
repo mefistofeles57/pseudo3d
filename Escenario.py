@@ -72,12 +72,16 @@ class Escenario:
         self.cache.addImage("piedra","piedra.png",(0.5,1.0),True,False)
         self.cache.addImage("quitamiedos","quitamiedos.png",(0.5,2.0),False,False)
         self.cache.addImage("poste","poste.2.png",(0.5,1.0),False,True)
+        self.cache.addImage("checkpoint","checkpoint.png",(0.6,1.0),True,True)
+
+        self.cache.addAnimation("enemigo.1","enemigo.1.png",(0.5,1.0),False,True,ancho=256,alto=256)
 
         self.images={}
         base = Path(__file__).resolve().parent
         self.images["flecha.1"]=pygame.image.load(base/"img"/"flecha.1.png").convert_alpha()
         self.images["flecha.2"]=pygame.image.load(base/"img"/"flecha.2.png").convert_alpha()
-
+        self.images["linea"]=pygame.image.load(base/"img"/"linea.png").convert_alpha()
+        self.images["parrilla"]=pygame.image.load(base/"img"/"parrilla.png").convert_alpha()
 
 
         self.drawer=DefaultDrawer(context)

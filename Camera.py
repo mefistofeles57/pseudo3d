@@ -108,19 +108,24 @@ class Camera:
 
         ############################################
 
-        #mover el coche
-        self.context.player.update(dt)
-        self.z=self.context.player.z-self.player_z
-        self.x=self.context.player.x_rel
-        self.y=self.height+self.y_move
-        dz=self.context.player.speed*dt
+        #actualizar objetos en orden
 
-        #actualizar objetos temporales
-        for obj in self.context.frame_data.tempobjbuffer:
-            obj.update(dt)
+        listaobjs = [self.context.player] + self.context.frame_data.tempobjbuffer
+        listaobjs.sort(key=lambda obj: obj.z, reverse=True)
+
+        for item in listaobjs:
+            item.update(dt)
 
         #eliminar objetos temporales muertos
         self.remove_dead_objects()
+
+        #mover la camara
+        self.z=self.context.player.z-self.player_z
+        self.x=self.context.player.x_rel
+        self.y=self.height+self.y_move
+
+        #calcular el avance para actualizar el fondo
+        dz=self.context.player.speed*dt
 
         #construir el buffer de carreta
         offset=self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,offset=self.context.player.z)
@@ -131,9 +136,6 @@ class Camera:
         self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
         self.getObjBuffer(self.frame_data)
 
-        if len(self.frame_data.buffer)<3:
-            return
-       
 
         #proyecto el ultimo segmento
         pn=self.project(self.frame_data.buffer[-1].end)
@@ -144,7 +146,7 @@ class Camera:
             f_y=self.horizon+50
 
         for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
-            fondo.update(self.context.player.getVS().segment.curve*dz,f_y)
+            fondo.update(self.context.player.getVS(self.context).segment.curve*dz,f_y)
 
         self.update_sky()
 
@@ -175,9 +177,8 @@ class Camera:
         fin=False
 
         vs_prev=None
-        numitems=0
         for s in segments:
-            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y,vs_index=numitems)
+            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y)
             if vs.end.z<=frontera:
                 continue
 
@@ -208,7 +209,6 @@ class Camera:
                     p=Point(vs.start.x+pct*vs.curve,vs.start.y+pct*vs.height,offset)
                     return p
             buffer.append(vs)
-            numitems+=1
             if fin:
                 break
 
@@ -224,6 +224,10 @@ class Camera:
         objects=self.context.road.objects[self.context.road.current_object:]
         player=self.context.player
         frame_data.objbuffer.clear()
+
+
+
+        frame_data.tempobjbuffer.sort(key=lambda obj: obj.z)
 
         #construyo el buffer haciendo merge de objetos del mapa, objetos temporales y coche del jugador
         #aprovecho la pasada para calcular sombras
@@ -250,7 +254,7 @@ class Camera:
             
             sublist2.sort(key=lambda obj: obj.z)
 
-            #hay que recorrer todos los elementos en las listas
+            #player
             sublist3=[]
             if player.z>=vs.start.z and player.z<vs.end.z:
                 sublist3.append(player)
@@ -282,7 +286,6 @@ class Camera:
 
 
 
-
     def project(self,p:Point):
         dx=p.x-self.x
         dy=p.y-self.y
@@ -308,7 +311,6 @@ class Camera:
 
     def draw(self,s:pygame.Surface):
 
-        t0 = time.perf_counter()
             
         if self.fondo!=None:
             s.blit(self.fondo, (0, 0))
@@ -321,10 +323,6 @@ class Camera:
             fondo.draw(s)
 
 
-        t1 = time.perf_counter()
-
-        acum_shadow=0.0
-        acum_draw=0.0
 
         shadow_objects=[]
         profile=self.frame_data.buffer[0].visualProfile
@@ -344,23 +342,13 @@ class Camera:
             if pc2.y-pc1.y>=0:
                 vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
 
-
-            t0_acum = time.perf_counter()
-
             #primero se pintan las sombras del vs. Cualquier objeto puede proyectar
             vs.visualProfile.drawer.clear_shadow_surface(pc1,pc2)
             for item in reversed(shadow_objects):
                 profile=vs.visualProfile
                 p1=self.project(Point(item.x,item.y,item.z))
-                t0_acum_draw = time.perf_counter()
                 profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
-                t1_acum_draw = time.perf_counter()
-                acum_draw+=(t1_acum_draw-t0_acum_draw)
             vs.visualProfile.drawer.blitShadows(s,pc1,pc2)
-
-            t1_acum = time.perf_counter()
-            acum_shadow+=(t1_acum-t0_acum)
-
 
             #despues los objetos. Solo los que estén situados dentro del segmento
             for item in reversed(self.frame_data.objbuffer):
@@ -368,11 +356,6 @@ class Camera:
                     p1=self.project(Point(item.x,item.y,item.z))
                     profile=vs.visualProfile
                     profile.drawer.drawObj(s,p1,item,profile)
-
-
-        t2 = time.perf_counter()
-        self.context.root.debug_text="fondo: "+str(round((t1-t0)*1000,3))+" escena: "+str(round((t2-t1)*1000,3))+ \
-            " shadow: "+str(round(acum_shadow*1000,3))+" draw: "+str(round(acum_draw*1000,3))
 
 
 

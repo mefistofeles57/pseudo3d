@@ -180,6 +180,7 @@ class DefaultDrawer:
                 #de momento ni alpha ni scale
             if img!=None:
                 if shadow==False:
+                    #print(obj.img)
                     punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
                     surface.blit(img,punto)
                 elif metadata.shadow:
@@ -208,14 +209,14 @@ class DefaultDrawer:
         p2=Point(obj.x,obj.y,obj.z+shadow_offset_z-shadow_height)
         #p3=Point(obj.x,obj.y,obj.z+shadow_offset_z+shadow_height)
 
-        p=self.context.camera.project(p1)
-        pc=self.context.camera.project(p2)
+        pp1=self.context.camera.project(p1)
+        pp2=self.context.camera.project(p2)
         #pl=self.context.camera.project(p3)
 
 
         width=img.get_width()*shadow_width_factor
         #height=shadow_height*scale
-        height=max(2,(pc.y-p.y)*2)
+        height=max(2,abs(pp1.y-pp2.y)*2)
 
         #dibuja en la superfice
 
@@ -229,7 +230,7 @@ class DefaultDrawer:
         pygame.draw.ellipse(
             self.shadow_surface,
             (shadow_color[0], shadow_color[1], shadow_color[2], shadow_alpha),      # RGBA
-            (p.x - width // 2, p.y - height // 2, width, height)
+            (pp1.x - width // 2, pp1.y - height // 2, width, height)
         )
         #surface.blit(shadow, (p.x - width // 2, p.y - height // 2))
 
@@ -266,7 +267,7 @@ class DefaultDrawer:
         for i in range(numstripes):
             #calcular los extremos (interpolar x e y)
             z=((i+1)*stripesize)
-            pct=(z+road_mark.offset_z)/vs.length
+            pct=min((z+road_mark.offset_z)/vs.length,1.0)
             x=vs.curve*pct
             y=vs.height*pct
 
@@ -276,7 +277,6 @@ class DefaultDrawer:
                 s_ini=Point(vs.end.x-vs.segment.curve,vs.end.y-vs.segment.height,vs.end.z-vs.segment.length)
             else:
                 s_ini=vs.start
-
 
             p=Point(s_ini.x+road_mark.offset_x+x,s_ini.y+y,s_ini.z+road_mark.offset_z+z)
             #si el punto anterior está entre el inicio y el fin del segmento con clipping
@@ -313,3 +313,5 @@ class DefaultDrawer:
 
                     self.context.screen.blit(stripe_redim,(x,y2))
             p_ant=p
+            if p_ant.z>=vs.end.z:
+                break

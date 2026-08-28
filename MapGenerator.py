@@ -2,6 +2,7 @@ import random
 from RoadMark import RoadMark
 from Road import Segment
 from Object import Object
+from Event import EnemySpawn,Checkpoint
 
 class MapGenerator:
     CURVE=0
@@ -124,5 +125,14 @@ class MapGenerator:
         rm.height=h
         s.road_marks.append(rm)
 
+    @staticmethod
+    def addEnemy(s:Segment,z_rel, x_rel,speed):
+        e=EnemySpawn(z_rel,x_rel,speed)
+        s.events.append(e)
 
+
+    @staticmethod
+    def addCheckpoint(s:Segment,z_rel, time):
+        e=Checkpoint(z_rel,time)
+        s.events.append(e)
 

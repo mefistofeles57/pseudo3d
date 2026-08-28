@@ -1,13 +1,22 @@
--sprites coches (F3)
--rpm (F3)
--medianas (F3)
+-sprites coches *
+-rpm
+-medianas
 -sonido
--enemigos
+-enemigos *
 -panel
 -timer
 -checkpoint
 -bifucaciones
 -escenarios
--transiciones
+ -vegetación - campos
+ -ciudades
+ -desierto
+ -costa
+ -montaña
+ -tunel
+ -señales verticales (indicadores, curvas, velocidad, adelantamiento)
+ -marcas suelo (paso de cebra, checkpoint, velocidad, bifurcaciones)
+-transiciones entre escenarios
 -inercia humo
+
 
