@@ -84,13 +84,13 @@ class Player(Car):
         self.smoke_interval=0.1
         self.smoke_timer=0.0
         #params
-        self.PENALIZACION_CURVA=0.5
+        self.PENALIZACION_CURVA=1.0
         self.POTENCIA_MOTOR=7.0
         self.FUERZA_FRENADO=7.0
         self.RESISTENCIA_AIRE=0.0001
         self.FRENO_MOTOR=1.0
-        self.INTENSIDAD_CURVA=15.0
-        self.FUERZA_VOLANTE=2.5
+        self.INTENSIDAD_CURVA=20.0
+        self.FUERZA_VOLANTE=3.0
         self.LIMITE_AGARRE=0.6
         #object
         self.type=Object.PLAYER
@@ -105,39 +105,56 @@ class Player(Car):
         
 
 
-    def update(self,dt):
+    def update(self, dt):
+        vs=self.getVS(self.context)
         if self.context.keys[pygame.K_SPACE] and self.tecla_marcha==False:
             self.tecla_marcha=True
             self.cambio_marcha()
         elif self.context.keys[pygame.K_SPACE]==False:
             self.tecla_marcha=False
-        if self.context.estado==NORMAL or self.context.estado==STARTING or self.context.estado==GAMEOVER:
+        if self.context.estado==NORMAL or self.context.estado==STARTING or self.context.estado==GAMEOVER or self.context.estado==GAMEOVER_FINAL:
 
-            if self.context.estado!=GAMEOVER:
+            if self.context.estado!=GAMEOVER and self.context.estado!=GAMEOVER_FINAL:
                 k_freno=self.context.keys[pygame.K_DOWN]
                 k_acel=self.context.keys[pygame.K_UP]
                 k_vol_r=self.context.keys[pygame.K_RIGHT]
                 k_vol_l=self.context.keys[pygame.K_LEFT]
             else:
-                k_freno=True
+                k_freno = True
                 k_acel=k_vol_r=k_vol_l=False
 
             acelerador=self.get_acelerador(k_acel,dt)
             freno=self.get_freno(k_freno,dt)
             volante = self.get_volante(k_vol_l, k_vol_r, dt)
 
-            if k_vol_l and not k_vol_r and self.speed>0.1:
+            if freno < -2.0 and self.speed > 2.0:
+                self.context.root.playSound("freno")
+            else:
+                self.context.root.stopSound("freno")
+
+            if k_vol_l and not k_vol_r and self.speed > 0.1:
+                #izquierda
                 self.frame = 2
-            elif k_vol_r and not k_vol_l and self.speed>0.1:
+            elif k_vol_r and not k_vol_l and self.speed > 0.1:
+                #derecha
                 self.frame = 1
             else:
-                self.frame = 0
+                if vs!=None and vs.height > 0:
+                    #subiendo
+                    self.frame = 4
+                elif vs!=None and vs.height < 0:
+                    #bajando
+                    self.frame = 3
+                else:
+                    self.frame = 0
                 
             
 
-            (vmax_marcha,_)=self.marchas[self.marcha]
+            (vmax_marcha, _) = self.marchas[self.marcha]
+            
 
-            if self.context.estado==NORMAL or self.context.estado==GAMEOVER:
+
+            if self.context.estado==NORMAL or self.context.estado==GAMEOVER or self.context.estado==GAMEOVER_FINAL:
                 self.physics(acelerador,freno,volante,dt)
 
                 dz=self.speed*dt
@@ -235,6 +252,7 @@ class Player(Car):
             self.context.frame_data.tempobjbuffer.append(h)
 
     def cambio_marcha(self):
+        self.context.root.sounds["marcha"].play()
         if self.marcha==0:
             self.marcha=1
         else:
@@ -244,21 +262,22 @@ class Player(Car):
         #material
         rueda_i=(self.x_rel-0.05)*-1
         rueda_d=self.x_rel+0.05
-        profile=None
-        if self.getVS(self.context)!=None:
-            profile=self.getVS(self.context).visualProfile
+        profile = None
+        vs=self.getVS(self.context)
+        if vs!=None:
+            profile=vs.visualProfile
         if profile==None:
             return Material()
         
-        if rueda_i<profile.half_width:
+        if rueda_i<vs.half_width:
             material_i=0
-        elif rueda_i<profile.half_width+profile.arcen_width:
+        elif rueda_i<vs.half_width+profile.arcen_width:
             material_i=1
         else:
             material_i=2
-        if rueda_d<profile.half_width:
+        if rueda_d<vs.half_width:
             material_d=0
-        elif rueda_d<profile.half_width+profile.arcen_width:
+        elif rueda_d<vs.half_width+profile.arcen_width:
             material_d=1
         else:
             material_d=2
@@ -288,8 +307,8 @@ class Player(Car):
         self.c=0.0
         self.p_freno=0.0
         self.p_acelerador=0.0
-        self.volante=0.0
-        self.context.root.sounds["derrape"].stop()
+        self.volante = 0.0
+        self.context.root.stopSound("derrape")
         self.engine.stop()
     
     def soft_reset(self):
@@ -311,7 +330,9 @@ class Player(Car):
 
     def physics(self,i_acelerador,i_freno,i_volante,dt):
         K_curva=8.0
-        K_stress=2.0
+        K_stress = 2.0
+        
+        vs=self.getVS(self.context)
 
         #dz con la vz del frame anterior
         dz=self.speed*dt
@@ -321,10 +342,14 @@ class Player(Car):
 
 
         #material
-        material=self.getMaterial()
+        material = self.getMaterial()
+        if material.name == "hierba" and self.speed>2.0:
+            self.context.root.playSound("hierba")
+        else:
+            self.context.root.stopSound("hierba")
 
         #acelerador/freno
-        freno=i_freno*material.friccion_z
+        freno=i_freno
         acelerador=i_acelerador
         giro=i_volante
 
@@ -341,8 +366,8 @@ class Player(Car):
             fuerza_motor=0.0
 
         #desnivel
-        if self.getVS(self.context)!=None:
-            pte=10*self.getVS(self.context).segment.height/self.getVS(self.context).segment.length
+        if vs!=None:
+            pte=10*vs.segment.height/vs.segment.length
             if pte<-0.5:
                 pte=-0.5
             elif pte>0.5:
@@ -352,6 +377,18 @@ class Player(Car):
         else:
             fuerza_pte=0.0
 
+        if vs!=None:
+            #posicion relativa de la curva (0.0 = interior de la curva 1.0 - exterior)
+            x_ratio = (self.x_rel + vs.half_width) / (2.0 * vs.half_width)
+            x_ratio = max(0.0, min(1.0, x_ratio))
+
+            if vs.curve > 1e-6:
+                x_ratio = 1.0 - x_ratio
+                
+            #el ratio modifica la penalización por curva. Tomar la curva por el interior penaliza menos
+            x_ratio = 0.5 + x_ratio * 0.5
+        else:
+            x_ratio=0.0
 
         #giro y fuerzas laterales
         dz_segura=max(0.001,dz)
@@ -359,7 +396,7 @@ class Player(Car):
         curva_pista=0.0
         if self.getVS(self.context)!=None:
             curva_pista=self.getVS(self.context).segment.curve
-        centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA
+        centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA*x_ratio
         
         self.target_c=giro_player
         #si se suelta el acelerador el coche se agarra más
@@ -403,13 +440,11 @@ class Player(Car):
             factor_humo_salida=0.0
         #humo
         factor_humo=max(factor_humo_giro,factor_humo_freno,factor_humo_salida)
-        derrape=self.context.root.sounds["derrape"]
-        if factor_humo>0.5:
-            if derrape.get_num_channels() == 0:
-                derrape.play()
+        if factor_humo > 0.5:
+            self.context.root.playSound("derrape")
             self.addHumo(dt)
         else:
-            derrape.stop()
+            self.context.root.stopSound("derrape")
         
         fuerza_z=0.0
         #potencia efectiva (transmision a ruedas)
@@ -417,8 +452,6 @@ class Player(Car):
             fuerza_base=acelerador*fuerza_motor*material.friccion_z
             fuerza_z+=fuerza_base*(1.0-factor_humo_salida*0.5)
         fuerza_z+=fuerza_pte
-        # el material.freno_z no puede ser más del 50% de la fuerza_z
-        fuerza_z-=min(material.freno_z,fuerza_z*0.5)
         fuerza_z+=freno
         #resistencia al viento
         r_aire=self.speed*self.speed*self.RESISTENCIA_AIRE
@@ -427,7 +460,10 @@ class Player(Car):
         r_curva=abs(self.c)*self.PENALIZACION_CURVA*factor_v
         fuerza_z-=r_curva
         #integracion fuerza
-        self.speed+=fuerza_z*dt
+        self.speed += fuerza_z * dt
+        
+        #disminuye la velocidad según el material
+        self.speed-=material.drag_z*factor_v*dt
 
 
         #limites

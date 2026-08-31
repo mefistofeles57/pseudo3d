@@ -1,7 +1,7 @@
 import pygame
 import math
 from pathlib import Path
-from Estados import STARTING,GAMEOVER,NORMAL
+from Estados import NONE,STARTING,GAMEOVER,GAMEOVER_FINAL,NORMAL
 from GameContext import GameContext
 from Point import Point
 from Message import Message
@@ -22,9 +22,20 @@ class Juego:
 
         base = Path(__file__).resolve().parent
         self.sounds = {
-            "derrape": pygame.mixer.Sound(base/"sound/derrape.wav")
+            "derrape": pygame.mixer.Sound(base/"sound/derrape.wav"),
+            "321go": pygame.mixer.Sound(base/"sound/321go.wav"),
+            "checkpoint": pygame.mixer.Sound(base/"sound/checkpoint.wav"),
+            "freno": pygame.mixer.Sound(base/"sound/freno.wav"),
+            "crash": pygame.mixer.Sound(base/"sound/crash.wav"),
+            "gameover": pygame.mixer.Sound(base/"sound/gameover.wav"),
+            "hierba": pygame.mixer.Sound(base/"sound/hierba.wav"),
+            "marcha": pygame.mixer.Sound(base/"sound/marcha.wav"),
+            "choque": pygame.mixer.Sound(base/"sound/choque.wav")
         }
         self.sounds["derrape"].set_volume(0.05)
+        self.sounds["freno"].set_volume(0.2)
+        self.sounds["hierba"].set_volume(0.3)
+        self.sounds["choque"].set_volume(0.5)
 
         pygame.display.set_caption(title)
 
@@ -62,28 +73,37 @@ class Juego:
         self.messages=[]
 
         #sprites
-        self.resources=Resources()
-
-
+        self.resources = Resources()
+        
+ 
 
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
 
-    def update(self,dt):
+    def update(self, dt):
+        if self.context.estado == NONE:
+            self.context.changeStatus(STARTING)
+            return
         if self.context.estado==STARTING:
             self.context.countdown-=dt
             self.context.countdown=max(self.context.countdown,0.0)
             if self.context.countdown<=1e-6:
                 self.messages.append(Message(self.screen.get_width() // 2,int(self.screen.get_height() *0.425),self.resources.go,1.0))
                 self.context.changeStatus(NORMAL)
-        elif self.context.estado!=GAMEOVER:
+        elif self.context.estado!=GAMEOVER and self.context.estado!=GAMEOVER_FINAL:
             self.context.timer-=dt
-            self.context.timer=max(self.context.timer,0.0)
-
-            if self.context.timer<=0.0:
+            self.context.timer = max(self.context.timer, 0.0)
+            if self.context.timer <= 1e-6:
                 self.context.changeStatus(GAMEOVER)
+        elif self.context.estado==GAMEOVER:
+            if self.context.timer <= 1e-6:
+                if self.context.player.speed<=1e-6:
+                    self.context.changeStatus(GAMEOVER_FINAL)
+            else:
+                self.context.changeStatus(NORMAL)
+            
 
         
         self.context.camera.update(dt)
@@ -93,6 +113,8 @@ class Juego:
 
 
     def draw(self):
+        if self.context.estado == NONE:
+            return
 
         self.context.camera.draw(self.screen)
 
@@ -123,8 +145,8 @@ class Juego:
         #countdown
         if self.context.estado==STARTING:
             #self.write_message(f"{math.floor(self.context.countdown)+1:1.0f}",self.screen.get_width() // 2, self.screen.get_height() // 2, font=self.font150)
-            self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{math.floor(self.context.countdown)+1:1.0f}", self.screen.get_width() // 2, (self.screen.get_height() // 2)-50)
-        elif self.context.estado==GAMEOVER:
+            self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{math.floor(self.context.countdown+1.0):1.0f}", self.screen.get_width() // 2, (self.screen.get_height() // 2)-50)
+        elif self.context.estado==GAMEOVER_FINAL:
             rect = self.resources.gameover.get_rect(midtop=(self.screen.get_width() // 2, int(self.screen.get_height()*0.4)))
             self.screen.blit(self.resources.gameover,rect)
         else:
@@ -236,7 +258,7 @@ class Juego:
         #self.write_message(f"{self.context.timer:3.0f}",self.screen.get_width() // 2, 8)
         rect = self.resources.time.get_rect(midtop=(self.screen.get_width() // 2, 30))
         self.screen.blit(self.resources.time,rect)
-        self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{self.context.timer:3.0f}", self.screen.get_width() // 2, int(self.screen.get_height()*0.1)+4)
+        self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{math.floor(self.context.timer):3.0f}", self.screen.get_width() // 2, int(self.screen.get_height()*0.1)+4)
         #score
         #alas
         self.draw_wings(self.screen.get_width()*0.05,30,False,15)
@@ -279,6 +301,14 @@ class Juego:
         self.screen.blit(self.resources.kmh,rect)
         #RPM
         self.draw_rpm(int(self.screen.get_width()*0.03), int(self.screen.get_height()*0.93))
+
+    def playSound(self, sound, once=True):
+        sonido=self.sounds[sound]
+        if sonido.get_num_channels() == 0 or not once:
+            sonido.play()
+    def stopSound(self, sound):
+        sonido = self.sounds[sound]
+        sonido.stop()
 
 
 if __name__ == "__main__":

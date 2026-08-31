@@ -81,10 +81,10 @@ class DefaultDrawer:
         # se produce cierto jitter subpixel en la cuantización alrededor de la distancia 15. Se ha podido comprobar forzando la monotonía,
         # pero no es aplicable a otras geometrias, como las elevaciones
 
-        p1=Point( pc1.x-(profile.half_width*pc1.z) , pc1.y )
-        p2=Point( pc1.x+(profile.half_width*pc1.z) , pc1.y )
-        p3=Point( pc2.x-(profile.half_width*pc2.z) , pc2.y )
-        p4=Point( pc2.x+(profile.half_width*pc2.z) , pc2.y )
+        p1=Point( pc1.x-(vs.half_width*pc1.z) , pc1.y )
+        p2=Point( pc1.x+(vs.half_width*pc1.z) , pc1.y )
+        p3=Point( pc2.x-(vs.half_width*pc2.z) , pc2.y )
+        p4=Point( pc2.x+(vs.half_width*pc2.z) , pc2.y )
 
         #road_color=profile.road_colors[vs.index%2]
         #outside_color=profile.outside_colors[vs.index%2]
@@ -127,17 +127,17 @@ class DefaultDrawer:
                     min(255,color_arcen[2]*brillo)
                 )
                 #izquierdo
-                pl1=Point(pc1.x-((profile.half_width+profile.arcen_width)*pc1.z),pc1.y)
-                pl2=Point(pc1.x-((profile.half_width)*pc1.z),pc1.y)
-                pl4=Point(pc2.x-((profile.half_width+profile.arcen_width)*pc2.z),pc2.y)
-                pl3=Point(pc2.x-((profile.half_width)*pc2.z),pc2.y)
+                pl1=Point(pc1.x-((vs.half_width+profile.arcen_width)*pc1.z),pc1.y)
+                pl2=Point(pc1.x-((vs.half_width)*pc1.z),pc1.y)
+                pl4=Point(pc2.x-((vs.half_width+profile.arcen_width)*pc2.z),pc2.y)
+                pl3=Point(pc2.x-((vs.half_width)*pc2.z),pc2.y)
                 puntos=(pl1.list2d(),pl2.list2d(),pl3.list2d(),pl4.list2d())
                 self.pinta(surface,puntos,color_arcen)
                 #derecho
-                pl1=Point(pc1.x+((profile.half_width+profile.arcen_width)*pc1.z),pc1.y)
-                pl2=Point(pc1.x+((profile.half_width)*pc1.z),pc1.y)
-                pl4=Point(pc2.x+((profile.half_width+profile.arcen_width)*pc2.z),pc2.y)
-                pl3=Point(pc2.x+((profile.half_width)*pc2.z),pc2.y)
+                pl1=Point(pc1.x+((vs.half_width+profile.arcen_width)*pc1.z),pc1.y)
+                pl2=Point(pc1.x+((vs.half_width)*pc1.z),pc1.y)
+                pl4=Point(pc2.x+((vs.half_width+profile.arcen_width)*pc2.z),pc2.y)
+                pl3=Point(pc2.x+((vs.half_width)*pc2.z),pc2.y)
                 puntos=(pl1.list2d(),pl2.list2d(),pl3.list2d(),pl4.list2d())
                 self.pinta(surface,puntos,color_arcen)
         #lineas

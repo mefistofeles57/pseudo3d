@@ -10,7 +10,8 @@ class Segment:
         self.index=0
         self.z=0.0
         self.road_marks=[]
-        self.events=[]
+        self.events = []
+        self.half_width=1.0
         #self.heading=math.atan2(curve,height)
 
 class VisibleSegment:
@@ -36,7 +37,8 @@ class VisibleSegment:
         self.index=s.index
         self.length=self.end.z-self.start.z
         self.road_marks=s.road_marks
-        self.events=s.events
+        self.events = s.events
+        self.half_width=s.half_width
 
 class Line:
     def __init__(self,position,x,width,offset,freq,color):
@@ -55,7 +57,7 @@ class Line:
         else:
             color=None
         if color!=None:
-            width=vs.visualProfile.half_width
+            width=vs.half_width
             x1=pc1.x+((self.position*width+self.x)*pc1.z)
             x4=pc2.x+((self.position*width+self.x)*pc2.z)
             x2=x1+(self.width*pc1.z)

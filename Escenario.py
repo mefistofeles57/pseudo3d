@@ -16,19 +16,20 @@ class Escenario:
         self.name="Escenario"
         self.context=context
         #materiales
-        hierba=Material()
+        hierba = Material()
+        hierba.name="hierba"
         hierba.agarre_x=0.5
         hierba.amplitud=0.005
-        hierba.frecuencia=3.0
-        hierba.friccion_z=0.5
-        hierba.freno_z=3.0
+        hierba.frecuencia=4.0
+        hierba.friccion_z=0.6
+        hierba.drag_z=3.0
         asfalto=Material()
         arcen=Material()
         arcen.agarre_x=0.9
         arcen.friccion_z=0.9
         #carretera
-        self.half_width=1.0
-        self.road_limit=1.5
+        #self.half_width=1.0
+        self.road_limit=2.0
         self.road_colors=[(102,102,102),(88,88,88)]
         self.road_material=asfalto
         #exterior
@@ -65,7 +66,10 @@ class Escenario:
         #cache
         self.cache=ImageCache(None,context)
         self.cache.addImage("signal.arrow","signal.arrow.png",(0.5,1.0),True,True)
-        self.cache.addImage("arbol","arbol.png",(0.5,1.0),True,True)
+        self.cache.addImage("curva","curva.png",(0.5,1.0),True,True)
+        self.cache.addImage("curva.s","curva.s.png",(0.5,1.0),False,True)
+        self.cache.addImage("rasante","rasante.png",(0.5,1.0),True,True)
+        self.cache.addImage("arbol","arbol.1.png",(0.5,1.0),True,True)
         self.cache.addImage("arbusto","arbusto.png",(0.5,1.0),True,False)
         self.cache.addImage("farola","farola.png",(0.7,1.0),True,True)
         self.cache.addImage("palmera","palmera.png",(0.5,1.0),True,True)

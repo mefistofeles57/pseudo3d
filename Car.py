@@ -1,6 +1,6 @@
 import math
 from Object import Object
-from Estados import STUCK
+from Estados import STUCK,NORMAL
 from abc import ABC, abstractmethod
 
 class Car(Object,ABC):
@@ -59,9 +59,9 @@ class Car(Object,ABC):
                     distance2=self.getDistance(self,impact_x,impact_z)
                     col_distance2=obj.profile.collide_radius2+self.profile.collide_radius2
                     #si está dentro del radio
-                    if distance2<=col_distance2:
+                    if distance2 <= col_distance2:
+                        #se queda con la primera que encuentra
                         collide_obj=obj
-                        #no se buscan más colisiones. No interesa contra que colisiona, con saber que colisiona es suficiente
                         break
             elif obj.z>fin:
                 break
@@ -137,7 +137,7 @@ class Car(Object,ABC):
         # Rebote:
         # 0 = totalmente inelástico
         # 1 = perfectamente elástico
-        restitution = 0.5
+        restitution = 0.1
 
         inv_mass_sum = m1 + m2
         if inv_mass_sum == 0.0:
@@ -170,8 +170,11 @@ class Car(Object,ABC):
             other.vx=vx2
 
         if self.type==Car.PLAYER and other.type==Car.NONE and self.speed<1e-6:
-            if self.context!=None:
+            if self.context != None and self.context.estado == NORMAL:
+                self.context.root.playSound("crash")
                 self.context.changeStatus(STUCK)
+        else:
+            self.context.root.playSound("choque",once=False)
 
         return impact
     

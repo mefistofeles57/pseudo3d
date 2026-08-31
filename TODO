@@ -1,11 +1,6 @@
 -sprites coches *
--rpm
 -medianas
--sonido
--enemigos *
--panel
--timer
--checkpoint
+-sonido *
 -bifucaciones
 -escenarios
  -vegetación - campos
@@ -15,8 +10,8 @@
  -montaña
  -tunel
  -señales verticales (indicadores, curvas, velocidad, adelantamiento)
- -marcas suelo (paso de cebra, checkpoint, velocidad, bifurcaciones)
+ -marcas suelo (paso de cebra, velocidad, bifurcaciones)
 -transiciones entre escenarios
--inercia humo
+-proporcion de sombras
 
 
