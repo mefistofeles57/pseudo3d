@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
+  <rect width="1200" height="390" rx="18" fill="#f6f8fa"/>
+  <style>
+    .t{font:600 22px Arial,sans-serif;fill:#1f2328}.s{font:16px Arial,sans-serif;fill:#59636e}.m{font:16px monospace;fill:#1f2328}.b{fill:#fff;stroke:#d0d7de;stroke-width:2}.a{stroke:#57606a;stroke-width:3;fill:none}.p{fill:#0969da}.arrow{fill:#57606a}
+  </style>
+  <text x="600" y="38" text-anchor="middle" class="t">Pseudo-3D projection pipeline</text>
+  <g transform="translate(35,70)">
+    <rect class="b" width="200" height="240" rx="12"/><text x="100" y="34" text-anchor="middle" class="t">1. World space</text>
+    <line class="a" x1="45" y1="185" x2="160" y2="185"/><line class="a" x1="45" y1="185" x2="45" y2="75"/>
+    <circle class="p" cx="135" cy="95" r="7"/><text x="145" y="90" class="m">P(x,y,z)</text><text x="100" y="218" text-anchor="middle" class="s">road / sprite point</text>
+  </g>
+  <g transform="translate(270,70)">
+    <rect class="b" width="200" height="240" rx="12"/><text x="100" y="34" text-anchor="middle" class="t">2. Camera space</text>
+    <text x="22" y="85" class="m">dx = x - cam.x</text><text x="22" y="118" class="m">dy = y - cam.y</text><text x="22" y="151" class="m">dz = z - cam.z</text>
+    <text x="100" y="205" text-anchor="middle" class="s">translate relative</text><text x="100" y="226" text-anchor="middle" class="s">to the camera</text>
+  </g>
+  <g transform="translate(505,70)">
+    <rect class="b" width="200" height="240" rx="12"/><text x="100" y="34" text-anchor="middle" class="t">3. Apply pitch</text>
+    <text x="18" y="95" class="m">y' = dy cos(p)</text><text x="45" y="120" class="m">- dz sin(p)</text><text x="18" y="158" class="m">z' = dy sin(p)</text><text x="45" y="183" class="m">+ dz cos(p)</text>
+    <text x="100" y="222" text-anchor="middle" class="s">vertical camera rotation</text>
+  </g>
+  <g transform="translate(740,70)">
+    <rect class="b" width="200" height="240" rx="12"/><text x="100" y="34" text-anchor="middle" class="t">4. Depth shaping</text>
+    <text x="18" y="88" class="m">t = clamp(z'/25)</text><text x="18" y="126" class="m">zᵥ = z' ·</text><text x="35" y="151" class="m">(1 + .75 t³)</text>
+    <text x="100" y="198" text-anchor="middle" class="s">extra far-distance</text><text x="100" y="220" text-anchor="middle" class="s">perspective compression</text>
+  </g>
+  <g transform="translate(975,70)">
+    <rect class="b" width="190" height="240" rx="12"/><text x="95" y="34" text-anchor="middle" class="t">5. Screen</text>
+    <text x="16" y="85" class="m">s = focal / zᵥ</text><text x="16" y="123" class="m">sx = W/2 + dx·s</text><text x="16" y="161" class="m">sy = horizon</text><text x="43" y="186" class="m">- y'·s</text>
+    <text x="95" y="222" text-anchor="middle" class="s">2D coordinates</text>
+  </g>
+  <g class="a"><line x1="240" y1="190" x2="262" y2="190"/><line x1="475" y1="190" x2="497" y2="190"/><line x1="710" y1="190" x2="732" y2="190"/><line x1="945" y1="190" x2="967" y2="190"/></g>
+  <g class="arrow"><polygon points="262,190 252,184 252,196"/><polygon points="497,190 487,184 487,196"/><polygon points="732,190 722,184 722,196"/><polygon points="967,190 957,184 957,196"/></g>
+  <text x="600" y="350" text-anchor="middle" class="s">No 3D engine: road polygons and sprites are drawn from projected 2D coordinates.</text>
+</svg>
