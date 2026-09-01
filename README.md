@@ -136,7 +136,7 @@ I'm interested in understanding the techniques behind pseudo-3D arcade racers, e
 
 ## Gameplay video
 
-[Watch the current gameplay video on YouTube](https://youtu.be/mZjY_mZjY_iRJYPY)
+[Watch the current gameplay video on YouTube](https://youtu.be/mZjY_iRJYPY)
 
 ## Source code
 
