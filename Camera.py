@@ -35,7 +35,7 @@ class Camera:
         self.cos_pitch = 0.0
         self.setPitch(-0.04)
         self.fov=55.0
-        self.view_distance=15.0
+        self.view_distance=25.0
         self.height=0.3
         self.horizon=2*self.h/3
         self.y_move=0.0
@@ -292,7 +292,20 @@ class Camera:
         dz=p.z-self.z
         y2=dy*self.cos_pitch - dz*self.sin_pitch
         z2=dy*self.sin_pitch + dz*self.cos_pitch
-        scale=self.focal/z2
+
+        # Compresión adicional de perspectiva lejana
+        MAX_Z = 25.0
+        STRENGTH = 0.75
+        POWER = 3
+
+        t = max(0.0, min(1.0, z2 / MAX_Z))
+        z_visual = z2 * (1.0 + STRENGTH * t**POWER)
+
+
+        scale = self.focal / z_visual
+        
+
+
 
         screen_x=(self.halfw)+dx*scale
         screen_y=(self.horizon)-y2*scale

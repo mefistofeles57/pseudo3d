@@ -2,7 +2,7 @@ import math
 from Point import Point
 
 class Segment:
-    def __init__(self,length=0.0,curve=0.0,height=0.0,half_width=0.6,profile=None):
+    def __init__(self,length=0.0,curve=0.0,height=0.0,half_width=1.0,profile=None):
         self.length=length
         self.curve=curve
         self.height=height
@@ -11,7 +11,7 @@ class Segment:
         self.z=0.0
         self.road_marks=[]
         self.events = []
-        self.half_width=1.0
+        self.half_width=half_width
         #self.heading=math.atan2(curve,height)
 
 class VisibleSegment:

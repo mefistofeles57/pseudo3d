@@ -36,6 +36,7 @@ class Juego:
         self.sounds["freno"].set_volume(0.2)
         self.sounds["hierba"].set_volume(0.3)
         self.sounds["choque"].set_volume(0.5)
+        self.sounds["gameover"].set_volume(0.5)
 
         pygame.display.set_caption(title)
 

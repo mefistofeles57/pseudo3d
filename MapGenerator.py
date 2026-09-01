@@ -61,7 +61,7 @@ class MapGenerator:
             base=hill
             sec=curve
             c2h=True
-        for i in range(len(sec)-1):
+        for i in range(len(sec)):
             if c2h:
                 base[i].curve=sec[i].curve
             else:
@@ -70,20 +70,11 @@ class MapGenerator:
 
     @staticmethod
     def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True):
-        objects=[]
         z_pos=tramo[0].z+offset
         if random_x!=0 or random_step!=0:
             rng=random.Random(z_pos)
         z_end=tramo[-1].z+tramo[-1].length
-        obj_pointer=0
         while z_pos<z_end:
-            #copiar en object todos los elementos de objetos anteriores a z_pos
-            for item in objetos[obj_pointer:]:
-                if item.z<=z_pos:
-                    objects.append(item)
-                    obj_pointer+=1
-                else:
-                    break
             #añadir el objeto en z_pos
             obj=Object()
             if profile==None:
@@ -107,13 +98,11 @@ class MapGenerator:
                 cache=MapGenerator.visualProfile.cache
             obj.metadata=cache.metadata[obj.img]
 
-            objects.append(obj)
+            objetos.append(obj)
 
             z_pos+=step
         #añadir los objetos detras de z_end
-        for item in objetos[obj_pointer:]:
-            objects.append(item)
-        return objects
+        return objetos
 
     @staticmethod
     def addMark(s:Segment,img,x,z,w,h):

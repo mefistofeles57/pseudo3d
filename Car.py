@@ -56,8 +56,8 @@ class Car(Object,ABC):
                     impact_dx=vx*pct
                     impact_z=obj.z
                     impact_x=self.x_rel+impact_dx
-                    distance2=self.getDistance(self,impact_x,impact_z)
-                    col_distance2=obj.profile.collide_radius2+self.profile.collide_radius2
+                    distance2=self.getDistance(obj,impact_x,impact_z)
+                    col_distance2=(obj.profile.collide_radius+self.profile.collide_radius)**2
                     #si está dentro del radio
                     if distance2 <= col_distance2:
                         #se queda con la primera que encuentra
@@ -159,15 +159,17 @@ class Car(Object,ABC):
 
         # No existe marcha atrás
         vz1 = max(0.0, vz1)
-        vz2 = max(0.0, vz2)        
+        vz2 = max(0.0, vz2)
+
+        energy_loss=0.6
 
         if self.type!=Car.NONE:
             self.speed=vz1
-            self.vx=vx1
+            self.vx=vx1*energy_loss
 
         if other.type!=Car.NONE:
             other.speed=vz2
-            other.vx=vx2
+            other.vx=vx2*energy_loss
 
         if self.type==Car.PLAYER and other.type==Car.NONE and self.speed<1e-6:
             if self.context != None and self.context.estado == NORMAL:

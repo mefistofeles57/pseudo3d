@@ -12,8 +12,8 @@ class CacheConfig:
     def __init__(self,resize=1.0):
         self.num_samples=150
         self.scale_max=1500*resize
-        self.scale_min=80*resize
-        self.resize_at_1=1.5*resize
+        self.scale_min=10*resize
+        self.resize_at_1=1.25*resize
 
 class ImageCache:
 
