@@ -87,6 +87,7 @@ class Escenario:
         self.cache.addImage("pitbox.3","pitbox.n.png",(0.5,1.0),False,False)
         self.cache.addImage("start","start.png",(0.5,3.5),False,False)
         self.cache.addImage("column","column.png",(0.5,1.0),False,False)
+        self.cache.addImage("grada","grada.png",(0.0,1.0),False,False)
 
         self.cache.addAnimation("enemigo.1","enemigo.1.png",(0.5,1.0),False,True,ancho=256,alto=256)
 

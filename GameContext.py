@@ -144,21 +144,21 @@ class GameContext:
         )
         objects = MapGenerator.objects(
             objects,
-            self.road.segments[10:20],
+            self.road.segments[7:17],
             "pitbox.1",
             10.0, 0.0, -2.0
         )
         objects = MapGenerator.objects(
             objects,
-            self.road.segments[10:20],
+            self.road.segments[7:17],
             "pitbox.2",
-            10.0, 2.5, -2.0
+            10.0, 3.5, -2.0
         )
         objects = MapGenerator.objects(
             objects,
-            self.road.segments[10:20],
+            self.road.segments[7:17],
             "pitbox.3",
-            10.0, 5.0, -2.0
+            10.0, 7.0, -2.0
         )
         objects = MapGenerator.objects(
             objects,
@@ -171,6 +171,12 @@ class GameContext:
             self.road.segments[:5],
             "ruedas",
             10.0, 1.3, 0.5
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[10:20],
+            "grada",
+            3.0, 0.0, 3.0
         )
 
         # PENDIENTE:
