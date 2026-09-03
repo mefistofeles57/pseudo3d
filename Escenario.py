@@ -78,8 +78,15 @@ class Escenario:
         self.cache.addImage("palmera","palmera.png",(0.5,1.0),True,True)
         self.cache.addImage("piedra","piedra.png",(0.5,1.0),False,False)
         self.cache.addImage("quitamiedos","quitamiedos.png",(0.5,2.0),False,False)
+        self.cache.addImage("quitamiedos.down","quitamiedos.png",(0.5,1.0),False,False)
         self.cache.addImage("poste","poste.2.png",(0.5,1.0),False,True)
         self.cache.addImage("checkpoint","checkpoint.png",(0.6,1.0),False,True)
+        self.cache.addImage("ruedas","ruedas.png",(0.5,1.0),False,True)
+        self.cache.addImage("pitbox.1","pitbox.r.png",(0.5,1.0),False,False)
+        self.cache.addImage("pitbox.2","pitbox.a.png",(0.5,1.0),False,False)
+        self.cache.addImage("pitbox.3","pitbox.n.png",(0.5,1.0),False,False)
+        self.cache.addImage("start","start.png",(0.5,3.5),False,False)
+        self.cache.addImage("column","column.png",(0.5,1.0),False,False)
 
         self.cache.addAnimation("enemigo.1","enemigo.1.png",(0.5,1.0),False,True,ancho=256,alto=256)
 

@@ -100,6 +100,79 @@ class GameContext:
             x=-1.1, z=0.5, w=2.2, h=1.0
         )
 
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[2:4],
+            "start",
+            10.0, 1.0, 0.0,collidable=False
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[2:4],
+            "column",
+            10.0, 1.0, 1.11,collidable=False
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[2:4],
+            "column",
+            10.0, 1.0, -1.11,collidable=False
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[:20],
+            "quitamiedos",
+            0.09, 0.03, 1.1
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[:20],
+            "quitamiedos",
+            0.09, 0.03, -1.1
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[:20],
+            "quitamiedos.down",
+            0.09, 0.03, 1.1
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[:20],
+            "quitamiedos.down",
+            0.09, 0.03, -1.1
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[10:20],
+            "pitbox.1",
+            10.0, 0.0, -2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[10:20],
+            "pitbox.2",
+            10.0, 2.5, -2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[10:20],
+            "pitbox.3",
+            10.0, 5.0, -2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[:5],
+            "ruedas",
+            10.0, 1.5, -0.5
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[:5],
+            "ruedas",
+            10.0, 1.3, 0.5
+        )
+
         # PENDIENTE:
         # - arco/cartel de salida
         # - ruedas
@@ -143,7 +216,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbusto",
-            4.0, 1.0, -1.55,
+            0.5, 1.0, -1.55,
             random_x=-0.25,
             random_step=1.0,
             collidable=False
@@ -153,7 +226,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbusto",
-            4.5, 2.0, 1.55,
+            0.5, 2.0, 1.55,
             random_x=0.25,
             random_step=1.0,
             collidable=False
