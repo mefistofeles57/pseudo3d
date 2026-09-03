@@ -88,8 +88,10 @@ class DefaultDrawer:
 
         #road_color=profile.road_colors[vs.index%2]
         #outside_color=profile.outside_colors[vs.index%2]
-        road_color=profile.road_colors[0]
-        outside_color=profile.outside_colors[0]
+        num_rc=len(profile.road_colors)
+        road_color=profile.road_colors[vs.index%num_rc]
+        num_osc=len(profile.outside_colors)
+        outside_color=profile.outside_colors[vs.index%num_osc]
         brillo=self.brillo(vs.start.z-c.z,c.view_distance)
         road_color=(
             min(255,road_color[0]*brillo),

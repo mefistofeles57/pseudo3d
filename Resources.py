@@ -2,12 +2,13 @@ import pygame
 from pathlib import Path
 
 class Resources:
-    def __init__(self):
+    def __init__(self,gen_scale):
         base = Path(__file__).resolve().parent
 
         self.number43_dim=[(28,28),(20,20),(26,26),(27,27),(29,29),(28,28),(28,28),(23,23),(28,28),(28,28)]
         self.number86_dim=[(56,56),(40,40),(52,52),(54,54),(58,58),(56,56),(56,56),(46,46),(56,56),(56,56)]
         self.number43=pygame.image.load(base/"img"/"font.number.64.png").convert_alpha()
+        #escala=2/gen_scale
         self.number86=pygame.transform.scale(self.number43, (self.number43.get_width() * 2, self.number43.get_height() * 2))
         self.number43_items=[]
         self.number86_items=[]

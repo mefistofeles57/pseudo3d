@@ -317,7 +317,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol",
-            5.0, 0.0, -1.5,
+            3.0, 0.0, -1.5,
             random_x=-0.25,
             random_step=1.0
         )
@@ -326,7 +326,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.2",
-            5.5, 2.0, 1.5,
+            3.5, 2.0, 1.5,
             random_x=0.25,
             random_step=1.0
         )
@@ -336,7 +336,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.3",
-            7.0, 1.0, -1.8,
+            4.0, 1.0, -1.8,
             random_x=-0.30,
             random_step=1.5
         )
@@ -345,7 +345,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.4",
-            7.5, 3.0, 1.8,
+            4.5, 3.0, 1.8,
             random_x=0.30,
             random_step=1.5
         )
@@ -355,7 +355,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.2",
-            10.0, 4.0, -2.15,
+            6.0, 4.0, -2.15,
             random_x=-0.35,
             random_step=2.0
         )
@@ -364,7 +364,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol",
-            11.0, 6.0, 2.15,
+            7.0, 6.0, 2.15,
             random_x=0.35,
             random_step=2.0
         )
@@ -406,7 +406,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.2",
-            4.5, 0.0, -1.5,
+            3.5, 0.0, -1.5,
             random_x=-0.25,
             random_step=1.0
         )
@@ -415,7 +415,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol",
-            5.0, 2.0, 1.5,
+            3.0, 2.0, 1.5,
             random_x=0.25,
             random_step=1.0
         )
@@ -424,7 +424,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.3",
-            6.5, 1.0, -1.8,
+            4.5, 1.0, -1.8,
             random_x=-0.30,
             random_step=1.2
         )
@@ -433,7 +433,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.4",
-            7.0, 3.0, 1.8,
+            5.0, 3.0, 1.8,
             random_x=0.30,
             random_step=1.2
         )
@@ -442,7 +442,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol",
-            9.0, 2.0, -2.15,
+            7.0, 2.0, -2.15,
             random_x=-0.35,
             random_step=1.8
         )
@@ -451,7 +451,7 @@ class GameContext:
             objects,
             self.road.segments[-num_segs:],
             "arbol.2",
-            10.0, 5.0, 2.15,
+            6.0, 5.0, 2.15,
             random_x=0.35,
             random_step=1.8
         )
@@ -3000,244 +3000,3 @@ class GameContext:
             )
 
 
-    def decoracion(self,objects,tutorial_start):
-        # ============================================================
-        # DECORACION - SALIDA / TUTORIAL
-        # ============================================================
-
-        # ------------------------------------------------------------
-        # SALIDA
-        # Limpia y abierta. Farolas para dar referencias de velocidad.
-        # ------------------------------------------------------------
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[tutorial_start:tutorial_start + 70],
-            "farola",
-            8.0,
-            1.0,
-            -1.8,
-            random_step=1.0
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[tutorial_start:tutorial_start + 70],
-            "farola.flip",
-            8.0,
-            5.0,
-            1.8,
-            random_step=1.0
-        )
-
-        # Algunos arbustos bastante retirados.
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[tutorial_start:tutorial_start + 70],
-            "arbusto",
-            9.0,
-            2.0,
-            -2.5,
-            random_x=1.0,
-            random_step=2.0,
-            collidable=False
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[tutorial_start:tutorial_start + 70],
-            "arbusto",
-            11.0,
-            5.0,
-            2.5,
-            random_x=1.0,
-            random_step=2.0,
-            collidable=False
-        )
-
-
-        # ------------------------------------------------------------
-        # PRIMERAS CURVAS
-        # Empieza a aparecer vegetacion alta.
-        # ------------------------------------------------------------
-
-        zone_start = tutorial_start + 70
-        zone_end   = zone_start + 45 + 25 + 55 + 45
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbol",
-            9.0,
-            1.0,
-            -2.0,
-            random_x=1.2,
-            random_step=2.5
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbol",
-            13.0,
-            4.0,
-            2.2,
-            random_x=1.5,
-            random_step=3.0
-        )
-
-        # Vegetacion baja para romper la regularidad.
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbusto",
-            7.0,
-            0.0,
-            -2.0,
-            random_x=1.0,
-            random_step=2.0,
-            collidable=False
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbusto",
-            8.0,
-            3.0,
-            2.0,
-            random_x=1.0,
-            random_step=2.0,
-            collidable=False
-        )
-
-
-        # ------------------------------------------------------------
-        # CURVA LARGA
-        # Algo mas cerrada visualmente.
-        # ------------------------------------------------------------
-
-        zone_start = zone_end
-        zone_end   = zone_start + 70
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbol",
-            6.0,
-            0.0,
-            -1.8,
-            random_x=0.8,
-            random_step=1.5
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbol",
-            10.0,
-            3.0,
-            2.0,
-            random_x=1.2,
-            random_step=2.0
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "piedra",
-            18.0,
-            5.0,
-            1.7,
-            random_x=0.5,
-            random_step=3.0,
-            profile=piedra_profile
-        )
-
-
-        # ------------------------------------------------------------
-        # ENLAZADAS DEL FINAL DEL TUTORIAL
-        # Un poco mas densas para anunciar que empieza el juego serio.
-        # ------------------------------------------------------------
-
-        zone_start = zone_end + 25
-        zone_end   = zone_start + 45 + 55
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbol",
-            6.0,
-            0.0,
-            -1.8,
-            random_x=1.0,
-            random_step=1.5
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbol",
-            7.0,
-            2.0,
-            1.8,
-            random_x=1.0,
-            random_step=1.5
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbusto",
-            5.0,
-            1.0,
-            -2.2,
-            random_x=1.2,
-            random_step=2.0,
-            collidable=False
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbusto",
-            6.0,
-            3.0,
-            2.2,
-            random_x=1.2,
-            random_step=2.0,
-            collidable=False
-        )
-
-
-        # ------------------------------------------------------------
-        # RECTA FINAL / FLECHAS
-        # Abrir otra vez el paisaje para que las marcas respiren.
-        # ------------------------------------------------------------
-
-        zone_start = zone_end
-        zone_end   = zone_start + 35
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbusto",
-            8.0,
-            1.0,
-            -2.5,
-            random_x=1.0,
-            random_step=2.0,
-            collidable=False
-        )
-
-        objects = MapGenerator.objects(
-            objects,
-            self.road.segments[zone_start:zone_end],
-            "arbusto",
-            9.0,
-            4.0,
-            2.5,
-            random_x=1.0,
-            random_step=2.0,
-            collidable=False
-        )

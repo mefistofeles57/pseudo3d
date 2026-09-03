@@ -8,7 +8,7 @@ from Message import Message
 from Resources import Resources
 
 class Juego:
-    def __init__(self, width=800, height=450, screen_w=1280, screen_h=720, gen_scale=1, title="Outrun prototype",fps=60):
+    def __init__(self, width=800, height=450, screen_w=1280, screen_h=720, gen_scale=1, title="Cool Racing",fps=60):
         pygame.mixer.pre_init(
             frequency=44100,
             size=-16,
@@ -74,7 +74,7 @@ class Juego:
         self.messages=[]
 
         #sprites
-        self.resources = Resources()
+        self.resources = Resources(gen_scale)
         
  
 
