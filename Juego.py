@@ -32,7 +32,7 @@ class Juego:
             "marcha": pygame.mixer.Sound(base/"sound/marcha.wav"),
             "choque": pygame.mixer.Sound(base/"sound/choque.wav")
         }
-        self.sounds["derrape"].set_volume(0.05)
+        self.sounds["derrape"].set_volume(0.5)
         self.sounds["freno"].set_volume(0.2)
         self.sounds["hierba"].set_volume(0.3)
         self.sounds["choque"].set_volume(0.5)

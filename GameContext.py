@@ -77,7 +77,7 @@ class GameContext:
         checkpoint_profile=VisualObjProfile()
         #sombra ancha
         checkpoint_profile.shadow_color=(0,0,0)
-        checkpoint_profile.shadow_alpha=60
+        checkpoint_profile.shadow_alpha=80
         checkpoint_profile.shadow_width_factor=1.3
         checkpoint_profile.shadow_height=0.3
         checkpoint_profile.shadow_offset_z=0.1
@@ -259,11 +259,11 @@ class GameContext:
         self.road.add(
             MapGenerator.pattern(MapGenerator.NONE, 0.0, num_segs)
         )
+        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_z=8.0,offset_z=0.0,number=1,random_step=1.5,objeto="arbol")
+        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_z=8.0,offset_z=2.0,number=1,random_step=1.5,objeto="arbol.2")
+        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_z=8.0,offset_z=4.0,number=1,random_step=1.5,objeto="arbol.3")
+        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_z=8.0,offset_z=6.0,number=1,random_step=1.5,objeto="arbol.4")
 
-        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.0,step_z=20.0,offset_z=0.0,number=1,objeto="arbol")
-        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.0,step_z=20.0,offset_z=4.0,number=1,objeto="arbol.2")
-        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.0,step_z=20.0,offset_z=8.0,number=1,objeto="arbol.3")
-        self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.0,step_z=20.0,offset_z=16.0,number=1,objeto="arbol.4")
 
 
         objects = MapGenerator.objects(
@@ -299,6 +299,7 @@ class GameContext:
         )
 
 
+        objects=self.vegetacion(objects,self.road.segments[-num_segs:],x=1.7,step_x=1.0,step_z=4.0,offset_z=0.5,number=3,objeto="vegetacion.3")
         self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.7,step_z=8.0,offset_z=0.0,number=3,random_step=3.5,random_x=0.3,objeto="arbol")
         self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.7,step_z=8.0,offset_z=4.0,number=3,random_step=3.5,random_x=0.3,objeto="arbol.2")
         self.bosque(objects,self.road.segments[-num_segs:],x=1.5,step_x=0.7,step_z=8.0,offset_z=0.0,number=3,random_step=3.5,random_x=0.3,objeto="arbol.3")
