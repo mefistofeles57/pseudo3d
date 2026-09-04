@@ -174,9 +174,37 @@ class GameContext:
         )
         objects = MapGenerator.objects(
             objects,
-            self.road.segments[10:20],
+            self.road.segments[5:25],
             "grada",
-            3.0, 0.0, 3.0
+            5.0, 0.0, 2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[-35:],
+            "vegetacion.1",
+            5.0, 0.0, 2.0
+            ,2.0,2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[-35:],
+            "vegetacion.1",
+            5.0, 5.0, -2.0
+            ,-2.0,2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[-35:],
+            "vegetacion.2",
+            5.0, 0.0, 1.0
+            ,2.0,2.0
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[-35:],
+            "vegetacion.2",
+            5.0, 5.0, -1.0
+            ,-2.0,2.0
         )
 
         # PENDIENTE:
