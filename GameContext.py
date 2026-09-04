@@ -3003,13 +3003,13 @@ class GameContext:
             
 
         ##position,x,width,offset,freq,color
-        l=Line(0.35,-0.0025,0.005,0,2,[(255,255,255),None])
+        l=Line(0.35,-0.0025,-0.03,0,2,[(255,255,255),None])
         self.road.addLine(l,0,self.road.segments[-1].index)
-        l=Line(-0.35,-0.0025,0.005,0,2,[(255,255,255),None])
+        l=Line(-0.35,-0.0025,-0.03,0,2,[(255,255,255),None])
         self.road.addLine(l,0,self.road.segments[-1].index)
-        l=Line(-1.05,0.01,0.01,0,1,[(255,255,255)])
+        l=Line(-1.05,0.01,0.02,0,1,[(255,255,255)])
         self.road.addLine(l,0,self.road.segments[-1].index)
-        l=Line(1.05,-0.01,-0.01,0,1,[(255,255,255)])
+        l=Line(1.05,-0.01,-0.02,0,1,[(255,255,255)])
         self.road.addLine(l,0,self.road.segments[-1].index)
 
     
