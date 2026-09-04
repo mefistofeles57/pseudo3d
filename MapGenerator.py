@@ -8,6 +8,7 @@ class MapGenerator:
     CURVE=0
     HILL=1
     NONE=0
+    rng=random.Random(0)
 
     visualProfile=None
     visualObjProfile=None
@@ -71,8 +72,6 @@ class MapGenerator:
     @staticmethod
     def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True):
         z_pos=tramo[0].z+offset
-        if random_x!=0 or random_step!=0:
-            rng=random.Random(z_pos)
         z_end=tramo[-1].z+tramo[-1].length
         while z_pos<z_end:
             #añadir el objeto en z_pos
@@ -87,9 +86,9 @@ class MapGenerator:
             obj.x_rel=x
             #añadir un random a la posicion z
             if random_step!=0:
-                obj.z+=rng.uniform(0,random_step)
+                obj.z+=MapGenerator.rng.uniform(0,random_step)
             if random_x!=0:
-                obj.x_rel+=rng.uniform(0,random_x)
+                obj.x_rel+=MapGenerator.rng.uniform(0,random_x)
             obj.collidable=collidable
             #cargar los metadatos
             if obj.profile.cache!=None:
