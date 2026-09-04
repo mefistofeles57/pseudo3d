@@ -385,8 +385,6 @@ class Player(Car):
             if vs.curve > 1e-6:
                 x_ratio = 1.0 - x_ratio
                 
-            #el ratio modifica la penalización por curva. Tomar la curva por el interior penaliza menos
-            x_ratio = 0.5 + x_ratio * 0.5
         else:
             x_ratio=0.0
 
@@ -396,7 +394,11 @@ class Player(Car):
         curva_pista=0.0
         if self.getVS(self.context)!=None:
             curva_pista=self.getVS(self.context).segment.curve
-        centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA*x_ratio
+        centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA
+
+
+        #50% de la fuerza modificada por la trazada
+        centrifuga=centrifuga*0.5+centrifuga*x_ratio*0.5
         
         self.target_c=giro_player
         #si se suelta el acelerador el coche se agarra más

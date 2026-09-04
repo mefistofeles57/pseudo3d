@@ -147,64 +147,74 @@ class GameContext:
             self.road.segments[7:17],
             "pitbox.1",
             10.0, 0.0, -2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[7:17],
             "pitbox.2",
             10.0, 3.5, -2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[7:17],
             "pitbox.3",
             10.0, 7.0, -2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[:5],
             "ruedas",
             10.0, 1.5, -0.5
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[:5],
             "ruedas",
             10.0, 1.3, 0.5
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[5:25],
             "grada",
             5.0, 0.0, 2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[-35:],
             "vegetacion.1",
-            5.0, 0.0, 2.0
-            ,2.0,2.0
+            4.0, 2.0, 2.0
+            ,random_x=2.0,random_step=2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[-35:],
             "vegetacion.1",
-            5.0, 5.0, -2.0
-            ,-2.0,2.0
+            5.0, 3.0, -2.0
+            ,random_x=-2.0,random_step=2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[-35:],
             "vegetacion.2",
-            5.0, 0.0, 1.0
-            ,2.0,2.0
+            5.0, 1.0, 1.5
+            ,random_x=2.0,random_step=2.0
+            ,collidable=False
         )
         objects = MapGenerator.objects(
             objects,
             self.road.segments[-35:],
             "vegetacion.2",
-            5.0, 5.0, -1.0
-            ,-2.0,2.0
+            7.0, 4.0, -1.5
+            ,random_x=-2.0,random_step=2.0
+            ,collidable=False
         )
 
         # PENDIENTE:
