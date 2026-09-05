@@ -91,8 +91,12 @@ class Escenario:
         self.cache.addImage("vegetacion.1","vegetacion.1.png",(0.5,1.0),False,False)
         self.cache.addImage("vegetacion.2","vegetacion.2.png",(0.5,1.0),False,False)
         self.cache.addImage("vegetacion.3","vegetacion.3.png",(0.5,1.0),False,False)
+        self.cache.addImage("mastil","mastil.png",(1.0,0.85),False,False)
 
         self.cache.addAnimation("enemigo.1","enemigo.1.png",(0.5,1.0),False,True,ancho=256,alto=256)
+        self.cache.addAnimation("bandera.r","bandera.r.png",(0.0,5.0),False,True,ancho=486,alto=288)
+        self.cache.addAnimation("bandera.v","bandera.v.png",(0.0,5.0),False,True,ancho=486,alto=288)
+        self.cache.addAnimation("bandera.a","bandera.a.png",(0.0,5.0),False,True,ancho=486,alto=288)
 
         self.images={}
         base = Path(__file__).resolve().parent

@@ -136,6 +136,10 @@ class Camera:
         self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
         self.getObjBuffer(self.frame_data)
 
+        for item in self.frame_data.objbuffer:
+            if item.isAnim:
+                item.obj.update(dt)
+
 
         #proyecto el ultimo segmento
         pn=self.project(self.frame_data.buffer[-1].end)

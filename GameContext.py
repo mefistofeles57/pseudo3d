@@ -165,6 +165,48 @@ class GameContext:
         )
         objects = MapGenerator.objects(
             objects,
+            self.road.segments[7:17],
+            "mastil",
+            10.0, 7.0, -2.0
+            ,collidable=False
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[7:17],
+            "bandera.r",
+            10.0, 6.99, -2.0
+            ,collidable=False,anim=True,frametime=0.05
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[7:17],
+            "mastil",
+            10.0, 3.0, -2.0
+            ,collidable=False
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[7:17],
+            "bandera.a",
+            10.0, 2.99, -2.0
+            ,collidable=False,anim=True,frametime=0.05
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[7:17],
+            "mastil",
+            10.0, 5.0, -2.0
+            ,collidable=False
+        )
+        objects = MapGenerator.objects(
+            objects,
+            self.road.segments[7:17],
+            "bandera.v",
+            10.0, 4.99, -2.0
+            ,collidable=False,anim=True,frametime=0.05
+        )
+        objects = MapGenerator.objects(
+            objects,
             self.road.segments[:5],
             "ruedas",
             10.0, 1.5, -0.5

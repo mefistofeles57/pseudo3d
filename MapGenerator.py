@@ -70,12 +70,15 @@ class MapGenerator:
         return base
 
     @staticmethod
-    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True):
+    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1):
         z_pos=tramo[0].z+offset
         z_end=tramo[-1].z+tramo[-1].length
         while z_pos<z_end:
             #añadir el objeto en z_pos
-            obj=Object()
+            if anim:
+                obj=Object(anim=True,frametime=frametime)
+            else:
+                obj=Object()
             if profile==None:
                 obj.profile=MapGenerator.visualObjProfile
             else:
