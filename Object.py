@@ -1,4 +1,5 @@
 from Road import VisibleSegment
+from Road import Segment
 
 class Object:
 
@@ -14,11 +15,13 @@ class Object:
         self.x_rel=0.0
         self.collidable=True
         self.vs_index=-1
+        self.side=0        
         self.type=Object.NONE
         self.isAnim=anim
         self.frametime=frametime
         self.age=0.0
         self.frame=0
+        self.capas=()
         
     def load_metadata(self,cache):
         self.metadata=cache.metadata[self.img]
@@ -43,21 +46,25 @@ class VisibleObject(Object):
         if obj.isAnim:
             self.frame=obj.frame
 
-
         #interpolar x e y
         z_pos=self.z
         x=self.x_rel
-        
+
         length=seg.end.z-seg.start.z
 
         pct=(z_pos-seg.start.z)/length
-        #dx=seg.start.x+((seg.end.x-seg.start.x)*pct)
-        #self.x=x+dx
-        #self.y=seg.start.y+((seg.end.y-seg.start.y)*pct)
         dx=seg.start.x+(pct*seg.curve)
         dy=seg.start.y+(pct*seg.height)
+
+        self.x_shift=0.0
+        if seg.type==Segment.FORK:
+            if self.side==-1:
+                self.x_shift=seg.w0-2*seg.d_at(z_pos)
+            elif self.side==1:
+                self.x_shift=seg.w0
+        dx=dx+self.x_shift
+
         self.x=x+dx
         self.y=dy
-
 
 

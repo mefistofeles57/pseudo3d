@@ -696,4 +696,19 @@ circuit:
         {command: "MK", segment: -41, img: "flecha.2", x: -0.9, z: 0.0, w: 0.5, h: 1.0},
         {command: "MK", segment: -40, img: "flecha.1", x: 0.4, z: 0.0, w: 0.5, h: 1.0},
         {command: "MK", segment: -41, img: "flecha.2", x: 0.4, z: 0.0, w: 0.5, h: 1.0},
+
+        # --- Claro: la carretera (ya a 2.0 de semiancho) se abre en dos ---
+        {command: "fork", segments: 40, curve: "CHR", w: 1.0},
+        # --- decoración de la bifurcación (x medido desde el centro del carril de cada rama) ---
+        # árbol central: en la punta de la mediana, pegado al borde interior de la rama derecha
+        {command: "O", segments: 12, img: "arbol.3", side: 1, x: -1.7, step: 100.0, offset: 9.0},
+        # laterales sueltos por el exterior de cada rama
+        {command: "O", segments: 40, img: "arbol.3", side: 1,  x: 2.0,  step: 9.0, offset: 6.0,  random_x: 0.5, random_step: 3.0},
+        {command: "O", segments: 40, img: "arbol.2", side: 1,  x: 2.6,  step: 11.0, offset: 10.0, random_x: 0.6, random_step: 4.0},
+        {command: "O", segments: 40, img: "arbol",   side: -1, x: -2.5, step: 10.0, offset: 7.5,  random_x: 0.5, random_step: 3.0},
+        {command: "O", segments: 40, img: "arbol.3", side: -1, x: -3.0, step: 13.0, offset: 12.0, random_x: 0.6, random_step: 4.0},
+        # mediana: solo cuando el hueco ya es ancho (offset alto), objetos sueltos en cada borde interior
+        {command: "O", segments: 40, img: "arbusto", side: 1,  x: -1.9, step: 8.0, offset: 15.0, random_x: 0.3, random_step: 2.0, collidable: false},
+        {command: "O", segments: 40, img: "arbusto", side: -1, x: 1.9,  step: 8.0, offset: 18.0, random_x: 0.3, random_step: 2.0, collidable: false},
+        {command: "R", segments: 30},
       ]

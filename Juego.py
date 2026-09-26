@@ -139,28 +139,6 @@ class Juego:
 
         self.context.camera.draw(self.screen)
 
-        txt="speed: "+str(round(self.context.player.speed*20,2))+ \
-            " acel: "+str(round(self.context.player.p_acelerador,2))+ \
-            " freno: "+str(round(self.context.player.p_freno,2))+ \
-            " volante: "+str(round(self.context.player.volante,2))+ \
-            " marcha: "+str(self.context.player.marcha)
-        texto = self.font.render(
-        txt,
-        True,              # antialiasingzzzzzz
-        (255, 255, 255)    # color blanco
-        )
-
-        self.screen.blit(texto, (10, 10))
-        txt="FPS: "+str(round(self.clock.get_fps(),2))+ \
-            " debug: "+self.debug_text
-        texto = self.font.render(
-        txt,
-        True,              # antialiasing
-        (255, 255, 255)    # color blanco
-        )
-
-        self.screen.blit(texto, (10, 35))
-
         self.print_hud()
 
         #countdown

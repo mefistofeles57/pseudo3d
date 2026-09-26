@@ -3,9 +3,10 @@ from TempObject import TempObject
 from Car import Car
 from Object import Object
 from VisualObjProfile import VisualObjProfile
+from Road import Segment
 
 class Enemy(TempObject,Car):
-    def __init__(self, img, x_rel, z,speed,context):
+    def __init__(self, img, x_rel, z,speed,context,side=0):
         super().__init__(x_rel, z, img)
         self.collidable=True
         self.metadata=context.escenario.cache.metadata[img]
@@ -27,25 +28,35 @@ class Enemy(TempObject,Car):
         self.speed=speed
         self.vx=0.0
         self.type=Object.CAR
+        self.side=side
 
     def update(self, dt):
         if self.dead==False:
+            self.sync_side(self.context)
             vs=self.getVS(self.context)
+            player=self.context.player
+            rama_jugador=player.side or player.last_side
+            if self.last_side!=0 and rama_jugador!=0 and self.last_side!=rama_jugador:
+                enemigo_dentro=vs is not None and vs.type==Segment.FORK
+                jugador_fuera=player.side==0
+                if (not enemigo_dentro) or jugador_fuera:
+                    self.dead=True
+                    return
             if vs!=None:
-                if vs.curve<0.0:
+                curva=-vs.curve if self.side==-1 else vs.curve
+                if curva<0.0:
                     self.frame=1
-                elif vs.curve>0.0:
+                elif curva>0.0:
                     self.frame=2
                 else:
                     player=self.context.player
-                    dx=self.x_rel-player.x_rel
+                    dx=(self.x_rel+self.x_shift_actual(self.context))-(player.x_rel+player.x_shift_actual(self.context))
                     dz=self.z-player.z
                     angulo=math.degrees(math.atan2(abs(dx),abs(dz)))
                     if angulo>30.0:
                         self.frame=2 if dx<0.0 else 1
                     else:
-                        self.frame=0
-            #lateral
+                        self.frame=0            #lateral
             self.vx *= 0.95 ** (dt * 60.0)
 
             if abs(self.vx) < 0.1:

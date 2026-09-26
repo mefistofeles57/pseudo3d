@@ -1,10 +1,11 @@
 import pygame
 import time
 import math
+import copy
 from Camera import Camera
 from Point import Point
+from Road import Segment
 from Road import VisibleSegment
-from Road import Road
 from Object import VisibleObject
 from ImageCache import ImageCache
 from typing import TYPE_CHECKING
@@ -72,23 +73,12 @@ class DefaultDrawer:
         if vs.length<=0.0:
             return
 
-        borde_i=-1
-        borde_d=c.w
-
         profile=vs.visualProfile
         #la coordenada z es la escala
 
         # se produce cierto jitter subpixel en la cuantización alrededor de la distancia 15. Se ha podido comprobar forzando la monotonía,
         # pero no es aplicable a otras geometrias, como las elevaciones
 
-        p1=Point( pc1.x-(vs.w1*pc1.z) , pc1.y )
-        p2=Point( pc1.x+(vs.w1*pc1.z) , pc1.y )
-        p3=Point( pc2.x-(vs.w0*pc2.z) , pc2.y )
-        p4=Point( pc2.x+(vs.w0*pc2.z) , pc2.y )
-
-
-        #road_color=profile.road_colors[vs.index%2]
-        #outside_color=profile.outside_colors[vs.index%2]
         num_rc=len(profile.road_colors)
         road_color=profile.road_colors[vs.index%num_rc]
         num_osc=len(profile.outside_colors)
@@ -105,6 +95,42 @@ class DefaultDrawer:
             min(255,outside_color[2]*brillo)
         )
 
+        a=profile.arcen_width
+
+        if vs.type==Segment.FORK:
+            self.draw_exterior_fork(surface,c,vs,pc1,pc2,outside_color)
+            #dibuja la seguna carretera desplazada d
+
+            pc2_f = copy.copy(pc2)
+            pc1_f = copy.copy(pc1)
+            pc2_despl = copy.copy(pc2)
+            pc1_despl = copy.copy(pc1)
+            pc2_f.x -= 2*vs.d*pc2.z
+            pc1_f.x -= 2*(vs.d+vs.curve)*pc1.z
+            pc2_despl.x+=vs.w0*pc2.z
+            pc1_despl.x+=vs.w1*pc1.z
+            pc2_f.x+=vs.w0*pc2.z
+            pc1_f.x+=vs.w1*pc1.z
+            
+            self.draw_road(surface,c,vs,pc1_despl,pc2_despl,road_color,brillo,(a,a),(a,a))
+            self.draw_road(surface,c,vs,pc1_f,pc2_f,road_color,brillo,(a,a),(a,a))
+        else:
+            self.draw_exterior(surface,c,vs,pc1,pc2,outside_color)
+            self.draw_road(surface,c,vs,pc1,pc2,road_color,brillo,(a,a),(a,a))
+
+        #dibujos
+        #solo no tiene clipping
+        for marca in vs.road_marks:
+            self.drawRoadMark(vs,marca)
+
+    def draw_exterior(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2,outside_color):
+        borde_i=-1
+        borde_d=c.w
+
+        p1=Point( pc1.x-(vs.w1*pc1.z) , pc1.y )
+        p2=Point( pc1.x+(vs.w1*pc1.z) , pc1.y )
+        p3=Point( pc2.x-(vs.w0*pc2.z) , pc2.y )
+        p4=Point( pc2.x+(vs.w0*pc2.z) , pc2.y )
 
         #dibuja el exterior izquierdo
         #solo si está dentro de la pantalla
@@ -115,6 +141,43 @@ class DefaultDrawer:
         if p2.x<c.w:
             puntos=((p2.x,p2.y),(borde_d,p2.y),(borde_d,p4.y),(p4.x,p4.y))
             self.pinta(surface,puntos,outside_color)
+
+    def draw_exterior_fork(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2,outside_color):
+        borde_i=-1
+        borde_d=c.w
+
+        d_lejos=vs.d+vs.curve
+
+        # izquierda (borde exterior en pc-2d)
+        p1=Point( pc1.x-(2*d_lejos*pc1.z) , pc1.y )
+        p3=Point( pc2.x-(2*vs.d*pc2.z) , pc2.y )
+        # derecha (borde exterior en pc+2w, fijo)
+        p2=Point( pc1.x+(2*vs.w1*pc1.z) , pc1.y )
+        p4=Point( pc2.x+(2*vs.w0*pc2.z) , pc2.y )
+
+        if p1.x>=0:
+            puntos=((borde_i,p1.y),(p1.x,p1.y),(p3.x,p3.y),(borde_i,p3.y))
+            self.pinta(surface,puntos,outside_color)
+        if p2.x<c.w:
+            puntos=((p2.x,p2.y),(borde_d,p2.y),(borde_d,p4.y),(p4.x,p4.y))
+            self.pinta(surface,puntos,outside_color)
+
+        #hueco entre las dos carreteras (solo se abre hacia la izquierda de pc)
+        if vs.d>=vs.w0 and d_lejos>=vs.w1:
+            g1=2*(d_lejos-vs.w1)*pc1.z
+            g0=2*(vs.d-vs.w0)*pc2.z
+            puntos=((pc1.x,pc1.y),(pc1.x-g1,pc1.y),(pc2.x-g0,pc2.y),(pc2.x,pc2.y))
+            self.pinta(surface,puntos,outside_color)
+
+    def draw_road(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2,road_color,brillo,arcen_izq,arcen_der):
+        
+        profile=vs.visualProfile
+
+        p1=Point( pc1.x-(vs.w1*pc1.z) , pc1.y )
+        p2=Point( pc1.x+(vs.w1*pc1.z) , pc1.y )
+        p3=Point( pc2.x-(vs.w0*pc2.z) , pc2.y )
+        p4=Point( pc2.x+(vs.w0*pc2.z) , pc2.y )
+
         #dibuja el trapecio de la carretera
         if p1.y<c.h:
             puntos=((p1.x,p1.y),(p2.x,p2.y),(p4.x,p4.y),(p3.x,p3.y))
@@ -130,16 +193,16 @@ class DefaultDrawer:
                     min(255,color_arcen[2]*brillo)
                 )
                 #izquierdo
-                pl1=Point(pc1.x-((vs.w1+profile.arcen_width)*pc1.z),pc1.y)
+                pl1=Point(pc1.x-((vs.w1+arcen_izq[0])*pc1.z),pc1.y)
                 pl2=Point(pc1.x-((vs.w1)*pc1.z),pc1.y)
-                pl4=Point(pc2.x-((vs.w0+profile.arcen_width)*pc2.z),pc2.y)
+                pl4=Point(pc2.x-((vs.w0+arcen_izq[1])*pc2.z),pc2.y)
                 pl3=Point(pc2.x-((vs.w0)*pc2.z),pc2.y)
                 puntos=(pl1.list2d(),pl2.list2d(),pl3.list2d(),pl4.list2d())
                 self.pinta(surface,puntos,color_arcen)
                 #derecho
-                pl1=Point(pc1.x+((vs.w1+profile.arcen_width)*pc1.z),pc1.y)
+                pl1=Point(pc1.x+((vs.w1+arcen_der[0])*pc1.z),pc1.y)
                 pl2=Point(pc1.x+((vs.w1)*pc1.z),pc1.y)
-                pl4=Point(pc2.x+((vs.w0+profile.arcen_width)*pc2.z),pc2.y)
+                pl4=Point(pc2.x+((vs.w0+arcen_der[1])*pc2.z),pc2.y)
                 pl3=Point(pc2.x+((vs.w0)*pc2.z),pc2.y)
                 puntos=(pl1.list2d(),pl2.list2d(),pl3.list2d(),pl4.list2d())
                 self.pinta(surface,puntos,color_arcen)
@@ -150,10 +213,6 @@ class DefaultDrawer:
                 (puntos,color)=item
                 if color!=None:
                     self.pinta(surface,puntos,color)
-        #dibujos
-        #solo no tiene clipping
-        for marca in vs.road_marks:
-            self.drawRoadMark(vs,marca)
 
 
     def drawShadow(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",vs:VisibleSegment,pc1:Point,pc2:Point):
@@ -172,6 +231,7 @@ class DefaultDrawer:
         #metadata=cache.metadata[obj.img]
         metadata=obj.metadata
         if metadata!=None:
+            anim=None
             if metadata.type==ImageCache.IMAGE:
                 img=cache.getImage(obj.img,p1.z)
             else:
@@ -186,6 +246,9 @@ class DefaultDrawer:
                     #print(obj.img)
                     punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
                     surface.blit(img,punto)
+                    if anim!=None:
+                        for capa in obj.capas:
+                            surface.blit(anim[capa],punto)
                 elif metadata.shadow:
                     #filtrar por z
                     shadow_height=obj.profile.shadow_height
@@ -277,7 +340,7 @@ class DefaultDrawer:
             #tiene que usar el inicio y fin sin clipping para calcular la posición de las franjas
             if (vs.start.z-self.context.camera.z)==Camera.near_plane:
                 #primer vs con clipping cercano
-                s_ini=Point(vs.end.x-vs.segment.curve,vs.end.y-vs.segment.height,vs.end.z-vs.segment.length)
+                s_ini=Point(vs.end.x-vs.segment.curve_for(1),vs.end.y-vs.segment.height,vs.end.z-vs.segment.length)
             else:
                 s_ini=vs.start
 

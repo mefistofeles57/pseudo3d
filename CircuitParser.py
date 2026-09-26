@@ -1,7 +1,7 @@
 import yaml
 
 from MapGenerator import MapGenerator
-from Road import Branch
+from Road import Segment
 
 
 class CircuitParser:
@@ -37,7 +37,7 @@ class CircuitParser:
             "MK": self.command_mark,
             "CHK": self.command_checkpoint,
             "BMP": self.command_bumps,
-            "branch": self.command_branch,
+            "fork": self.command_fork,
             "E": self.command_enemy
         }
 
@@ -129,6 +129,15 @@ class CircuitParser:
 
         return segments
 
+
+    def get_side(self, data):
+        side = data.get("side", 0)
+        if side not in (-1, 0, 1):
+            raise ValueError(f"'side' must be -1, 0 or 1: {side}")
+        return side
+
+
+
     def get_current_tramo(self, segments):
         if segments is None:
             if not self.current_tramo:
@@ -153,17 +162,11 @@ class CircuitParser:
 
     def command_road(self, data):
 
-        pattern = self.parse_pattern(data)
-
-        branch_id = data.get("branch", 0)
-
-        if branch_id != 0:
-            self.add_to_branch(branch_id, pattern)
-            return
-
         self.last_segment=len(self.context.road.segments)-1
 
         start = self.last_segment+1
+
+        pattern = self.parse_pattern(data)
 
         self.context.road.add(pattern)
 
@@ -196,6 +199,8 @@ class CircuitParser:
 
             params[key] = value
 
+        params["side"] = self.get_side(command)
+
         self.objects = MapGenerator.objects(
             self.objects,
             tramo,
@@ -221,6 +226,7 @@ class CircuitParser:
             step_z=data.get("step_z", 5.0),
             offset_z=data.get("offset", 0.0),
             number=data.get("number", 1),
+            side=self.get_side(data),
             objeto=img
         )
     # ============================================================
@@ -243,6 +249,7 @@ class CircuitParser:
             number=data.get("number", 1),
             random_x=data.get("random_x", 0.0),
             random_step=data.get("random_step", 0.0),
+            side=self.get_side(data),
             objeto=img
         )
     # ============================================================
@@ -328,6 +335,7 @@ class CircuitParser:
         x_rel = data.get("x_rel", 0.0)
         speed = data.get("speed", 10.0)
         img = data.get("img","enemigo.1")
+        side = self.get_side(data)
 
         # Enemy
         MapGenerator.addEnemy(
@@ -335,7 +343,8 @@ class CircuitParser:
             z_rel,
             x_rel,
             speed,
-            img
+            img,
+            side
         )
 
     # ============================================================
@@ -420,61 +429,36 @@ class CircuitParser:
         return table[key]
 
     # ============================================================
-    # BRANCH
+    # FORK
     # ============================================================
 
-    def command_branch(self, data):
+    def command_fork(self, data):
         road = self.context.road
 
-        branch_id = data.get("id")
+        segments = self.get_segments(data)
 
-        if branch_id != len(road.branches):
+        if segments is None:
             raise ValueError(
-                f"Branch id must be {len(road.branches)} (next free), got {branch_id}"
+                "Command 'fork' requires 'segments'"
             )
 
-        offset = data.get("offset", 0.0)
+        curve = self.get_constant(self.curves, data.get("curve"), "curve")
 
-        # la rama empieza en el próximo segmento de la primaria
-        road.branches.append(Branch(len(road.segments), offset))
+        # las dos carreteras nacen pegadas: d parte de w
+        w = data.get("w", 1.0)
 
-    def add_to_branch(self, branch_id, pattern):
-        road = self.context.road
+        self.last_segment = len(road.segments) - 1
 
-        if (
-            not isinstance(branch_id, int)
-            or isinstance(branch_id, bool)
-            or not 0 < branch_id < len(road.branches)
-        ):
-            raise ValueError(
-                f"Unknown branch '{branch_id}' (define it first with 'branch')"
-            )
+        start = self.last_segment + 1
 
-        branch = road.branches[branch_id]
-
-        first = branch.first_index + len(branch.segments)
-        last = first + len(pattern)
-
-        if last > len(road.segments):
-            raise ValueError(
-                f"Branch {branch_id} needs {last - len(road.segments)} more "
-                f"primary segments than exist"
-            )
-
-        primary = road.segments[first:last]
-
-        # la rama primaria manda: longitud, altura y alineación
-        for p, s in zip(primary, pattern):
-            s.index = p.index
-            s.z = p.z
-            s.length = p.length
-            s.height = p.height
-
-        branch.offset, branch.heading = MapGenerator.branch(
-            primary,
-            pattern,
-            branch.offset,
-            branch.heading
+        pattern = MapGenerator.fork(
+            Segment.FORK,
+            curve,
+            segments,
+            w
         )
 
-        branch.segments.extend(pattern)
+        road.add(pattern)
+
+        self.current_tramo = road.segments[start:]
+        

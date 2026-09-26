@@ -2,7 +2,13 @@ import math
 from Point import Point
 
 class Segment:
+    NORMAL=0
+    FORK=1
+    JOIN=2
+
     def __init__(self,length=0.0,curve=0.0,height=0.0,profile=None,w0=1.0,w1=1.0):
+        self.type=Segment.NORMAL
+        self.d=0.0
         self.length=length
         self.curve=curve
         self.height=height
@@ -13,24 +19,41 @@ class Segment:
         self.events = []
         self.w0=w0
         self.w1=w1
-        self.offset=0.0
-        self.heading=0.0
+
+    def curve_for(self,side):
+        # side: -1 izquierda, +1 derecha
+        if self.type==Segment.FORK:
+            return side*self.curve
+        return self.curve
+
 class VisibleSegment:
-    def __init__(self,s:Segment,origin,playerx=None,playery=None):
+    def __init__(self,s:Segment,origin,playerx=None,playery=None,side=1):
         if origin!=None:
             x=origin.end.x
             y=origin.end.y
             c=origin.curve
             h=origin.height
+            if origin.type==Segment.FORK:
+                d=(origin.d+origin.curve)
+            else:
+                d=None
+            if origin.type==Segment.FORK and s.type!=Segment.FORK:
+                # el tramo posterior se ancla al final de la rama del jugador
+                if side==-1:
+                    x+=origin.w1-2*(origin.d+origin.curve)
+                    c=-origin.curve
+                else:
+                    x+=origin.w1
         else:
             x=y=c=h=0.0
+            d=None
             if playerx!=None:
                 x=-playerx
             if playery!=None:
                 y=-playery
 
         self.segment=s
-        self.curve=c+s.curve
+        self.curve=c+s.curve_for(1)
         self.height=h+s.height
         self.start=Point(x,y,s.z)
         self.end=Point(x+self.curve,y+self.height,s.z+s.length)
@@ -41,6 +64,25 @@ class VisibleSegment:
         self.events = s.events
         self.w0=s.w0
         self.w1=s.w1
+
+        self.type=s.type
+        if s.type==Segment.FORK:
+            if d is not None:
+                self.d=d 
+            else:
+                self.d=s.d
+        else:
+            self.d=0.0
+
+
+
+    def d_at(self, z):
+        if self.length<=0.0:
+            return self.d
+        t=(z-self.start.z)/self.length
+        t=max(0.0,min(1.0,t))
+        return self.d+self.curve*t
+
 
 class Line:
     def __init__(self,position,x,width,offset,freq,color):
@@ -72,22 +114,10 @@ class Line:
             puntos=((x1,y1),(x2,y2),(x3,y3),(x4,y4))
             return (puntos,color)
 
-class Branch:
-    def __init__(self,first_index,offset=0.0,heading=0.0):
-        self.first_index=first_index
-        self.segments=[]
-        self.offset=offset       # estado de parseo: con qué offset/heading continúa la rama
-        self.heading=heading
-
-    def get(self,index):
-        i=index-self.first_index
-        if 0<=i<len(self.segments):
-            return self.segments[i]
-        return None
 class Road:
+
     def __init__(self):
-        self.branches=[Branch(0)]
-        self.segments=self.branches[0].segments   # atajo: la misma lista que la rama 0
+        self.segments=[]
         self.current_segment=0
         self.objects=[]
         self.current_object=0

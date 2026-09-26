@@ -1,6 +1,7 @@
 import math
 from Object import Object
 from Estados import STUCK,NORMAL
+from Road import Segment
 from abc import ABC, abstractmethod
 
 class Car(Object,ABC):
@@ -22,6 +23,47 @@ class Car(Object,ABC):
         self.vx=0.0
         self.speed=0.0
         self.context=None
+        self.last_side=0
+        
+
+    def sync_side(self,context):
+        vs=self.getVS(context)
+        if vs is None:
+            return
+        if vs.type!=Segment.FORK:
+            self.side=0
+            return
+                
+        if self.side==0:
+            self.side=1
+            self.x_rel-=vs.w0
+
+        d=vs.d_at(self.z)
+        margen=self.profile.collide_radius
+
+        elegido=self.side
+        if self.side==1 and self.x_rel<-d-margen:
+            elegido=-1
+        elif self.side==-1 and self.x_rel>d+margen:
+            elegido=1
+
+        if elegido!=self.side:
+            self.x_rel=self.x_rel-2*d*elegido
+            self.side=elegido
+
+        self.last_side=self.side
+
+
+    def x_shift_actual(self,context):
+        vs=self.getVS(context)
+        if vs is None or vs.type!=Segment.FORK:
+            return 0.0
+        if self.side==-1:
+            return vs.w0-2*vs.d_at(self.z)
+        if self.side==1:
+            return vs.w0
+        return 0.0
+
 
     def collide(self,dz,vx,context):
         inicio=self.z-0.5
@@ -30,24 +72,26 @@ class Car(Object,ABC):
             return
         fin=vs.end.z
 
-        x_min = min(self.x_rel, self.x_rel + vx) - self.profile.collide_radius
-        x_max = max(self.x_rel, self.x_rel + vx) + self.profile.collide_radius
+        x_self=self.x_rel+self.x_shift_actual(context)
+        x_min = min(x_self, x_self + vx) - self.profile.collide_radius
+        x_max = max(x_self, x_self + vx) + self.profile.collide_radius
 
         z_min = self.z
         z_max = self.z + dz + self.profile.collide_radius
 
         collide_obj=None
+        collide_vs=None
 
         #buscar en el buffer los objetos
         for vsobj in context.frame_data.objbuffer:
             obj=vsobj.obj
             if not(obj is self) and obj.collidable and obj.z>=inicio and obj.z<=fin:
-                if obj.x_rel + obj.profile.collide_radius >= x_min \
-                    and obj.x_rel - obj.profile.collide_radius <= x_max \
+                ox=obj.x_rel+vsobj.x_shift
+                if ox + obj.profile.collide_radius >= x_min \
+                    and ox - obj.profile.collide_radius <= x_max \
                     and obj.z + obj.profile.collide_radius >= z_min \
                     and obj.z - obj.profile.collide_radius <= z_max:
                     #candidato a colision
-                    #interpolación de posición
                     impact_dz=obj.z-self.z
                     if dz>0.0:
                         pct=impact_dz/dz
@@ -55,46 +99,31 @@ class Car(Object,ABC):
                         pct=0.0
                     impact_dx=vx*pct
                     impact_z=obj.z
-                    impact_x=self.x_rel+impact_dx
-                    distance2=self.getDistance(obj,impact_x,impact_z)
+                    impact_x=x_self+impact_dx
+                    distance2=self.getDistance(ox,obj.z,impact_x,impact_z)
                     col_distance2=(obj.profile.collide_radius+self.profile.collide_radius)**2
                     #si está dentro del radio
                     if distance2 <= col_distance2:
                         #se queda con la primera que encuentra
                         collide_obj=obj
+                        collide_vs=vsobj
                         break
             elif obj.z>fin:
                 break
 
         if collide_obj!=None:
-            self.resolve_collision(collide_obj)
-            #tipo de colision
-#            distance2=self.getDistance(self,collide_obj.x_rel,collide_obj.z)
-#            col_dz=collide_obj.z-self.z
-#            col_dx=collide_obj.x_rel-self.x_rel
-#            ratio_z = col_dz * col_dz / distance2
-#            lateral=False
-#            if col_dz<0 and ratio_z>=0.5:
-#                #choque trasero, no se detecta
-#                return
-#            elif col_dz<0 or ratio_z<0.5:
-#                #lateral
-#                lateral=True
-#            if lateral:
-#                tipo=Car.LATERAL
-#            else:
-#                tipo=Car.FRONT
-#            self.action(collide_obj,tipo,col_dz,col_dx)
+            self.resolve_collision(collide_obj,x_self-(collide_obj.x_rel+collide_vs.x_shift))
 
-    def getDistance(self,obj1,x_rel,z):
-        dx = x_rel - obj1.x_rel
-        dz = z - obj1.z
+
+    def getDistance(self,ox,oz,x,z):
+        dx = x - ox
+        dz = z - oz
 
         distance_squared = dx * dx + dz * dz
 
         return distance_squared
 
-    def resolve_collision(self, other):
+    def resolve_collision(self, other, dx):
         if self.type==Car.CAR or self.type==Car.PLAYER:
             m1=1.0
             vx1 = self.vx
@@ -109,7 +138,6 @@ class Car(Object,ABC):
         else:
             m2=vx2=vz2=0.0
         # Vector entre centros
-        dx = self.x_rel - other.x_rel
         dz = self.z - other.z
 
         dist = math.hypot(dx, dz)

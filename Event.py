@@ -13,17 +13,18 @@ class Event:
         self.enabled=True
 
 class EnemySpawn(Event):
-    def __init__(self,z,x_rel,speed,img):
+    def __init__(self,z,x_rel,speed,img,side=0):
         super().__init__(z)
         self.x_rel=x_rel
         self.speed=speed
         self.img=img
+        self.side=side
 
     def execute(self,context:"GameContext"):
         if self.enabled:
             #crear un nuevo Enemy en el horizonte, posicion x_rel y velocidad speed
             horizonte=context.camera.view_distance
-            enemigo=Enemy(self.img,self.x_rel, horizonte+context.camera.z, self.speed, context)
+            enemigo=Enemy(self.img,self.x_rel, horizonte+context.camera.z, self.speed, context,self.side)
             #añadir el enemigo a la lista de objetos temporales
             context.frame_data.tempobjbuffer.append(enemigo)
             self.enabled=False

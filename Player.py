@@ -9,6 +9,7 @@ from TempObject import Humo
 from Material import Material
 from Car import Car
 from Sound import EngineSound
+from Road import Segment
 from Estados import *
 from typing import TYPE_CHECKING
 
@@ -16,6 +17,34 @@ if TYPE_CHECKING:
     from GameContext import GameContext
 
 
+FR_LLANO=0
+FR_LLANO_CD1=1
+FR_LLANO_CD2=2
+FR_LLANO_CI1=3
+FR_LLANO_CI2=4
+FR_CAR=5
+FR_CAR_CD1=6
+FR_CAR_CD2=7
+FR_CAR_CI1=8
+FR_CAR_CI2=9
+FR_CAB=10
+FR_CAB_CD1=11
+FR_CAB_CD2=12
+FR_CAB_CI1=13
+FR_CAB_CI2=14
+FR_LUZ=15
+FR_RUEDAS=16
+FR_RUEDAS_NUM=5
+FR_LUCES_BASE=15     # índice del primer frame de luces en la animación (después de los 15 cuerpos)
+FR_RUEDAS_BASE=30    # índice del primer frame de ruedas (después de los 15 de luces)
+FR_RUEDAS_VEL=3.0    # fases del patrón de ruedas por unidad recorrida
+FR_GIRO_EXTREMO=15   # frames pulsando hasta llegar al extremo
+FR_GIRO_MAX=20       # tope del contador: FR_GIRO_MAX-FR_GIRO_EXTREMO frames de giro suave al soltar
+LUCES_DESPL=[
+    (0,0),(-1,0),(-3,0),(1,0),(3,0),
+    (0,-2),(0,-2),(0,-2),(0,-2),(0,-2),
+    (0,1),(0,1),(0,1),(0,1),(0,1)
+]
 class Player(Car):
 
     def __init__(self,context:"GameContext"):
@@ -39,8 +68,37 @@ class Player(Car):
         #cache para el coche
         self.cache=ImageCache(ImageCache.getPlayerConfig(resize=self.context.gen_scale),context)
         #self.cache.addImage("coche","coche.png",(0.5,1.0),False,True)
-        self.cache.addAnimation("coche","coche-anim.png",(0.5,1.0),False,True,ancho=64,alto=64)
+        #self.cache.addAnimation("coche","coche-anim.png",(0.5,1.0),False,True,ancho=64,alto=64)
+        #self.load_metadata(self.cache)
+
+
+        hoja=pygame.image.load(str(self.cache.base/"img"/"coche-anim.png")).convert_alpha()
+        f=self.cache.load_frames(hoja,64,64)
+        coches=f[0:15]
+        luz=f[FR_LUZ]
+        patrones=f[FR_RUEDAS:FR_RUEDAS+FR_RUEDAS_NUM]
+
+        luces=[]
+        for i in range(15):
+            capa=pygame.Surface((64,64),pygame.SRCALPHA)
+            capa.blit(luz,self.despl_luz(i))
+            luces.append(capa)
+
+        ruedas=[]
+        for i in range(15):
+            for k in range(FR_RUEDAS_NUM):
+                dxi,dxd=self.despl_ruedas(i,k)
+                capa=pygame.Surface((64,64),pygame.SRCALPHA)
+                capa.blit(patrones[k],(dxi,0),(0,0,32,64))
+                capa.blit(patrones[k],(32+dxd,0),(32,0,32,64))
+                ruedas.append(capa)
+
+        self.cache.newAnimation("coche",coches+luces+ruedas,(0.5,1.0),True)
+
+
         self.load_metadata(self.cache)
+
+
         #propiedades
         self.collidable=True
         profile=VisualObjProfile()
@@ -104,13 +162,17 @@ class Player(Car):
         self.engine = EngineSound(str(base/"sound/loop_5.wav"))
 
         #frame
-        self.frame=0
+        self.frame=FR_LLANO
+        self.giro_frames=0
+        self.ruedas_fase=0.0
 
+        #road width
         self.cur_width=0.0
         
 
 
     def update(self, dt):
+        self.sync_side(self.context)
         vs=self.getVS(self.context)
 
         if self.context.keys[pygame.K_SPACE] and self.tecla_marcha==False:
@@ -138,23 +200,69 @@ class Player(Car):
             else:
                 self.context.root.stopSound("freno")
 
-            if k_vol_l and not k_vol_r and self.speed > 0.1:
-                #izquierda
-                self.frame = 2
-            elif k_vol_r and not k_vol_l and self.speed > 0.1:
-                #derecha
-                self.frame = 1
+            # --- frame del coche ---
+            # pendiente: bloque de frames (recto, CD1, CD2, CI1, CI2 dentro de cada bloque)
+            if vs!=None and vs.segment.height > 0:
+                base=FR_CAR
+            elif vs!=None and vs.segment.height < 0:
+                base=FR_CAB
             else:
-                if vs!=None and vs.height > 0:
-                    #subiendo
-                    self.frame = 4
-                elif vs!=None and vs.height < 0:
-                    #bajando
-                    self.frame = 3
+                base=FR_LLANO
+
+            # giro: contador con signo que sube pulsando y baja al soltar
+            if k_vol_r and not k_vol_l:
+                pulsa=1
+            elif k_vol_l and not k_vol_r:
+                pulsa=-1
+            else:
+                pulsa=0
+
+            if self.speed<=0.1:
+                self.giro_frames=0
+            elif pulsa!=0:
+                if self.giro_frames*pulsa<0:
+                    self.giro_frames=0
+                self.giro_frames=max(-FR_GIRO_MAX,min(FR_GIRO_MAX,self.giro_frames+pulsa))
+            elif self.giro_frames>0:
+                self.giro_frames-=1
+            elif self.giro_frames<0:
+                self.giro_frames+=1
+
+            mag=abs(self.giro_frames)
+            if self.giro_frames>0:
+                direccion=1
+            else:
+                direccion=-1
+            if self.speed<=0.1:
+                nivel=0
+            elif pulsa!=0:
+                if mag>=FR_GIRO_EXTREMO:
+                    nivel=2 
                 else:
-                    self.frame = 0
-                
+                    nivel=1
+            else:
+                if mag>=FR_GIRO_EXTREMO:
+                    nivel=1
+                else:
+                    nivel=0
+
+            if nivel==0:
+                self.frame=base
+            else:
+                if direccion>0:
+                    self.frame=base+nivel
+                else:
+                    self.frame=base+nivel+2                
             
+            # capas: luces de freno y patrón de ruedas (frames extra de la misma animación)
+            capas=[]
+            if k_freno:
+                capas.append(FR_LUCES_BASE+self.frame)
+            self.ruedas_fase+=self.speed*dt*FR_RUEDAS_VEL
+            fase=int(self.ruedas_fase)%FR_RUEDAS_NUM
+            capas.append(FR_RUEDAS_BASE+self.frame*FR_RUEDAS_NUM+fase)
+            self.capas=tuple(capas)
+
 
             (vmax_marcha, _) = self.marchas[self.marcha]
             
@@ -252,10 +360,13 @@ class Player(Car):
             metadata2=cache.metadata["humo"]
             h=Humo(self.x_rel-0.08,self.z-0.01,self.speed,self.vx,metadata1,flip=True)
             h.profile=self.profile_humo
+            h.side=self.side
             self.context.frame_data.tempobjbuffer.append(h)
             h=Humo(self.x_rel+0.08,self.z-0.01,self.speed,self.vx,metadata2)
             h.profile=self.profile_humo
+            h.side=self.side
             self.context.frame_data.tempobjbuffer.append(h)
+
 
     def cambio_marcha(self):
         self.context.root.sounds["marcha"].play()
@@ -396,12 +507,16 @@ class Player(Car):
         else:
             fuerza_pte=0.0
 
+        curva_pista=0.0
+        if vs!=None:
+            curva_pista=vs.segment.curve_for(self.side)
+
         if vs!=None:
             #posicion relativa de la curva (0.0 = interior de la curva 1.0 - exterior)
             x_ratio = (self.x_rel + self.cur_width) / (2.0 * self.cur_width)
             x_ratio = max(0.0, min(1.0, x_ratio))
 
-            if vs.curve > 1e-6:
+            if curva_pista > 1e-6:
                 x_ratio = 1.0 - x_ratio
                 
         else:
@@ -411,9 +526,7 @@ class Player(Car):
         dz_segura=max(0.001,dz)
         factor_giro = max(0.1, factor_v)
         giro_player=giro*self.FUERZA_VOLANTE*dz_segura*factor_giro/ max(factor_v, 0.001)
-        curva_pista=0.0
-        if self.getVS(self.context)!=None:
-            curva_pista=self.getVS(self.context).segment.curve
+   
         centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA
 
 
@@ -493,9 +606,29 @@ class Player(Car):
         if self.speed<0.0: self.speed=0.0
         if round(self.speed,2)==0.0:
             self.vx=0.0
-        if self.getVS(self.context)!=None and abs(self.x_rel)>self.getVS(self.context).visualProfile.road_limit:
-            self.x_rel=math.copysign(self.getVS(self.context).visualProfile.road_limit, self.x_rel)
-            self.vx=0.0
+
+        vs_actual=self.getVS(self.context)
+        if vs_actual!=None:
+            margen=vs_actual.visualProfile.margin_limit
+            lim_ext=self.cur_width+margen
+            lim_int=lim_ext
+            if vs_actual.type==Segment.FORK and self.side!=0:
+                d=vs_actual.d_at(self.z)
+                if 2*d<=margen+2*self.cur_width:
+                    lim_int=2*d+self.cur_width+margen
+            # side=1: el hueco queda a la izquierda (x_rel negativo); side=-1: a la derecha
+            if self.side==1:
+                lim_izq,lim_der=lim_int,lim_ext
+            elif self.side==-1:
+                lim_izq,lim_der=lim_ext,lim_int
+            else:
+                lim_izq,lim_der=lim_ext,lim_ext
+            if self.x_rel<-lim_izq:
+                self.x_rel=-lim_izq
+                self.vx=0.0
+            elif self.x_rel>lim_der:
+                self.x_rel=lim_der
+                self.vx=0.0
 
         self.mueve_camera(material)
 
@@ -503,3 +636,25 @@ class Player(Car):
         self.vx+=self.c*dz#*factor_v
         self.vx-=centrifuga*dz
 
+
+    def despl_luz(self,i):
+        return LUCES_DESPL[i]
+    
+    def despl_ruedas(self,i,fase):
+        # desplazamiento del patrón según el giro. Las cuestas quedan a cero hasta que se dibujen sus giros
+        if i>=FR_CAR:
+            return (0,0)
+        #nivel y sentido del giro según la posición del frame
+        giro=i%5
+        if giro==0:
+            return (0,0)
+        if giro<=2:
+            sentido=-1
+        else:
+            sentido=1
+        nivel=1
+        if giro==2 or giro==4:
+            if fase>0:
+                nivel=2
+        dx=sentido*nivel
+        return (dx,dx)

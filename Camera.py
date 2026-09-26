@@ -2,7 +2,7 @@ import pygame
 import math
 import copy
 import time
-from Road import Road
+from Road import Segment
 from Road import VisibleSegment
 from Point import Point
 from Player import Player
@@ -122,12 +122,16 @@ class Camera:
         #mover la camara
         self.z=self.context.player.z-self.player_z
         self.x=self.context.player.x_rel
+
+        pl=self.context.player
+        self.side_anclaje=pl.side or pl.last_side or 1
+
         self.y=self.height+self.y_move
 
         #calcular el avance para actualizar el fondo
         dz=self.context.player.speed*dt
 
-        #construir el buffer de carreta
+        #construir el buffer de carretera
         offset=self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,offset=self.context.player.z)
 
         if offset==None:
@@ -135,6 +139,14 @@ class Camera:
 
         self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
         self.getObjBuffer(self.frame_data)
+
+        #desplazamiento con el buffer de ESTE frame (ya con vs_index actualizado)
+        vs_jugador=self.context.player.getVS(self.context)
+        if vs_jugador!=None and vs_jugador.type==Segment.FORK:
+            if self.context.player.side==-1:
+                self.x+=vs_jugador.w0-2*vs_jugador.d_at(self.context.player.z)
+            elif self.context.player.side==1:
+                self.x+=vs_jugador.w0
 
         for item in self.frame_data.objbuffer:
             if item.isAnim:
@@ -150,7 +162,7 @@ class Camera:
             f_y=self.horizon+50
 
         for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
-            fondo.update(self.context.player.getVS(self.context).segment.curve*dz,f_y)
+            fondo.update(self.context.player.getVS(self.context).segment.curve_for(self.context.player.side or 1)*dz,f_y)
 
         self.update_sky()
 
@@ -182,12 +194,13 @@ class Camera:
 
         vs_prev=None
         for s in segments:
-            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y)
+            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y,side=self.side_anclaje)
             if vs.end.z<=frontera:
                 continue
 
             if vs.start.z<frontera:
                 #clipping cercano
+                d_clip=vs.d_at(frontera)
                 p=self.clip(vs.start,vs.end,frontera)
                 vs.start.z=frontera
                 vs.curve=vs.end.x-p.x
@@ -195,8 +208,8 @@ class Camera:
                 vs.length=vs.end.z-p.z
                 vs.end.x=vs.start.x+vs.curve
                 vs.end.y=vs.start.y+vs.height
+                vs.d=d_clip
 
-                #end x e y deben interpolarse
 
             elif vs.end.z>(self.z+distancia):
                 #clipping lejano
@@ -206,13 +219,14 @@ class Camera:
                 vs.length=vs.end.z-vs.start.z
 
                 fin=True
-            vs_prev=vs
             if offset!=None:
                 if vs.start.z<=offset and vs.end.z>offset:
                     pct=(offset-vs.start.z)/(vs.end.z-vs.start.z)
                     p=Point(vs.start.x+pct*vs.curve,vs.start.y+pct*vs.height,offset)
                     return p
+
             buffer.append(vs)
+            vs_prev=vs
             if fin:
                 break
 
@@ -358,6 +372,7 @@ class Camera:
             #cuando hay líneas de grosor negativo no pinto porque es un polígono no visible
             if pc2.y-pc1.y>=0:
                 vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
+
 
             #primero se pintan las sombras del vs. Cualquier objeto puede proyectar
             vs.visualProfile.drawer.clear_shadow_surface(pc1,pc2)

@@ -51,7 +51,7 @@ class MapGenerator:
         return (3*(t*t)) - (2*(t*t*t))
     
     @staticmethod
-    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1):
+    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1,side=0):
         z_pos=tramo[0].z+offset
         z_end=tramo[-1].z+tramo[-1].length
         while z_pos<z_end:
@@ -74,6 +74,7 @@ class MapGenerator:
             if random_x!=0:
                 obj.x_rel+=MapGenerator.rng.uniform(0,random_x)
             obj.collidable=collidable
+            obj.side=side
             #cargar los metadatos
             if obj.profile.cache!=None:
                 cache=obj.profile.cache
@@ -98,8 +99,8 @@ class MapGenerator:
         s.road_marks.append(rm)
 
     @staticmethod
-    def addEnemy(s:Segment,z_rel, x_rel,speed,img):
-        e=EnemySpawn(z_rel,x_rel,speed,img)
+    def addEnemy(s:Segment,z_rel, x_rel,speed,img,side=0):
+        e=EnemySpawn(z_rel,x_rel,speed,img,side)
         s.events.append(e)
 
 
@@ -114,10 +115,13 @@ class MapGenerator:
         s.events.append(e)
 
     @staticmethod
-    def branch(primary_segments,branch_segments,offset=0.0,heading=0.0):
-        for primary,seg in zip(primary_segments,branch_segments):
-            seg.offset=offset
-            seg.heading=heading
-            heading+=seg.curve-primary.curve
-            offset+=heading
-        return offset,heading
+    def fork(type,curve,length,w):
+        segments=[]
+        d=w
+        for _ in range(length):
+            s=MapGenerator.genSegment(curve,0.0,w,w)
+            s.type=type
+            s.d=d
+            d+=curve
+            segments.append(s)
+        return segments

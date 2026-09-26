@@ -1,17 +1,4 @@
-esta semana:
-Roadside billboards/ads -> 3/4
-Finish road decoration -> 80%
-Shading for enemy car sprites -> OK
-Add traffic to the track -> 10%
-Adjustable road width -> cancelled
-End-of-race screen: message, restart, Esc to quit => OK
-Remap controls: swap up/down for Z and X => OK
 
-resto:
-
--sprites coches *
--medianas
--bifucaciones
 -escenarios
  -vegetación - campos
  -ciudades
@@ -23,5 +10,6 @@ resto:
  -marcas suelo (paso de cebra, velocidad, bifurcaciones)
 -transiciones entre escenarios
 -proporcion de sombras
+-objetos duplicados en objbuffer cuando su z cae justo en el borde entre dos segmentos (Camera.getObjBuffer: o.z==vs.end.z y o.z==siguiente vs.start.z)
 
 

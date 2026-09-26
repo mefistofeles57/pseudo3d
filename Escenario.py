@@ -30,7 +30,7 @@ class Escenario:
         arcen.friccion_z=0.9
         #carretera
         #self.half_width=1.0
-        self.road_limit=1.5
+        self.margin_limit=0.5
         self.road_colors=[(102,102,102),(88,88,88)]
         self.road_material=asfalto
         #exterior

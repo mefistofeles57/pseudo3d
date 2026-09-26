@@ -154,7 +154,7 @@ class GameContext:
             )
 
 
-    def vegetacion(self,objects,tramo,x,step_x,step_z,offset_z,number,objeto):
+    def vegetacion(self,objects,tramo,x,step_x,step_z,offset_z,number,objeto,side=0):
             
         obj=objects
         for i in range(number):
@@ -163,14 +163,14 @@ class GameContext:
                 tramo,
                 objeto,
                 step=step_z, offset=offset_z, x=x+i*step_x
-                ,collidable=False
+                ,collidable=False, side=side
             )
             obj = MapGenerator.objects(
                 obj,
                 tramo,
                 objeto,
                 step=step_z, offset=offset_z, x=-x-i*step_x
-                ,collidable=False
+                ,collidable=False, side=side
             )
         return obj
 
@@ -185,7 +185,8 @@ class GameContext:
         number=1,
         objeto="",
         random_x=0.0,
-        random_step=0.0
+        random_step=0.0,
+        side=0
     ):
         obj = objects
 
@@ -199,7 +200,8 @@ class GameContext:
                 x + i * step_x,
                 random_x=random_x,
                 random_step=random_step,
-                collidable=True
+                collidable=True,
+                side=side
             )
 
             obj = MapGenerator.objects(
@@ -211,7 +213,8 @@ class GameContext:
                 -x - i * step_x,
                 random_x=-random_x,
                 random_step=random_step,
-                collidable=True
+                collidable=True,
+                side=side
             )
 
         return obj
