@@ -11,5 +11,6 @@
 -transiciones entre escenarios
 -proporcion de sombras
 -objetos duplicados en objbuffer cuando su z cae justo en el borde entre dos segmentos (Camera.getObjBuffer: o.z==vs.end.z y o.z==siguiente vs.start.z)
+-pruebas con distintos FOV
 
 

@@ -6,7 +6,7 @@ from Road import Segment
 from Road import VisibleSegment
 from Point import Point
 from Player import Player
-from Object import VisibleObject
+from Object import Object,VisibleObject
 from FrameData import FrameData
 from typing import TYPE_CHECKING
 
@@ -49,6 +49,9 @@ class Camera:
         self.fondo=None
         self.color_fondo_l=None
         self.color_fondo_d=None
+        self.perfil_fondos=None
+        self.fase_fondos=0.0
+
 
         self.context=context
         self.frame_data=context.frame_data
@@ -131,6 +134,11 @@ class Camera:
         #calcular el avance para actualizar el fondo
         dz=self.context.player.speed*dt
 
+        #carga de assets
+        streamer=self.context.escenario.streamer
+        streamer.actualizar(self.context.road,self.context.player.z)
+        #streamer.avanzar(0.003)
+
         #construir el buffer de carretera
         offset=self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,offset=self.context.player.z)
 
@@ -161,10 +169,10 @@ class Camera:
         if f_y>(self.horizon+50):
             f_y=self.horizon+50
 
-        for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
-            fondo.update(self.context.player.getVS(self.context).segment.curve_for(self.context.player.side or 1)*dz,f_y)
-
         self.update_sky()
+
+        for fondo in self.perfil_fondos.fondos:
+            fondo.update(self.context.player.getVS(self.context).segment.curve_for(self.context.player.side or 1)*dz,f_y)
 
     def remove_dead_objects(self):
         alive_objects = []
@@ -239,7 +247,8 @@ class Camera:
 
 
     def getObjBuffer(self,frame_data):
-        objects=self.context.road.objects[self.context.road.current_object:]
+        #objects=self.context.road.objects[self.context.road.current_object:]
+        objects=self.context.road.objects
         player=self.context.player
         frame_data.objbuffer.clear()
 
@@ -250,15 +259,20 @@ class Camera:
         #construyo el buffer haciendo merge de objetos del mapa, objetos temporales y coche del jugador
         #aprovecho la pasada para calcular sombras
 
+        last_object_index=self.context.road.current_object
+
         for vs_index,vs in enumerate(frame_data.buffer):
             #selecciono la parte del mapa a dibujar
             sublist1=[]
-            for i,o in enumerate(objects):
+            first_object_index=last_object_index
+            for i in range(first_object_index,len(objects)):
+                o=objects[i]
                 if o.z<vs.start.z:
                     if vs==frame_data.buffer[0]:
                         self.context.road.current_object+=1
                     continue
                 if o.z>vs.end.z:
+                    last_object_index=i
                     break
                 sublist1.append(o)
             #selecciono los objetos temporales a dibujar
@@ -342,7 +356,8 @@ class Camera:
 
     def draw(self,s:pygame.Surface):
 
-            
+        self.context.escenario.cache.nuevoFrame()
+
         if self.fondo!=None:
             s.blit(self.fondo, (0, 0))
 
@@ -350,17 +365,21 @@ class Camera:
             return
 
         #parallax
-        for fondo in self.frame_data.buffer[-1].visualProfile.fondos:
-            fondo.draw(s)
+        if self.perfil_fondos!=None:
+            for fondo in self.perfil_fondos.fondos:
+                fondo.draw(s,self.fase_fondos)
 
 
-
-        shadow_objects=[]
-        profile=self.frame_data.buffer[0].visualProfile
+        #objetos con sombra: proyección y rango de z de la sombra, una sola vez por frame
+        sombras=[]
         for obj in self.frame_data.objbuffer:
-            metadata=obj.metadata
-            if metadata.shadow:
-                shadow_objects.append(obj)
+            cache=Object.resolverCache(obj.profile)
+            metadata=cache.metadata.get(obj.img)
+            if metadata!=None and metadata.shadow:
+                z=obj.z+obj.profile.shadow_offset_z
+                h=obj.profile.shadow_height
+                p1=self.project(Point(obj.x,obj.y,obj.z))
+                sombras.append((obj,p1,z-h,z+h))
 
 
 
@@ -374,12 +393,12 @@ class Camera:
                 vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
 
 
-            #primero se pintan las sombras del vs. Cualquier objeto puede proyectar
+            #primero se pintan las sombras del vs. Solo las que caen en este segmento
             vs.visualProfile.drawer.clear_shadow_surface(pc1,pc2)
-            for item in reversed(shadow_objects):
-                profile=vs.visualProfile
-                p1=self.project(Point(item.x,item.y,item.z))
-                profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
+            for item,p1,z_min,z_max in reversed(sombras):
+                if z_max>=vs.start.z and z_min<=vs.end.z:
+                    profile=vs.visualProfile
+                    profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
             vs.visualProfile.drawer.blitShadows(s,pc1,pc2)
 
             #despues los objetos. Solo los que estén situados dentro del segmento
@@ -420,48 +439,33 @@ class Camera:
         )
 
     def update_sky(self):
-        #color del cielo
-        #buscar los colores del cielo en el buffer
-        if len(self.frame_data.buffer)==0:
+        buffer=self.frame_data.buffer
+        if len(buffer)==0:
             return
-        num_primer_color=0
-        primer_color_l=None
-        primer_color_d=None
-        num_segundo_color=0
-        segundo_color_l=None
-        segundo_color_d=None
-        for item in reversed(self.frame_data.buffer):
-            if num_segundo_color==0:
-                if num_primer_color==0:
-                    #primer color
-                    primer_color_l=item.visualProfile.sky_light
-                    primer_color_d=item.visualProfile.sky_dark
-                    num_primer_color=1
-                elif item.visualProfile.sky_light!=primer_color_l or item.visualProfile.sky_dark!=primer_color_d:
-                    #segundo color
-                    segundo_color_l=item.visualProfile.sky_light
-                    segundo_color_d=item.visualProfile.sky_dark
-                    num_segundo_color=1
+        actual=buffer[0].visualProfile
+        color_l=actual.sky_light
+        color_d=actual.sky_dark
+        self.perfil_fondos=actual
+        self.fase_fondos=0.0
+        for vs in buffer:
+            p=vs.visualProfile
+            if p is not actual:
+                # t=1 con la frontera en el horizonte, t=0 al llegar a ella
+                t=(vs.start.z-self.z-self.near_plane)/(self.view_distance-self.near_plane)
+                t=max(0.0,min(1.0,t))
+                color_l=self.lerp_color(p.sky_light,actual.sky_light,t)
+                color_d=self.lerp_color(p.sky_dark,actual.sky_dark,t)
+                if t>=0.5:
+                    self.fase_fondos=(1.0-t)*2.0
                 else:
-                    num_primer_color+=1
-            else:
-                if item.vs.sky_light==segundo_color_l or item.vs.sky_dark==segundo_color_d:
-                    break
-                else:
-                    num_segundo_color+=1
-        if num_segundo_color>0:
-            #hacer mezcla de colores
-            t=num_segundo_color/(num_segundo_color+num_primer_color)
-            color_l=self.lerp_color(primer_color_l,segundo_color_d,t)
-            color_d=self.lerp_color(primer_color_d,segundo_color_d,t)
-        else:
-            #sin mezcla
-            color_l=primer_color_l
-            color_d=primer_color_d
+                    self.perfil_fondos=p
+                    self.fase_fondos=t*2.0
+                break
         if self.color_fondo_l!=color_l or self.color_fondo_d!=color_d:
             self.color_fondo_l=color_l
             self.color_fondo_d=color_d
-            self.fondo=self.create_vertical_gradient(self.w, int(self.horizon), color_d, color_l )
+            self.fondo=self.create_vertical_gradient(self.w, int(self.horizon), color_d, color_l)
+
 
     def move_camera(self,mov):
         self.y_move=mov

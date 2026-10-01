@@ -2,7 +2,7 @@ import random
 from RoadMark import RoadMark
 from Road import Segment
 from Object import Object
-from Event import EnemySpawn,Checkpoint,Finish
+from Event import EnemySpawn,Checkpoint,Finish,LoadCircuit
 
 class MapGenerator:
     rng=random.Random(0)
@@ -75,12 +75,6 @@ class MapGenerator:
                 obj.x_rel+=MapGenerator.rng.uniform(0,random_x)
             obj.collidable=collidable
             obj.side=side
-            #cargar los metadatos
-            if obj.profile.cache!=None:
-                cache=obj.profile.cache
-            else:
-                cache=MapGenerator.visualProfile.cache
-            obj.metadata=cache.metadata[obj.img]
 
             objetos.append(obj)
 
@@ -125,3 +119,8 @@ class MapGenerator:
             d+=curve
             segments.append(s)
         return segments
+
+    @staticmethod
+    def addLoadCircuit(s: Segment, z_rel, next_map):
+        e = LoadCircuit(z_rel, next_map)
+        s.events.append(e)

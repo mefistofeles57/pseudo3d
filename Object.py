@@ -26,12 +26,24 @@ class Object:
     def load_metadata(self,cache):
         self.metadata=cache.metadata[self.img]
 
+    @staticmethod
+    def resolverCache(profile):
+        if profile!=None and profile.cache!=None:
+            return profile.cache
+        from MapGenerator import MapGenerator
+        return MapGenerator.visualProfile.cache
+
     def getVS(self, context, index=0):
         if self.vs_index==-1 or self.vs_index+index>len(context.frame_data.buffer)-1:
             return None
         return context.frame_data.buffer[self.vs_index+index]
 
     def update(self, dt):
+        if self.metadata==None:
+            cache=Object.resolverCache(self.profile)
+            self.metadata=cache.metadata.get(self.img)
+            if self.metadata==None:
+                return
         self.age += dt
         if self.age>self.frametime:
             self.frame+=1

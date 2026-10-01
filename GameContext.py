@@ -1,8 +1,7 @@
 import pygame
 from MapGenerator import MapGenerator
-from Escenario import Escenario
-from Road import Road
-from Road import Line
+from Escenario import RecursosEscenario,Bosque,DesiertoRoca,Pradera
+from Road import Road,Line,LineProfile
 from Camera import Camera
 from Player import Player
 from VisualObjProfile import VisualObjProfile
@@ -26,7 +25,23 @@ class GameContext:
         self.keys=None
         self.default_profile=None
         self.checkpoints=None
-        self.escenario=Escenario(self)
+        self.recursos_escenario=RecursosEscenario(self)
+        self.escenarios={
+            "bosque": Bosque(self,self.recursos_escenario),
+            "desierto_roca": DesiertoRoca(self,self.recursos_escenario),
+            "pradera": Pradera(self,self.recursos_escenario),
+        }
+        self.escenario=self.escenarios["bosque"]
+
+        #circuit - hay que fijarlo antes de createMap, que ya lo usa
+        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+            self.base_circuitos = Path(sys._MEIPASS)
+        else:
+            self.base_circuitos = Path(__file__).resolve().parent
+        self.parser = None
+        self.gen_circuito = None
+        self.next_circuit = None
+
         self.createMap(self.escenario)
         self.estado=NONE
         #stuck
@@ -37,6 +52,9 @@ class GameContext:
         self.timer=60.0
         self.score=0
         self.stage=1
+        self.escenario.streamer.actualizar(self.road,self.road.segments[0].z)
+        self.escenario.streamer.procesarCompleto()
+
 
     def createMap(self, escenario):
         R = 0.05
@@ -85,6 +103,11 @@ class GameContext:
 
         MapGenerator.setObjProfile(default_profile)
 
+        discontinua_blanca = LineProfile(grosor=0.03, offset=0, freq=2, color=[(255,255,255),None])
+        continua_blanca = LineProfile(grosor=0.02, offset=0, freq=1, color=[(255,255,255)])
+        discontinua_arena = LineProfile(grosor=0.03, offset=0, freq=2, color=[(232,217,160),None])
+        continua_arena = LineProfile(grosor=0.02, offset=0, freq=1, color=[(232,217,160)])
+
         parser = CircuitParser(
             self,
             curves={"CR": R, "CL": L, "CHR": R_HARD, "CHL": L_HARD},
@@ -94,38 +117,27 @@ class GameContext:
                 "poste": poste_profile,
                 "piedra": piedra_profile,
                 "checkpoint": checkpoint_profile,
-            }
+            },
+            line_profiles={
+                "discontinua_blanca": discontinua_blanca,
+                "continua_blanca": continua_blanca,
+                "discontinua_arena": discontinua_arena,
+                "continua_arena": continua_arena,
+            },
+            scene_profiles=self.escenarios
         )
+        self.parser=parser
 
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            base = Path(sys._MEIPASS)
-        else:
-            base = Path(__file__).resolve().parent
-        parser.load(
-            str(base/"circuits/circuit1.yaml")
-        )
+        parser.load(str(self.base_circuitos / "circuits/circuit1.jsonl"))
 
         objects = parser.objects
         self.checkpoints = parser.checkpoints
 
-        MapGenerator.addFinish(
-            self.road.segments[-1],
-            0.5
-        )
 
         objects.sort(key=lambda obj: obj.z)
         self.road.objects=objects
             
 
-        ##position,x,width,offset,freq,color
-        l=Line(0.35,-0.0025,-0.03,0,2,[(255,255,255),None])
-        self.road.addLine(l,0,self.road.segments[-1].index)
-        l=Line(-0.35,-0.0025,-0.03,0,2,[(255,255,255),None])
-        self.road.addLine(l,0,self.road.segments[-1].index)
-        l=Line(-1.05,0.01,0.02,0,1,[(255,255,255)])
-        self.road.addLine(l,0,self.road.segments[-1].index)
-        l=Line(1.05,-0.01,-0.02,0,1,[(255,255,255)])
-        self.road.addLine(l,0,self.road.segments[-1].index)
 
     
     def changeStatus(self,estado):
@@ -143,14 +155,14 @@ class GameContext:
 
         self.estado=estado
 
-    def add_bumps(self, repeats=3, segments=4, slope=0.025):
+    def add_bumps(self, repeats=3, segments=4, slope=0.025, w=1.0):
         for _ in range(repeats):
             self.road.add(
-                MapGenerator.pattern(0.0, slope, segments)
+                MapGenerator.pattern(0.0, slope, segments, w, w)
             )
 
             self.road.add(
-                MapGenerator.pattern(0.0, -slope, segments)
+                MapGenerator.pattern(0.0, -slope, segments, w, w)
             )
 
 
@@ -218,3 +230,4 @@ class GameContext:
             )
 
         return obj
+

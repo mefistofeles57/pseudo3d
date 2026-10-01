@@ -8,7 +8,7 @@ from VisualObjProfile import VisualObjProfile
 from TempObject import Humo
 from Material import Material
 from Car import Car
-from Sound import EngineSound
+from SonidoMotor import SonidoMotor
 from Road import Segment
 from Estados import *
 from typing import TYPE_CHECKING
@@ -159,7 +159,7 @@ class Player(Car):
             base = Path(sys._MEIPASS)
         else:
             base = Path(__file__).resolve().parent
-        self.engine = EngineSound(str(base/"sound/loop_5.wav"))
+        self.engine = SonidoMotor(str(base/"sound/loop_5.wav"))
 
         #frame
         self.frame=FR_LLANO

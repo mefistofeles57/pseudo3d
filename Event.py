@@ -53,3 +53,17 @@ class Finish(Event):
         if self.enabled:
             context.changeStatus(FINISH)
             self.enabled=False
+
+class LoadCircuit(Event):
+    def __init__(self, z, next_map):
+        super().__init__(z)
+        self.next_map = next_map  # {-1: "...", 1: "..."}
+
+    def execute(self, context):
+        side = context.player.side
+        if side == 0:
+            return  # aún no se sabe la rama, se reintenta el siguiente frame
+        archivo = self.next_map.get(side)
+        if archivo is not None:
+            context.next_circuit = archivo
+        self.enabled = False

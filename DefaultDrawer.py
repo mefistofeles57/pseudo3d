@@ -6,7 +6,7 @@ from Camera import Camera
 from Point import Point
 from Road import Segment
 from Road import VisibleSegment
-from Object import VisibleObject
+from Object import Object,VisibleObject
 from ImageCache import ImageCache
 from typing import TYPE_CHECKING
 
@@ -222,45 +222,44 @@ class DefaultDrawer:
         self.drawItem(surface,p1,obj,p,False)
 
     def drawItem(self,surface:pygame.Surface,p1:Point,obj:VisibleObject,p:"Escenario",shadow,vs=None,pc1=None,pc2=None):
-        #p1=c.project(Point(obj.x,obj.y,obj.z))
-        #cache=vs.visualProfile.cache
-        if  obj.profile==None or obj.profile.cache==None:
-            cache=p.cache
-        else:
-            cache=obj.profile.cache
-        #metadata=cache.metadata[obj.img]
-        metadata=obj.metadata
-        if metadata!=None:
-            anim=None
-            if metadata.type==ImageCache.IMAGE:
-                img=cache.getImage(obj.img,p1.z)
-            else:
-                anim=cache.getAnimation(obj.img,p1.z)
-                if anim!=None:
-                    img=anim[obj.frame]
-                else:
-                    img=None
-                #de momento ni alpha ni scale
-            if img!=None:
-                if shadow==False:
-                    #print(obj.img)
-                    punto=(p1.x-(img.get_width()*metadata.anchor_x),p1.y-img.get_height()*metadata.anchor_y)
-                    surface.blit(img,punto)
-                    if anim!=None:
-                        for capa in obj.capas:
-                            surface.blit(anim[capa],punto)
-                elif metadata.shadow:
-                    #filtrar por z
-                    shadow_height=obj.profile.shadow_height
-                    shadow_offset_z=obj.profile.shadow_offset_z
-                    #calcular z de sombra
-                    z=obj.z+shadow_offset_z
-                    #if metadata.name=="coche" and vs.index<=4:
-                    #    print(vs.index,z+shadow_height,">=",vs.start.z,vs.index,z+shadow_height>=vs.start.z,z-shadow_height,"<=",vs.end.z,z-shadow_height<=vs.end.z)
-                    if z+shadow_height>=vs.start.z and z-shadow_height<=vs.end.z:
-                        self.drawItemShadow(surface,img,obj.profile,obj,vs,pc1,pc2)
+        cache=Object.resolverCache(obj.profile)
+        metadata=cache.metadata.get(obj.img)
+        if metadata==None:
+            return
+        if p1.z>cache.config.scale_max:
+            return
+        (w,h)=cache.tamano(obj.img,p1.z)
+        if shadow:
+            if metadata.shadow:
+                shadow_height=obj.profile.shadow_height
+                shadow_offset_z=obj.profile.shadow_offset_z
+                z=obj.z+shadow_offset_z
+                if z+shadow_height>=vs.start.z and z-shadow_height<=vs.end.z:
+                    self.drawItemShadow(surface,w,obj.profile,obj,vs,pc1,pc2)
+            return
+        x=p1.x-w*metadata.anchor_x
+        y=p1.y-h*metadata.anchor_y
+        sw=surface.get_width()
+        sh=surface.get_height()
+        if x>=sw or x+w<=0 or y>=sh or y+h<=0:
+            return
+        vx0=max(0,int(-x))
+        vy0=max(0,int(-y))
+        vx1=min(w,math.ceil(sw-x))
+        vy1=min(h,math.ceil(sh-y))
+        frame=None
+        if metadata.type==ImageCache.ANIMATION:
+            frame=obj.frame
+        (img,dx,dy)=cache.getSprite(obj.img,p1.z,frame,w,h,vx0,vy0,vx1,vy1)
+        surface.blit(img,(x+dx,y+dy))
+        if frame is not None:
+            for capa in obj.capas:
+                (img,dx,dy)=cache.getSprite(obj.img,p1.z,capa,w,h,vx0,vy0,vx1,vy1)
+                surface.blit(img,(x+dx,y+dy))
 
-    def drawItemShadow(self,surface:pygame.Surface,img,profile:"Escenario",obj:VisibleObject,vs:VisibleSegment,pc1:Point,pc2:Point):
+
+
+    def drawItemShadow(self,surface:pygame.Surface,ancho,profile:"Escenario",obj:VisibleObject,vs:VisibleSegment,pc1:Point,pc2:Point):
         #calcula el tamaño de la sombra en función al ancho del objeto y a un tamaño fijo
         #dibuja una elipse en el punto p con el ancho calculado y el color y alfa indicados en el vp
         shadow_color=profile.shadow_color
@@ -280,9 +279,11 @@ class DefaultDrawer:
         #pl=self.context.camera.project(p3)
 
 
-        width=img.get_width()*shadow_width_factor
+        width=ancho*shadow_width_factor
+        #la sombra no puede doblar la anchura, para que no se deforme
+        max_h=width*0.5
         #height=shadow_height*scale
-        height=max(2,abs(pp1.y-pp2.y)*2)
+        height=min(max(2,abs(pp1.y-pp2.y)*2),max_h)
 
         #dibuja en la superfice
 

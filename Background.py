@@ -8,12 +8,8 @@ if TYPE_CHECKING:
 
 class Background:
     def __init__(self,img,rolling,v_mov,mov,context:"GameContext",bg_color=(0,0,0),x=0.0,y=0.0,resize=1.0):
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            base = Path(sys._MEIPASS)
-        else:
-            base = Path(__file__).resolve().parent
         self.img=img
-        self.f_img1=pygame.image.load(str(base/img)).convert_alpha()
+        self.f_img1=pygame.image.load(str(img)).convert_alpha()
         #escalar la imagen
         if resize!=1.0:
             self.f_img1 = pygame.transform.scale(self.f_img1,(int(self.f_img1.get_width() * resize), int(self.f_img1.get_height() * resize)))
@@ -48,12 +44,26 @@ class Background:
             self.y_t=pos_y
 
 
-    def draw(self,s:pygame.Surface):
-            posicion=self.x
-            s.blit(self.f_img1, (posicion-self.f_img1.get_width(),self.y_t-self.f_img1.get_height()))
-            if self.rolling:
-                s.blit(self.f_img2, (posicion,self.y_t-self.f_img2.get_height()))
-                pygame.draw.rect(s,self.bg_color,pygame.Rect((0,self.y_t,self.context.screen.get_width(),self.context.screen.get_height()-self.y_t)),0)
+    def draw(self,s:pygame.Surface,fase=0.0):
+        img_h=self.f_img1.get_height()
+        alpha=255
+        bajada=0
+        if fase>0.0:
+            if self.y_t-img_h<s.get_height()*0.25:
+                alpha=int(255*(1.0-fase))
+            elif self.rolling:
+                bajada=int(fase*img_h)
+            else:
+                bajada=int(fase*(self.context.camera.horizon-(self.y_t-img_h)))
+        posicion=self.x
+        y=self.y_t+bajada
+        self.f_img1.set_alpha(alpha)
+        s.blit(self.f_img1, (posicion-self.f_img1.get_width(),y-img_h))
+        if self.rolling:
+            self.f_img2.set_alpha(alpha)
+            s.blit(self.f_img2, (posicion,y-self.f_img2.get_height()))
+            pygame.draw.rect(s,self.bg_color,pygame.Rect((0,self.y_t,self.context.screen.get_width(),self.context.screen.get_height()-self.y_t)),0)
+            
 
     def swapFondo(self):
         if self.f_img1!=None and self.f_img2!=None:

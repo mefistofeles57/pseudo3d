@@ -1,6 +1,7 @@
 import pygame
 import math
 import sys
+import time
 from pathlib import Path
 from Estados import NONE,STARTING,GAMEOVER,GAMEOVER_FINAL,NORMAL,FINISH,PRELOADED
 from GameContext import GameContext
@@ -163,9 +164,9 @@ class Juego:
 
     def run(self):
 
-
         while self.running:
             dt=self.clock.tick(self.fps)/1000.0
+            inicio_frame=time.perf_counter()
 
             self.handle_events()
             if self.context!=None:
@@ -173,7 +174,13 @@ class Juego:
             self.update(dt)
             self.draw()
 
+            if self.context!=None:
+                objetivo=1.0/self.fps
+                transcurrido=time.perf_counter()-inicio_frame
+                presupuesto=max(0.003,objetivo-transcurrido)
+                self.avanzar_carga(presupuesto)
         pygame.quit()
+
 
     def write_message(self,msg,x,y,font=None):
         if font==None:
@@ -448,7 +455,27 @@ class Juego:
         return barra.bottom - alto_progreso
 
 
+    def avanzar_carga(self, presupuesto):
+        ctx = self.context
 
+        if ctx.gen_circuito is None and ctx.next_circuit is not None:
+            archivo = str(ctx.base_circuitos / ctx.next_circuit)
+            ctx.gen_circuito = ctx.parser.cargar_generador(archivo)
+            ctx.next_circuit = None
+
+        fin = time.perf_counter() + presupuesto
+        if ctx.gen_circuito is not None:
+            while time.perf_counter() < fin:
+                try:
+                    next(ctx.gen_circuito)
+                except StopIteration:
+                    ctx.road.objects.sort(key=lambda obj: obj.z)
+                    ctx.gen_circuito = None
+                    break
+
+        restante = fin - time.perf_counter()
+        if restante > 0:
+            ctx.escenario.streamer.avanzar(restante)
 
 
 if __name__ == "__main__":

@@ -84,20 +84,24 @@ class VisibleSegment:
         return self.d+self.curve*t
 
 
-class Line:
-    def __init__(self,position,x,width,offset,freq,color):
-        self.position=position
-        self.x=x
-        self.width=width
+class LineProfile:
+    def __init__(self,grosor,offset,freq,color):
+        self.grosor=grosor
         self.offset=offset
         self.freq=freq
         self.color=color
-        self.material=None
+
+class Line:
+    def __init__(self,profile:LineProfile,position,x):
+        self.profile=profile
+        self.position=position
+        self.x=x
 
     def getPoints(self,vs:VisibleSegment,pc1:Point,pc2:Point):
-        mod=(vs.index+self.offset)%self.freq
-        if mod<len(self.color):
-            color=self.color[mod]
+        p=self.profile
+        mod=(vs.index+p.offset)%p.freq
+        if mod<len(p.color):
+            color=p.color[mod]
         else:
             color=None
         if color!=None:
@@ -105,15 +109,18 @@ class Line:
             w1=vs.w1
             x1=pc1.x+((self.position*w1+self.x)*pc1.z)
             x4=pc2.x+((self.position*w0+self.x)*pc2.z)
-            x2=x1+(self.width*pc1.z)
-            x3=x4+(self.width*pc2.z)
+            if self.position<0:
+                ancho=p.grosor
+            else:
+                ancho=-p.grosor
+            x2=x1+(ancho*pc1.z)
+            x3=x4+(ancho*pc2.z)
             y1=pc1.y
             y2=y1
             y3=pc2.y
             y4=y3
             puntos=((x1,y1),(x2,y2),(x3,y3),(x4,y4))
             return (puntos,color)
-
 class Road:
 
     def __init__(self):

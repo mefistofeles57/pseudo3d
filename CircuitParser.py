@@ -1,7 +1,7 @@
-import yaml
+import json
 
 from MapGenerator import MapGenerator
-from Road import Segment
+from Road import Segment, Line
 
 
 class CircuitParser:
@@ -18,16 +18,19 @@ class CircuitParser:
         "frametime": 0.1,
     }
 
-    def __init__(self, context, curves, heights, profiles=None):
+    def __init__(self, context, curves, heights, profiles=None, line_profiles=None, scene_profiles=None):
         self.context = context
 
         self.curves = curves
         self.heights = heights
 
         self.profiles = profiles if profiles is not None else {}
+        self.line_profiles = line_profiles if line_profiles is not None else {}
+        self.scene_profiles = scene_profiles if scene_profiles is not None else {}
 
         self.objects = []
         self.checkpoints = []
+        self.pending_lines = []
 
         self.commands = {
             "R": self.command_road,
@@ -38,7 +41,12 @@ class CircuitParser:
             "CHK": self.command_checkpoint,
             "BMP": self.command_bumps,
             "fork": self.command_fork,
-            "E": self.command_enemy
+            "E": self.command_enemy,
+            "block": self.command_block,
+            "LOAD": self.command_load,
+            "LINE": self.command_line,
+            "escenario": self.command_escenario,
+            "FINISH": self.command_finish
         }
 
         self.last_segment=0
@@ -49,41 +57,91 @@ class CircuitParser:
     # ============================================================
 
     def load(self, filename):
+        inicio = len(self.context.road.segments)
+
         with open(filename, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-
-        if data is None:
-            raise ValueError("Empty circuit file")
-
-        if "circuit" not in data:
-            raise ValueError("Missing 'circuit' section")
-
-        circuit = data["circuit"]
-
-        sections = circuit.get("sections")
-
-        if sections is None:
-            raise ValueError("Missing 'sections'")
-
-        for section in sections:
-            self.parse_section(section)
+            for linea in f:
+                linea = linea.strip()
+                if not linea or linea.startswith("#"):
+                    continue
+                command = json.loads(linea)
+                self.parse_command(command)
 
         self.context.objects = self.objects
         self.context.checkpoints = self.checkpoints
+        self.aplicar_lineas_pendientes(inicio)
+
+    def cargar_generador(self, filename, comandos_por_paso=15):
+        inicio = len(self.context.road.segments)
+
+        with open(filename, "r", encoding="utf-8") as f:
+            n = 0
+            for linea in f:
+                linea = linea.strip()
+                if not linea or linea.startswith("#"):
+                    continue
+                command = json.loads(linea)
+                self.parse_command(command)
+                n += 1
+                if n % comandos_por_paso == 0:
+                    yield
+
+        self.context.objects = self.objects
+        self.context.checkpoints = self.checkpoints
+        self.aplicar_lineas_pendientes(inicio)
+
+    def aplicar_lineas_pendientes(self, inicio):
+        fin = len(self.context.road.segments) - 1
+        for nombre, position, x in self.pending_lines:
+            perfil = self.line_profiles[nombre]
+            self.context.road.addLine(Line(perfil, position, x), inicio, fin)
+        self.pending_lines = []
 
     # ============================================================
-    # SECTION
+    # ESCENARIO
     # ============================================================
 
-    def parse_section(self, section):
-        name = section.get("name", "unnamed")
+    def command_escenario(self, data):
+        tipo = data.get("tipo")
+        if tipo is None:
+            raise ValueError(
+                "Command 'escenario' requires 'tipo'"
+            )
+        if tipo not in self.scene_profiles:
+            raise ValueError(
+                f"Unknown escenario '{tipo}'"
+            )
 
-        print(f"Parsing section: {name}")
+        self.context.escenario = self.scene_profiles[tipo]
+        MapGenerator.setProfile(self.context.escenario)
 
-        commands = section.get("data", [])
+    # ============================================================
+    # LINE
+    # ============================================================
 
-        for command in commands:
-            self.parse_command(command)
+    def command_line(self, data):
+        nombre = data.get("profile")
+        if nombre is None:
+            raise ValueError(
+                "Command 'LINE' requires 'profile'"
+            )
+        if nombre not in self.line_profiles:
+            raise ValueError(
+                f"Unknown line profile '{nombre}'"
+            )
+
+        position = data.get("position", 0.0)
+        x = data.get("x", 0.0)
+
+        self.pending_lines.append((nombre, position, x))
+
+    # ============================================================
+    # BLOCK
+    # ============================================================
+
+    def command_block(self, data):
+        nombre = data.get("name", "")
+        print(f"Parsing block: {nombre}")
 
     # ============================================================
     # COMMAND
@@ -313,6 +371,62 @@ class CircuitParser:
             s.z + z_rel
         )
     # ============================================================
+    # LOAD
+    # ============================================================
+    def command_load(self, data):
+        if not self.current_tramo:
+            raise ValueError(
+                "Command 'LOAD' requires a previous road section"
+            )
+
+        segment = data.get("segment", 0)
+
+        try:
+            s = self.current_tramo[segment]
+        except IndexError:
+            raise ValueError(
+                f"LOAD segment index {segment} out of range "
+                f"for current tramo ({len(self.current_tramo)} segments)"
+            )
+
+        z_rel = data.get("z", 0.25)
+
+        next_data = data.get("next")
+        if next_data is None:
+            raise ValueError(
+                "Command 'LOAD' requires 'next'"
+            )
+
+        next_map = {int(k): v for k, v in next_data.items()}
+
+        MapGenerator.addLoadCircuit(
+            s,
+            z_rel,
+            next_map
+        )
+    # ============================================================
+    # FINISH
+    # ============================================================
+    def command_finish(self, data):
+        if not self.current_tramo:
+            raise ValueError(
+                "Command 'FINISH' requires a previous road section"
+            )
+
+        segment = data.get("segment", -1)
+
+        try:
+            s = self.current_tramo[segment]
+        except IndexError:
+            raise ValueError(
+                f"FINISH segment index {segment} out of range "
+                f"for current tramo ({len(self.current_tramo)} segments)"
+            )
+
+        z_rel = data.get("z", 0.5)
+
+        MapGenerator.addFinish(s, z_rel)
+    # ============================================================
     # E
     # ============================================================
     def command_enemy(self, data):
@@ -372,7 +486,8 @@ class CircuitParser:
         self.context.add_bumps(
             repeats=repeats,
             segments=segments,
-            slope=slope
+            slope=slope,
+            w=self.context.escenario.ancho_defecto
         )
 
         self.current_tramo = self.context.road.segments[start:]
@@ -410,8 +525,9 @@ class CircuitParser:
                 "Pattern 'R' requires 'segments'"
             )
 
-        w0 = data.get("w0", 1.0)
-        w1 = data.get("w1", 1.0)
+        ancho = self.context.escenario.ancho_defecto
+        w0 = data.get("w0", ancho)
+        w1 = data.get("w1", ancho)
         curve = self.get_constant(self.curves, data.get("curve"), "curve")
         height = self.get_constant(self.heights, data.get("height"), "height")
 
@@ -445,7 +561,7 @@ class CircuitParser:
         curve = self.get_constant(self.curves, data.get("curve"), "curve")
 
         # las dos carreteras nacen pegadas: d parte de w
-        w = data.get("w", 1.0)
+        w = data.get("w", self.context.escenario.ancho_defecto)
 
         self.last_segment = len(road.segments) - 1
 

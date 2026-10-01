@@ -1,0 +1,15 @@
+{"command": "escenario", "tipo": "pradera"}
+{"command": "LINE", "profile": "discontinua_blanca", "position": 0.35, "x": -0.0025}
+{"command": "LINE", "profile": "discontinua_blanca", "position": -0.35, "x": -0.0025}
+{"command": "LINE", "profile": "continua_blanca", "position": -1.05, "x": 0.01}
+{"command": "LINE", "profile": "continua_blanca", "position": 1.05, "x": -0.01}
+{"command": "block", "name": "entrada_pradera"}
+{"command": "R", "segments": 20, "w0": 1.0}
+{"command": "block", "name": "recta_pradera"}
+{"command": "R", "segments": 300}
+{"command": "CHK", "segment": 150}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -1.0, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.5, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.0, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.5, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "FINISH", "segment": -1}
