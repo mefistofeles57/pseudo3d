@@ -6,8 +6,18 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from GameContext import GameContext
 
+CLAVE=(255,0,255)
+
+def a_color_clave(img):
+    # pixel art sin semitransparencias: color clave en vez de alfa por pixel
+    sup=pygame.Surface(img.get_size()).convert()
+    sup.fill(CLAVE)
+    sup.blit(img,(0,0))
+    sup.set_colorkey(CLAVE,pygame.RLEACCEL)
+    return sup
+
 class Background:
-    def __init__(self,img,rolling,v_mov,mov,context:"GameContext",bg_color=(0,0,0),x=0.0,y=0.0,resize=1.0):
+    def __init__(self,img,rolling,v_mov,mov,context:"GameContext",bg_color=(0,0,0),x=0.0,y=0.0,resize=1.0,color_clave=False):
         self.img=img
         self.f_img1=pygame.image.load(str(img)).convert_alpha()
         #escalar la imagen
@@ -25,7 +35,18 @@ class Background:
         self.v_mov=v_mov
         self.bg_color=bg_color
         if rolling:
-            self.f_img2=pygame.transform.flip(self.f_img1, True, False)
+            #self.f_img2=pygame.transform.flip(self.f_img1, True, False)
+            self.f_img2=self.f_img1
+
+        if color_clave:
+            self.f_img1=a_color_clave(self.f_img1)
+            #if rolling:
+            #    self.f_img2=a_color_clave(self.f_img2)
+
+        self.alpha=255
+        self.f_img1.set_alpha(255, pygame.RLEACCEL)
+        #if rolling:
+        #    self.f_img2.set_alpha(255, pygame.RLEACCEL)            
 
 
 
@@ -41,8 +62,7 @@ class Background:
                 self.x-=img.get_width()
                 self.swapFondo()
         if self.v_mov:
-            self.y_t=pos_y
-
+            self.y_t=pos_y+(self.y-self.context.camera.horizon)
 
     def draw(self,s:pygame.Surface,fase=0.0):
         img_h=self.f_img1.get_height()
@@ -57,13 +77,16 @@ class Background:
                 bajada=int(fase*(self.context.camera.horizon-(self.y_t-img_h)))
         posicion=self.x
         y=self.y_t+bajada
-        self.f_img1.set_alpha(alpha)
+        if alpha!=self.alpha:
+            self.alpha=alpha
+            self.f_img1.set_alpha(alpha, pygame.RLEACCEL)
+            #if self.rolling:
+            #    self.f_img2.set_alpha(alpha, pygame.RLEACCEL)
         s.blit(self.f_img1, (posicion-self.f_img1.get_width(),y-img_h))
         if self.rolling:
-            self.f_img2.set_alpha(alpha)
             s.blit(self.f_img2, (posicion,y-self.f_img2.get_height()))
-            pygame.draw.rect(s,self.bg_color,pygame.Rect((0,self.y_t,self.context.screen.get_width(),self.context.screen.get_height()-self.y_t)),0)
-            
+            if self.bg_color is not None:
+                pygame.draw.rect(s,self.bg_color,pygame.Rect((0,self.y_t,self.context.screen.get_width(),self.context.screen.get_height()-self.y_t)),0)            
 
     def swapFondo(self):
         if self.f_img1!=None and self.f_img2!=None:

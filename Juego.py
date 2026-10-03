@@ -2,6 +2,7 @@ import pygame
 import math
 import sys
 import time
+import asyncio
 from pathlib import Path
 from Estados import NONE,STARTING,GAMEOVER,GAMEOVER_FINAL,NORMAL,FINISH,PRELOADED
 from GameContext import GameContext
@@ -10,12 +11,25 @@ from Message import Message
 from Resources import Resources
 
 class Juego:
+    # tope de updates seguidos para recuperar un frame lento
+    MAX_UPDATES=4
+    # dibujo adaptativo: a fps si update+draw cabe holgado en un frame, a la mitad si no
+    UMBRAL_BAJAR=0.015
+    UMBRAL_SUBIR=0.012
+    TIEMPO_SUBIR=1.0
+
+
     def __init__(self, width=800, height=450, screen_w=1280, screen_h=720, gen_scale=1, title="Cool Racing",fps=60):
+        if sys.platform=="emscripten":
+            buffer_audio=4096
+        else:
+            buffer_audio=512
+
         pygame.mixer.pre_init(
             frequency=44100,
             size=-16,
             channels=2,
-            buffer=512
+            buffer=buffer_audio
         )
         pygame.init()
 
@@ -78,7 +92,9 @@ class Juego:
 
         #sprites
         self.resources = Resources(gen_scale)
-        
+        #piezas fijas del HUD, compuestas la primera vez que se pintan
+        self.hud_barra=None
+        self.cache_alas={}        
  
 
     def handle_events(self):
@@ -87,8 +103,15 @@ class Juego:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.running = False
-
+                    if sys.platform == "emscripten":
+                        # en el navegador no hay ventana que cerrar: Esc reinicia la carrera
+                        if self.context!=None:
+                            self.context.player.reset()
+                            pygame.mixer.stop()
+                            self.context.changeStatus(NONE)
+                    else:
+                        self.running = False
+                        
     def update(self, dt):
         if self.context==None or self.context.estado == NONE:
             self.context=GameContext(self.screen,self,gen_scale=(1/self.gen_scale))
@@ -162,24 +185,67 @@ class Juego:
 
 
 
-    def run(self):
+    async def run(self):
+        paso=1.0/self.fps
+        acumulado=0.0
+        ultimo=time.perf_counter()
+        ultimo_dibujo=0.0
+        media_update=0.0
+        media_draw=0.0
+        holgado_desde=None
+        periodo_dibujo=1.0/self.fps
 
         while self.running:
-            dt=self.clock.tick(self.fps)/1000.0
+            self.clock.tick(self.fps)
             inicio_frame=time.perf_counter()
+            acumulado+=inicio_frame-ultimo
+            ultimo=inicio_frame
 
             self.handle_events()
-            if self.context!=None:
-                self.context.keys=pygame.key.get_pressed()
-            self.update(dt)
-            self.draw()
+
+            #update de paso fijo: siempre fps por segundo, aunque haya que hacer varios seguidos
+            pasos=0
+            t=time.perf_counter()
+            while acumulado>=paso and pasos<self.MAX_UPDATES:
+                if self.context!=None:
+                    self.context.keys=pygame.key.get_pressed()
+                self.update(paso)
+                acumulado-=paso
+                pasos+=1
+            if pasos==self.MAX_UPDATES:
+                #el equipo no da para más: se descarta el retraso en vez de arrastrarlo
+                acumulado=0.0
+            if pasos>0:
+                media_update+=((time.perf_counter()-t)/pasos-media_update)*0.1
+
+            #draw a su ritmo, con 4 ms de margen para no perder el turno por poco
+            if inicio_frame-ultimo_dibujo>=periodo_dibujo-0.004:
+                t=time.perf_counter()
+                self.draw()
+                media_draw+=(time.perf_counter()-t-media_draw)*0.1
+                ultimo_dibujo=inicio_frame
+
+                #ritmo de dibujo: baja enseguida si no cabe, sube solo tras un rato holgado
+                previsto=media_update+media_draw
+                if previsto>self.UMBRAL_BAJAR:
+                    periodo_dibujo=2.0/self.fps
+                    holgado_desde=None
+                elif previsto<self.UMBRAL_SUBIR:
+                    if holgado_desde is None:
+                        holgado_desde=inicio_frame
+                    elif inicio_frame-holgado_desde>=self.TIEMPO_SUBIR:
+                        periodo_dibujo=1.0/self.fps
+                else:
+                    holgado_desde=None
 
             if self.context!=None:
                 objetivo=1.0/self.fps
                 transcurrido=time.perf_counter()-inicio_frame
                 presupuesto=max(0.003,objetivo-transcurrido)
                 self.avanzar_carga(presupuesto)
+            await asyncio.sleep(0)
         pygame.quit()
+
 
 
     def write_message(self,msg,x,y,font=None):
@@ -220,6 +286,15 @@ class Juego:
         self.messages = alive_messages
 
     def draw_wings(self,x,y,flip,number):
+        clave=(flip,number)
+        alas=self.cache_alas.get(clave)
+        if alas is None:
+            alas=self.componer_alas(flip,number)
+            self.cache_alas[clave]=alas
+        rect = alas.get_rect(topleft=(x, y))
+        self.screen.blit(alas,rect)
+
+    def componer_alas(self,flip,number):
         if flip:
             seg1=self.resources.alas3_f
             siz1=3
@@ -232,19 +307,42 @@ class Juego:
             seg2=self.resources.alas2
             siz2=4
             seg3=self.resources.alas3
-
-        alas_x=x
-        rect = seg1.get_rect(topleft=(alas_x, y))
-        self.screen.blit(seg1,rect)
-        alas_x+=siz1
-
+        bordes=[seg1.get_width(), siz1+number*siz2+seg3.get_width()]
+        if number>0:
+            bordes.append(siz1+(number-1)*siz2+seg2.get_width())
+        ancho=max(bordes)
+        alto=max(seg1.get_height(),seg2.get_height(),seg3.get_height())
+        sup=pygame.Surface((ancho,alto),pygame.SRCALPHA)
+        x=0
+        sup.blit(seg1,(x,0))
+        x+=siz1
         for _ in range(number):
-            rect = seg2.get_rect(topleft=(alas_x, y))
-            self.screen.blit(seg2,rect)
-            alas_x+=siz2
-        rect = seg3.get_rect(topleft=(alas_x, y))
-        self.screen.blit(seg3,rect)
+            sup.blit(seg2,(x,0))
+            x+=siz2
+        sup.blit(seg3,(x,0))
+        sup.set_alpha(255,pygame.RLEACCEL)
+        return sup
 
+    def componer_barra(self):
+        top=self.resources.barra_top
+        mid=self.resources.barra_middle
+        bot=self.resources.barra_bottom
+        ancho=max(top.get_width(),mid.get_width(),bot.get_width())
+        alto=7*76+bot.get_height()
+        sup=pygame.Surface((ancho,alto),pygame.SRCALPHA)
+        cx=ancho/2
+        y=0
+        sup.blit(top,top.get_rect(midtop=(cx,y)))
+        y+=7
+        for i in range(75):
+            sup.blit(mid,mid.get_rect(midtop=(cx,y)))
+            y+=7
+        sup.blit(bot,bot.get_rect(midtop=(cx,y)))
+        sup.set_alpha(255,pygame.RLEACCEL)
+        return sup
+
+
+    
     def draw_rpm(self,x,y):
         self.screen.blit(self.resources.rpm,(x,y))
         x_temp=x+40
@@ -266,16 +364,11 @@ class Juego:
         x=x0
         y0=50
         y=y0
-        rect = self.resources.barra_top.get_rect(midtop=(x, y))
-        self.screen.blit(self.resources.barra_top,rect)
-        y+=7
-        for i in range(75):
-            rect = self.resources.barra_middle.get_rect(midtop=(x, y))
-            self.screen.blit(self.resources.barra_middle,rect)
-            y+=7
-        rect = self.resources.barra_bottom.get_rect(midtop=(x, y))
-        self.screen.blit(self.resources.barra_bottom,rect)
-
+        if self.hud_barra is None:
+            self.hud_barra=self.componer_barra()
+        rect = self.hud_barra.get_rect(midtop=(x, y))
+        self.screen.blit(self.hud_barra,rect)
+        y+=7*76
         #calcular progreso (% coche.z desde checkpoint anterior y checkpoint posterior)
 
         last_check=0.0
@@ -355,11 +448,15 @@ class Juego:
 
     def playSound(self, sound, once=True):
         sonido=self.sounds[sound]
-        if sonido.get_num_channels() == 0 or not once:
-            sonido.play()
+        if sonido.get_num_channels() == 0:
+            if once:
+                sonido.play()
+            else:
+                sonido.play(loops=-1)
+
     def stopSound(self, sound):
         sonido = self.sounds[sound]
-        sonido.stop()
+        sonido.fadeout(80)
 
     def dibujar_barra(self,pantalla, progreso,x=100,y=100,ancho=28,alto=500):
 
@@ -481,4 +578,4 @@ class Juego:
 if __name__ == "__main__":
 
     j=Juego()
-    j.run()
+    asyncio.run(j.run())

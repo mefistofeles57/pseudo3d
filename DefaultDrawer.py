@@ -23,38 +23,31 @@ class DefaultDrawer:
             (context.screen.get_width(), context.screen.get_height()),
             pygame.SRCALPHA
         ).convert_alpha()
-
+        # rectángulo de la superficie de sombras usado en el segmento actual
+        self.sucio=None
 
     def clear_shadow_surface(self,p1:Point,p2:Point):
-        y1 = p1.y
-        y2 = min(p2.y,self.shadow_surface.get_height())
-
-
-        rect = pygame.Rect(
-            0,
-            y1,
-            self.shadow_surface.get_width(),
-            y2 - y1 +1
-        )
-        self.shadow_surface.fill((0, 0, 0, 0),rect)
+        # la superficie de sombras queda limpia al terminar cada segmento:
+        # aquí solo se empieza a anotar lo que se dibuja
+        self.sucio=None
 
     def blitShadows(self,s:pygame.Surface,pc1:Point,pc2:Point):
+        if self.sucio is None:
+            return
         y1 = pc1.y
         y2 = min(pc2.y,s.get_height())
-
-
-        area = pygame.Rect(
+        franja = pygame.Rect(
             0,
             y1,
             self.shadow_surface.get_width(),
             y2 - y1 +1
         )
+        area = self.sucio.clip(franja)
+        if area.width>0 and area.height>0:
+            s.blit(self.shadow_surface, area.topleft, area)
+        self.shadow_surface.fill((0, 0, 0, 0), self.sucio)
+        self.sucio=None
 
-        s.blit(
-            self.shadow_surface,
-            (0, y1),
-            area
-        )
 
     def brillo(self,distancia,max):
         min_brillo=1.0
@@ -289,18 +282,19 @@ class DefaultDrawer:
 
         #shadow = pygame.Surface((width, height), pygame.SRCALPHA)
 
-#        if obj.img=="coche":
-#            print("h2d: ",height,"h3d: ",shadow_height,"scale: ",scale)
-#            print("h2d: ",pc2.y-pc1.y,"scale1: ",pc1.z,"scale2: ",pc2.z)
-
-
+        x=pp1.x - width // 2
+        y=pp1.y - height // 2
         pygame.draw.ellipse(
             self.shadow_surface,
             (shadow_color[0], shadow_color[1], shadow_color[2], shadow_alpha),      # RGBA
-            (pp1.x - width // 2, pp1.y - height // 2, width, height)
+            (x, y, width, height)
         )
-        #surface.blit(shadow, (p.x - width // 2, p.y - height // 2))
-
+        # 1 px de margen para cubrir el redondeo de la elipse
+        r=pygame.Rect(math.floor(x)-1, math.floor(y)-1, math.ceil(width)+3, math.ceil(height)+3)
+        if self.sucio is None:
+            self.sucio=r
+        else:
+            self.sucio.union_ip(r)
 
 
 

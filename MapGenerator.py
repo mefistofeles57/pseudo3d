@@ -51,9 +51,10 @@ class MapGenerator:
         return (3*(t*t)) - (2*(t*t*t))
     
     @staticmethod
-    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1,side=0):
+    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1,side=0,lod=None):
         z_pos=tramo[0].z+offset
         z_end=tramo[-1].z+tramo[-1].length
+        i=0
         while z_pos<z_end:
             #añadir el objeto en z_pos
             if anim:
@@ -75,9 +76,19 @@ class MapGenerator:
                 obj.x_rel+=MapGenerator.rng.uniform(0,random_x)
             obj.collidable=collidable
             obj.side=side
+            if lod!=None:
+                if i%8==0:
+                    obj.lod_hasta=9999
+                elif i%4==0:
+                    obj.lod_hasta=lod[2]
+                elif i%2==0:
+                    obj.lod_hasta=lod[1]
+                else:
+                    obj.lod_hasta=lod[0]
 
             objetos.append(obj)
 
+            i+=1
             z_pos+=step
         #añadir los objetos detras de z_end
         return objetos

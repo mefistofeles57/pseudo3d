@@ -111,6 +111,7 @@ class ImageCache:
         for scale in self.LUT:
             resize=(scale/self.resizeFactor)*escala
             new_img=pygame.transform.scale(img,(int(w*resize),int(h*resize)))
+            new_img.set_alpha(255, pygame.RLEACCEL)
             escalados.append(new_img)
             yield
         self.images[name]=escalados
@@ -130,7 +131,9 @@ class ImageCache:
             resize=(scale/self.resizeFactor)*escala
             nuevos=[]
             for frame in frames:
-                nuevos.append(pygame.transform.scale(frame,(int(w*resize),int(h*resize))))
+                nuevo=pygame.transform.scale(frame,(int(w*resize),int(h*resize)))
+                nuevo.set_alpha(255, pygame.RLEACCEL)
+                nuevos.append(nuevo)
             escalados.append(nuevos)
             yield
         self.animations[name]=escalados

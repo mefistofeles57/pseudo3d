@@ -1,0 +1,401 @@
+{
+ "assets": [
+  {
+   "name": "bandera.r",
+   "file": "bandera.r.png",
+   "type": "animation",
+   "anchor": [
+    0.0,
+    5.0
+   ],
+   "shadow": true,
+   "ancho": 486,
+   "alto": 288,
+   "escala": 1.0
+  },
+  {
+   "name": "bandera.v",
+   "file": "bandera.v.png",
+   "type": "animation",
+   "anchor": [
+    0.0,
+    5.0
+   ],
+   "shadow": true,
+   "ancho": 486,
+   "alto": 288,
+   "escala": 1.0
+  },
+  {
+   "name": "bandera.a",
+   "file": "bandera.a.png",
+   "type": "animation",
+   "anchor": [
+    0.0,
+    5.0
+   ],
+   "shadow": true,
+   "ancho": 486,
+   "alto": 288,
+   "escala": 1.0
+  },
+  {
+   "name": "curva",
+   "file": "curva.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "flip": true,
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "curva.s",
+   "file": "curva.s.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "rasante",
+   "file": "rasante.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "arbol",
+   "file": "arbol.1.png",
+   "type": "image",
+   "anchor": [
+    0.55,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "arbol.2",
+   "file": "arbol.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "arbol.3",
+   "file": "arbol.3.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "arbol.4",
+   "file": "arbol.2.png",
+   "type": "image",
+   "anchor": [
+    0.55,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "arbusto",
+   "file": "arbusto.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "farola",
+   "file": "farola.png",
+   "type": "image",
+   "anchor": [
+    0.7,
+    1.0
+   ],
+   "flip": true,
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "palmera",
+   "file": "palmera.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "flip": true,
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "piedra",
+   "file": "piedra.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "quitamiedos",
+   "file": "quitamiedos.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    2.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "quitamiedos.down",
+   "file": "quitamiedos.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "quitamiedos.doble",
+   "file": "quitamiedos.doble.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "poste",
+   "file": "poste.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "flip": true,
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "checkpoint",
+   "file": "checkpoint.png",
+   "type": "image",
+   "anchor": [
+    0.6,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "ruedas",
+   "file": "ruedas.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "pitbox.1",
+   "file": "pitbox.r.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "pitbox.2",
+   "file": "pitbox.a.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "pitbox.3",
+   "file": "pitbox.n.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "start",
+   "file": "start.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    3.5
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "column",
+   "file": "column.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "grada",
+   "file": "grada.2.png",
+   "type": "image",
+   "anchor": [
+    0.0,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "vegetacion.1",
+   "file": "vegetacion.1.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "vegetacion.2",
+   "file": "vegetacion.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "vegetacion.3",
+   "file": "vegetacion.3.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "mastil",
+   "file": "mastil.png",
+   "type": "image",
+   "anchor": [
+    1.0,
+    0.85
+   ],
+   "escala": 1.0
+  },
+  {
+   "name": "cartel.1",
+   "file": "cartel.1.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "cartel.2",
+   "file": "cartel.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "cartel.3",
+   "file": "cartel.3.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "cartel.4",
+   "file": "cartel.3.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0
+  },
+  {
+   "name": "enemigo.1",
+   "file": "enemigo.1.scale.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "ancho": 384,
+   "alto": 384,
+   "escala": 1.0,
+   "permanente": true
+  },
+  {
+   "name": "enemigo.2",
+   "file": "enemigo.2.scale.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "ancho": 384,
+   "alto": 384,
+   "escala": 1.0,
+   "permanente": true
+  }
+ ]
+}

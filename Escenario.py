@@ -34,7 +34,7 @@ class RecursosEscenario:
         self.arcen=arcen
 
         self.cache=ImageCache(None,context)
-        self.streamer=AssetStreamer(self.cache,str(base/"circuits/assets.yaml"))
+        self.streamer=AssetStreamer(self.cache,str(base/"circuits/assets.json"))
         self.images={}
         self.images["flecha.1"]=pygame.image.load(str(base/"img"/"flecha.1.png")).convert_alpha()
         self.images["flecha.2"]=pygame.image.load(str(base/"img"/"flecha.2.png")).convert_alpha()
@@ -73,15 +73,17 @@ class Bosque(Escenario):
         base=recursos.base
         self.fondos=[]
 
-        b=Background(base/"img/nube1.png",False,False,mov*0.5,context,None,x=400,y=400,resize=sprite_resize)
+        esc_pixel=3
+        b=Background(base/"img/fondo.bosque.n.1.png",False,False,mov*0.5,context,None,x=450,y=200,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-        b=Background(base/"img/nube2.png",False,False,mov*0.5,context,None,x=800,y=200,resize=sprite_resize)
+        b=Background(base/"img/fondo.bosque.n.2.png",False,False,mov*0.5,context,None,x=820,y=260,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-        b=Background(base/"img/hills.png",True,False,mov*1.0,context,(27,41,53),y=context.camera.horizon,resize=sprite_resize)
+        b=Background(base/"img/fondo.bosque.n.3.png",False,False,mov*0.5,context,None,x=1180,y=170,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-        b=Background(base/"img/near_hills.png",True,True,mov*4.0,context,(31,159,68),y=context.camera.horizon,resize=sprite_resize)
+        b=Background(base/"img/fondo.bosque.l.png",True,False,mov*1.0,context,(138,165,216),y=context.camera.horizon,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-
+        b=Background(base/"img/fondo.bosque.m.png",True,True,mov*4.0,context,(72,126,102),y=context.camera.horizon+15,resize=sprite_resize*esc_pixel,color_clave=True)
+        self.fondos.append(b)
 
 
 class DesiertoRoca(Escenario):

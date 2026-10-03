@@ -22,6 +22,7 @@ class Object:
         self.age=0.0
         self.frame=0
         self.capas=()
+        self.lod_hasta=9999
         
     def load_metadata(self,cache):
         self.metadata=cache.metadata[self.img]

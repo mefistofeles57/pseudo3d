@@ -1,11 +1,11 @@
 import array
 import math
+import sys
 import time
-import wave
 import pygame
 
 
-# Canales del mixer apartados para motores: 2 por coche (jugador + 3 enemigos)
+# Canales del mixer apartados para motores: uno por coche
 CANALES_RESERVADOS = 8
 
 _libres = None
@@ -19,16 +19,12 @@ def _reservar_canales():
         _libres = list(range(CANALES_RESERVADOS))
 
 
-def _leer_wav(fichero):
-    with wave.open(fichero, "rb") as wav:
-        canales = wav.getnchannels()
-        ancho = wav.getsampwidth()
-        frecuencia = wav.getframerate()
-        datos = wav.readframes(wav.getnframes())
-    if ancho != 2:
-        raise ValueError("Se espera un WAV PCM de 16 bits")
+def _leer_sonido(fichero):
+    # pygame lo decodifica y lo deja en el formato y la frecuencia del mixer
+    # (el módulo wave no existe en la versión web de Python)
+    frecuencia, formato, canales = pygame.mixer.get_init()
     muestras = array.array("h")
-    muestras.frombytes(datos)
+    muestras.frombytes(pygame.mixer.Sound(fichero).get_raw())
     if canales > 1:
         mono = array.array("h")
         for i in range(0, len(muestras), canales):
@@ -55,36 +51,42 @@ def _remuestrear(muestras, paso):
 
 
 class _Banco:
-    # Versiones del bucle a tonos crecientes, separadas por el factor 'paso', guardadas en el formato del mixer
+    # Versiones mono del bucle a tonos crecientes, separadas por el factor 'paso'
     def __init__(self, fichero, pitch_min, pitch_max, paso):
         frecuencia_mixer, formato, canales_mixer = pygame.mixer.get_init()
         if formato != -16:
             raise ValueError("El mixer tiene que estar en 16 bits con signo")
-        muestras, frecuencia = _leer_wav(fichero)
+        muestras, frecuencia = _leer_sonido(fichero)
         self.frecuencia = frecuencia_mixer
-        self.bytes_frame = 2 * canales_mixer
+        self.canales = canales_mixer
         self.pitch_min = pitch_min
         self.log_paso = math.log(paso)
         n = max(2, int(math.ceil(math.log(pitch_max / pitch_min) / self.log_paso)) + 1)
-        self.datos = []
+        self.versiones = []
         for i in range(n):
             pitch = pitch_min * paso ** i
-            mono = _remuestrear(muestras, pitch * frecuencia / frecuencia_mixer)
-            datos = mono
-            if canales_mixer > 1:
-                datos = array.array("h", bytes(2 * len(mono) * canales_mixer))
-                for c in range(canales_mixer):
-                    datos[c::canales_mixer] = mono
-            self.datos.append(datos.tobytes())
+            self.versiones.append(_remuestrear(muestras, pitch * frecuencia / frecuencia_mixer))
 
-    def frames(self, version):
-        return len(self.datos[version]) // self.bytes_frame
+    def tramo(self, version, inicio, n):
+        # n muestras mono de la versión a partir de 'inicio', dando la vuelta al bucle
+        datos = self.versiones[version]
+        largo = len(datos)
+        salida = array.array("h")
+        while n > 0:
+            trozo = min(n, largo - inicio)
+            salida.extend(datos[inicio:inicio + trozo])
+            n -= trozo
+            inicio = 0
+        return salida
 
-    def sonido(self, version, inicio):
-        # el bucle empezando en el frame 'inicio': sigue siendo un bucle perfecto
-        b = inicio * self.bytes_frame
-        datos = self.datos[version]
-        return pygame.mixer.Sound(buffer=datos[b:] + datos[:b])
+    def a_mixer(self, mono):
+        # mono -> formato del mixer (mismo valor en todos los canales)
+        if self.canales == 1:
+            return mono.tobytes()
+        salida = array.array("h", bytes(2 * len(mono) * self.canales))
+        for c in range(self.canales):
+            salida[c::self.canales] = mono
+        return salida.tobytes()
 
 
 class SonidoMotor:
@@ -92,60 +94,80 @@ class SonidoMotor:
     PITCH_MAX = 3.7
     PASO = 1.02
     HISTERESIS = 0.8
-    # pygame aplica los fundidos a saltos, uno por bloque de audio (~11.6 ms):
-    # un fundido largo da saltos pequeños, que no se oyen como clic
-    FUNDIDO_MS = 120
-    # no se empieza otro cambio hasta que el fundido anterior ha terminado
-    ESPERA_CAMBIO = 0.14
+    # cuánto audio se deja escrito por delante de lo que está sonando: es el retardo
+    # de respuesta al tono y aguanta frames de hasta esa duración sin cortes.
+    # En el navegador el mixer pide bloques de 4096 muestras (93 ms) de golpe
+    if sys.platform == "emscripten":
+        ADELANTO = 0.25
+    else:
+        ADELANTO = 0.15
+    CINTA = 1.0
+    MEZCLA_MS = 25
 
     def __init__(self, fichero, volumen=0.8):
         clave = (fichero, self.PITCH_MIN, self.PITCH_MAX, self.PASO)
         if clave not in _bancos:
             _bancos[clave] = _Banco(fichero, self.PITCH_MIN, self.PITCH_MAX, self.PASO)
         self.banco = _bancos[clave]
+        b = self.banco
+        self.bytes_frame = 2 * b.canales
+        self.frames_cinta = int(self.CINTA * b.frecuencia)
+        self.frames_adelanto = int(self.ADELANTO * b.frecuencia)
+        self.frames_mezcla = int(self.MEZCLA_MS / 1000 * b.frecuencia)
+        # el bucle del mixer es una cinta circular en la que se escribe por delante de lo que suena
+        self.cinta = pygame.mixer.Sound(buffer=bytes(self.frames_cinta * self.bytes_frame))
+        self.plano = memoryview(self.cinta).cast("B")
         self.pitch = self.PITCH_MIN
         self.volumen = volumen
         self.pan = 0.0
-        self.ids = None
-        self.canales = None
-        self.activo = 0
+        self.id = None
+        self.canal = None
         self.version = 0
-        self.t0 = 0.0
-        self.inicio = 0
+        self.pos = 0
+        self.escrito = 0
+        self.t_inicio = 0.0
 
     def start(self):
         # Se puede llamar cada frame: si no quedaban canales libres, lo vuelve a intentar
-        if self.canales is not None:
+        if self.canal is not None:
             return
         _reservar_canales()
-        if len(_libres) < 2:
+        if len(_libres) == 0:
             return
-        self.ids = [_libres.pop(0), _libres.pop(0)]
-        self.canales = [pygame.mixer.Channel(self.ids[0]), pygame.mixer.Channel(self.ids[1])]
-        self.activo = 0
-        self._sonar(self._version_objetivo(), 0)
+        self.id = _libres.pop(0)
+        self.canal = pygame.mixer.Channel(self.id)
+        self.plano[:] = bytes(len(self.plano))
+        self.escrito = 0
+        self.version = self._version_objetivo()
+        self.pos = 0
+        # entrada fundida desde silencio, y el resto del adelanto
+        n = self.frames_mezcla
+        nueva = self.banco.tramo(self.version, 0, n)
+        entrada = array.array("h", bytes(2 * n))
+        for k in range(n):
+            entrada[k] = int(nueva[k] * k / n)
+        self._escribir(entrada)
+        self.pos = n % len(self.banco.versiones[self.version])
+        self._escribir(self._siguiente(self.frames_adelanto - n))
+        self.canal.play(self.cinta, loops=-1)
+        self.t_inicio = time.perf_counter()
+        self._aplicar_volumen()
 
     def stop(self):
-        if self.canales is None:
+        if self.canal is None:
             return
-        for canal in self.canales:
-            canal.stop()
-        _libres.extend(self.ids)
-        self.ids = None
-        self.canales = None
+        self.canal.fadeout(60)
+        _libres.append(self.id)
+        self.id = None
+        self.canal = None
 
     def close(self):
         self.stop()
 
     def set_pitch(self, pitch):
+        # hay que llamarlo cada frame: además de fijar el tono, rellena la cinta
         self.pitch = max(self.PITCH_MIN, min(self.PITCH_MAX, pitch))
-        if self.canales is None:
-            return
-        if time.perf_counter() - self.t0 < self.ESPERA_CAMBIO:
-            return
-        x = self._posicion()
-        if abs(x - self.version) > self.HISTERESIS:
-            self._cambiar(self._version_objetivo())
+        self._rellenar()
 
     def set_volume(self, volumen):
         self.volumen = max(0.0, min(1.0, volumen))
@@ -158,36 +180,63 @@ class SonidoMotor:
 
     def _posicion(self):
         x = math.log(self.pitch / self.banco.pitch_min) / self.banco.log_paso
-        return max(0.0, min(float(len(self.banco.datos) - 1), x))
+        return max(0.0, min(float(len(self.banco.versiones) - 1), x))
 
     def _version_objetivo(self):
         return int(round(self._posicion()))
 
-    def _fase(self):
-        # punto del bucle por el que va la versión actual, de 0 a 1
-        n = self.banco.frames(self.version)
-        transcurrido = int((time.perf_counter() - self.t0) * self.banco.frecuencia)
-        return ((self.inicio + transcurrido) % n) / n
+    def _cabeza(self):
+        # frame que está sonando ahora, contando desde el arranque
+        return int((time.perf_counter() - self.t_inicio) * self.banco.frecuencia)
 
-    def _cambiar(self, version):
-        # la nueva versión entra por el otro canal en el mismo punto del bucle y la vieja se funde
-        n = self.banco.frames(version)
-        inicio = int(self._fase() * n) % n
-        self.canales[self.activo].fadeout(self.FUNDIDO_MS)
-        self.activo = 1 - self.activo
-        self._sonar(version, inicio)
+    def _rellenar(self):
+        if self.canal is None:
+            return
+        cabeza = self._cabeza()
+        if self.escrito < cabeza:
+            # la cabeza nos ha adelantado (un frame muy largo): se continúa desde ella
+            self.escrito = cabeza
+        objetivo = cabeza + self.frames_adelanto
+        if self.escrito >= objetivo:
+            return
+        if abs(self._posicion() - self.version) > self.HISTERESIS:
+            self._cruzar(self._version_objetivo())
+        falta = objetivo - self.escrito
+        if falta > 0:
+            self._escribir(self._siguiente(falta))
 
-    def _sonar(self, version, inicio):
-        canal = self.canales[self.activo]
-        canal.play(self.banco.sonido(version, inicio), loops=-1, fade_ms=self.FUNDIDO_MS)
-        self.version = version
-        self.inicio = inicio
-        self.t0 = time.perf_counter()
-        self._aplicar_volumen()
+    def _siguiente(self, n):
+        datos = self.banco.tramo(self.version, self.pos, n)
+        self.pos = (self.pos + n) % len(self.banco.versiones[self.version])
+        return datos
+
+    def _cruzar(self, nueva):
+        # la versión nueva entra en el mismo punto del bucle y se mezcla muestra a muestra
+        vieja = self.version
+        largo_viejo = len(self.banco.versiones[vieja])
+        largo_nuevo = len(self.banco.versiones[nueva])
+        inicio = int(self.pos / largo_viejo * largo_nuevo) % largo_nuevo
+        n = self.frames_mezcla
+        a = self.banco.tramo(vieja, self.pos, n)
+        b = self.banco.tramo(nueva, inicio, n)
+        mezcla = array.array("h", bytes(2 * n))
+        for k in range(n):
+            mezcla[k] = int(a[k] + (b[k] - a[k]) * k / n)
+        self._escribir(mezcla)
+        self.version = nueva
+        self.pos = (inicio + n) % largo_nuevo
+
+    def _escribir(self, mono):
+        datos = self.banco.a_mixer(mono)
+        inicio = (self.escrito % self.frames_cinta) * self.bytes_frame
+        primero = min(len(datos), len(self.plano) - inicio)
+        self.plano[inicio:inicio + primero] = datos[:primero]
+        if primero < len(datos):
+            self.plano[0:len(datos) - primero] = datos[primero:]
+        self.escrito += len(mono)
 
     def _aplicar_volumen(self):
-        # solo el canal activo: el otro se está fundiendo y no hay que tocarlo
-        if self.canales is None:
+        if self.canal is None:
             return
         izquierda = 1.0
         derecha = 1.0
@@ -195,4 +244,4 @@ class SonidoMotor:
             izquierda = 1.0 - self.pan
         elif self.pan < 0:
             derecha = 1.0 + self.pan
-        self.canales[self.activo].set_volume(self.volumen * izquierda, self.volumen * derecha)
+        self.canal.set_volume(self.volumen * izquierda, self.volumen * derecha)

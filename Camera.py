@@ -274,6 +274,8 @@ class Camera:
                 if o.z>vs.end.z:
                     last_object_index=i
                     break
+                if vs_index>=o.lod_hasta:
+                    continue
                 sublist1.append(o)
             #selecciono los objetos temporales a dibujar
             sublist2=[]

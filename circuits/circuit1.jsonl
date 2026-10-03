@@ -7,10 +7,8 @@
 {"command": "O", "segments": 4, "img": "start", "step": 10.0, "offset": 3.0, "x": 0.0, "collidable": false}
 {"command": "O", "segments": 4, "img": "column", "step": 10.0, "offset": 3.0, "x": 1.11, "collidable": false}
 {"command": "O", "segments": 4, "img": "column", "step": 10.0, "offset": 3.0, "x": -1.11, "collidable": false}
-{"command": "O", "segments": 20, "img": "quitamiedos", "step": 0.09, "offset": 0.03, "x": 1.1}
-{"command": "O", "segments": 20, "img": "quitamiedos", "step": 0.09, "offset": 0.03, "x": -1.1}
-{"command": "O", "segments": 20, "img": "quitamiedos.down", "step": 0.09, "offset": 0.03, "x": 1.1}
-{"command": "O", "segments": 20, "img": "quitamiedos.down", "step": 0.09, "offset": 0.03, "x": -1.1}
+{"command": "O", "segments": 20, "img": "quitamiedos.doble", "step": 0.09, "offset": 0.03, "x": 1.1, "lod": [6, 12, 20]}
+{"command": "O", "segments": 20, "img": "quitamiedos.doble", "step": 0.09, "offset": 0.03, "x": -1.1, "lod": [6, 12, 20]}
 {"command": "O", "segments": 17, "img": "pitbox.1", "step": 10.0, "offset": 7.0, "x": -2.0, "collidable": false}
 {"command": "O", "segments": 17, "img": "pitbox.2", "step": 10.0, "offset": 11.5, "x": -2.0, "collidable": false}
 {"command": "O", "segments": 17, "img": "pitbox.3", "step": 10.0, "offset": 14.0, "x": -2.0, "collidable": false}
@@ -362,8 +360,8 @@
 {"command": "R", "segments": 45, "curve": "CHR"}
 {"command": "O", "img": "piedra", "segments": 1, "step": 10.0, "offset": 0.0, "x": -1.4, "profile": "piedra"}
 {"command": "O", "img": "piedra", "segments": 1, "step": 10.0, "offset": 0.0, "x": 1.4, "profile": "piedra"}
-{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": -1.3}
-{"command": "O", "img": "quitamiedos", "step": 0.15, "offset": 0.03, "x": 1.3}
+{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": -1.3, "lod": [8, 16, 22]}
+{"command": "O", "img": "quitamiedos", "step": 0.15, "offset": 0.03, "x": 1.3, "lod": [8, 16, 22]}
 {"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": -1.3, "profile": "poste"}
 {"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
 {"command": "O", "img": "farola.flip", "step": 7.0, "offset": 1.0, "x": -1.65, "random_step": 0.5}
@@ -404,7 +402,7 @@
 {"command": "F", "img": "arbol.4", "x": 15.0, "step_x": 2.0, "step_z": 7.0, "offset": 1.0, "number": 1, "random_x": 1.5, "random_step": 4.0}
 {"command": "O", "img": "curva.flip", "step": 30.0, "offset": 42.0, "x": -1.3, "collidable": true}
 {"command": "R", "segments": 38, "curve": "CHL"}
-{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": 1.3}
+{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": 1.3, "lod": [8, 16, 22]}
 {"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
 {"command": "O", "img": "arbol.3", "step": 8.0, "offset": 0.0, "x": -1.9, "random_x": -0.3, "random_step": 1.5}
 {"command": "O", "img": "arbol.4", "step": 8.5, "offset": 2.0, "x": 1.9, "random_x": 0.3, "random_step": 1.5}
@@ -499,7 +497,7 @@
 {"command": "F", "img": "arbol.4", "x": 15.0, "step_x": 2.0, "step_z": 7.0, "offset": 1.0, "number": 1, "random_x": 1.5, "random_step": 4.0}
 {"command": "O", "img": "curva.flip", "step": 30.0, "offset": 32.0, "x": -1.3, "collidable": true}
 {"command": "R", "segments": 25, "curve": "CHL", "height": "H"}
-{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": 1.3}
+{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": 1.3, "lod": [8, 16, 22]}
 {"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
 {"command": "O", "img": "arbusto", "step": 4.0, "offset": 0.0, "x": -1.5, "random_x": -0.2, "random_step": 0.9, "collidable": false}
 {"command": "O", "img": "arbusto", "step": 4.5, "offset": 2.0, "x": 1.5, "random_x": 0.2, "random_step": 0.9, "collidable": false}
@@ -519,7 +517,7 @@
 {"command": "E", "segment": -6, "x_rel": -0.3, "speed": 11.0, "img": "enemigo.1"}
 {"command": "O", "img": "curva", "step": 30.0, "offset": 37.0, "x": 1.3, "collidable": true}
 {"command": "R", "segments": 40, "curve": "CHR"}
-{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": -1.3}
+{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": -1.3, "lod": [8, 16, 22]}
 {"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": -1.3, "profile": "poste"}
 {"command": "O", "img": "arbol", "step": 5.5, "offset": 0.0, "x": -1.55, "random_x": -0.25, "random_step": 1.0}
 {"command": "O", "img": "arbol.2", "step": 6.0, "offset": 2.0, "x": 1.55, "random_x": 0.25, "random_step": 1.0}

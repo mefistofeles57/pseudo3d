@@ -208,7 +208,7 @@ class Car(Object,ABC):
                 self.context.root.playSound("crash")
                 self.context.changeStatus(STUCK)
         else:
-            self.context.root.playSound("choque",once=False)
+            self.context.root.playSound("choque",once=True)
 
         return impact
     

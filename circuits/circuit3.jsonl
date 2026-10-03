@@ -8,8 +8,8 @@
 {"command": "block", "name": "recta_pradera"}
 {"command": "R", "segments": 300}
 {"command": "CHK", "segment": 150}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": -1.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.5, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.5, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 150, "img": "parrilla", "x": -1.0, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 150, "img": "parrilla", "x": -0.5, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 150, "img": "parrilla", "x": 0.0, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 150, "img": "parrilla", "x": 0.5, "z": 0.25, "w": 0.5, "h": 0.5}
 {"command": "FINISH", "segment": -1}

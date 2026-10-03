@@ -22,16 +22,16 @@ FR_LLANO_CD1=1
 FR_LLANO_CD2=2
 FR_LLANO_CI1=3
 FR_LLANO_CI2=4
-FR_CAR=5
-FR_CAR_CD1=6
-FR_CAR_CD2=7
-FR_CAR_CI1=8
-FR_CAR_CI2=9
-FR_CAB=10
-FR_CAB_CD1=11
-FR_CAB_CD2=12
-FR_CAB_CI1=13
-FR_CAB_CI2=14
+FR_CAR=10
+FR_CAR_CD1=11
+FR_CAR_CD2=12
+FR_CAR_CI1=13
+FR_CAR_CI2=14
+FR_CAB=5
+FR_CAB_CD1=6
+FR_CAB_CD2=7
+FR_CAB_CI1=8
+FR_CAB_CI2=9
 FR_LUZ=15
 FR_RUEDAS=16
 FR_RUEDAS_NUM=5
@@ -576,7 +576,7 @@ class Player(Car):
         #humo
         factor_humo=max(factor_humo_giro,factor_humo_freno,factor_humo_salida)
         if factor_humo > 0.5:
-            self.context.root.playSound("derrape")
+            self.context.root.playSound("derrape",once=False)
             self.addHumo(dt)
         else:
             self.context.root.stopSound("derrape")
@@ -642,7 +642,7 @@ class Player(Car):
     
     def despl_ruedas(self,i,fase):
         # desplazamiento del patrón según el giro. Las cuestas quedan a cero hasta que se dibujen sus giros
-        if i>=FR_CAR:
+        if i>=FR_CAB:
             return (0,0)
         #nivel y sentido del giro según la posición del frame
         giro=i%5

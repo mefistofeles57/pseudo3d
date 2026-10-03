@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "pygbag", "--disable-sound-format-error", "C:/Users/ricardo/AppData/Local/Temp/claude/C--Users-ricardo-development-git-pseudo3d-pseudo3d/72f9447b-bd95-48fe-b04c-6e39c8e8855e/scratchpad/web/pseudo3d"],
+      "port": 8000
+    }
+  ]
+}

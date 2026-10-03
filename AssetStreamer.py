@@ -1,5 +1,5 @@
 import time
-import yaml
+import json
 import pygame
 from pathlib import Path
 from Road import Segment
@@ -16,7 +16,7 @@ class AssetStreamer:
         self.gen=None
 
         with open(archivo,"r",encoding="utf-8") as f:
-            datos=yaml.safe_load(f)
+            datos=json.load(f)
 
         self.catalogo={}
         for asset in datos["assets"]:
