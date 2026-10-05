@@ -5,11 +5,706 @@
 {"command": "LINE", "profile": "continua_arena", "position": 1.05, "x": -0.01}
 {"command": "block", "name": "entrada_desierto"}
 {"command": "R", "segments": 20, "w0": 1.0}
-{"command": "block", "name": "recta_desierto"}
-{"command": "R", "segments": 300}
-{"command": "CHK", "segment": 150}
-{"command": "MK", "segment": 150, "img": "parrilla", "x": -1.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 150, "img": "parrilla", "x": -0.5, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 150, "img": "parrilla", "x": 0.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 150, "img": "parrilla", "x": 0.5, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 15.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 18.333333333333336, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 28.333333333333336, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 28.333333333333336, "offset": 22.167, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 31.666666666666668, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 31.666666666666668, "offset": 28.833, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 30.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 30.0, "offset": 18.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 35.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 35.0, "offset": 27.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "llanura"}
+{"command": "R", "segments": 80}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 10, "x_rel": -0.4, "speed": 9.0, "img": "enemigo.2"}
+{"command": "R", "segments": 40, "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 24.285714285714285, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 24.285714285714285, "offset": 20.143, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 27.142857142857142, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 27.142857142857142, "offset": 26.571, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 25.714285714285715, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 25.714285714285715, "offset": 15.857, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 30.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 30.0, "offset": 25.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 40, "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 24.285714285714285, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 24.285714285714285, "offset": 20.143, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 27.142857142857142, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 27.142857142857142, "offset": 26.571, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 25.714285714285715, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 25.714285714285715, "offset": 15.857, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 30.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 30.0, "offset": 25.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": -10, "x_rel": 0.4, "speed": 9.5, "img": "enemigo.1"}
+{"command": "R", "segments": 70, "curve": "CR"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 60, "curve": "CL", "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 20, "x_rel": -0.3, "speed": 10.0, "img": "enemigo.2"}
+{"command": "R", "segments": 40, "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 21.25, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 21.25, "offset": 18.625, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 23.75, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 23.75, "offset": 1.125, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 22.5, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 22.5, "offset": 14.25, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 26.25, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 26.25, "offset": 23.125, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "dunas"}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "R", "segments": 30, "curve": "CL", "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 28.333333333333336, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 28.333333333333336, "offset": 22.167, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 31.666666666666668, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 31.666666666666668, "offset": 28.833, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 30.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 30.0, "offset": 18.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 35.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 35.0, "offset": 27.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 15.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 18.333333333333336, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 25, "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "R", "segments": 30, "curve": "CR", "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 28.333333333333336, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 28.333333333333336, "offset": 22.167, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 31.666666666666668, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 31.666666666666668, "offset": 28.833, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 30.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 30.0, "offset": 18.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 35.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 35.0, "offset": 27.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "rasante", "step": 30.0, "offset": 18.0, "x": -1.7, "collidable": true}
+{"command": "O", "img": "rasante", "step": 30.0, "offset": 18.0, "x": 1.7, "collidable": true}
+{"command": "BMP", "repeats": 3, "segments": 5, "slope": 0.03}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "R", "segments": 25, "height": "HH"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "O", "img": "curva.flip", "step": 30.0, "offset": 13.0, "x": -1.6, "collidable": true}
+{"command": "R", "segments": 35, "curve": "CHL", "height": "DH"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 5, "x_rel": 0.3, "speed": 9.5, "img": "enemigo.1"}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 21.25, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 21.25, "offset": 18.625, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 23.75, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 23.75, "offset": 1.125, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 22.5, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 22.5, "offset": 14.25, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 26.25, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 26.25, "offset": 23.125, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "primer_checkpoint"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "CHK", "segment": 0, "z": 0.25, "time": 50.0}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -1.3, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.78, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.26, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.26, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.78, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 15.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 18.333333333333336, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 28.333333333333336, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 28.333333333333336, "offset": 22.167, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 31.666666666666668, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 31.666666666666668, "offset": 28.833, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 30.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 30.0, "offset": 18.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 35.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 35.0, "offset": 27.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "canon"}
+{"command": "R", "segments": 30, "w0": 1.3, "w1": 0.95}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 11.333333333333332, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 11.333333333333332, "offset": 2.333, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 12.666666666666666, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 12.666666666666666, "offset": 6.667, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 12.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 12.0, "offset": 9.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 14.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 14.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "segments": 25, "img": "desierto.roca.1", "x": -1.6, "step": 1.5, "offset": 0.0, "random_x": 0.3}
+{"command": "O", "segments": 25, "img": "desierto.roca.1", "x": 1.3, "step": 1.5, "offset": 0.75, "random_x": 0.3}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 100.0, "offset": 28.0, "collidable": true}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 100.0, "offset": 28.0, "collidable": true}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.75, "step": 100.0, "offset": 28.0, "collidable": false}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.75, "step": 100.0, "offset": 28.0, "collidable": false}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -2.25, "step": 100.0, "offset": 28.0, "collidable": false}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 2.25, "step": 100.0, "offset": 28.0, "collidable": false}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -2.75, "step": 100.0, "offset": 28.0, "collidable": false}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 2.75, "step": 100.0, "offset": 28.0, "collidable": false}
+{"command": "R", "segments": 40, "curve": "CL", "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "R", "segments": 40, "curve": "CR", "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "E", "segment": 10, "x_rel": -0.25, "speed": 9.0, "img": "enemigo.1"}
+{"command": "R", "segments": 30, "curve": "CL", "height": "H", "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "O", "img": "curva", "step": 30.0, "offset": 18.0, "x": 1.15, "collidable": true}
+{"command": "R", "segments": 40, "curve": "CHR", "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "R", "segments": 30, "height": "D", "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "E", "segment": 5, "x_rel": 0.25, "speed": 9.5, "img": "enemigo.2"}
+{"command": "R", "segments": 40, "curve": "CL", "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "R", "segments": 20, "w0": 0.95, "w1": 0.95}
+{"command": "O", "img": "desierto.rocas.lateral", "x": -1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": -0.3}
+{"command": "O", "img": "desierto.rocas.lateral.der", "x": 1.25, "step": 0.9, "offset": 0.0, "random_step": 0.225, "random_x": 0.3}
+{"command": "O", "img": "desierto.roca.1", "x": -1.6, "step": 1.5, "offset": 0.0, "random_x": 0.3}
+{"command": "O", "img": "desierto.roca.1", "x": 1.3, "step": 1.5, "offset": 0.75, "random_x": 0.3}
+{"command": "block", "name": "salida_canon"}
+{"command": "R", "segments": 30, "w0": 0.95, "w1": 1.3}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 11.333333333333332, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 11.333333333333332, "offset": 2.333, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 12.666666666666666, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 12.666666666666666, "offset": 6.667, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 12.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 12.0, "offset": 9.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 14.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 14.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 120, "curve": "CR", "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 12.857142857142858, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 15.714285714285715, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 20.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 18.571428571428573, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 28.571428571428573, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 31.42857142857143, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 24.285714285714285, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 24.285714285714285, "offset": 20.143, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 27.142857142857142, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 27.142857142857142, "offset": 26.571, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 25.714285714285715, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 25.714285714285715, "offset": 15.857, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 30.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 30.0, "offset": 25.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 30, "x_rel": -0.4, "speed": 10.0, "img": "enemigo.1"}
+{"command": "R", "segments": 50, "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "zona_trampa"}
+{"command": "R", "segments": 100, "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 24.285714285714285, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 24.285714285714285, "offset": 20.143, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 27.142857142857142, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 27.142857142857142, "offset": 26.571, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 25.714285714285715, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 25.714285714285715, "offset": 15.857, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 30.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 30.0, "offset": 25.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 10, "x_rel": 0.35, "speed": 9.0, "img": "enemigo.2"}
+{"command": "E", "segment": 60, "x_rel": -0.35, "speed": 9.5, "img": "enemigo.1"}
+{"command": "R", "segments": 20, "w0": 1.3, "w1": 1.0}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -0.95, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -0.95, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": 0.45, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": 0.45, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "O", "img": "curva.s", "step": 30.0, "offset": 8.0, "x": -1.5, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 30.0, "offset": 8.0, "x": 1.5, "collidable": true}
+{"command": "R", "segments": 20, "curve": "CHL", "w0": 1.0, "w1": 1.0}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 1.25, "step": 4.0, "offset": 2.0}
+{"command": "R", "segments": 20, "curve": "CHR", "w0": 1.0, "w1": 1.0}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -1.25, "step": 4.0, "offset": 2.0}
+{"command": "R", "segments": 15, "curve": "CHL", "w0": 1.0, "w1": 1.0}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 1.2, "step": 3.0, "offset": 0.0}
+{"command": "O", "img": "desierto.roca.1", "x": -1.2, "step": 3.0, "offset": 1.5}
+{"command": "R", "segments": 25, "w0": 1.0, "w1": 1.3}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 21.25, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 21.25, "offset": 18.625, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 23.75, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 23.75, "offset": 1.125, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 22.5, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 22.5, "offset": 14.25, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 26.25, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 26.25, "offset": 23.125, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "segundo_checkpoint"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "CHK", "segment": 0, "z": 0.25, "time": 45.0}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -1.3, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.78, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.26, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.26, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.78, "z": 0.25, "w": 0.52, "h": 0.5}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 15.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 18.333333333333336, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 28.333333333333336, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 28.333333333333336, "offset": 22.167, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 31.666666666666668, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 31.666666666666668, "offset": 28.833, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 30.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 30.0, "offset": 18.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 35.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 35.0, "offset": 27.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "rasante", "step": 30.0, "offset": 28.0, "x": -1.7, "collidable": true}
+{"command": "O", "img": "rasante", "step": 30.0, "offset": 28.0, "x": 1.7, "collidable": true}
+{"command": "block", "name": "tramo_ondulado"}
+{"command": "BMP", "repeats": 4, "segments": 4, "slope": 0.03}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "R", "segments": 60, "curve": "CL", "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 15, "x_rel": 0.3, "speed": 10.0, "img": "enemigo.1"}
+{"command": "R", "segments": 60, "curve": "CR", "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -1.1, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -5, "img": "flecha.1", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -6, "img": "flecha.2", "x": 0.6, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "O", "img": "curva.flip", "step": 30.0, "offset": 28.0, "x": -1.6, "collidable": true}
+{"command": "R", "segments": 50, "curve": "CHL"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 17.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 17.0, "offset": 16.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 19.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 19.0, "offset": 3.5, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 18.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 18.0, "offset": 12.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 21.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 21.0, "offset": 20.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 10, "x_rel": -0.3, "speed": 10.5, "img": "enemigo.2"}
+{"command": "R", "segments": 40, "curve": "CR", "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 9.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 11.0, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 14.0, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 13.0, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 20.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 22.0, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 21.25, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 21.25, "offset": 18.625, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 23.75, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 23.75, "offset": 1.125, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 22.5, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 22.5, "offset": 14.25, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 26.25, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 26.25, "offset": 23.125, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 11.25, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 13.75, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 17.5, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 16.25, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 25.0, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 27.5, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "block", "name": "subida_meseta"}
+{"command": "R", "segments": 100, "height": "HH"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 15.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 18.333333333333336, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 34.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 34.0, "offset": 25.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 38.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 38.0, "offset": 32.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 36.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 36.0, "offset": 21.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 42.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 42.0, "offset": 31.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": 20, "x_rel": 0.3, "speed": 11.0, "img": "enemigo.1"}
+{"command": "R", "segments": 40, "curve": "CR", "height": "H"}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -2.2, "step": 15.0, "offset": 2.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": 1.8, "step": 18.333333333333336, "offset": 6.0, "random_x": 0.6, "random_step": 4.0}
+{"command": "O", "img": "desierto.cactus.2", "x": -6.0, "step": 23.333333333333336, "offset": 4.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": 5.0, "step": 21.666666666666668, "offset": 9.0, "random_x": 2.5, "random_step": 6.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.1", "x": -12.0, "step": 33.333333333333336, "offset": 1.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": 10.0, "step": 36.66666666666667, "offset": 12.0, "random_x": 4.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 2.0, "step": 34.0, "offset": 8.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": 2.0, "step": 34.0, "offset": 25.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": -2.4, "step": 38.0, "offset": 13.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.2", "x": -2.4, "step": 38.0, "offset": 32.0, "random_x": 0.8, "random_step": 6.0}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 36.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 36.0, "offset": 21.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 42.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 42.0, "offset": 31.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "R", "segments": 60, "w1": 2.0}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": 7.0, "step": 30.0, "offset": 3.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 30.0, "offset": 18.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 35.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 35.0, "offset": 27.5, "random_x": 3.0, "random_step": 8.0, "collidable": false}
+{"command": "E", "segment": -20, "x_rel": -0.25, "speed": 12.5, "img": "enemigo.2"}
+{"command": "MK", "segment": -40, "img": "flecha.1", "x": -1.02, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -41, "img": "flecha.2", "x": -1.02, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -40, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -41, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -40, "img": "flecha.1", "x": 0.52, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -41, "img": "flecha.2", "x": 0.52, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "block", "name": "bifurcacion"}
+{"command": "fork", "segments": 40, "curve": "CHR", "w": 1.0}
+{"command": "R", "segments": 30, "w0": 1.0, "w1": 1.0}
+{"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": 2.5, "step": 5.0, "offset": 0.0, "random_x": 1.5, "random_step": 2.5, "collidable": false}
+{"command": "O", "img": "desierto.arbusto", "x": -2.5, "step": 5.0, "offset": 2.5, "random_x": -1.5, "random_step": 2.5, "collidable": false}
 {"command": "FINISH", "segment": -1}

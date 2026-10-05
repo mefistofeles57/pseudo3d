@@ -108,13 +108,20 @@ class DesiertoRoca(Escenario):
         base=recursos.base
         self.fondos=[]
 
-        b=Background(base/"img/nube1.png",False,False,mov*0.5,context,None,x=400,y=400,resize=sprite_resize)
+        esc_pixel=4
+        b=Background(base/"img/desierto.nube.g.png",False,False,mov*0.5,context,None,x=380,y=180,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-        b=Background(base/"img/nube2.png",False,False,mov*0.5,context,None,x=800,y=200,resize=sprite_resize)
+        b=Background(base/"img/desierto.nube.p.png",False,False,mov*0.5,context,None,x=900,y=250,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-        b=Background(base/"img/hills.png",True,False,mov*1.0,context,(110,50,40),y=context.camera.horizon,resize=sprite_resize)
+        b=Background(base/"img/desierto.nube.g.png",False,False,mov*0.5,context,None,x=1250,y=150,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
-        b=Background(base/"img/near_hills.png",True,True,mov*4.0,context,(178,108,64),y=context.camera.horizon,resize=sprite_resize)
+        b=Background(base/"img/desierto.rocas.fondo.1.png",False,False,mov*2.0,context,None,x=700,y=context.camera.horizon+15,resize=sprite_resize*esc_pixel,color_clave=True)
+        self.fondos.append(b)
+        b=Background(base/"img/desierto.rocas.fondo.2.png",False,False,mov*2.0,context,None,x=1400,y=context.camera.horizon+15,resize=sprite_resize*esc_pixel,color_clave=True)
+        self.fondos.append(b)
+        b=Background(base/"img/fondo.desierto.m.png",True,False,mov*3.0,context,(199,122,85),y=context.camera.horizon+5,resize=sprite_resize*3.0,color_clave=True)
+        self.fondos.append(b)
+        b=Background(base/"img/fondo.desierto.c.png",True,True,mov*4.0,context,(184,106,72),y=context.camera.horizon+10,resize=sprite_resize*3.0,color_clave=True)
         self.fondos.append(b)
 
 class Pradera(Escenario):

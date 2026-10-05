@@ -396,6 +396,83 @@
    "alto": 384,
    "escala": 1.0,
    "permanente": true
+  },
+  {
+   "name": "desierto.rocas.lateral",
+   "file": "desierto.rocas.lateral.png",
+   "type": "image",
+   "anchor": [
+    1.0,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 12.0
+  },
+  {
+   "name": "desierto.rocas.lateral.der",
+   "file": "desierto.rocas.lateral.der.png",
+   "type": "image",
+   "anchor": [
+    0.0,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 12.0
+  },
+  {
+   "name": "desierto.cactus.1",
+   "file": "desierto.cactus.1.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
+  },
+  {
+   "name": "desierto.cactus.2",
+   "file": "desierto.cactus.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
+  },
+  {
+   "name": "desierto.roca.2",
+   "file": "desierto.roca.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
+  },
+  {
+   "name": "desierto.arbusto",
+   "file": "desierto.arbusto.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
+  },
+  {
+   "name": "desierto.roca.1",
+   "file": "desierto.roca.1.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
   }
  ]
 }
