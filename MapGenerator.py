@@ -51,7 +51,7 @@ class MapGenerator:
         return (3*(t*t)) - (2*(t*t*t))
     
     @staticmethod
-    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1,side=0,lod=None):
+    def objects(objetos,tramo,image,step,offset,x,random_x=0.0,random_step=0.0,profile=None,collidable=True,anim=False,frametime=0.1,side=0,lod=None,linea=None,cable_inicio=False):
         z_pos=tramo[0].z+offset
         z_end=tramo[-1].z+tramo[-1].length
         i=0
@@ -76,6 +76,9 @@ class MapGenerator:
                 obj.x_rel+=MapGenerator.rng.uniform(0,random_x)
             obj.collidable=collidable
             obj.side=side
+            obj.linea=linea
+            if cable_inicio and i==0:
+                obj.cable_inicio=True
             if lod!=None:
                 if i%8==0:
                     obj.lod_hasta=9999
@@ -135,3 +138,4 @@ class MapGenerator:
     def addLoadCircuit(s: Segment, z_rel, next_map):
         e = LoadCircuit(z_rel, next_map)
         s.events.append(e)
+

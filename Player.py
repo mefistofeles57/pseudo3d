@@ -42,7 +42,7 @@ FR_GIRO_EXTREMO=15   # frames pulsando hasta llegar al extremo
 FR_GIRO_MAX=20       # tope del contador: FR_GIRO_MAX-FR_GIRO_EXTREMO frames de giro suave al soltar
 LUCES_DESPL=[
     (0,0),(-1,0),(-3,0),(1,0),(3,0),
-    (0,-2),(0,-2),(0,-2),(0,-2),(0,-2),
+    (0,-2),(-1,-2),(-1,-2),(1,-2),(1,-2),
     (0,1),(0,1),(0,1),(0,1),(0,1)
 ]
 class Player(Car):
@@ -455,6 +455,7 @@ class Player(Car):
     def physics(self,i_acelerador,i_freno,i_volante,dt):
         K_curva=8.0
         K_stress = 2.0
+
         
         vs=self.getVS(self.context)
 
@@ -641,10 +642,9 @@ class Player(Car):
         return LUCES_DESPL[i]
     
     def despl_ruedas(self,i,fase):
-        # desplazamiento del patrón según el giro. Las cuestas quedan a cero hasta que se dibujen sus giros
-        if i>=FR_CAB:
+        # desplazamiento del patrón según el giro. La subida queda a cero hasta que se dibujen sus giros
+        if i>=FR_CAR:
             return (0,0)
-        #nivel y sentido del giro según la posición del frame
         giro=i%5
         if giro==0:
             return (0,0)
@@ -653,8 +653,9 @@ class Player(Car):
         else:
             sentido=1
         nivel=1
-        if giro==2 or giro==4:
-            if fase>0:
-                nivel=2
+        if i<FR_CAB:
+            if giro==2 or giro==4:
+                if fase>0:
+                    nivel=2
         dx=sentido*nivel
         return (dx,dx)

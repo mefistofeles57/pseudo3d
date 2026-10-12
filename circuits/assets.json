@@ -473,6 +473,144 @@
    ],
    "shadow": true,
    "escala": 12.0
+  },
+  {
+   "name": "obra.valla",
+   "file": "obra.valla.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
+  },
+  {
+   "name": "obra.cartel",
+   "file": "obra.cartel.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 20.0
+  },
+  {
+   "name": "obra.arena",
+   "file": "obra.arena.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 12.0
+  },
+  {
+   "name": "obrero.2",
+   "file": "obrero.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 12.0
+  },
+  {
+   "name": "pradera.vegetacion.1",
+   "file": "pradera.vegetacion.1.png",
+   "type": "image",
+   "anchor": [
+    0.0,
+    1.0
+   ],
+   "shadow": false,
+   "flip": true,
+   "escala": 6.0
+  },
+  {
+   "name": "pradera.valla",
+   "file": "pradera.valla.png",
+   "type": "image",
+   "anchor": [
+    0.0,
+    1.6
+   ],
+   "shadow": false,
+   "flip": true,
+   "escala": 6.0
+  },
+  {
+   "name": "pradera.vegetacion.2",
+   "file": "pradera.vegetacion.2.png",
+   "type": "image",
+   "anchor": [
+    0.0,
+    1.0
+   ],
+   "shadow": false,
+   "flip": true,
+   "escala": 6.0
+  },
+  {
+   "name": "pradera.posteluz",
+   "file": "pradera.posteluz.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 6.0
+  },
+  {
+   "name": "pradera.postevalla",
+   "file": "pradera.postevalla.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 6.0
+  },
+  {
+   "name": "cartel.cool",
+   "file": "cartel.cool.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 12.0
+  },
+  {
+   "name": "pradera.molino",
+   "file": "pradera.molino.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": false,
+   "ancho": 100,
+   "alto": 150,
+   "escala": 12.0
+  },
+  {
+   "name": "pradera.vaca",
+   "file": "pradera.vaca.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": false,
+   "flip": true,
+   "escala": 12.0
   }
  ]
 }

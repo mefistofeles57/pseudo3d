@@ -384,6 +384,8 @@ class Camera:
                 sombras.append((obj,p1,z-h,z+h))
 
 
+        cables=self.context.escenario.cables
+        ultimos={}
 
         for vs in reversed(self.frame_data.buffer):
             pc1=self.project(vs.end)
@@ -409,9 +411,17 @@ class Camera:
                     p1=self.project(Point(item.x,item.y,item.z))
                     profile=vs.visualProfile
                     profile.drawer.drawObj(s,p1,item,profile)
+                    if cables and item.linea!=None:
+                        lejano=ultimos.get(item.linea)
+                        if lejano!=None:
+                            self.drawCable(s,item.z,item.x_rel,lejano.z,lejano.x_rel,item.profile)
+                        ultimos[item.linea]=item
 
-
-
+        if cables:
+            for item in ultimos.values():
+                if not item.cable_inicio:
+                    prof=item.profile
+                    self.drawCable(s,item.z,item.x_rel,item.z-prof.cable_vano,item.x_rel,prof)
 
     def create_vertical_gradient(self,width, height, top_color, bottom_color):
         surface = pygame.Surface((width, height)).convert()
@@ -471,3 +481,56 @@ class Camera:
 
     def move_camera(self,mov):
         self.y_move=mov
+
+
+    def puntoCarretera(self,z):
+        buf=self.frame_data.buffer
+        if len(buf)==0:
+            return None
+        for vs in buf:
+            if vs.start.z<=z and z<vs.end.z:
+                pct=(z-vs.start.z)/(vs.end.z-vs.start.z)
+                return (vs.start.x+pct*vs.curve, vs.start.y+pct*vs.height)
+        # fuera de lo visible: se prolonga el primer o el último segmento con longitud
+        if z<buf[0].start.z:
+            candidatos=buf
+        else:
+            candidatos=reversed(buf)
+        for vs in candidatos:
+            largo=vs.end.z-vs.start.z
+            if largo>0:
+                pct=(z-vs.start.z)/largo
+                return (vs.start.x+pct*vs.curve, vs.start.y+pct*vs.height)
+        return None
+
+        
+    def drawCable(self,s,a_z,a_x,b_z,b_x,profile):
+        pa=self.puntoCarretera(a_z)
+        pb=self.puntoCarretera(b_z)
+        if pa==None or pb==None:
+            return
+        xa=pa[0]+a_x
+        ya=pa[1]+profile.cable_alto
+        xb=pb[0]+b_x
+        yb=pb[1]+profile.cable_alto
+        if a_z>b_z:
+            a_z,b_z,xa,xb,ya,yb=b_z,a_z,xb,xa,yb,ya
+        z_cerca=self.z+1.0
+        if b_z<=z_cerca:
+            return
+        # extremo detrás de la cámara: se recorta en el mundo contra z_cerca
+        if a_z<z_cerca:
+            t=(z_cerca-a_z)/(b_z-a_z)
+            xa=xa+(xb-xa)*t
+            ya=ya+(yb-ya)*t
+            a_z=z_cerca
+        N=12
+        for dx in profile.cable_dx:
+            p1=self.project(Point(xa+dx,ya,a_z))
+            p2=self.project(Point(xb+dx,yb,b_z))
+            caida=profile.cable_flecha*(p1.z+p2.z)/2
+            puntos=[]
+            for i in range(N+1):
+                t=i/N
+                puntos.append((p1.x+(p2.x-p1.x)*t, p1.y+(p2.y-p1.y)*t+caida*4*t*(1-t)))
+            pygame.draw.lines(s,profile.cable_color,False,puntos,1)

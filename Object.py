@@ -23,7 +23,9 @@ class Object:
         self.frame=0
         self.capas=()
         self.lod_hasta=9999
-        
+        self.linea=None
+        self.cable_inicio=False
+                
     def load_metadata(self,cache):
         self.metadata=cache.metadata[self.img]
 

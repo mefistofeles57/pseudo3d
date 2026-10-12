@@ -6,7 +6,7 @@ import asyncio
 from pathlib import Path
 from Estados import NONE,STARTING,GAMEOVER,GAMEOVER_FINAL,NORMAL,FINISH,PRELOADED
 from GameContext import GameContext
-from Point import Point
+from MapGenerator import MapGenerator
 from Message import Message
 from Resources import Resources
 
@@ -59,6 +59,7 @@ class Juego:
         self.sounds["gameover"].set_volume(0.2)
 
         pygame.display.set_caption(title)
+        pygame.display.set_icon(pygame.image.load(str(base/"img"/"icono.png")))
 
         self.width=width
         self.height=height
@@ -95,7 +96,15 @@ class Juego:
         #piezas fijas del HUD, compuestas la primera vez que se pintan
         self.hud_barra=None
         self.cache_alas={}        
- 
+
+         #portada: ajustada al alto de pantalla, centrada con laterales negros
+        self.portada = pygame.image.load(str(base/"img"/"portada.jpg")).convert()
+        #alto = self.screen_h
+        #ancho = round(portada.get_width() * alto / portada.get_height())
+        #self.portada = pygame.transform.smoothscale(portada, (ancho, alto))
+        self.portada_activa = True
+        self.msg_blink=False
+        self.acum_blink=0
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -111,7 +120,7 @@ class Juego:
                             self.context.changeStatus(NONE)
                     else:
                         self.running = False
-                        
+
     def update(self, dt):
         if self.context==None or self.context.estado == NONE:
             self.context=GameContext(self.screen,self,gen_scale=(1/self.gen_scale))
@@ -119,13 +128,29 @@ class Juego:
             self.context.player.x=0.0
             self.context.player.y=0.0
             self.context.player.z=self.context.camera.player_z
-            self.context.player.engine.start()
             #eliminar objetos
             self.context.changeStatus(PRELOADED)
             return
         if self.context.estado==PRELOADED:
-            self.context.changeStatus(STARTING)
-            return
+            if self.portada_activa:
+                self.acum_blink+=dt
+                if not self.msg_blink:
+                    if self.acum_blink>=0.25:
+                        self.acum_blink-=0.25
+                        self.msg_blink=True
+                else:
+                    if self.acum_blink>=1.0:
+                        self.acum_blink-=1.0
+                        self.msg_blink=False
+                if self.context.keys[pygame.K_RETURN]:
+                    self.portada_activa = False
+                    self.portada=None
+                    self.context.player.engine.start()
+                    self.context.changeStatus(STARTING)
+            else:
+                self.context.player.engine.start()
+                self.context.changeStatus(STARTING)
+                return
         if self.context.estado==STARTING:
             self.context.countdown-=dt
             self.context.countdown=max(self.context.countdown,0.0)
@@ -166,13 +191,36 @@ class Juego:
         self.print_hud()
 
         #countdown
-        if self.context.estado==STARTING:
+        if self.context.estado==PRELOADED:
+            if self.portada_activa:
+                posx=self.screen.get_width() // 2
+                posy=int(self.screen_h*0.9)
+                self.screen.fill((0,0,0))
+                rect = self.portada.get_rect(midtop=(posx, 0))
+                self.screen.blit(self.portada,rect)
+                if self.msg_blink:
+                    self.write_message("Press ENTER to play",posx,posy,font=self.font50)        
+
+        elif self.context.estado==STARTING:
             #self.write_message(f"{math.floor(self.context.countdown)+1:1.0f}",self.screen.get_width() // 2, self.screen.get_height() // 2, font=self.font150)
             self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{math.floor(self.context.countdown+1.0):1.0f}", self.screen.get_width() // 2, (self.screen.get_height() // 2)-50)
-        elif self.context.estado==GAMEOVER_FINAL or self.context.estado==FINISH:
+        elif self.context.estado==GAMEOVER_FINAL:
             rect = self.resources.gameover.get_rect(midtop=(self.screen.get_width() // 2, int(self.screen.get_height()*0.4)))
             self.screen.blit(self.resources.gameover,rect)
             self.write_message("Press ENTER to play again",self.screen_w // 2,int(self.screen_h*0.8),font=self.font50)
+        elif self.context.estado==FINISH:
+            posx=self.screen_w // 2
+            self.write_message("ROAD CLOSED",posx,int(self.screen_h*0.25))
+            y1=int(self.screen_h*0.42)
+            y2=int(self.screen_h*0.49)
+            ancho=self.font50.size("Leave your feedback on itch.io")[0]+60
+            alto=(y2-y1)+self.font50.get_height()+20
+            panel=pygame.Surface((ancho,alto),pygame.SRCALPHA)
+            panel.fill((0,0,0,120))
+            self.screen.blit(panel,panel.get_rect(midtop=(posx,y1-10)))
+            self.write_message("New stages every week!",posx,y1,font=self.font50)
+            self.write_message("Leave your feedback on itch.io",posx,y2,font=self.font50)
+            self.write_message("Press ENTER to play again",posx,int(self.screen_h*0.9),font=self.font50)
         else:
             #dibujar mensajes
             for msg in self.messages:
@@ -269,7 +317,7 @@ class Juego:
             midtop=(x,y)
         )
         shadow_rect = shadow.get_rect(
-            midtop=(x + 5, y+5)
+            midtop=(x + 2, y+2)
         )
 
         self.context.screen.blit(shadow, shadow_rect)
