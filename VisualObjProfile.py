@@ -9,3 +9,9 @@ class VisualObjProfile:
         self.cache=None
         self.collide_radius=0.0
         self.collide_radius2=0.0
+        self.cable=False
+        self.cable_alto=0.0
+        self.cable_dx=[]
+        self.cable_flecha=0.0
+        self.cable_vano=0.0
+        self.cable_color=(40,34,30)

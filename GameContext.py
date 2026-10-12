@@ -101,6 +101,21 @@ class GameContext:
         checkpoint_profile.shadow_height=0.3
         checkpoint_profile.shadow_offset_z=0.1
 
+
+        valla_profile=VisualObjProfile()
+        valla_profile.collide_radius=0.12
+        valla_profile.collide_radius2=0.12*0.12
+
+        poste_cable_profile=VisualObjProfile()
+        poste_cable_profile.collide_radius=0.05
+        poste_cable_profile.collide_radius2=0.05*0.05
+        poste_cable_profile.cable=True
+        poste_cable_profile.cable_alto=0.665
+        poste_cable_profile.cable_dx=[-0.079,0.079]
+        poste_cable_profile.cable_flecha=0.15
+        poste_cable_profile.cable_vano=6.0
+        poste_cable_profile.cable_color=(40,34,30)
+
         MapGenerator.setObjProfile(default_profile)
 
         discontinua_blanca = LineProfile(grosor=0.03, offset=0, freq=2, color=[(255,255,255),None])
@@ -117,6 +132,8 @@ class GameContext:
                 "poste": poste_profile,
                 "piedra": piedra_profile,
                 "checkpoint": checkpoint_profile,
+                "valla": valla_profile,
+                "poste_cable": poste_cable_profile,
             },
             line_profiles={
                 "discontinua_blanca": discontinua_blanca,
@@ -135,6 +152,7 @@ class GameContext:
 
 
         objects.sort(key=lambda obj: obj.z)
+
         self.road.objects=objects
             
 

@@ -18,6 +18,8 @@ class CircuitParser:
         "frametime": 0.1,
         # [d1, d2, d3]: todos hasta d1 segmentos, mitad hasta d2, cuarto hasta d3, octavo despues
         "lod": None,
+        "linea": None,
+        "cable_inicio": False,
     }
 
     def __init__(self, context, curves, heights, profiles=None, line_profiles=None, scene_profiles=None):
