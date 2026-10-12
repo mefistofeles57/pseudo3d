@@ -150,7 +150,7 @@ class Juego:
             else:
                 self.context.player.engine.start()
                 self.context.changeStatus(STARTING)
-                return
+            return
         if self.context.estado==STARTING:
             self.context.countdown-=dt
             self.context.countdown=max(self.context.countdown,0.0)
