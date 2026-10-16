@@ -2,6 +2,7 @@ import json
 
 from MapGenerator import MapGenerator
 from Road import Segment, Line
+from Event import TIPOS_ENEMIGO
 
 
 class CircuitParser:
@@ -454,6 +455,14 @@ class CircuitParser:
         speed = data.get("speed", 10.0)
         img = data.get("img","enemigo.1")
         side = self.get_side(data)
+        tipo = data.get("tipo", "deportivo")
+
+        # se valida aquí y no al saltar el evento, a mitad de carrera
+        if tipo not in TIPOS_ENEMIGO:
+            raise ValueError(
+                f"E tipo '{tipo}' desconocido "
+                f"(tipos: {', '.join(TIPOS_ENEMIGO)})"
+            )
 
         # Enemy
         MapGenerator.addEnemy(
@@ -462,7 +471,8 @@ class CircuitParser:
             x_rel,
             speed,
             img,
-            side
+            side,
+            tipo
         )
 
     # ============================================================

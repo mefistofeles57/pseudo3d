@@ -6,17 +6,14 @@ from abc import ABC, abstractmethod
 
 class Car(Object,ABC):
 
-#    LATERAL=0
-#    FRONT=1
-#    REAR=2
-
-#    @abstractmethod
-#    def action(self, other, tipo, col_dz, col_dx):
-#        pass
-#    @abstractmethod
-#    def reaction(self, other, tipo, vz, vx):
-#        pass
-
+    # reacciones
+    EMPUJE_FIJO=2.0         # vx mínima con la que se separan dos objetos al chocar
+    RECORTE_ALCANCE=0.3     # parte de su velocidad que pierde el que embiste por detrás a un coche
+    EMPUJON_ALCANCE=0.5     # parte de la diferencia de velocidad que gana el embestido
+    RECORTE_DECORADO=0.15   # parte de su velocidad que se pierde chocando de refilón con el decorado
+    UMBRAL_STUCK=1.0        # por debajo de esta velocidad, un choque con el decorado deja al jugador parado
+    FRACCION_FRONTAL=0.5    # golpe de frente si el desplazamiento lateral es menor que esta parte de la suma de radios
+    RECORTE_LATERAL=0.15    # parte de su velocidad que pierde cada coche en un golpe lateral entre coches
 
     def __init__(self):
         super().__init__()
@@ -24,6 +21,8 @@ class Car(Object,ABC):
         self.speed=0.0
         self.context=None
         self.last_side=0
+        self.masa=1.0
+        self.target_x_rel=0.0
         
 
     def sync_side(self,context):
@@ -37,6 +36,7 @@ class Car(Object,ABC):
         if self.side==0:
             self.side=1
             self.x_rel-=vs.w0
+            self.target_x_rel-=vs.w0
 
         d=vs.d_at(self.z)
         margen=self.profile.collide_radius
@@ -49,6 +49,7 @@ class Car(Object,ABC):
 
         if elegido!=self.side:
             self.x_rel=self.x_rel-2*d*elegido
+            self.target_x_rel=self.target_x_rel-2*d*elegido
             self.side=elegido
 
         self.last_side=self.side
@@ -123,92 +124,83 @@ class Car(Object,ABC):
 
         return distance_squared
 
+    def vel_lateral(self):
+        return self.vx
+
+    def es_coche(self,obj):
+        return obj.type==Car.CAR or obj.type==Car.PLAYER
+
+    def factor_masa(self,otro):
+        # masa es la inversa de la masa: el que menos pesa (masa mayor) se lleva más
+        suma=self.masa+otro.masa
+        if suma==0.0:
+            return 1.0
+        return 2.0*self.masa/suma
+
     def resolve_collision(self, other, dx):
-        if self.type==Car.CAR or self.type==Car.PLAYER:
-            m1=1.0
-            vx1 = self.vx
-            vz1 = self.speed
+        # dx: posición lateral relativa (yo - otro) en coordenadas comunes
+        dz=self.z-other.z
+        if dx>0.0:
+            lado=1
+        elif dx<0.0:
+            lado=-1
+        elif self.vel_lateral()>=0.0:
+            lado=1
         else:
-            m1=vx1=vz1=0.0
-
-        if other.type==Car.CAR or other.type==Car.PLAYER:
-            m2=1.0
-            vx2 = other.vx
-            vz2 = other.speed
+            lado=-1
+        radios=self.profile.collide_radius+other.profile.collide_radius
+        de_frente=abs(dx)<self.FRACCION_FRONTAL*radios
+        if self.es_coche(other):
+            self.choque_coche(other,lado,dz,de_frente)
         else:
-            m2=vx2=vz2=0.0
-        # Vector entre centros
-        dz = self.z - other.z
+            self.choque_decorado(lado,dz,de_frente)
 
-        dist = math.hypot(dx, dz)
-        if dist < 1e-6:
+    def choque_coche(self,other,lado,dz,de_frente):
+        v_yo=self.vel_lateral()
+        v_otro=other.vel_lateral()
+        if dz<0.0:
+            detras=self
+            delante=other
+        else:
+            detras=other
+            delante=self
+        se_acercan_x=(v_yo-v_otro)*lado<0.0
+        alcance=de_frente and detras.speed>delante.speed
+        if not se_acercan_x and not alcance:
+            #ya se están separando (el otro coche también llama a collide en su update)
             return
+        #separación lateral: parte fija + lo que el otro venía hacia mí + lo que yo ya me alejaba
+        empuje_yo=self.EMPUJE_FIJO+max(0.0,v_otro*lado)+max(0.0,v_yo*lado)
+        empuje_otro=self.EMPUJE_FIJO+max(0.0,-v_yo*lado)+max(0.0,-v_otro*lado)
+        self.vx=lado*empuje_yo*self.factor_masa(other)
+        other.vx=-lado*empuje_otro*other.factor_masa(self)
+        #alcance: el de detrás pierde velocidad y el de delante recibe un empujón
+        if alcance:
+            dv=detras.speed-delante.speed
+            recorte=min(1.0,self.RECORTE_ALCANCE*detras.factor_masa(delante))
+            detras.speed=detras.speed*(1.0-recorte)
+            delante.speed=delante.speed+self.EMPUJON_ALCANCE*dv*delante.factor_masa(detras)
+        self.context.root.playSound("choque",once=True)
+        #golpe lateral entre coches: los dos pierden algo de velocidad, el que menos pesa más
+        if not alcance:
+            self.speed=self.speed*(1.0-min(1.0,self.RECORTE_LATERAL*self.factor_masa(other)))
+            other.speed=other.speed*(1.0-min(1.0,self.RECORTE_LATERAL*other.factor_masa(self)))
 
-        # Normal del impacto
-        nx = dx / dist
-        nz = dz / dist
-
-        # Velocidades relativas
-        rvx = vx1 - vx2
-        rvz = vz1 - vz2
-
-        # Velocidad relativa sobre la normal
-        vn = rvx * nx + rvz * nz
-
-        # Ya se están separando
-        if vn > 0.0:
+    def choque_decorado(self,lado,dz,de_frente):
+        v_yo=self.vel_lateral()
+        se_acercan_x=v_yo*lado<0.0
+        se_acercan_z=dz<0.0 and self.speed>0.0
+        if not se_acercan_x and not se_acercan_z:
             return
-
-        #fuerza del impacto (para sonido o chispas)
-        impact = -vn
-
-        # Rebote:
-        # 0 = totalmente inelástico
-        # 1 = perfectamente elástico
-        restitution = 0.3
-
-        inv_mass_sum = m1 + m2
-        if inv_mass_sum == 0.0:
-            return
-
-        # Impulso
-        j = -(1.0 + restitution) * vn / inv_mass_sum
-
-        impulse_x = j * nx
-        impulse_z = j * nz
-
-        # Aplicar a ambos
-        vx1 += impulse_x * m1
-        vz1 += impulse_z * m1
-
-
-        vx2 -= impulse_x * m2
-        vz2 -= impulse_z * m2
-
-        # No existe marcha atrás
-        vz1 = max(0.0, vz1)
-        vz2 = max(0.0, vz2)
-
-        car2car_energy=2.0
-        energy_loss=0.5
-
-        if self.type!=Car.NONE and other.type!=Car.NONE:
-            energy_loss=car2car_energy
-
-        if self.type!=Car.NONE:
-            self.speed=vz1
-            self.vx=vx1*energy_loss
-
-        if other.type!=Car.NONE:
-            other.speed=vz2
-            other.vx=vx2*energy_loss
-
-        if self.type==Car.PLAYER and other.type==Car.NONE and self.speed<1e-6:
-            if self.context != None and self.context.estado == NORMAL:
+        if de_frente:
+            self.speed=0.0
+        else:
+            self.speed=self.speed*(1.0-self.RECORTE_DECORADO)
+            #el decorado no se mueve: solo cuenta la parte fija y lo que yo ya me alejaba
+            self.vx=lado*(self.EMPUJE_FIJO+max(0.0,v_yo*lado))
+        if self.type==Car.PLAYER and self.speed<self.UMBRAL_STUCK:
+            if self.context!=None and self.context.estado==NORMAL:
                 self.context.root.playSound("crash")
                 self.context.changeStatus(STUCK)
-        else:
-            self.context.root.playSound("choque",once=True)
-
-        return impact
-    
+                return
+        self.context.root.playSound("choque",once=True)

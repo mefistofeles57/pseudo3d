@@ -168,8 +168,10 @@ class GameContext:
             self.root.sounds["321go"].play()
         elif estado == GAMEOVER_FINAL:
             self.root.sounds["gameover"].play()
+            pygame.mixer.music.fadeout(1500)
         elif estado == FINISH:
             self.player.reset()
+            pygame.mixer.music.fadeout(1500)
 
         self.estado=estado
 

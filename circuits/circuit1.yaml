@@ -688,7 +688,6 @@ circuit:
         {command: "F", img: "arbol.3", x: 10.0, step_x: 1.0, step_z: 2.5, offset: 0.0, number: 1, random_x: 0.75, random_step: 1.5},
         {command: "F", img: "arbol.2", x: 15.0, step_x: 2.0, step_z: 7.0, offset: 1.0, number: 1, random_x: 1.50, random_step: 4.0},
 
-        {command: "E", segment: -20, x_rel: -0.25, speed: 12.5, img: "enemigo.2"},
 
         {command: "MK", segment: -40, img: "flecha.1", x: -0.25, z: 0.0, w: 0.5, h: 1.0},
         {command: "MK", segment: -41, img: "flecha.2", x: -0.25, z: 0.0, w: 0.5, h: 1.0},

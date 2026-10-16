@@ -371,30 +371,44 @@
   },
   {
    "name": "enemigo.1",
-   "file": "enemigo.1.scale.png",
+   "file": "enemigo.1.png",
    "type": "animation",
    "anchor": [
     0.5,
     1.0
    ],
    "shadow": true,
-   "ancho": 384,
-   "alto": 384,
-   "escala": 1.0,
+   "ancho": 64,
+   "alto": 33,
+   "escala": 6.0,
    "permanente": true
   },
   {
    "name": "enemigo.2",
-   "file": "enemigo.2.scale.png",
+   "file": "enemigo.2.png",
    "type": "animation",
    "anchor": [
     0.5,
     1.0
    ],
    "shadow": true,
-   "ancho": 384,
-   "alto": 384,
-   "escala": 1.0,
+   "ancho": 64,
+   "alto": 33,
+   "escala": 6.0,
+   "permanente": true
+  },
+  {
+   "name": "camion",
+   "file": "camion.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "ancho": 90,
+   "alto": 109,
+   "escala": 6.0,
    "permanente": true
   },
   {

@@ -272,18 +272,29 @@ class DefaultDrawer:
         #pl=self.context.camera.project(p3)
 
 
+        z=obj.z+shadow_offset_z
+        pp1=self.context.camera.project(Point(obj.x,obj.y,z))
+        pp_cerca=self.context.camera.project(Point(obj.x,obj.y,z-shadow_height))
+        pp_lejos=self.context.camera.project(Point(obj.x,obj.y,z+shadow_height))
+
         width=ancho*shadow_width_factor
         #la sombra no puede doblar la anchura, para que no se deforme
         max_h=width*0.5
-        #height=shadow_height*scale
-        height=min(max(2,abs(pp1.y-pp2.y)*2),max_h)
-
-        #dibuja en la superfice
-
-        #shadow = pygame.Surface((width, height), pygame.SRCALPHA)
+        #extremos reales en pantalla: por la perspectiva la mitad cercana es más alta que la lejana
+        y_lejos=pp_lejos.y
+        y_cerca=pp_cerca.y
+        height=max(2,y_cerca-y_lejos)
+        y=y_lejos
+        if height>max_h:
+            #se recorta alrededor del centro sin salirse de los extremos
+            height=max_h
+            y=pp1.y-max_h/2
+            if y<y_lejos:
+                y=y_lejos
+            if y+max_h>y_cerca:
+                y=y_cerca-max_h
 
         x=pp1.x - width // 2
-        y=pp1.y - height // 2
         pygame.draw.ellipse(
             self.shadow_surface,
             (shadow_color[0], shadow_color[1], shadow_color[2], shadow_alpha),      # RGBA

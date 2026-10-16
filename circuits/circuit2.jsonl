@@ -93,7 +93,7 @@
 {"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 25.714285714285715, "offset": 15.857, "random_x": 3.0, "random_step": 8.0, "collidable": false}
 {"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 30.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
 {"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 30.0, "offset": 25.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
-{"command": "E", "segment": -10, "x_rel": 0.4, "speed": 9.5, "img": "enemigo.1"}
+{"command": "E", "segment": -10, "x_rel": 0.4, "speed": 9.5, "img": "camion", "tipo": "camion"}
 {"command": "R", "segments": 70, "curve": "CR"}
 {"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}
 {"command": "O", "img": "desierto.cactus.2", "x": -3.0, "step": 4.0, "offset": 0.0, "random_x": -3.0, "random_step": 2.0, "collidable": false}
@@ -450,7 +450,7 @@
 {"command": "O", "img": "desierto.roca.2", "x": 7.0, "step": 25.714285714285715, "offset": 15.857, "random_x": 3.0, "random_step": 8.0, "collidable": false}
 {"command": "O", "img": "desierto.roca.1", "x": -8.0, "step": 30.0, "offset": 10.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
 {"command": "O", "img": "desierto.roca.2", "x": -8.0, "step": 30.0, "offset": 25.0, "random_x": 3.0, "random_step": 8.0, "collidable": false}
-{"command": "E", "segment": 10, "x_rel": 0.35, "speed": 9.0, "img": "enemigo.2"}
+{"command": "E", "segment": 10, "x_rel": 0.35, "speed": 9.0, "img": "camion", "tipo": "camion"}
 {"command": "E", "segment": 60, "x_rel": -0.35, "speed": 9.5, "img": "enemigo.1"}
 {"command": "R", "segments": 20, "w0": 1.3, "w1": 1.0}
 {"command": "O", "img": "desierto.cactus.1", "x": 3.0, "step": 4.0, "offset": 0.0, "random_x": 3.0, "random_step": 2.0, "collidable": false}

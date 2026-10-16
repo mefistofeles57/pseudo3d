@@ -107,10 +107,9 @@ class MapGenerator:
         s.road_marks.append(rm)
 
     @staticmethod
-    def addEnemy(s:Segment,z_rel, x_rel,speed,img,side=0):
-        e=EnemySpawn(z_rel,x_rel,speed,img,side)
+    def addEnemy(s:Segment,z_rel, x_rel,speed,img,side=0,tipo="deportivo"):
+        e=EnemySpawn(z_rel,x_rel,speed,img,side,tipo)
         s.events.append(e)
-
 
     @staticmethod
     def addCheckpoint(s:Segment,z_rel, time):

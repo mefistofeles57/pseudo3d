@@ -386,7 +386,7 @@ class Camera:
 
         cables=self.context.escenario.cables
         ultimos={}
-
+        
         for vs in reversed(self.frame_data.buffer):
             pc1=self.project(vs.end)
             pc2=self.project(vs.start)
@@ -416,12 +416,13 @@ class Camera:
                         if lejano!=None:
                             self.drawCable(s,item.z,item.x_rel,lejano.z,lejano.x_rel,item.profile)
                         ultimos[item.linea]=item
-
         if cables:
-            for item in ultimos.values():
-                if not item.cable_inicio:
-                    prof=item.profile
-                    self.drawCable(s,item.z,item.x_rel,item.z-prof.cable_vano,item.x_rel,prof)
+            for linea,item in ultimos.items():
+                if item.cable_inicio:
+                    continue
+                prof=item.profile
+                self.drawCable(s,item.z-prof.cable_vano,item.x_rel,item.z,item.x_rel,prof)
+
 
     def create_vertical_gradient(self,width, height, top_color, bottom_color):
         surface = pygame.Surface((width, height)).convert()
@@ -505,6 +506,17 @@ class Camera:
 
         
     def drawCable(self,s,a_z,a_x,b_z,b_x,profile):
+        if a_z>b_z:
+            a_z,b_z,a_x,b_x=b_z,a_z,b_x,a_x
+        # el plano de corte es donde empieza el buffer: ahí desaparecen los postes
+        z_cerca=self.z+self.near_plane
+        if b_z<=z_cerca:
+            return
+        # extremo cercano detrás del plano: el cable se corta ahí, sobre la carretera en esa z
+        if a_z<z_cerca:
+            t=(z_cerca-a_z)/(b_z-a_z)
+            a_x=a_x+(b_x-a_x)*t
+            a_z=z_cerca
         pa=self.puntoCarretera(a_z)
         pb=self.puntoCarretera(b_z)
         if pa==None or pb==None:
@@ -513,17 +525,6 @@ class Camera:
         ya=pa[1]+profile.cable_alto
         xb=pb[0]+b_x
         yb=pb[1]+profile.cable_alto
-        if a_z>b_z:
-            a_z,b_z,xa,xb,ya,yb=b_z,a_z,xb,xa,yb,ya
-        z_cerca=self.z+1.0
-        if b_z<=z_cerca:
-            return
-        # extremo detrás de la cámara: se recorta en el mundo contra z_cerca
-        if a_z<z_cerca:
-            t=(z_cerca-a_z)/(b_z-a_z)
-            xa=xa+(xb-xa)*t
-            ya=ya+(yb-ya)*t
-            a_z=z_cerca
         N=12
         for dx in profile.cable_dx:
             p1=self.project(Point(xa+dx,ya,a_z))

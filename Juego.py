@@ -58,6 +58,8 @@ class Juego:
         self.sounds["choque"].set_volume(0.5)
         self.sounds["gameover"].set_volume(0.2)
 
+        self.musica=str(base/"sound/music.ogg")
+
         pygame.display.set_caption(title)
         pygame.display.set_icon(pygame.image.load(str(base/"img"/"icono.png")))
 
@@ -117,6 +119,7 @@ class Juego:
                         if self.context!=None:
                             self.context.player.reset()
                             pygame.mixer.stop()
+                            pygame.mixer.music.stop()
                             self.context.changeStatus(NONE)
                     else:
                         self.running = False
@@ -156,6 +159,9 @@ class Juego:
             self.context.countdown=max(self.context.countdown,0.0)
             if self.context.countdown<=1e-6:
                 self.messages.append(Message(self.screen.get_width() // 2,int(self.screen.get_height() *0.425),self.resources.go,1.0))
+                pygame.mixer.music.load(self.musica)
+                pygame.mixer.music.set_volume(0.8)
+                pygame.mixer.music.play(loops=-1)
                 self.context.changeStatus(NORMAL)
         elif self.context.estado!=GAMEOVER and self.context.estado!=GAMEOVER_FINAL and self.context.estado!=FINISH:
             self.context.timer-=dt

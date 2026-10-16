@@ -1,11 +1,18 @@
 from Enemy import Enemy
 from Message import Message
 from Estados import FINISH
+from Enemy import Deportivo,Camion
 from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
     from GameContext import GameContext
+
+
+TIPOS_ENEMIGO={
+    "deportivo":Deportivo,
+    "camion":Camion,
+}
 
 class Event:
     def __init__(self,z):
@@ -13,22 +20,24 @@ class Event:
         self.enabled=True
 
 class EnemySpawn(Event):
-    def __init__(self,z,x_rel,speed,img,side=0):
+    def __init__(self,z,x_rel,speed,img,side=0,tipo="deportivo"):
         super().__init__(z)
         self.x_rel=x_rel
         self.speed=speed
         self.img=img
         self.side=side
+        self.tipo=tipo
 
     def execute(self,context:"GameContext"):
         if self.enabled:
-            #crear un nuevo Enemy en el horizonte, posicion x_rel y velocidad speed
+            #crear un nuevo enemigo del tipo indicado en el horizonte, posicion x_rel y velocidad speed
             horizonte=context.camera.view_distance
-            enemigo=Enemy(self.img,self.x_rel, horizonte+context.camera.z, self.speed, context,self.side)
+            clase=TIPOS_ENEMIGO[self.tipo]
+            enemigo=clase(self.img,self.x_rel, horizonte+context.camera.z, self.speed, context,self.side)
             #añadir el enemigo a la lista de objetos temporales
             context.frame_data.tempobjbuffer.append(enemigo)
             self.enabled=False
-
+            
 class Checkpoint(Event):
     def __init__(self,z,time):
         super().__init__(z)
