@@ -78,44 +78,44 @@
    "file": "arbol.1.png",
    "type": "image",
    "anchor": [
-    0.55,
+    0.53,
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "arbol.2",
    "file": "arbol.2.png",
    "type": "image",
    "anchor": [
-    0.5,
+    0.43,
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "arbol.3",
    "file": "arbol.3.png",
    "type": "image",
    "anchor": [
-    0.5,
+    0.49,
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "arbol.4",
    "file": "arbol.2.png",
    "type": "image",
    "anchor": [
-    0.55,
+    0.43,
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "arbusto",
@@ -125,7 +125,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "farola",
@@ -153,13 +153,13 @@
   },
   {
    "name": "piedra",
-   "file": "piedra.png",
+   "file": "roca.png",
    "type": "image",
    "anchor": [
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "quitamiedos",
@@ -287,33 +287,33 @@
   },
   {
    "name": "vegetacion.1",
-   "file": "vegetacion.1.png",
+   "file": "vegetacion.png",
    "type": "image",
    "anchor": [
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "vegetacion.2",
-   "file": "vegetacion.2.png",
+   "file": "vegetacion.png",
    "type": "image",
    "anchor": [
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "vegetacion.3",
-   "file": "vegetacion.3.png",
+   "file": "vegetacion.png",
    "type": "image",
    "anchor": [
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 12.0
   },
   {
    "name": "mastil",
