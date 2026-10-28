@@ -16,6 +16,7 @@ if TYPE_CHECKING:
 
 class DefaultDrawer:
 
+
     def __init__(self,context):
         # Superficie temporal reutilizable para sombras
         self.context=context
@@ -25,6 +26,9 @@ class DefaultDrawer:
         ).convert_alpha()
         # rectángulo de la superficie de sombras usado en el segmento actual
         self.sucio=None
+        self.luz_surface=pygame.Surface((context.screen.get_width(),context.screen.get_height())).convert()
+        self.luz_surface.fill((0,0,0))
+        self.luz_sucio=None
 
     def clear_shadow_surface(self,p1:Point,p2:Point):
         # la superficie de sombras queda limpia al terminar cada segmento:
@@ -74,6 +78,11 @@ class DefaultDrawer:
 
         num_rc=len(profile.road_colors)
         road_color=profile.road_colors[vs.index%num_rc]
+        nivel=0
+        if profile.luz_color!=None:
+            nivel=self.nivelLuz(c,vs)
+            if nivel>0:
+                road_color=self.iluminar(road_color,nivel,profile)
         num_osc=len(profile.outside_colors)
         outside_color=profile.outside_colors[vs.index%num_osc]
         brillo=self.brillo(vs.start.z-c.z,c.view_distance)
@@ -105,11 +114,11 @@ class DefaultDrawer:
             pc2_f.x+=vs.w0*pc2.z
             pc1_f.x+=vs.w1*pc1.z
             
-            self.draw_road(surface,c,vs,pc1_despl,pc2_despl,road_color,brillo,(a,a),(a,a))
-            self.draw_road(surface,c,vs,pc1_f,pc2_f,road_color,brillo,(a,a),(a,a))
+            self.draw_road(surface,c,vs,pc1_despl,pc2_despl,road_color,brillo,(a,a),(a,a),nivel)
+            self.draw_road(surface,c,vs,pc1_f,pc2_f,road_color,brillo,(a,a),(a,a),nivel)
         else:
             self.draw_exterior(surface,c,vs,pc1,pc2,outside_color)
-            self.draw_road(surface,c,vs,pc1,pc2,road_color,brillo,(a,a),(a,a))
+            self.draw_road(surface,c,vs,pc1,pc2,road_color,brillo,(a,a),(a,a),nivel)
 
         #dibujos
         #solo no tiene clipping
@@ -162,8 +171,8 @@ class DefaultDrawer:
             puntos=((pc1.x,pc1.y),(pc1.x-g1,pc1.y),(pc2.x-g0,pc2.y),(pc2.x,pc2.y))
             self.pinta(surface,puntos,outside_color)
 
-    def draw_road(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2,road_color,brillo,arcen_izq,arcen_der):
-        
+    def draw_road(self,surface:pygame.Surface,c:Camera,vs:VisibleSegment,pc1,pc2,road_color,brillo,arcen_izq,arcen_der,nivel=0):
+                
         profile=vs.visualProfile
 
         p1=Point( pc1.x-(vs.w1*pc1.z) , pc1.y )
@@ -180,6 +189,8 @@ class DefaultDrawer:
             mod=vs.index%profile.arcen_freq
             color_arcen=profile.arcen_color[mod]
             if color_arcen!=None:
+                if nivel>0:
+                    color_arcen=self.iluminar(color_arcen,nivel,profile)
                 color_arcen=(
                     min(255,color_arcen[0]*brillo),
                     min(255,color_arcen[1]*brillo),
@@ -228,7 +239,10 @@ class DefaultDrawer:
                 shadow_offset_z=obj.profile.shadow_offset_z
                 z=obj.z+shadow_offset_z
                 if z+shadow_height>=vs.start.z and z-shadow_height<=vs.end.z:
-                    self.drawItemShadow(surface,w,obj.profile,obj,vs,pc1,pc2)
+                    if obj.profile.sombra_suelo:
+                        self.drawSombraSuelo(w,h,p1,obj.profile,obj)
+                    else:
+                        self.drawItemShadow(surface,w,obj.profile,obj,vs,pc1,pc2)
             return
         x=p1.x-w*metadata.anchor_x
         y=p1.y-h*metadata.anchor_y
@@ -387,3 +401,86 @@ class DefaultDrawer:
             p_ant=p
             if p_ant.z>=vs.end.z:
                 break
+
+
+    def drawSombraSuelo(self,ancho,alto,p1,profile,obj):
+        #sombra pegada al sprite: elipse proporcional a su tamaño en pantalla, apoyada en su base
+        width=ancho*profile.shadow_width_factor
+        x=p1.x-ancho*obj.metadata.anchor_x-(width-ancho)/2
+        y=p1.y-profile.sombra_delante*alto
+        height=(profile.sombra_delante+profile.sombra_atras)*alto
+        c=profile.shadow_color
+        pygame.draw.ellipse(self.shadow_surface,(c[0],c[1],c[2],profile.shadow_alpha),(x,y,width,height))
+        r=pygame.Rect(math.floor(x)-1,math.floor(y)-1,math.ceil(width)+3,math.ceil(height)+3)
+        r=r.clip(self.shadow_surface.get_rect())
+        if r.width==0 or r.height==0:
+            return
+        if self.sucio is None:
+            self.sucio=r
+        else:
+            self.sucio.union_ip(r)
+
+
+    def prepararLuces(self,manchas):
+        #todas las manchas del frame se pintan una sola vez; cada segmento solo copia su franja
+        self.luz_sucio=None
+        for i in range(len(manchas)):
+            elipses,z_min,z_max=manchas[i]
+            for rect,color in elipses:
+                pygame.draw.ellipse(self.luz_surface,color,rect)
+            r=pygame.Rect(elipses[0][0]).inflate(4,4)
+            manchas[i]=(elipses,z_min,z_max,r)
+            if self.luz_sucio is None:
+                self.luz_sucio=r.copy()
+            else:
+                self.luz_sucio.union_ip(r)
+
+    def drawLuces(self,surface,vs,pc1,pc2,manchas):
+        sucio=None
+        for elipses,z_min,z_max,r in manchas:
+            if z_max<vs.start.z or z_min>vs.end.z:
+                continue
+            if sucio is None:
+                sucio=r.copy()
+            else:
+                sucio.union_ip(r)
+        if sucio is None:
+            return
+        y1=int(pc1.y)
+        y2=int(min(pc2.y,surface.get_height()))
+        franja=pygame.Rect(0,y1,self.luz_surface.get_width(),y2-y1+1)
+        area=sucio.clip(franja)
+        if area.width>0 and area.height>0:
+            surface.blit(self.luz_surface,area.topleft,area,special_flags=pygame.BLEND_RGB_ADD)
+
+    def limpiarLuces(self):
+        if self.luz_sucio is not None:
+            self.luz_surface.fill((0,0,0),self.luz_sucio.clip(self.luz_surface.get_rect()))
+            self.luz_sucio=None
+
+
+    def nivelLuz(self,c,vs):
+        #luz de faros que recibe el centro del segmento, en escalones 0..len(umbrales)
+        profile=vs.visualProfile
+        zc=(vs.start.z+vs.end.z)/2
+        luz=0.0
+        for z in c.frame_data.faros:
+            t=zc-z
+            if t>profile.faro_inicio and t<profile.faro_fin:
+                #sube hasta el pico y luego se apaga: lo mas cercano, que en pantalla es enorme, queda suave
+                if t<profile.faro_pico:
+                    f=(t-profile.faro_inicio)/(profile.faro_pico-profile.faro_inicio)
+                else:
+                    f=1.0-(t-profile.faro_pico)/(profile.faro_fin-profile.faro_pico)
+                luz+=profile.faro_intensidad*f
+        nivel=0
+        for umbral in profile.luz_umbrales:
+            if luz>=umbral:
+                nivel+=1
+        return nivel
+
+    def iluminar(self,color,nivel,profile):
+        #mezcla el color hacia el de la luz segun el nivel
+        k=profile.luz_mezcla[nivel]
+        lc=profile.luz_color
+        return (color[0]+(lc[0]-color[0])*k,color[1]+(lc[1]-color[1])*k,color[2]+(lc[2]-color[2])*k)

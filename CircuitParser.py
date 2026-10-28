@@ -352,15 +352,18 @@ class CircuitParser:
 
         z_rel = data.get("z", 0.25)
         time = data.get("time", 55.0)
+        # imagen y posicion del poste: opcionales para escenarios con otra version o ancho
+        img = data.get("img", "checkpoint")
+        x = data.get("x", 1.3)
 
         # Asset
         self.objects = MapGenerator.objects(
             self.objects,
             [s],
-            "checkpoint",
+            img,
             step=1.0,
             offset=0.5,
-            x=1.3,
+            x=x,
             profile=self.profiles["checkpoint"]
         )
 

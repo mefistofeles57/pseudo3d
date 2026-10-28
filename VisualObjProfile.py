@@ -15,3 +15,14 @@ class VisualObjProfile:
         self.cable_flecha=0.0
         self.cable_vano=0.0
         self.cable_color=(40,34,30)
+        self.sombra_suelo=False
+        self.sombra_atras=0.045
+        self.sombra_delante=0.10
+        #farolas
+        self.luz=False
+        self.luz_color=(255,158,74)
+        self.luz_ancho=1.3
+        self.luz_alto=0.15
+        self.luz_hacia_centro=0.3
+        self.luz_offset_z=0.0
+        self.luz_escalones=[(1.0,0.15),(0.7,0.3),(0.4,0.45)]        

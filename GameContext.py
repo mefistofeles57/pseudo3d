@@ -1,6 +1,6 @@
 import pygame
 from MapGenerator import MapGenerator
-from Escenario import RecursosEscenario,Bosque,DesiertoRoca,Pradera
+from Escenario import RecursosEscenario,Bosque,DesiertoRoca,Pradera,Noche
 from Road import Road,Line,LineProfile
 from Camera import Camera
 from Player import Player
@@ -30,6 +30,7 @@ class GameContext:
             "bosque": Bosque(self,self.recursos_escenario),
             "desierto_roca": DesiertoRoca(self,self.recursos_escenario),
             "pradera": Pradera(self,self.recursos_escenario),
+            "noche": Noche(self,self.recursos_escenario),
         }
         self.escenario=self.escenarios["bosque"]
 
@@ -116,12 +117,27 @@ class GameContext:
         poste_cable_profile.cable_vano=6.0
         poste_cable_profile.cable_color=(40,34,30)
 
+        farola_profile=VisualObjProfile()
+        farola_profile.shadow_color=(0,0,0)
+        farola_profile.shadow_alpha=80
+        farola_profile.shadow_width_factor=1.4
+        farola_profile.shadow_height=0.2
+        farola_profile.collide_radius=0.07
+        farola_profile.collide_radius2=0.07*0.07
+        farola_profile.luz=True
+        farola_profile.luz_ancho=1.3
+        farola_profile.luz_alto=0.1
+        farola_profile.luz_hacia_centro=0.25
+        farola_profile.luz_escalones=[(1.0,0.2),(0.7,0.35),(0.4,0.5)]        
+
         MapGenerator.setObjProfile(default_profile)
 
         discontinua_blanca = LineProfile(grosor=0.03, offset=0, freq=2, color=[(255,255,255),None])
         continua_blanca = LineProfile(grosor=0.02, offset=0, freq=1, color=[(255,255,255)])
         discontinua_arena = LineProfile(grosor=0.03, offset=0, freq=2, color=[(232,217,160),None])
         continua_arena = LineProfile(grosor=0.02, offset=0, freq=1, color=[(232,217,160)])
+        discontinua_amarilla = LineProfile(grosor=0.03, offset=0, freq=2, color=[(242,196,64),None])
+        continua_amarilla = LineProfile(grosor=0.03, offset=0, freq=1, color=[(242,196,64)])
 
         parser = CircuitParser(
             self,
@@ -134,12 +150,15 @@ class GameContext:
                 "checkpoint": checkpoint_profile,
                 "valla": valla_profile,
                 "poste_cable": poste_cable_profile,
+                "farola": farola_profile,
             },
             line_profiles={
                 "discontinua_blanca": discontinua_blanca,
                 "continua_blanca": continua_blanca,
                 "discontinua_arena": discontinua_arena,
                 "continua_arena": continua_arena,
+                "discontinua_amarilla": discontinua_amarilla,
+                "continua_amarilla": continua_amarilla,
             },
             scene_profiles=self.escenarios
         )

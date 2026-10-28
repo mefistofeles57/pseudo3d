@@ -1,0 +1,555 @@
+# circuito del bioma noche. Se llega desde desierto y pradera; siguiente: ciudad (por ahora termina en obra)
+# ancho 0.75 (+0.3 de arcen = 1.05), dos carriles en x -0.37/0.37; quitamiedos (solo curvas cerradas) y farolas de recta a 1.15; farolas de curva y señales a 1.3; chopos en 3 capas a 1.45/2.3/3.3 (1 junto al quitamiedos)
+{"command": "escenario", "tipo": "noche"}
+{"command": "LINE", "profile": "discontinua_amarilla", "position": 0.0, "x": 0.015}
+{"command": "LINE", "profile": "continua_amarilla", "position": -1.05, "x": 0.01}
+{"command": "LINE", "profile": "continua_amarilla", "position": 1.05, "x": -0.01}
+{"command": "block", "name": "entrada_noche"}
+{"command": "R", "segments": 20, "w0": 1.0}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "CHK", "segment": 0, "z": 0.25, "time": 50.0, "img": "noche.checkpoint", "x": 1.35}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.75, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.25, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.25, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "E", "segment": 15, "x_rel": -0.37, "speed": 9.0, "img": "noche.enemigo.2"}
+{"command": "block", "name": "avenida"}
+{"command": "R", "segments": 60}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 20, "x_rel": 0.37, "speed": 9.2, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 40, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "E", "segment": 20, "x_rel": 0.37, "speed": 7.5, "img": "noche.camion", "tipo": "camion"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 40, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "E", "segment": 10, "x_rel": -0.37, "speed": 9.5, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 60}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "O", "img": "rasante", "step": 100.0, "offset": 52.0, "x": 1.3, "collidable": true}
+{"command": "O", "img": "rasante", "step": 100.0, "offset": 52.0, "x": -1.3, "collidable": true}
+{"command": "block", "name": "rasantes_oscuras"}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "E", "segment": 10, "x_rel": 0.37, "speed": 9.0, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "E", "segment": 15, "x_rel": -0.37, "speed": 9.4, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 25, "height": "HH"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 25, "height": "DH"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "curva.s", "step": 100.0, "offset": 12.0, "x": 1.3, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 100.0, "offset": 12.0, "x": -1.3, "collidable": true}
+{"command": "MK", "segment": -10, "img": "flecha.1.amarillo", "x": -0.625, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -11, "img": "flecha.2.amarillo", "x": -0.625, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -10, "img": "flecha.1.amarillo", "x": 0.125, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -11, "img": "flecha.2.amarillo", "x": 0.125, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "block", "name": "enlazadas_1"}
+{"command": "R", "segments": 40, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "E", "segment": 10, "x_rel": 0.37, "speed": 9.0, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 40, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "E", "segment": 20, "x_rel": 0.37, "speed": 9.3, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 40, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "R", "segments": 40, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "E", "segment": 15, "x_rel": -0.37, "speed": 9.6, "img": "noche.enemigo.1"}
+{"command": "block", "name": "checkpoint_2"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "CHK", "segment": 0, "z": 0.25, "time": 50.0, "img": "noche.checkpoint", "x": 1.35}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.75, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.25, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.25, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "E", "segment": 25, "x_rel": -0.37, "speed": 9.0, "img": "noche.enemigo.2"}
+{"command": "block", "name": "ondulado"}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 10, "x_rel": -0.37, "speed": 9.2, "img": "noche.enemigo.2"}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 5, "x_rel": 0.37, "speed": 8.0, "img": "noche.camion", "tipo": "camion"}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 20, "x_rel": -0.37, "speed": 9.5, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "O", "img": "curva.s", "step": 100.0, "offset": 32.0, "x": 1.3, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 100.0, "offset": 32.0, "x": -1.3, "collidable": true}
+{"command": "MK", "segment": -10, "img": "flecha.1.amarillo", "x": -0.625, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -11, "img": "flecha.2.amarillo", "x": -0.625, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -10, "img": "flecha.1.amarillo", "x": 0.125, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -11, "img": "flecha.2.amarillo", "x": 0.125, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "block", "name": "enlazadas_cerradas"}
+{"command": "R", "segments": 35, "curve": "CHR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.quitamiedos", "step": 0.12, "offset": 0.03, "x": -1.15, "lod": [14, 20, 24]}
+{"command": "O", "img": "noche.poste", "step": 1.0, "offset": 0.1, "x": -1.15, "profile": "poste"}
+{"command": "E", "segment": 15, "x_rel": -0.37, "speed": 9.0, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 35, "curve": "CHL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.quitamiedos", "step": 0.12, "offset": 0.03, "x": 1.15, "lod": [14, 20, 24]}
+{"command": "O", "img": "noche.poste", "step": 1.0, "offset": 0.1, "x": 1.15, "profile": "poste"}
+{"command": "R", "segments": 30, "curve": "CHR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.quitamiedos", "step": 0.12, "offset": 0.03, "x": -1.15, "lod": [14, 20, 24]}
+{"command": "O", "img": "noche.poste", "step": 1.0, "offset": 0.1, "x": -1.15, "profile": "poste"}
+{"command": "E", "segment": 10, "x_rel": 0.37, "speed": 9.3, "img": "noche.enemigo.2"}
+{"command": "R", "segments": 35, "curve": "CHL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.quitamiedos", "step": 0.12, "offset": 0.03, "x": 1.15, "lod": [14, 20, 24]}
+{"command": "O", "img": "noche.poste", "step": 1.0, "offset": 0.1, "x": 1.15, "profile": "poste"}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 45, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "block", "name": "recta_oscura"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "E", "segment": 20, "x_rel": -0.37, "speed": 9.4, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 30, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "E", "segment": 10, "x_rel": 0.37, "speed": 9.0, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "rasante", "step": 100.0, "offset": 22.0, "x": 1.3, "collidable": true}
+{"command": "O", "img": "rasante", "step": 100.0, "offset": 22.0, "x": -1.3, "collidable": true}
+{"command": "R", "segments": 35, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "R", "segments": 35, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "block", "name": "checkpoint_3"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "CHK", "segment": 0, "z": 0.25, "time": 45.0, "img": "noche.checkpoint", "x": 1.35}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.75, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.25, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.25, "z": 0.25, "w": 0.5, "h": 0.5}
+{"command": "E", "segment": 20, "x_rel": -0.37, "speed": 9.2, "img": "noche.enemigo.1"}
+{"command": "O", "img": "curva.s", "step": 100.0, "offset": 32.0, "x": 1.3, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 100.0, "offset": 32.0, "x": -1.3, "collidable": true}
+{"command": "MK", "segment": -10, "img": "flecha.1.amarillo", "x": -0.625, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -11, "img": "flecha.2.amarillo", "x": -0.625, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -10, "img": "flecha.1.amarillo", "x": 0.125, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "MK", "segment": -11, "img": "flecha.2.amarillo", "x": 0.125, "z": 0.0, "w": 0.5, "h": 1.0}
+{"command": "block", "name": "enlazadas_finales"}
+{"command": "R", "segments": 40, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "E", "segment": 15, "x_rel": 0.37, "speed": 9.5, "img": "noche.enemigo.2"}
+{"command": "R", "segments": 40, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "H"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "height": "D"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 10, "x_rel": -0.37, "speed": 8.5, "img": "noche.camion", "tipo": "camion"}
+{"command": "R", "segments": 45, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "R", "segments": 45, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "E", "segment": 20, "x_rel": -0.37, "speed": 9.6, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30, "curve": "CHL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.quitamiedos", "step": 0.12, "offset": 0.03, "x": 1.15, "lod": [14, 20, 24]}
+{"command": "O", "img": "noche.poste", "step": 1.0, "offset": 0.1, "x": 1.15, "profile": "poste"}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "R", "segments": 30, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "block", "name": "recta_final"}
+{"command": "R", "segments": 60}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 30, "x_rel": 0.37, "speed": 9.3, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 40, "curve": "CR"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.3, "profile": "farola"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "E", "segment": 10, "x_rel": -0.37, "speed": 9.0, "img": "noche.enemigo.1"}
+{"command": "R", "segments": 30, "curve": "CL"}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.3, "profile": "farola"}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 0.0, "x": 1.45, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.0, "offset": 1.0, "x": 2.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol", "step": 2.5, "offset": 0.5, "x": 3.3, "random_x": 0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 1.0, "x": -1.45, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.0, "offset": 0.0, "x": -2.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.arbol.flip", "step": 2.5, "offset": 1.5, "x": -3.3, "random_x": -0.2, "random_step": 0.5, "collidable": false, "lod": [12, 18, 24]}
+{"command": "O", "img": "noche.farola.flip", "step": 10.0, "offset": 0.0, "x": -1.15, "profile": "farola"}
+{"command": "O", "img": "noche.farola", "step": 10.0, "offset": 5.0, "x": 1.15, "profile": "farola"}
+{"command": "block", "name": "obra_final"}
+{"command": "R", "segments": 25, "w0": 0.75, "w1": 0.75}
+{"command": "O", "img": "obra.cartel", "x": -2.5, "step": 100.0, "offset": 14.5, "collidable": false}
+{"command": "O", "img": "obra.cartel", "x": 2.5, "step": 100.0, "offset": 14.5, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": -0.94, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": -0.31, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": 0.31, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": 0.94, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": -1.6, "step": 100.0, "offset": 13.5, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": 1.7, "step": 100.0, "offset": 13.8, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": -0.35, "step": 100.0, "offset": 10.5, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": 2.3, "step": 100.0, "offset": 9.0, "collidable": false}
+{"command": "O", "img": "obrero.2", "x": -0.55, "step": 100.0, "offset": 8.5, "collidable": false}
+{"command": "O", "img": "obrero.2", "x": 0.6, "step": 100.0, "offset": 9.5, "collidable": false}
+{"command": "FINISH", "segment": 6, "z": 0.5}

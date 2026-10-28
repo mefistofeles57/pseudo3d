@@ -47,6 +47,10 @@ LUCES_DESPL=[
 ]
 class Player(Car):
 
+
+    AMPLITUD_DERRAPE=0.002     # ~±1,6 px bajo el coche en el derrape más fuerte
+    FRECUENCIA_DERRAPE=2.0  
+
     def __init__(self,context:"GameContext"):
         super().__init__()
         self.context=context
@@ -107,8 +111,11 @@ class Player(Car):
         profile.shadow_width_factor=1.4
         profile.shadow_height=0.20
         profile.shadow_offset_z=0.0
-        profile.collide_radius=0.15
-        profile.collide_radius2=0.15*0.15
+        profile.sombra_suelo=True
+        profile.sombra_atras=0.1
+        profile.sombra_delante=0.2
+        profile.collide_radius=0.20
+        profile.collide_radius2=0.20*0.20
 
         profile.cache=self.cache
         self.profile=profile
@@ -183,8 +190,8 @@ class Player(Car):
         if self.context.estado==NORMAL or self.context.estado==STARTING or self.context.estado==GAMEOVER or self.context.estado==GAMEOVER_FINAL:
 
             if self.context.estado!=GAMEOVER and self.context.estado!=GAMEOVER_FINAL:
-                k_freno=self.context.keys[pygame.K_x]
-                k_acel=self.context.keys[pygame.K_z]
+                k_freno=self.context.keys[pygame.K_x] or self.context.keys[pygame.K_DOWN]
+                k_acel=self.context.keys[pygame.K_z] or self.context.keys[pygame.K_UP]
                 k_vol_r=self.context.keys[pygame.K_RIGHT]
                 k_vol_l=self.context.keys[pygame.K_LEFT]
             else:
@@ -408,11 +415,13 @@ class Player(Car):
 
         return material
 
-    def mueve_camera(self,m:Material):
-        mov=0.0
-
+    def mueve_camera(self,m:Material,factor_humo):
+        #vibracion por material
         mov=m.amplitud*math.sin(self.z*m.frecuencia)
-
+        #vibracion del derrape: empieza con el humo (factor>0.5) y crece con el
+        if factor_humo>0.5:
+            intensidad=(factor_humo-0.5)/0.5
+            mov+=self.AMPLITUD_DERRAPE*intensidad*math.sin(self.z*self.FRECUENCIA_DERRAPE)
         self.context.camera.move_camera(mov)
 
     def reset(self):
@@ -631,7 +640,7 @@ class Player(Car):
                 self.x_rel=lim_der
                 self.vx=0.0
 
-        self.mueve_camera(material)
+        self.mueve_camera(material,factor_humo)
 
         dz=self.speed*dt
         self.vx+=self.c*dz#*factor_v

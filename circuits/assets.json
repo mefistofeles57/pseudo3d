@@ -137,7 +137,7 @@
    ],
    "flip": true,
    "shadow": true,
-   "escala": 1.0
+   "escala": 8.0
   },
   {
    "name": "palmera",
@@ -169,7 +169,7 @@
     0.5,
     2.0
    ],
-   "escala": 1.0
+   "escala": 6.0
   },
   {
    "name": "quitamiedos.down",
@@ -179,7 +179,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 6.0
   },
   {
    "name": "quitamiedos.doble",
@@ -189,7 +189,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 6.0
   },
   {
    "name": "poste",
@@ -233,7 +233,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 8.0
   },
   {
    "name": "pitbox.2",
@@ -243,7 +243,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 8.0
   },
   {
    "name": "pitbox.3",
@@ -253,7 +253,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 8.0
   },
   {
    "name": "start",
@@ -334,7 +334,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 10.0
   },
   {
    "name": "cartel.2",
@@ -345,7 +345,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 10.0
   },
   {
    "name": "cartel.3",
@@ -356,7 +356,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 10.0
   },
   {
    "name": "cartel.4",
@@ -367,7 +367,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 10.0
   },
   {
    "name": "enemigo.1",
@@ -380,7 +380,7 @@
    "shadow": true,
    "ancho": 64,
    "alto": 33,
-   "escala": 6.0,
+   "escala": 7.0,
    "permanente": true
   },
   {
@@ -394,7 +394,7 @@
    "shadow": true,
    "ancho": 64,
    "alto": 33,
-   "escala": 6.0,
+   "escala": 7.0,
    "permanente": true
   },
   {
@@ -408,7 +408,7 @@
    "shadow": true,
    "ancho": 90,
    "alto": 109,
-   "escala": 6.0,
+   "escala": 8.0,
    "permanente": true
   },
   {
@@ -625,6 +625,178 @@
    "shadow": false,
    "flip": true,
    "escala": 12.0
+  },
+  {
+   "name": "noche.farola",
+   "file": "farola.png",
+   "type": "image",
+   "anchor": [
+    0.7,
+    1.0
+   ],
+   "flip": true,
+   "shadow": true,
+   "escala": 16.0,
+   "filtro": "noche",
+   "conservar": [
+    [
+     251,
+     242,
+     54
+    ],
+    [
+     143,
+     86,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "noche.quitamiedos",
+   "file": "quitamiedos.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    2.0
+   ],
+   "escala": 6.0,
+   "filtro": "noche"
+  },
+  {
+   "name": "noche.quitamiedos.down",
+   "file": "quitamiedos.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 6.0,
+   "filtro": "noche"
+  },
+  {
+   "name": "noche.quitamiedos.doble",
+   "file": "quitamiedos.doble.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "escala": 6.0,
+   "filtro": "noche"
+  },
+  {
+   "name": "noche.enemigo.1",
+   "file": "enemigo.1.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "ancho": 64,
+   "alto": 33,
+   "escala": 7.0,
+   "permanente": true,
+   "filtro": "noche_color"
+  },
+  {
+   "name": "noche.enemigo.2",
+   "file": "enemigo.2.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "ancho": 64,
+   "alto": 33,
+   "escala": 7.0,
+   "permanente": true,
+   "filtro": "noche_color"
+  },
+  {
+   "name": "noche.camion",
+   "file": "camion.png",
+   "type": "animation",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "shadow": true,
+   "ancho": 90,
+   "alto": 109,
+   "escala": 8.0,
+   "permanente": true,
+   "filtro": "noche"
+  },
+  {
+   "name": "noche.poste",
+   "file": "poste.2.png",
+   "type": "image",
+   "anchor": [
+    0.5,
+    1.0
+   ],
+   "flip": true,
+   "shadow": true,
+   "escala": 1.0,
+   "filtro": "noche"
+  },
+  {
+   "name": "noche.arbol",
+   "file": "arbol.noche.png",
+   "type": "image",
+   "anchor": [
+    0.45,
+    1.0
+   ],
+   "shadow": false,
+   "escala": 12.0,
+   "flip": true
+  },
+  {
+   "name": "noche.checkpoint",
+   "file": "checkpoint.png",
+   "type": "image",
+   "anchor": [
+    0.6,
+    1.0
+   ],
+   "shadow": true,
+   "escala": 1.0,
+   "filtro": "noche",
+   "conservar": [
+    [
+     250,
+     244,
+     132
+    ],
+    [
+     142,
+     2,
+     4
+    ],
+    [
+     186,
+     2,
+     4
+    ],
+    [
+     111,
+     2,
+     4
+    ],
+    [
+     254,
+     183,
+     10
+    ],
+    [
+     255,
+     255,
+     255
+    ]
+   ]
   }
  ]
 }

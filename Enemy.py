@@ -1,4 +1,5 @@
 import math
+import pygame
 from TempObject import TempObject
 from Car import Car
 from Object import Object
@@ -7,6 +8,8 @@ from Road import Segment
 
 
 class Enemy(TempObject,Car):
+
+    RUEDAS_VEL=3.0
 
     def __init__(self, img, x_rel, z,speed,context,side=0):
         super().__init__(x_rel, z, img)
@@ -20,10 +23,13 @@ class Enemy(TempObject,Car):
         profile.shadow_color=(0,0,0)
         profile.shadow_alpha=80
         profile.shadow_width_factor=1.4
-        profile.shadow_height=0.15
         profile.shadow_offset_z=0.0
-        profile.collide_radius=0.15
-        profile.collide_radius2=0.15*0.15
+        profile.collide_radius=0.2
+        profile.collide_radius2=0.2*0.2
+        profile.sombra_suelo=True
+        profile.sombra_atras=0.1
+        profile.sombra_delante=0.2
+        profile.shadow_height=0.3
         self.profile=profile
         #movimiento
         self.target_speed=speed
@@ -36,6 +42,9 @@ class Enemy(TempObject,Car):
         self.freno=3.0
         self.volante=0.5
         self.v_volante=0.0
+        #ruedas y freno
+        self.ruedas_fase=0.0
+        self.frenando=False
 
     def vel_lateral(self):
         return self.vx+self.v_volante
@@ -113,7 +122,9 @@ class Enemy(TempObject,Car):
 
             #intenta alcanzar su velocidad objetivo
             #si hay un coche en frente trata de igualar la velocidad
+            self.frenando=False
             if frente!=None and frente.speed<self.speed:
+                self.frenando=True
                 self.speed=max(frente.speed,self.speed-self.freno*dt)
             #si voy mas despacio pero mi velocidad objetivo supera a la del de delante solo acelero hasta la velocidad del de delante
             elif frente!=None and self.speed<self.target_speed and self.target_speed>frente.speed:
@@ -139,6 +150,16 @@ class Enemy(TempObject,Car):
             self.x_rel += self.vx * dt
             self.z+=self.speed*dt
 
+            #freno y patron de ruedas
+
+            capas=[]
+            if self.frenando:
+                capas.append(self.N_CUERPOS+self.frame)
+            self.ruedas_fase+=self.speed*dt*self.RUEDAS_VEL
+            fase=int(self.ruedas_fase)%self.N_RUEDAS
+            capas.append(2*self.N_CUERPOS+self.frame*self.N_RUEDAS+fase)
+            self.capas=tuple(capas)
+
             #si va por la otra rama y este avance lo saca del fork, muere ya:
             #en el siguiente dibujado ya no tendría el desplazamiento de su rama y aparecería en la del jugador
             vs=self.getVS(self.context)
@@ -155,20 +176,27 @@ class Enemy(TempObject,Car):
                 self.dead=True
 
 class Deportivo(Enemy):
+    N_CUERPOS=3
+    N_RUEDAS=5
 
     def __init__(self, img, x_rel, z,speed,context,side=0):
         super().__init__(img, x_rel, z,speed,context,side)
 
 
 class Camion(Enemy):
+    N_CUERPOS=3
+    N_RUEDAS=10
 
     def __init__(self, img, x_rel, z,speed,context,side=0):
         super().__init__(img, x_rel, z,speed,context,side)
-        self.profile.collide_radius=0.2
-        self.profile.collide_radius2=0.2*0.2
-        self.profile.shadow_height=0.45
-        self.profile.shadow_offset_z=0.1
-        self.profile.shadow_width_factor=1.25
+        self.profile.collide_radius=0.25
+        self.profile.collide_radius2=0.25*0.25
+        self.profile.sombra_atras=0.045
+        self.profile.sombra_delante=0.10
+        self.profile.shadow_offset_z=0.0
+        self.profile.shadow_height=1.0
+        self.profile.shadow_width_factor=1.05
         self.masa=0.25
         self.aceleracion=3.0
         self.freno=2.0
+

@@ -386,7 +386,9 @@ class Camera:
 
         cables=self.context.escenario.cables
         ultimos={}
-        
+        self.frame_data.faros=self.calcularFaros()
+        manchas=self.calcularLuces()
+        self.context.escenario.drawer.prepararLuces(manchas)
         for vs in reversed(self.frame_data.buffer):
             pc1=self.project(vs.end)
             pc2=self.project(vs.start)
@@ -396,6 +398,8 @@ class Camera:
             if pc2.y-pc1.y>=0:
                 vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
 
+            if manchas and pc2.y-pc1.y>0:
+                vs.visualProfile.drawer.drawLuces(s,vs,pc1,pc2,manchas)
 
             #primero se pintan las sombras del vs. Solo las que caen en este segmento
             vs.visualProfile.drawer.clear_shadow_surface(pc1,pc2)
@@ -416,6 +420,7 @@ class Camera:
                         if lejano!=None:
                             self.drawCable(s,item.z,item.x_rel,lejano.z,lejano.x_rel,item.profile)
                         ultimos[item.linea]=item
+        self.context.escenario.drawer.limpiarLuces()
         if cables:
             for linea,item in ultimos.items():
                 if item.cable_inicio:
@@ -535,3 +540,77 @@ class Camera:
                 t=i/N
                 puntos.append((p1.x+(p2.x-p1.x)*t, p1.y+(p2.y-p1.y)*t+caida*4*t*(1-t)))
             pygame.draw.lines(s,profile.cable_color,False,puntos,1)
+
+
+
+    def carretera_en(self,z):
+        #x,y del centro de la carretera en la z dada, interpolando el segmento visible
+        for vs in self.frame_data.buffer:
+            if z<vs.end.z:
+                t=(z-vs.start.z)/vs.length
+                t=max(0.0,min(1.0,t))
+                return (vs.start.x+t*vs.curve,vs.start.y+t*vs.height)
+        vs=self.frame_data.buffer[-1]
+        return (vs.end.x,vs.end.y)
+
+    def calcularLuces(self):
+        #manchas de luz de las farolas: elipses en pantalla calculadas una vez por frame
+        manchas=[]
+        buffer=self.frame_data.buffer
+        if len(buffer)==0:
+            return manchas
+        z_cerca=buffer[0].start.z+0.01
+        z_min=self.z-2.0
+        z_max=buffer[-1].end.z
+        objetos=self.context.road.objects
+        #tambien las farolas que ya han quedado un poco por detras de la camara
+        k=self.context.road.current_object
+        while k>0 and objetos[k-1].z>=z_min:
+            k-=1
+        while k<len(objetos) and objetos[k].z<=z_max:
+            o=objetos[k]
+            k+=1
+            p=o.profile
+            if p is None or not p.luz:
+                continue
+            lado=1.0
+            if o.x_rel<0:
+                lado=-1.0
+            x_rel=o.x_rel-lado*p.luz_hacia_centro
+            zc=o.z+p.luz_offset_z
+            #la mancha se dibuja pegada a la farola: proporcional a su escala, como la sombra
+            if zc<=z_cerca:
+                continue
+            (xc,yc)=self.carretera_en(zc)
+            centro=self.project(Point(xc+x_rel,yc,zc))
+            ancho=p.luz_ancho*centro.z
+            alto=p.luz_alto*centro.z
+            #rango de z que ocupa la mancha en pantalla: pixeles por unidad de carretera junto a la farola
+            za=max(zc-0.5,z_cerca)
+            zb=zc+0.5
+            (xa,ya)=self.carretera_en(za)
+            (xb,yb)=self.carretera_en(zb)
+            pa=self.project(Point(xa+x_rel,ya,za))
+            pb=self.project(Point(xb+x_rel,yb,zb))
+            px_unidad=(pa.y-pb.y)/(zb-za)
+            #carretera vista por detras (rasante): la mancha no se ve
+            if px_unidad<=0:
+                continue
+            medio=(alto/2)/px_unidad*1.3+0.5
+            elipses=[]
+            for escala,fraccion in p.luz_escalones:
+                w=ancho*escala
+                h=alto*escala
+                color=(int(p.luz_color[0]*fraccion),int(p.luz_color[1]*fraccion),int(p.luz_color[2]*fraccion))
+                elipses.append(((centro.x-w/2,centro.y-h/2,w,h),color))
+            manchas.append((elipses,zc-medio,zc+medio))
+        return manchas
+
+
+    def calcularFaros(self):
+        #z de los coches con faros, el jugador y los rivales vivos
+        faros=[self.context.player.z]
+        for o in self.frame_data.tempobjbuffer:
+            if not o.dead and o.type==Object.CAR:
+                faros.append(o.z)
+        return faros

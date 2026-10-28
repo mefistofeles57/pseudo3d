@@ -22,7 +22,7 @@ class RecursosEscenario:
         hierba = Material()
         hierba.name="hierba"
         hierba.agarre_x=0.5
-        hierba.amplitud=0.005
+        hierba.amplitud=0.003
         hierba.frecuencia=4.0
         hierba.friccion_z=0.6
         hierba.drag_z=3.0
@@ -38,6 +38,8 @@ class RecursosEscenario:
         self.images={}
         self.images["flecha.1"]=pygame.image.load(str(base/"img"/"flecha.1.png")).convert_alpha()
         self.images["flecha.2"]=pygame.image.load(str(base/"img"/"flecha.2.png")).convert_alpha()
+        self.images["flecha.1.amarillo"]=pygame.image.load(str(base/"img"/"flecha.1.amarilla.png")).convert_alpha()
+        self.images["flecha.2.amarillo"]=pygame.image.load(str(base/"img"/"flecha.2.amarilla.png")).convert_alpha()
         self.images["linea"]=pygame.image.load(str(base/"img"/"linea.png")).convert_alpha()
         self.images["parrilla"]=pygame.image.load(str(base/"img"/"parrilla.png")).convert_alpha()
         self.drawer=DefaultDrawer(context)
@@ -51,6 +53,13 @@ class Escenario:
         self.images=recursos.images
         self.drawer=recursos.drawer
         self.cables=False
+        #luces de faros
+        self.luz_color=None
+        self.luz_umbrales=[0.25,0.5,0.8]
+        self.luz_mezcla=[0.0,0.18,0.34,0.5]
+        self.faro_inicio=0.3
+        self.faro_fin=3.0
+        self.faro_intensidad=0.7
 class Bosque(Escenario):
     def __init__(self,context,recursos):
         super().__init__(context,recursos)
@@ -157,4 +166,42 @@ class Pradera(Escenario):
         b=Background(base/"img/pradera.fondo.l.png",True,False,mov*1.0,context,(63,63,116),y=context.camera.horizon,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)
         b=Background(base/"img/pradera.fondo.c.png",True,True,mov*4.0,context,(75,105,47),y=context.camera.horizon+30,resize=sprite_resize*esc_pixel,color_clave=True)
+        self.fondos.append(b)
+
+
+class Noche(Escenario):
+    def __init__(self,context,recursos):
+        super().__init__(context,recursos)
+        self.name="Noche"
+        self.ancho_defecto=0.75
+        self.margin_limit=0.5
+        self.arcen_width=0.2
+        self.road_colors=[(46, 40, 62),(40, 35, 55)]
+        self.road_material=recursos.asfalto
+        self.outside_colors=[(30, 24, 48),(26, 21, 42)]
+        self.outside_material=recursos.hierba
+        self.sky_dark=(26, 16, 51)
+        self.sky_light=(168, 72, 118)
+        self.arcen_freq=1
+        self.arcen_color=[(64, 54, 80)]
+        self.arcen_material=recursos.arcen
+        self.luz_color=(255,158,74)
+        self.faro_inicio=0.5
+        self.faro_pico=2.5
+        self.faro_fin=9.0
+        self.faro_intensidad=1.0
+        self.luz_umbrales=[0.1,0.25,0.4,0.55,0.7,0.85]
+        self.luz_mezcla=[0.0,0.04,0.08,0.12,0.16,0.2,0.24]
+
+        mov=75
+        sprite_resize=context.gen_scale
+        base=recursos.base
+        self.fondos=[]
+
+        esc_pixel=3
+        b=Background(base/"img/fondo.noche.l.png",True,False,mov*1.0,context,(30,24,48),y=context.camera.horizon,resize=sprite_resize*esc_pixel,color_clave=True)
+        self.fondos.append(b)
+        b=Background(base/"img/fondo.noche.c.png",True,True,mov*2.0,context,(30,24,48),y=context.camera.horizon,resize=sprite_resize*esc_pixel,color_clave=True)
+        self.fondos.append(b)
+        b=Background(base/"img/luna.png",False,False,mov*0.25,context,None,x=1060,y=170,resize=sprite_resize*esc_pixel,color_clave=True)
         self.fondos.append(b)

@@ -1,0 +1,17 @@
+# final de obra para las ramas que aun no tienen bioma siguiente (sin escenario: se queda el actual)
+{"command": "block", "name": "obra_final"}
+{"command": "R", "segments": 30, "w0": 1.0, "w1": 0.75}
+{"command": "R", "segments": 25, "w0": 0.75, "w1": 0.75}
+{"command": "O", "img": "obra.cartel", "x": -2.5, "step": 100.0, "offset": 14.5, "collidable": false}
+{"command": "O", "img": "obra.cartel", "x": 2.5, "step": 100.0, "offset": 14.5, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": -0.94, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": -0.31, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": 0.31, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.valla", "x": 0.94, "step": 100.0, "offset": 13.0, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": -1.6, "step": 100.0, "offset": 13.5, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": 1.7, "step": 100.0, "offset": 13.8, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": -0.35, "step": 100.0, "offset": 10.5, "collidable": false}
+{"command": "O", "img": "obra.arena", "x": 2.3, "step": 100.0, "offset": 9.0, "collidable": false}
+{"command": "O", "img": "obrero.2", "x": -0.55, "step": 100.0, "offset": 8.5, "collidable": false}
+{"command": "O", "img": "obrero.2", "x": 0.6, "step": 100.0, "offset": 9.5, "collidable": false}
+{"command": "FINISH", "segment": 6, "z": 0.5}

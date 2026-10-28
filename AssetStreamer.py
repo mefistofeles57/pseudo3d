@@ -1,6 +1,7 @@
 import time
 import json
 import pygame
+import Filtros
 from pathlib import Path
 from Road import Segment
 
@@ -24,6 +25,7 @@ class AssetStreamer:
             asset.setdefault("shadow",False)
             asset.setdefault("escala",1.0)
             asset.setdefault("permanente",False)
+            asset.setdefault("filtro",None)
             self.catalogo[asset["name"]]=asset
 
         for asset in self.catalogo.values():
@@ -91,25 +93,35 @@ class AssetStreamer:
             for _ in self.cargarAsset(self.catalogo[nombre]):
                 yield
 
+    def cargarHoja(self,asset,ruta):
+        #carga la imagen y le aplica el filtro de color si lo tiene
+        img=pygame.image.load(ruta).convert_alpha()
+        if asset["filtro"]!=None:
+            img=Filtros.aplicar(img,asset["filtro"],asset.get("conservar"))
+        return img
+
     def cargarAsset(self,asset):
         ruta=str(self.cache.base/"img"/asset["file"])
 
         if asset["type"]=="image":
-            img=pygame.image.load(ruta).convert_alpha()
+            img=self.cargarHoja(asset,ruta)
+            yield
             for _ in self.cache.generarImagen(asset["name"],img,asset["anchor"],asset["shadow"],asset["escala"]):
                 yield
             if asset["flip"]:
-                img2=pygame.transform.flip(pygame.image.load(ruta).convert_alpha(),True,False)
+                img2=pygame.transform.flip(img,True,False)
                 ancla=(1-asset["anchor"][0],asset["anchor"][1])
                 for _ in self.cache.generarImagen(asset["name"]+".flip",img2,ancla,asset["shadow"],asset["escala"]):
                     yield
         else:
-            hoja=pygame.image.load(ruta).convert_alpha()
+            hoja=self.cargarHoja(asset,ruta)
+            yield
             frames=self.cache.load_frames(hoja,asset["ancho"],asset["alto"])
+
             for _ in self.cache.generarAnimacion(asset["name"],frames,asset["anchor"],asset["shadow"],asset["escala"]):
                 yield
             if asset["flip"]:
-                hoja2=pygame.transform.flip(pygame.image.load(ruta).convert_alpha(),True,False)
+                hoja2=pygame.transform.flip(hoja,True,False)
                 frames2=list(reversed(self.cache.load_frames(hoja2,asset["ancho"],asset["alto"])))
                 ancla=(1-asset["anchor"][0],asset["anchor"][1])
                 for _ in self.cache.generarAnimacion(asset["name"]+".flip",frames2,ancla,asset["shadow"],asset["escala"]):
@@ -118,3 +130,5 @@ class AssetStreamer:
     def procesarCompleto(self):
         for _ in self.procesar():
             pass
+
+
