@@ -1,9 +1,7 @@
 import pygame
 import math
-import sys
-from pathlib import Path
 from ImageCache import ImageCache
-from Object import Object,VisibleObject
+from Object import Object
 from VisualObjProfile import VisualObjProfile
 from TempObject import Humo
 from Material import Material
@@ -11,6 +9,7 @@ from Car import Car
 from SonidoMotor import SonidoMotor
 from Road import Segment
 from Estados import *
+from Rutas import BASE
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -18,20 +17,8 @@ if TYPE_CHECKING:
 
 
 FR_LLANO=0
-FR_LLANO_CD1=1
-FR_LLANO_CD2=2
-FR_LLANO_CI1=3
-FR_LLANO_CI2=4
 FR_CAR=10
-FR_CAR_CD1=11
-FR_CAR_CD2=12
-FR_CAR_CI1=13
-FR_CAR_CI2=14
 FR_CAB=5
-FR_CAB_CD1=6
-FR_CAB_CD2=7
-FR_CAB_CI1=8
-FR_CAB_CI2=9
 FR_LUZ=15
 FR_RUEDAS=16
 FR_RUEDAS_NUM=5
@@ -56,24 +43,16 @@ class Player(Car):
         self.context=context
         self.speed=0.0
         self.img="coche"
-        #self.metadata=None
-        #self.vs_index=-1
         #posicion
-        #self.x_rel=0.0
-        #self.vx=0.0
         self.c=0.0
         self.target_c=0.0
         self.rpm=0.0
-        #self.z=0.0
         #posicion previa
         self.prev_z=0.0
         self.prev_x_rel=0.0
         self.prev_c=0.0
         #cache para el coche
         self.cache=ImageCache(ImageCache.getPlayerConfig(resize=self.context.gen_scale),context)
-        #self.cache.addImage("coche","coche.png",(0.5,1.0),False,True)
-        #self.cache.addAnimation("coche","coche-anim.png",(0.5,1.0),False,True,ancho=64,alto=64)
-        #self.load_metadata(self.cache)
 
 
         hoja=pygame.image.load(str(self.cache.base/"img"/"coche-anim.png")).convert_alpha()
@@ -162,11 +141,7 @@ class Player(Car):
         self.type=Object.PLAYER
 
         #sonido
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            base = Path(sys._MEIPASS)
-        else:
-            base = Path(__file__).resolve().parent
-        self.engine = SonidoMotor(str(base/"sound/loop_5.wav"))
+        self.engine = SonidoMotor(str(BASE/"sound/loop_5.wav"))
 
         #frame
         self.frame=FR_LLANO
@@ -330,7 +305,6 @@ class Player(Car):
 
     def get_freno(self,down_pressed,dt):
         K_pedal=6.0
-        #down_pressed=self.context.keys[pygame.K_DOWN]
         self.p_freno+=(down_pressed-self.p_freno)*K_pedal*dt
         fuerza_f=round(self.FUERZA_FRENADO*self.p_freno*-1,2)
         fuerza_fm=-self.FRENO_MOTOR
@@ -338,14 +312,11 @@ class Player(Car):
 
     def get_acelerador(self,up_pressed,dt):
         K_pedal=6.0
-        #up_pressed=self.context.keys[pygame.K_UP]
         self.p_acelerador+=(up_pressed-self.p_acelerador)*K_pedal*dt
         return self.p_acelerador
 
     def get_volante(self,left_pressed,right_pressed,dt):
         K_volante=10.0
-        #left_pressed=self.context.keys[pygame.K_LEFT]
-        #right_pressed=self.context.keys[pygame.K_RIGHT]
         
         i=0
 
@@ -437,13 +408,6 @@ class Player(Car):
         self.context.root.stopSound("derrape")
         self.engine.stop()
     
-    def soft_reset(self):
-        self.speed=0.0
-        self.vx=0.0
-        self.c=0.0
-        self.p_freno=0.0
-        self.p_acelerador=0.0
-        self.volante=0.0
 
     def check_segment_events(self):
         vs=self.getVS(self.context)

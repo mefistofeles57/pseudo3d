@@ -1,6 +1,4 @@
 import pygame
-import sys
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -35,18 +33,13 @@ class Background:
         self.v_mov=v_mov
         self.bg_color=bg_color
         if rolling:
-            #self.f_img2=pygame.transform.flip(self.f_img1, True, False)
             self.f_img2=self.f_img1
 
         if color_clave:
             self.f_img1=a_color_clave(self.f_img1)
-            #if rolling:
-            #    self.f_img2=a_color_clave(self.f_img2)
 
         self.alpha=255
         self.f_img1.set_alpha(255, pygame.RLEACCEL)
-        #if rolling:
-        #    self.f_img2.set_alpha(255, pygame.RLEACCEL)            
 
 
 
@@ -80,8 +73,6 @@ class Background:
         if alpha!=self.alpha:
             self.alpha=alpha
             self.f_img1.set_alpha(alpha, pygame.RLEACCEL)
-            #if self.rolling:
-            #    self.f_img2.set_alpha(alpha, pygame.RLEACCEL)
         s.blit(self.f_img1, (posicion-self.f_img1.get_width(),y-img_h))
         if self.rolling:
             s.blit(self.f_img2, (posicion,y-self.f_img2.get_height()))

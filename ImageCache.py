@@ -1,9 +1,8 @@
 import pygame
 import math
-import sys
-from pathlib import Path
 from Point import Point
 from Image import Image
+from Rutas import BASE
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -70,11 +69,7 @@ class ImageCache:
         p=context.camera.project(Point(0.0,0.0,1.0))
         self.resizeFactor=p.z/self.config.resize_at_1
 
-
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            self.base = Path(sys._MEIPASS)
-        else:
-            self.base = Path(__file__).resolve().parent
+        self.base=BASE
 
     def addAnimation(self,name,file,anchor,flip=True,shadow=False,ancho=32,alto=32):
         img=pygame.image.load(str(self.base/"img"/file)).convert_alpha()

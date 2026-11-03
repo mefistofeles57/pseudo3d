@@ -1,22 +1,13 @@
 import pygame
-import sys
-from pathlib import Path
 from ImageCache import ImageCache
 from DefaultDrawer import DefaultDrawer
 from Background import Background
 from Material import Material
 from AssetStreamer import AssetStreamer
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from GameContext import GameContext
-
+from Rutas import BASE
 class RecursosEscenario:
     def __init__(self,context):
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            base = Path(sys._MEIPASS)
-        else:
-            base = Path(__file__).resolve().parent
+        base=BASE
         self.base=base
 
         hierba = Material()
@@ -47,7 +38,6 @@ class RecursosEscenario:
 class Escenario:
     def __init__(self,context,recursos):
         self.context=context
-        self.recursos=recursos
         self.cache=recursos.cache
         self.streamer=recursos.streamer
         self.images=recursos.images
@@ -60,6 +50,9 @@ class Escenario:
         self.faro_inicio=0.3
         self.faro_fin=3.0
         self.faro_intensidad=0.7
+
+
+
 class Bosque(Escenario):
     def __init__(self,context,recursos):
         super().__init__(context,recursos)

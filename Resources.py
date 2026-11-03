@@ -1,18 +1,13 @@
 import pygame
-import sys
-from pathlib import Path
+from Rutas import BASE
 
 class Resources:
     def __init__(self,gen_scale):
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            base = Path(sys._MEIPASS)
-        else:
-            base = Path(__file__).resolve().parent
+        base=BASE
 
         self.number43_dim=[(28,28),(20,20),(26,26),(27,27),(29,29),(28,28),(28,28),(23,23),(28,28),(28,28)]
         self.number86_dim=[(56,56),(40,40),(52,52),(54,54),(58,58),(56,56),(56,56),(46,46),(56,56),(56,56)]
         self.number43=pygame.image.load(str(base/"img"/"font.number.64.png")).convert_alpha()
-        #escala=2/gen_scale
         self.number86=pygame.transform.scale(self.number43, (self.number43.get_width() * 2, self.number43.get_height() * 2))
         self.number43_items=[]
         self.number86_items=[]
@@ -41,10 +36,8 @@ class Resources:
         self.barra_bottom=barra.subsurface(48,0,32,7)
         minicoche=pygame.image.load(str(base/"img"/"minicoche.png")).convert_alpha()
         self.minicoche=pygame.transform.scale(minicoche, (minicoche.get_width() * 2, minicoche.get_height() * 2))
-        #gear_mark=pygame.transform.scale(gear_mark, (gear_mark.get_width() * 2, gear_mark.get_height() * 2))
 
         self.time=text32.subsurface(0,0,102,32)
-        #self.score=self.text32.subsurface(104,0,110,32)
         self.score=text16.subsurface(52,0,55,16)
         self.stage=text16.subsurface(108,0,55,16)
         self.gear=text16.subsurface(164,0,44,16)

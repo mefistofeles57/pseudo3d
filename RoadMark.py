@@ -1,5 +1,3 @@
-import pygame
-from Point import Point
 class RoadMark:
     def __init__(self):
         self.offset_z=0.0

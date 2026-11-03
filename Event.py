@@ -1,4 +1,3 @@
-from Enemy import Enemy
 from Message import Message
 from Estados import FINISH
 from Enemy import Deportivo,Camion

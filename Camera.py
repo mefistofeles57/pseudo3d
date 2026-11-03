@@ -1,13 +1,10 @@
 import pygame
 import math
-import copy
 import time
 from Road import Segment
 from Road import VisibleSegment
 from Point import Point
-from Player import Player
 from Object import Object,VisibleObject
-from FrameData import FrameData
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -29,7 +26,6 @@ class Camera:
         self.h=context.screen.get_height()
 
 
-        #self.pitch=-0.04
         self.pitch=0.0
         self.sin_pitch = 0.0
         self.cos_pitch = 0.0
@@ -56,9 +52,6 @@ class Camera:
         self.context=context
         self.frame_data=context.frame_data
 
-
-        self.current_horizon=self.horizon
-
         self.player_z=1.5
 
 
@@ -69,44 +62,44 @@ class Camera:
 
     def update(self,dt):
 
-        #ajuste de camara
-        keys=self.context.keys
 
-        current_time=time.time()
-        last_time=self.time_button
+        if self.context.root.DEBUG:
+            #ajuste de camara
+            keys=self.context.keys
 
-
-        if current_time-last_time>=0.5:
-            self.time_button=current_time
-        #altura        
-            if keys[pygame.K_1]:
-                self.context.camera.height-=0.1
-            elif keys[pygame.K_2]:
-                self.context.camera.height+=0.1
-    #pitch
-            elif keys[pygame.K_3]:
-                pitch=self.pitch
-                self.setPitch(pitch-0.01)
-            elif keys[pygame.K_4]:
-                pitch=self.pitch
-                self.setPitch(pitch+0.01)
-    #fov
-            elif keys[pygame.K_5]:
-                self.context.camera.fov-=1.0
-            elif keys[pygame.K_6]:
-                self.context.camera.fov+=1.0
-    #distance
-            elif keys[pygame.K_7]:
-                self.context.camera.view_distance-=1.0
-            elif keys[pygame.K_8]:
-                self.context.camera.view_distance+=1.0
-    #horizon
-            elif keys[pygame.K_9]:
-                self.context.camera.horizon-=1.0
-            elif keys[pygame.K_0]:
-                self.context.camera.horizon+=1.0
-            else:
-                self.time_button=last_time
+            current_time=time.time()
+            last_time=self.time_button
+            if current_time-last_time>=0.5:
+                self.time_button=current_time
+            #altura        
+                if keys[pygame.K_1]:
+                    self.context.camera.height-=0.1
+                elif keys[pygame.K_2]:
+                    self.context.camera.height+=0.1
+            #pitch
+                elif keys[pygame.K_3]:
+                    pitch=self.pitch
+                    self.setPitch(pitch-0.01)
+                elif keys[pygame.K_4]:
+                    pitch=self.pitch
+                    self.setPitch(pitch+0.01)
+            #fov
+                elif keys[pygame.K_5]:
+                    self.context.camera.fov-=1.0
+                elif keys[pygame.K_6]:
+                    self.context.camera.fov+=1.0
+            #distance
+                elif keys[pygame.K_7]:
+                    self.context.camera.view_distance-=1.0
+                elif keys[pygame.K_8]:
+                    self.context.camera.view_distance+=1.0
+            #horizon
+                elif keys[pygame.K_9]:
+                    self.context.camera.horizon-=1.0
+                elif keys[pygame.K_0]:
+                    self.context.camera.horizon+=1.0
+                else:
+                    self.time_button=last_time
 
 
         ############################################
@@ -137,18 +130,22 @@ class Camera:
         #carga de assets
         streamer=self.context.escenario.streamer
         streamer.actualizar(self.context.road,self.context.player.z)
-        #streamer.avanzar(0.003)
 
         #construir el buffer de carretera
+
+        #primero calcula la posicion del coche con respecto a un inicio de buffer en x=0
         offset=self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,offset=self.context.player.z)
 
         if offset==None:
             return
 
+        #usa ese desplazamiento anterior para calcular el buffer de carretera y que el coche esté en el centro
         self.getBuffer(self.frame_data.buffer,self.z+self.near_plane,x=offset.x,y=offset.y)
+
+        #calcula el buffer de objetos del frame
         self.getObjBuffer(self.frame_data)
 
-        #desplazamiento con el buffer de ESTE frame (ya con vs_index actualizado)
+        #si el coche está en un FORK calcula x según su side
         vs_jugador=self.context.player.getVS(self.context)
         if vs_jugador!=None and vs_jugador.type==Segment.FORK:
             if self.context.player.side==-1:
@@ -156,12 +153,13 @@ class Camera:
             elif self.context.player.side==1:
                 self.x+=vs_jugador.w0
 
+        #actualiza los objetos animados
         for item in self.frame_data.objbuffer:
             if item.isAnim:
                 item.obj.update(dt)
 
 
-        #proyecto el ultimo segmento
+        #proyecto el ultimo segmento para actualizar el fondo
         pn=self.project(self.frame_data.buffer[-1].end)
         f_y=pn.y
         if f_y<(self.horizon-50):
@@ -192,20 +190,23 @@ class Camera:
             z=z_clip
         )
 
-
+    #construye el buffer con los segmentos de carretera que van a aparecer en el frame
     def getBuffer(self,buffer,frontera,offset=None,x=None,y=None):
-        segments=self.context.road.segments[self.context.road.current_segment:]
         distancia=self.view_distance
         buffer.clear()
 
         fin=False
 
         vs_prev=None
-        for s in segments:
-            vs=VisibleSegment(copy.copy(s),vs_prev,playerx=x,playery=y,side=self.side_anclaje)
+        # para cada segmento del mapa empezando en self.context.road.current_segment
+        for s_i in range(self.context.road.current_segment,len(self.context.road.segments)):
+            s=self.context.road.segments[s_i]
+            #convierte a VS y comprueba que esté más allá del near plane
+            vs=VisibleSegment(s,vs_prev,playerx=x,playery=y,side=self.side_anclaje)
             if vs.end.z<=frontera:
                 continue
 
+            #si su inicio está anter del near plane hace el clipping cercano
             if vs.start.z<frontera:
                 #clipping cercano
                 d_clip=vs.d_at(frontera)
@@ -218,7 +219,7 @@ class Camera:
                 vs.end.y=vs.start.y+vs.height
                 vs.d=d_clip
 
-
+            #si su fin está más allá de la distancia de dibujado hace el clipping lejano
             elif vs.end.z>(self.z+distancia):
                 #clipping lejano
                 vs.end=self.clip(vs.start,vs.end,self.z+distancia)
@@ -227,12 +228,14 @@ class Camera:
                 vs.length=vs.end.z-vs.start.z
 
                 fin=True
+
+            #si tenemos un offset (z) del coche devuelve su posicion para desplazar la carretera en una llamada posterior
             if offset!=None:
                 if vs.start.z<=offset and vs.end.z>offset:
                     pct=(offset-vs.start.z)/(vs.end.z-vs.start.z)
                     p=Point(vs.start.x+pct*vs.curve,vs.start.y+pct*vs.height,offset)
                     return p
-
+            #añade el segmento al buffer
             buffer.append(vs)
             vs_prev=vs
             if fin:
@@ -245,9 +248,9 @@ class Camera:
 
 
 
-
+    #construye el buffer de objetos. Selecciona los que van a aparecer en el frame
+    #haciendo un merge del mapra de objetos, la lista de objetos temporales y el coche del player
     def getObjBuffer(self,frame_data):
-        #objects=self.context.road.objects[self.context.road.current_object:]
         objects=self.context.road.objects
         player=self.context.player
         frame_data.objbuffer.clear()
@@ -257,7 +260,6 @@ class Camera:
         frame_data.tempobjbuffer.sort(key=lambda obj: obj.z)
 
         #construyo el buffer haciendo merge de objetos del mapa, objetos temporales y coche del jugador
-        #aprovecho la pasada para calcular sombras
 
         last_object_index=self.context.road.current_object
 
@@ -319,7 +321,8 @@ class Camera:
                         break
 
 
-
+    #proyecta un punto tridimensional sobre la pantalla
+    #devuelve sus coordenadas x,y y su escala en z 
     def project(self,p:Point):
         dx=p.x-self.x
         dy=p.y-self.y
@@ -328,8 +331,11 @@ class Camera:
         z2=dy*self.sin_pitch + dz*self.cos_pitch
 
         # Compresión adicional de perspectiva lejana
+        #punto en el que se alcanza la maxima compresion
         MAX_Z = 25.0
+        #cuanto comprime. distancia aparente en el horizonte es distancia*(1+strength)
         STRENGTH = 0.75
+        #distancia a la empieza a notarse. 1 progresivo, 3 mitad, 5 lejos
         POWER = 3
 
         t = max(0.0, min(1.0, z2 / MAX_Z))
@@ -345,12 +351,6 @@ class Camera:
         screen_y=(self.horizon)-y2*scale
         return Point(screen_x,screen_y,scale)
 
-#        dz=z-cam_z
-#        focal=(screen_with/2)/tan(fov/2)
-#        scale=focal/dz
-#        screen_x=(screen_width/2)+(x-cam_x)
-#        screen_y
-#        screen_y+=pitch
 
 
 
@@ -358,6 +358,7 @@ class Camera:
 
     def draw(self,s:pygame.Surface):
 
+        #primero se dibujan los fondos
         self.context.escenario.cache.nuevoFrame()
 
         if self.fondo!=None:
@@ -372,46 +373,65 @@ class Camera:
                 fondo.draw(s,self.fase_fondos)
 
 
-        #objetos con sombra: proyección y rango de z de la sombra, una sola vez por frame
+        #calculo los indices del buffer sobre los que se proyecta la sombra de cada objeto
+        #y lo guardo en una lista de sombras por segmento
+
+        buffer=self.frame_data.buffer
         sombras=[]
+        for _ in buffer:
+            sombras.append([])
         for obj in self.frame_data.objbuffer:
             cache=Object.resolverCache(obj.profile)
             metadata=cache.metadata.get(obj.img)
             if metadata!=None and metadata.shadow:
                 z=obj.z+obj.profile.shadow_offset_z
                 h=obj.profile.shadow_height
+                z_min=z-h
+                z_max=z+h
                 p1=self.project(Point(obj.x,obj.y,obj.z))
-                sombras.append((obj,p1,z-h,z+h))
-
+                #segmentos que pisa la sombra
+                i=obj.vs_index
+                while i>0 and buffer[i-1].end.z>=z_min:
+                    i-=1
+                while i<len(buffer) and buffer[i].start.z<=z_max:
+                    if buffer[i].end.z>=z_min:
+                        sombras[i].append((obj,p1))
+                    i+=1
 
         cables=self.context.escenario.cables
         ultimos={}
         self.frame_data.faros=self.calcularFaros()
         manchas=self.calcularLuces()
         self.context.escenario.drawer.prepararLuces(manchas)
-        for vs in reversed(self.frame_data.buffer):
+        last_obj_idx=len(self.frame_data.objbuffer)-1
+        for i in range(len(buffer)-1,-1,-1):
+            vs=buffer[i]
             pc1=self.project(vs.end)
             pc2=self.project(vs.start)
 
 
-            #cuando hay líneas de grosor negativo no pinto porque es un polígono no visible
+            #si la distancia entre lineas es negativa no pinto porque es un polígono no visible
             if pc2.y-pc1.y>=0:
                 vs.visualProfile.drawer.draw(s,self,vs,pc1,pc2)
 
+            #en las pantallas noecturas dibuja las luces
             if manchas and pc2.y-pc1.y>0:
                 vs.visualProfile.drawer.drawLuces(s,vs,pc1,pc2,manchas)
 
             #primero se pintan las sombras del vs. Solo las que caen en este segmento
             vs.visualProfile.drawer.clear_shadow_surface(pc1,pc2)
-            for item,p1,z_min,z_max in reversed(sombras):
-                if z_max>=vs.start.z and z_min<=vs.end.z:
-                    profile=vs.visualProfile
-                    profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
+            for item,p1 in reversed(sombras[i]):
+                profile=vs.visualProfile
+                profile.drawer.drawShadow(s,p1,item,profile,vs,pc1,pc2)
             vs.visualProfile.drawer.blitShadows(s,pc1,pc2)
 
             #despues los objetos. Solo los que estén situados dentro del segmento
-            for item in reversed(self.frame_data.objbuffer):
-                if item.z>=vs.start.z and item.z<vs.end.z:
+            for j in range(last_obj_idx,-1,-1):
+                item=self.frame_data.objbuffer[j]
+                if item.z<vs.start.z:
+                    break
+                last_obj_idx=j-1
+                if item.z<vs.end.z:
                     p1=self.project(Point(item.x,item.y,item.z))
                     profile=vs.visualProfile
                     profile.drawer.drawObj(s,p1,item,profile)
@@ -421,6 +441,7 @@ class Camera:
                             self.drawCable(s,item.z,item.x_rel,lejano.z,lejano.x_rel,item.profile)
                         ultimos[item.linea]=item
         self.context.escenario.drawer.limpiarLuces()
+        #por ultimo se dibujan los cables solo si están habilitados
         if cables:
             for linea,item in ultimos.items():
                 if item.cable_inicio:
@@ -429,22 +450,21 @@ class Camera:
                 self.drawCable(s,item.z-prof.cable_vano,item.x_rel,item.z,item.x_rel,prof)
 
 
+    #crea el gradiente del fondo con lineas calculando los colores intermedios
     def create_vertical_gradient(self,width, height, top_color, bottom_color):
-        surface = pygame.Surface((width, height)).convert()
-
+        #degradado en bandas de 3 pixeles: una columna con un pixel por banda, estirada
+        banda=3
+        n=(height+banda-1)//banda
+        columna=pygame.Surface((1,n)).convert()
         r0, g0, b0 = top_color
         r1, g1, b1 = bottom_color
-
-        for y in range(height):
-            t = y / (height - 1)
-
-            r = int(r0 + (r1 - r0) * t)
-            g = int(g0 + (g1 - g0) * t)
-            b = int(b0 + (b1 - b0) * t)
-
-            pygame.draw.line(surface, (r, g, b), (0, y), (width, y))
-
-        return surface
+        for i in range(n):
+            t=i/(n-1)
+            r=int(r0+(r1-r0)*t)
+            g=int(g0+(g1-g0)*t)
+            b=int(b0+(b1-b0)*t)
+            columna.set_at((0,i),(r,g,b))
+        return pygame.transform.scale(columna,(width,height))
 
     def lerp(self,a, b, t):
         return a + (b - a) * t
@@ -456,6 +476,7 @@ class Camera:
             int(self.lerp(c0[2], c1[2], t)),
         )
 
+    #actualiza el color del cielo
     def update_sky(self):
         buffer=self.frame_data.buffer
         if len(buffer)==0:
@@ -467,18 +488,22 @@ class Camera:
         self.fase_fondos=0.0
         for vs in buffer:
             p=vs.visualProfile
+            #busca en el buffer un cambio de profile (escenario)
             if p is not actual:
                 # t=1 con la frontera en el horizonte, t=0 al llegar a ella
                 t=(vs.start.z-self.z-self.near_plane)/(self.view_distance-self.near_plane)
                 t=max(0.0,min(1.0,t))
+                #calcula los nuevos colores light y dark mezclando los colores de los dos escenarios ponderando por t
                 color_l=self.lerp_color(p.sky_light,actual.sky_light,t)
                 color_d=self.lerp_color(p.sky_dark,actual.sky_dark,t)
+                #calcula la fase de los fondos, para desvanecerlos o moverlos
                 if t>=0.5:
                     self.fase_fondos=(1.0-t)*2.0
                 else:
                     self.perfil_fondos=p
                     self.fase_fondos=t*2.0
                 break
+        #si el color cambia regenera el fondo
         if self.color_fondo_l!=color_l or self.color_fondo_d!=color_d:
             self.color_fondo_l=color_l
             self.color_fondo_d=color_d
@@ -489,6 +514,8 @@ class Camera:
         self.y_move=mov
 
 
+    #devuelve las coordenadas x,y de un punto z de la carretera
+    #se usa para dibujar cables
     def puntoCarretera(self,z):
         buf=self.frame_data.buffer
         if len(buf)==0:
@@ -509,7 +536,8 @@ class Camera:
                 return (vs.start.x+pct*vs.curve, vs.start.y+pct*vs.height)
         return None
 
-        
+
+    #dibuja el cable entre postes
     def drawCable(self,s,a_z,a_x,b_z,b_x,profile):
         if a_z>b_z:
             a_z,b_z,a_x,b_x=b_z,a_z,b_x,a_x
@@ -543,16 +571,7 @@ class Camera:
 
 
 
-    def carretera_en(self,z):
-        #x,y del centro de la carretera en la z dada, interpolando el segmento visible
-        for vs in self.frame_data.buffer:
-            if z<vs.end.z:
-                t=(z-vs.start.z)/vs.length
-                t=max(0.0,min(1.0,t))
-                return (vs.start.x+t*vs.curve,vs.start.y+t*vs.height)
-        vs=self.frame_data.buffer[-1]
-        return (vs.end.x,vs.end.y)
-
+    #calcula los circulos de las farolas
     def calcularLuces(self):
         #manchas de luz de las farolas: elipses en pantalla calculadas una vez por frame
         manchas=[]
@@ -581,15 +600,15 @@ class Camera:
             #la mancha se dibuja pegada a la farola: proporcional a su escala, como la sombra
             if zc<=z_cerca:
                 continue
-            (xc,yc)=self.carretera_en(zc)
+            (xc,yc)=self.puntoCarretera(zc)
             centro=self.project(Point(xc+x_rel,yc,zc))
             ancho=p.luz_ancho*centro.z
             alto=p.luz_alto*centro.z
             #rango de z que ocupa la mancha en pantalla: pixeles por unidad de carretera junto a la farola
             za=max(zc-0.5,z_cerca)
             zb=zc+0.5
-            (xa,ya)=self.carretera_en(za)
-            (xb,yb)=self.carretera_en(zb)
+            (xa,ya)=self.puntoCarretera(za)
+            (xb,yb)=self.puntoCarretera(zb)
             pa=self.project(Point(xa+x_rel,ya,za))
             pb=self.project(Point(xb+x_rel,yb,zb))
             px_unidad=(pa.y-pb.y)/(zb-za)
@@ -607,6 +626,8 @@ class Camera:
         return manchas
 
 
+
+    #guarda en una lista los faros que hay en la carretera
     def calcularFaros(self):
         #z de los coches con faros, el jugador y los rivales vivos
         faros=[self.context.player.z]

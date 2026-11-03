@@ -1,5 +1,4 @@
 import pygame
-import time
 import math
 import copy
 from Camera import Camera
@@ -71,11 +70,8 @@ class DefaultDrawer:
             return
 
         profile=vs.visualProfile
-        #la coordenada z es la escala
 
-        # se produce cierto jitter subpixel en la cuantización alrededor de la distancia 15. Se ha podido comprobar forzando la monotonía,
-        # pero no es aplicable a otras geometrias, como las elevaciones
-
+        #color de la carretera
         num_rc=len(profile.road_colors)
         road_color=profile.road_colors[vs.index%num_rc]
         nivel=0
@@ -97,6 +93,8 @@ class DefaultDrawer:
             min(255,outside_color[2]*brillo)
         )
 
+
+        #dibuja la carretera
         a=profile.arcen_width
 
         if vs.type==Segment.FORK:
@@ -235,14 +233,10 @@ class DefaultDrawer:
         (w,h)=cache.tamano(obj.img,p1.z)
         if shadow:
             if metadata.shadow:
-                shadow_height=obj.profile.shadow_height
-                shadow_offset_z=obj.profile.shadow_offset_z
-                z=obj.z+shadow_offset_z
-                if z+shadow_height>=vs.start.z and z-shadow_height<=vs.end.z:
-                    if obj.profile.sombra_suelo:
-                        self.drawSombraSuelo(w,h,p1,obj.profile,obj)
-                    else:
-                        self.drawItemShadow(surface,w,obj.profile,obj,vs,pc1,pc2)
+                if obj.profile.sombra_suelo:
+                    self.drawSombraSuelo(w,h,p1,obj.profile,obj)
+                else:
+                    self.drawItemShadow(surface,w,obj.profile,obj,vs,pc1,pc2)
             return
         x=p1.x-w*metadata.anchor_x
         y=p1.y-h*metadata.anchor_y
@@ -276,14 +270,6 @@ class DefaultDrawer:
         shadow_offset_z=profile.shadow_offset_z
 
         #necesito proyectar 3 punto, el centro, el max z y el min z
-
-        p1=Point(obj.x,obj.y,obj.z+shadow_offset_z)
-        p2=Point(obj.x,obj.y,obj.z+shadow_offset_z-shadow_height)
-        #p3=Point(obj.x,obj.y,obj.z+shadow_offset_z+shadow_height)
-
-        pp1=self.context.camera.project(p1)
-        pp2=self.context.camera.project(p2)
-        #pl=self.context.camera.project(p3)
 
 
         z=obj.z+shadow_offset_z

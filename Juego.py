@@ -3,14 +3,14 @@ import math
 import sys
 import time
 import asyncio
-from pathlib import Path
 from Estados import NONE,STARTING,GAMEOVER,GAMEOVER_FINAL,NORMAL,FINISH,PRELOADED
 from GameContext import GameContext
-from MapGenerator import MapGenerator
 from Message import Message
 from Resources import Resources
+from Rutas import BASE
 
 class Juego:
+    DEBUG=False
     # tope de updates seguidos para recuperar un frame lento
     MAX_UPDATES=4
     # dibujo adaptativo: a fps si update+draw cabe holgado en un frame, a la mitad si no
@@ -36,10 +36,7 @@ class Juego:
         # Canales simultáneos para SFX
         pygame.mixer.set_num_channels(16)
 
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            base = Path(sys._MEIPASS)
-        else:
-            base = Path(__file__).resolve().parent
+        base=BASE
 
         self.sounds = {
             "derrape": pygame.mixer.Sound(str(base/"sound/derrape.wav")),
@@ -69,7 +66,6 @@ class Juego:
         self.screen_h=screen_h
         self.fps=fps
 
-        #self.screen=pygame.Surface((self.width, self.height))
         
         self.screen=pygame.display.set_mode((self.screen_w,self.screen_h),pygame.SCALED | pygame.RESIZABLE)
 
@@ -87,9 +83,6 @@ class Juego:
         self.gen_scale=gen_scale
         self.context=None
 
-
-        self.debug_text=""
-
         #mesajes
         self.messages=[]
 
@@ -101,9 +94,6 @@ class Juego:
 
          #portada: ajustada al alto de pantalla, centrada con laterales negros
         self.portada = pygame.image.load(str(base/"img"/"portada.jpg")).convert()
-        #alto = self.screen_h
-        #ancho = round(portada.get_width() * alto / portada.get_height())
-        #self.portada = pygame.transform.smoothscale(portada, (ancho, alto))
         self.portada_activa = True
         self.msg_blink=False
         self.acum_blink=0
@@ -208,7 +198,6 @@ class Juego:
                     self.write_message("Press ENTER to play",posx,posy,font=self.font50)        
 
         elif self.context.estado==STARTING:
-            #self.write_message(f"{math.floor(self.context.countdown)+1:1.0f}",self.screen.get_width() // 2, self.screen.get_height() // 2, font=self.font150)
             self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{math.floor(self.context.countdown+1.0):1.0f}", self.screen.get_width() // 2, (self.screen.get_height() // 2)-50)
         elif self.context.estado==GAMEOVER_FINAL:
             rect = self.resources.gameover.get_rect(midtop=(self.screen.get_width() // 2, int(self.screen.get_height()*0.4)))
@@ -234,7 +223,6 @@ class Juego:
                 self.screen.blit(msg.sprite,rect)
 
 
-        #pygame.transform.scale(self.screen, (self.screen_w, self.screen_h), self.escalated_screen)
         pygame.display.flip()
 
 
@@ -453,7 +441,6 @@ class Juego:
 
 
         #tiempo
-        #self.write_message(f"{self.context.timer:3.0f}",self.screen.get_width() // 2, 8)
         rect = self.resources.time.get_rect(midtop=(self.screen.get_width() // 2, 30))
         self.screen.blit(self.resources.time,rect)
         self.resources.draw_number_align(self.screen, self.resources.number86_items,self.resources.number86_dim, f"{math.floor(self.context.timer):3.0f}", self.screen.get_width() // 2, int(self.screen.get_height()*0.1)+4)
@@ -493,7 +480,6 @@ class Juego:
             self.screen.blit(self.resources.h,rect)
 
         #velocidad
-        #self.write_message(f"{self.context.player.speed*20:3.0f}",75, self.screen.get_height() - 100, font=self.font100)
         self.resources.draw_number_align(self.screen, self.resources.number43_items,self.resources.number43_dim, f"{self.context.player.speed*20:3.0f}", int(self.screen.get_width()*0.1), int(self.screen.get_height()*0.85),1)
         rect = self.resources.kmh.get_rect(midtop=(int(self.screen.get_width()*0.1)+60, int(self.screen.get_height()*0.88)))
         self.screen.blit(self.resources.kmh,rect)
@@ -515,7 +501,6 @@ class Juego:
     def dibujar_barra(self,pantalla, progreso,x=100,y=100,ancho=28,alto=500):
 
         # Colores
-        BORDE = (75, 55, 35)
         DORADO_OSCURO = (156, 103, 28)
         DORADO = (255, 196, 55)
         BRILLO = (255, 225, 120)
@@ -527,11 +512,6 @@ class Juego:
         barra_ancho = ancho
         barra_alto = alto
 
-        # Colores
-        BORDE = (75, 55, 35)
-        DORADO_OSCURO = (156, 103, 28)
-        DORADO = (255, 196, 55)
-        BRILLO = (255, 225, 120)
 
         # Rectángulo principal usando midtop
         barra = pygame.Rect(0, 0, barra_ancho, barra_alto)

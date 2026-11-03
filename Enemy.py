@@ -1,5 +1,4 @@
 import math
-import pygame
 from TempObject import TempObject
 from Car import Car
 from Object import Object

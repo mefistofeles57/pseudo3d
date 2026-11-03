@@ -1,15 +1,14 @@
 import pygame
 from MapGenerator import MapGenerator
 from Escenario import RecursosEscenario,Bosque,DesiertoRoca,Pradera,Noche
-from Road import Road,Line,LineProfile
+from Road import Road,LineProfile
 from Camera import Camera
 from Player import Player
 from VisualObjProfile import VisualObjProfile
 from FrameData import FrameData
 from Estados import *
 from CircuitParser import CircuitParser
-import sys
-from pathlib import Path
+from Rutas import BASE
 
 class GameContext:
 
@@ -35,10 +34,7 @@ class GameContext:
         self.escenario=self.escenarios["bosque"]
 
         #circuit - hay que fijarlo antes de createMap, que ya lo usa
-        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-            self.base_circuitos = Path(sys._MEIPASS)
-        else:
-            self.base_circuitos = Path(__file__).resolve().parent
+        self.base_circuitos = BASE
         self.parser = None
         self.gen_circuito = None
         self.next_circuit = None

@@ -1,44 +1,62 @@
-import math
 from Point import Point
 
+
+#Representación estática de un segmento en el mapa
 class Segment:
+    #tipos de segmento. normal, fork y join
+    #de momento join no se usa
     NORMAL=0
     FORK=1
     JOIN=2
 
     def __init__(self,length=0.0,curve=0.0,height=0.0,profile=None,w0=1.0,w1=1.0):
         self.type=Segment.NORMAL
+        #distancia al eje del fork desde el inicio de la curva.
         self.d=0.0
+        #longitud del segmento
         self.length=length
+        #desplazamiento x local
         self.curve=curve
+        #desplazamiento y local
         self.height=height
+        #perfil
         self.visualProfile=profile
+        #indice del mapa
         self.index=0
+        #posicion global en z
         self.z=0.0
+        #listado de marcas en el segmento
         self.road_marks=[]
+        #listado de eventos en el segmento
         self.events = []
+        #medio ancho de carretera al inicio y al final del segmento
         self.w0=w0
         self.w1=w1
 
+    #calculo de curva. Cambia en los forks según la rama
     def curve_for(self,side):
         # side: -1 izquierda, +1 derecha
         if self.type==Segment.FORK:
             return side*self.curve
         return self.curve
 
+#Segmento dentro del buffer del frame
 class VisibleSegment:
+    #se construye a partir de un segmento del mapa y el segmento anterior del buffer
     def __init__(self,s:Segment,origin,playerx=None,playery=None,side=1):
         if origin!=None:
             x=origin.end.x
             y=origin.end.y
             c=origin.curve
             h=origin.height
+            #el valor d acumula la distancia con el eje de simetria del fork
             if origin.type==Segment.FORK:
                 d=(origin.d+origin.curve)
             else:
                 d=None
             if origin.type==Segment.FORK and s.type!=Segment.FORK:
                 # el tramo posterior se ancla al final de la rama del jugador
+                # para compensar que los tramos de fork están desplazados con respecto a su eje de simetría
                 if side==-1:
                     x+=origin.w1-2*(origin.d+origin.curve)
                     c=-origin.curve
@@ -51,10 +69,13 @@ class VisibleSegment:
                 x=-playerx
             if playery!=None:
                 y=-playery
-
+        #segmento del mapa asociado
         self.segment=s
+        #desplazamiento x del segmento dentro del buffer
         self.curve=c+s.curve_for(1)
+        #desplazamiento y del segmento dentro del buffer
         self.height=h+s.height
+        #coordenadas 3d de inicio y fin
         self.start=Point(x,y,s.z)
         self.end=Point(x+self.curve,y+self.height,s.z+s.length)
         self.visualProfile=s.visualProfile
@@ -76,6 +97,7 @@ class VisibleSegment:
 
 
 
+    #interpola la distancia en un punto z del centro con el eje de simetría del fork
     def d_at(self, z):
         if self.length<=0.0:
             return self.d
@@ -83,7 +105,10 @@ class VisibleSegment:
         t=max(0.0,min(1.0,t))
         return self.d+self.curve*t
 
-
+#perfil de linea de carretera.
+#grosor es el grosor de la linea
+#freq dice el numero de elementos y color es una lista con un color para cada indice%freq (None es sin pintar)
+#offset es el desplazamiento del inicio del patrón
 class LineProfile:
     def __init__(self,grosor,offset,freq,color):
         self.grosor=grosor
@@ -94,7 +119,9 @@ class LineProfile:
 class Line:
     def __init__(self,profile:LineProfile,position,x):
         self.profile=profile
+        #origen de posicionamiento (0.0 centro +-1.0 extremos)
         self.position=position
+        #desplamiento desde el origen
         self.x=x
 
     def getPoints(self,vs:VisibleSegment,pc1:Point,pc2:Point):
@@ -137,12 +164,6 @@ class Road:
             if segment.index>0:
                 s_ant=self.segments[segment.index-1]
                 segment.z=s_ant.z+segment.length
-                #segment.start.z=s_ant.end.z
-                #segment.start.x=s_ant.end.x
-                #segment.start.y=s_ant.end.y
-            #segment.end.x=segment.start.x+segment.curve
-            #segment.end.y=segment.start.y+segment.height
-            #segment.end.z=segment.start.z+segment.length
             
             self.segments.append(segment)
 

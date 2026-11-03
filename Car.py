@@ -1,9 +1,9 @@
-import math
 from Object import Object
 from Estados import STUCK,NORMAL
 from Road import Segment
-from abc import ABC, abstractmethod
+from abc import ABC
 
+#Clase base para todos los vehículos
 class Car(Object,ABC):
 
     # reacciones
@@ -17,14 +17,25 @@ class Car(Object,ABC):
 
     def __init__(self):
         super().__init__()
+        #velocidad lateral
         self.vx=0.0
+        #velocidad a lo largo del eje de la carretera
         self.speed=0.0
+        #contexto del juego
         self.context=None
+        #ultimo lado en el que ha estado en un fork
         self.last_side=0
+        #inverso de la masa para el calculo de reacciones a colisiones. Cuando menor más pesado
         self.masa=1.0
+        #posicion x objetivo de los rivales. Está en Car porque se modifica desde sync_side
         self.target_x_rel=0.0
         
-
+    #calcula el lado en el que se encuentra en un fork según la distancia a los ejes y actualiza el valor de x_rel relativo al centro de su rama.
+    #la rama derecha (1) desplaza w0 para alinear con el centro del tramo previo
+    #la rama izquierda (-1) desplaza dos veces d (distancia al eje del fork) con respecto al centro de la rama 1
+    #modifica los valores en el cambio de rama, cuando está más cerca de la rama contraria, dejando un margen (collide_radius)
+    #actualiza el valor de last_side para saber en que rama ha estado, que lo usan camara y rivales
+    # side 0 cuando no está en fork
     def sync_side(self,context):
         vs=self.getVS(context)
         if vs is None:
@@ -55,6 +66,8 @@ class Car(Object,ABC):
         self.last_side=self.side
 
 
+    #calcula el desplazamiento del centro de la rama del fork actual con respecto al eje del fork
+    #sumado a x_rel da la posicion en coordenadas comunes, para comparar con objetos de cualquier rama
     def x_shift_actual(self,context):
         vs=self.getVS(context)
         if vs is None or vs.type!=Segment.FORK:
@@ -66,6 +79,9 @@ class Car(Object,ABC):
         return 0.0
 
 
+    #calcula las colisiones con objetos o vehiculos
+    #dz y vx es el movimiento en el frame. Se hace una prueba de barrido
+    #y llama a resolve_collision para el primer objeto
     def collide(self,dz,vx,context):
         inicio=self.z-0.5
         vs=self.getVS(context,1)
@@ -115,7 +131,7 @@ class Car(Object,ABC):
         if collide_obj!=None:
             self.resolve_collision(collide_obj,x_self-(collide_obj.x_rel+collide_vs.x_shift))
 
-
+    #calcular distancia al cuadrado entre dos puntos
     def getDistance(self,ox,oz,x,z):
         dx = x - ox
         dz = z - oz
@@ -124,21 +140,27 @@ class Car(Object,ABC):
 
         return distance_squared
 
+    #devuelve la velocidad lateral. Enemy lo sobrescribe para sumar el movimiento del volante
     def vel_lateral(self):
         return self.vx
 
+    #devuelve si es un coche, player o rival
     def es_coche(self,obj):
         return obj.type==Car.CAR or obj.type==Car.PLAYER
 
+    #devuelve menos de 1 si soy mas pesado y mas de 1 si soy más ligero proporcionalmente a la diferencia de masa
     def factor_masa(self,otro):
-        # masa es la inversa de la masa: el que menos pesa (masa mayor) se lleva más
         suma=self.masa+otro.masa
         if suma==0.0:
             return 1.0
         return 2.0*self.masa/suma
 
+    #realiza las reacciones a una colision, según sea una colisión frontal, contra un vehiculo
+    #o contra el decorado
     def resolve_collision(self, other, dx):
         # dx: posición lateral relativa (yo - otro) en coordenadas comunes
+        #dz<0 si estás detrás de other
+        #lado==1 si estas a la derecha de other, -q a la izquierda
         dz=self.z-other.z
         if dx>0.0:
             lado=1
@@ -155,6 +177,7 @@ class Car(Object,ABC):
         else:
             self.choque_decorado(lado,dz,de_frente)
 
+    #calculo de reaccion contra otro vehiculo
     def choque_coche(self,other,lado,dz,de_frente):
         v_yo=self.vel_lateral()
         v_otro=other.vel_lateral()
@@ -186,6 +209,7 @@ class Car(Object,ABC):
             self.speed=self.speed*(1.0-min(1.0,self.RECORTE_LATERAL*self.factor_masa(other)))
             other.speed=other.speed*(1.0-min(1.0,self.RECORTE_LATERAL*other.factor_masa(self)))
 
+    #calculo de reaccion contra decorado
     def choque_decorado(self,lado,dz,de_frente):
         v_yo=self.vel_lateral()
         se_acercan_x=v_yo*lado<0.0

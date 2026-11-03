@@ -2,8 +2,6 @@ import time
 import json
 import pygame
 import Filtros
-from pathlib import Path
-from Road import Segment
 
 class AssetStreamer:
 
@@ -15,6 +13,7 @@ class AssetStreamer:
         self.cola_carga=[]
         self.cola_liberar=[]
         self.gen=None
+        self.last_obj_idx=0
 
         with open(archivo,"r",encoding="utf-8") as f:
             datos=json.load(f)
@@ -49,8 +48,10 @@ class AssetStreamer:
         z_inicio=road.segments[inicio].z
         z_fin=road.segments[fin].z
 
-        for o in road.objects:
+        for i in range(self.last_obj_idx,len(road.objects)):
+            o=road.objects[i]
             if o.z<z_inicio:
+                self.last_obj_idx+=1
                 continue
             if o.z>z_fin:
                 break

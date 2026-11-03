@@ -3,26 +3,38 @@ from Road import Segment
 
 class Object:
 
+    #tipo de objeto, jugardor, rival o decoracion
+
     NONE=0
     CAR=1
     PLAYER=2
 
     def __init__(self,anim=False,frametime=0.1):
+        #referencia a la imagen de cache
         self.img=""
+        #metadatos de la imagen
         self.metadata=None
         self.profile=None
+        #coordenadas. z posicion a la largo del eje, x_rel posicion lateral con respecto al eje
         self.z=0.0
         self.x_rel=0.0
+        #se tiene en cuenta en las colisiones
         self.collidable=True
+        #segmento en el que está situado dentro del buffer
         self.vs_index=-1
+        #rama en un fork: -1 izq, 1 der, 0 fuera del fork
         self.side=0        
         self.type=Object.NONE
         self.isAnim=anim
         self.frametime=frametime
         self.age=0.0
         self.frame=0
+        #distintas capas de dibujado
+        #son indices de los frames que se dibujan encima del frame actual
         self.capas=()
+        #indica hasta que posicion del buffer de segmentos se dibuja este objeto
         self.lod_hasta=9999
+        #relacionado con el dibujado de cables
         self.linea=None
         self.cable_inicio=False
                 
