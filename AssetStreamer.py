@@ -22,7 +22,6 @@ class AssetStreamer:
         for asset in datos["assets"]:
             asset.setdefault("flip",False)
             asset.setdefault("shadow",False)
-            asset.setdefault("escala",1.0)
             asset.setdefault("permanente",False)
             asset.setdefault("filtro",None)
             self.catalogo[asset["name"]]=asset

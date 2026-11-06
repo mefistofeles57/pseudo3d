@@ -3,15 +3,7 @@
 {"command": "LINE", "profile": "continua_blanca", "position": -1.05, "x": 0.01}
 {"command": "LINE", "profile": "continua_blanca", "position": 1.05, "x": -0.01}
 {"command": "block", "name": "salida"}
-{"command": "R", "segments": 70}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 36.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 30.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 30.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 33.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 37.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 42.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 33.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 40.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
+{"command": "R", "segments": 40}
 {"command": "O", "img": "arbol", "x": -6.5, "step": 12.0, "offset": 34.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
 {"command": "O", "img": "arbol", "x": 6.5, "step": 12.0, "offset": 40.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
 {"command": "O", "img": "arbol", "x": -7.5, "step": 8.0, "offset": 30.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
@@ -21,8 +13,8 @@
 {"command": "O", "segments": 4, "img": "start", "step": 10.0, "offset": 3.0, "x": 0.0, "collidable": false}
 {"command": "O", "segments": 4, "img": "column", "step": 10.0, "offset": 3.0, "x": 1.11, "collidable": false}
 {"command": "O", "segments": 4, "img": "column", "step": 10.0, "offset": 3.0, "x": -1.11, "collidable": false}
-{"command": "O", "segments": 20, "img": "quitamiedos.doble", "step": 0.15, "offset": 2.0, "x": 1.1, "lod": [5, 10, 16]}
-{"command": "O", "segments": 20, "img": "quitamiedos.doble", "step": 0.15, "offset": 2.0, "x": -1.1, "lod": [5, 10, 16]}
+{"command": "O", "segments": 20, "img": "quitamiedos.doble", "step": 0.1, "offset": 0.0, "x": 1.1}
+{"command": "O", "segments": 20, "img": "quitamiedos.doble", "step": 0.1, "offset": 0.0, "x": -1.1}
 {"command": "O", "segments": 17, "img": "pitbox.1", "step": 10.0, "offset": 7.0, "x": -2.0, "collidable": false}
 {"command": "O", "segments": 17, "img": "pitbox.2", "step": 10.0, "offset": 10.5, "x": -2.0, "collidable": false}
 {"command": "O", "segments": 17, "img": "pitbox.3", "step": 10.0, "offset": 14.0, "x": -2.0, "collidable": false}
@@ -39,822 +31,280 @@
 {"command": "O", "segments": 25, "img": "bandera.a", "step": 7.0, "offset": 7.99, "x": 2.6, "collidable": false, "anim": true, "frametime": 0.05}
 {"command": "O", "segments": 25, "img": "cartel.1", "step": 2.0, "offset": 15.0, "x": 1.5}
 {"command": "O", "segments": 25, "img": "cartel.2", "step": 2.0, "offset": 15.0, "x": -1.5}
-{"command": "E", "segment": -1, "x_rel": -0.6, "speed": 9.0, "img": "enemigo.2"}
-{"command": "E", "segment": 20, "x_rel": -0.6, "speed": 7.0, "img": "camion", "tipo": "camion"}
-{"command": "block", "name": "primeras_curvas"}
-{"command": "R", "segments": 45, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "farola.flip", "step": 5.0, "offset": 0.0, "x": -1.4, "random_step": 0.5}
-{"command": "O", "img": "farola", "step": 5.0, "offset": 2.5, "x": 1.4, "random_step": 0.5}
-{"command": "R", "segments": 25}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 55, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 25, "x_rel": -0.6, "speed": 8.5, "img": "enemigo.1"}
-{"command": "R", "segments": 45}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -15, "x_rel": -0.6, "speed": 8.5, "img": "enemigo.2"}
-{"command": "R", "segments": 70, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 30, "x_rel": -0.6, "speed": 9.0, "img": "enemigo.1"}
-{"command": "R", "segments": 25}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 45, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 55, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -20, "x_rel": 0.6, "speed": 9.0, "img": "enemigo.2"}
-{"command": "R", "segments": 35}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "block", "name": "primera_seccion_enlazadas"}
-{"command": "R", "segments": 45, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 45, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 20, "x_rel": -0.6, "speed": 9.0, "img": "enemigo.1"}
-{"command": "R", "segments": 35, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 55, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -20, "x_rel": 0.2, "speed": 9.5, "img": "enemigo.2"}
-{"command": "R", "segments": 35}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "block", "name": "primer_checkpoint_y_repechos"}
-{"command": "R", "segments": 25}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "CHK", "segment": 0, "z": 0.25, "time": 55.0}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": -1.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.5, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.5, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "O", "img": "cartel.1", "segments": 16, "step": 2.0, "offset": 7.0, "x": -1.9, "collidable": false}
-{"command": "O", "img": "cartel.2", "step": 2.0, "offset": 17.0, "x": -1.9, "collidable": false}
-{"command": "O", "img": "cartel.3", "segments": 16, "step": 2.0, "offset": 7.0, "x": 1.9, "collidable": false}
-{"command": "O", "img": "cartel.4", "step": 2.0, "offset": 17.0, "x": 1.9, "collidable": false}
-{"command": "E", "segment": 10, "x_rel": 0.25, "speed": 9.0, "img": "enemigo.1"}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 30.0, "x": -1.5, "segments": 40, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 31.0, "x": -2.4, "segments": 40, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 30.0, "x": 3.8, "segments": 40, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "E", "segment": 12, "x_rel": -0.6, "speed": 7.0, "img": "enemigo.1"}
+{"command": "block", "name": "elevacion"}
+{"command": "R", "segments": 10, "height": "H"}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 10, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 10, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 0.0, "x": 3.8, "segments": 10, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "R", "segments": 10, "height": "D"}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 10, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 10, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 10, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 10, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "block", "name": "curva_suave"}
+{"command": "R", "segments": 25, "curve": "CR"}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 10, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 10, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 10, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 10, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 10.0, "x": 1.5, "segments": 25, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 11.0, "x": 2.4, "segments": 25, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 10.0, "x": -3.8, "segments": 25, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 6.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 12.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "E", "segment": 10, "x_rel": -0.6, "speed": 9.0, "img": "enemigo.2"}
 {"command": "R", "segments": 20}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "E", "segment": -3, "x_rel": -0.2, "speed": 9.5, "img": "enemigo.2"}
-{"command": "O", "img": "rasante", "step": 30.0, "offset": 17.0, "x": -1.4, "collidable": true}
-{"command": "O", "img": "rasante", "step": 30.0, "offset": 17.0, "x": 1.4, "collidable": true}
-{"command": "BMP", "repeats": 3, "segments": 4, "slope": 0.025}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "block", "name": "rasantes_y_curvas"}
-{"command": "R", "segments": 30, "curve": "CR", "height": "H"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 25, "curve": "CL", "height": "D"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 12, "x_rel": 0.25, "speed": 9.5, "img": "enemigo.1"}
-{"command": "R", "segments": 35, "curve": "CL", "height": "H"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -15, "x_rel": -0.25, "speed": 10.0, "img": "enemigo.2"}
-{"command": "R", "segments": 30}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.3", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "block", "name": "tramo_rapido"}
-{"command": "R", "segments": 65, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "E", "segment": 26, "x_rel": -0.6, "speed": 8.5, "img": "camion", "tipo": "camion"}
-{"command": "R", "segments": 45}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "farola.flip", "step": 4.5, "offset": 0.0, "x": -1.4, "random_step": 0.4}
-{"command": "O", "img": "farola", "step": 4.5, "offset": 2.25, "x": 1.4, "random_step": 0.4}
-{"command": "E", "segment": 18, "x_rel": 0.3, "speed": 10.0, "img": "enemigo.1"}
-{"command": "E", "segment": 32, "x_rel": -0.3, "speed": 10.0, "img": "enemigo.2"}
-{"command": "R", "segments": 60, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "R", "segments": 40}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "block", "name": "zona_trampa"}
-{"command": "O", "img": "curva.s", "step": 30.0, "offset": 37.0, "x": 1.3, "collidable": true}
-{"command": "O", "img": "curva.s", "step": 30.0, "offset": 37.0, "x": -1.3, "collidable": true}
-{"command": "R", "segments": 18, "curve": "CR", "height": "H"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 18, "curve": "CL", "height": "D"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 20, "curve": "CR", "height": "H"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 10, "x_rel": -0.2, "speed": 10.5, "img": "enemigo.2"}
-{"command": "R", "segments": 18}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -10, "img": "flecha.1", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -11, "img": "flecha.2", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "O", "img": "rasante", "step": 30.0, "offset": 15.0, "x": -1.4, "collidable": true}
-{"command": "O", "img": "rasante", "step": 30.0, "offset": 15.0, "x": 1.4, "collidable": true}
-{"command": "BMP", "repeats": 4, "segments": 4, "slope": 0.03}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -6, "x_rel": 0.2, "speed": 10.5, "img": "enemigo.1"}
-{"command": "O", "img": "curva", "step": 30.0, "offset": 13.0, "x": 1.3, "collidable": true}
-{"command": "R", "segments": 45, "curve": "CHR"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "quitamiedos", "step": 0.12, "offset": 0.03, "x": -1.3, "lod": [14, 20, 24]}
-{"command": "O", "img": "quitamiedos", "step": 0.2, "offset": 0.03, "x": 1.3, "lod": [8, 16, 22]}
-{"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": -1.3, "profile": "poste"}
-{"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
-{"command": "O", "img": "farola.flip", "step": 7.0, "offset": 1.0, "x": -1.65, "random_step": 0.5}
-{"command": "O", "img": "farola", "step": 7.0, "offset": 4.5, "x": 1.65, "random_step": 0.5}
-{"command": "R", "segments": 30}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "block", "name": "segunda_seccion_enlazadas"}
-{"command": "O", "img": "curva.s", "step": 30.0, "offset": 27.0, "x": 1.3, "collidable": true}
-{"command": "O", "img": "curva.s", "step": 30.0, "offset": 27.0, "x": -1.3, "collidable": true}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 5, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 5, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 0.0, "x": -3.8, "segments": 5, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 5.0, "x": -1.5, "segments": 20, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 6.0, "x": -2.4, "segments": 20, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 5.0, "x": 3.8, "segments": 20, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "R", "segments": 50, "curve": "CR"}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 5, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 5, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 0.0, "x": 3.8, "segments": 5, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 5.0, "x": -1.5, "segments": 25, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 6.0, "x": -2.4, "segments": 25, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 5.0, "x": 1.5, "segments": 25, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 6.0, "x": 2.4, "segments": 25, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 25.0, "x": 1.5, "segments": 45, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 26.0, "x": 2.4, "segments": 45, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 25.0, "x": -3.8, "segments": 45, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 45.0, "x": -1.5, "segments": 50, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 46.0, "x": -2.4, "segments": 50, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 45.0, "x": 3.8, "segments": 50, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 6.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 12.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "E", "segment": 35, "x_rel": 0.6, "speed": 9.0, "img": "enemigo.1"}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 15, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 15, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 0.0, "x": 3.8, "segments": 15, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 15.0, "x": -1.5, "segments": 20, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 16.0, "x": -2.4, "segments": 20, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 15.0, "x": 1.5, "segments": 20, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 16.0, "x": 2.4, "segments": 20, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
 {"command": "R", "segments": 50, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 25, "x_rel": 0.2, "speed": 10.5, "img": "enemigo.2"}
-{"command": "R", "segments": 45, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "curva.flip", "step": 30.0, "offset": 42.0, "x": -1.3, "collidable": true}
-{"command": "R", "segments": 38, "curve": "CHL"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "quitamiedos", "step": 0.12, "offset": 0.03, "x": 1.3, "lod": [14, 20, 24]}
-{"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
-{"command": "E", "segment": -8, "x_rel": -0.25, "speed": 10.5, "img": "enemigo.1"}
-{"command": "R", "segments": 45}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.3", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.3", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "block", "name": "segundo_checkpoint"}
-{"command": "R", "segments": 25}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "CHK", "segment": 0, "z": 0.25, "time": 55.0}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": -1.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": -0.5, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.0, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "MK", "segment": 0, "img": "parrilla", "x": 0.5, "z": 0.25, "w": 0.5, "h": 0.5}
-{"command": "O", "img": "cartel.1", "segments": 16, "step": 2.0, "offset": 7.0, "x": -1.9, "collidable": false}
-{"command": "O", "img": "cartel.2", "step": 2.0, "offset": 17.0, "x": -1.9, "collidable": false}
-{"command": "O", "img": "cartel.3", "segments": 16, "step": 2.0, "offset": 7.0, "x": 1.9, "collidable": false}
-{"command": "O", "img": "cartel.4", "step": 2.0, "offset": 17.0, "x": 1.9, "collidable": false}
-{"command": "E", "segment": 10, "x_rel": -0.25, "speed": 10.0, "img": "enemigo.2"}
-{"command": "block", "name": "gran_curva_contracurva"}
-{"command": "R", "segments": 65, "curve": "CR", "height": "H"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.2", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.2", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "R", "segments": 70, "curve": "CL", "height": "D"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.2", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.2", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 35, "x_rel": -0.25, "speed": 11.0, "img": "enemigo.1"}
-{"command": "R", "segments": 45}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 10.0, "offset": 5.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 10.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.2, "step": 8.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.2, "step": 8.0, "offset": 4.0, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.8, "step": 12.0, "offset": 2.0, "random_x": -0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.2", "x": 2.8, "step": 12.0, "offset": 8.0, "random_x": 0.4, "random_step": 4.0}
-{"command": "O", "img": "arbol.2", "x": -5.5, "step": 14.0, "offset": 9.0, "random_x": -0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 5.5, "step": 14.0, "offset": 3.0, "random_x": 0.8, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -10.0, "step": 18.0, "offset": 5.0, "random_x": -2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 10.0, "step": 18.0, "offset": 14.0, "random_x": 2.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 22.0, "offset": 13.0, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 22.0, "offset": 6.0, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 22, "x_rel": 0.3, "speed": 11.0, "img": "enemigo.1"}
-{"command": "MK", "segment": -20, "img": "flecha.1", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -21, "img": "flecha.2", "x": -0.9, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -20, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -21, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -20, "img": "flecha.1", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "MK", "segment": -21, "img": "flecha.2", "x": 0.4, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "block", "name": "tramo_final"}
-{"command": "R", "segments": 55, "curve": "CR"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 25, "x_rel": 0.25, "speed": 11.0, "img": "enemigo.2"}
-{"command": "R", "segments": 35}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "curva.flip", "step": 30.0, "offset": 32.0, "x": -1.3, "collidable": true}
-{"command": "R", "segments": 25, "curve": "CHL", "height": "H"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": 2, "x_rel": -0.6, "speed": 9.5, "img": "camion", "tipo": "camion"}
-{"command": "O", "img": "quitamiedos", "step": 0.12, "offset": 0.03, "x": 1.3, "lod": [14, 20, 24]}
-{"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
-{"command": "R", "segments": 40}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -6, "x_rel": -0.3, "speed": 11.0, "img": "enemigo.1"}
-{"command": "O", "img": "curva", "step": 30.0, "offset": 37.0, "x": 1.3, "collidable": true}
-{"command": "R", "segments": 40, "curve": "CHR"}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "quitamiedos", "step": 0.12, "offset": 0.03, "x": -1.3, "lod": [14, 20, 24]}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 15, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 15, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 15, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 15, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 15.0, "x": 1.5, "segments": 35, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 16.0, "x": 2.4, "segments": 35, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 15.0, "x": -3.8, "segments": 35, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 2.0, "offset": 35.0, "x": -1.5, "segments": 50, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol", "step": 2.5, "offset": 36.0, "x": -2.4, "segments": 50, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol", "step": 3.0, "offset": 35.0, "x": 3.8, "segments": 50, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 6.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 12.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "E", "segment": 47, "x_rel": -0.6, "speed": 7.0, "img": "camion", "tipo": "camion"}
+{"command": "block", "name": "claro_1_cuesta"}
+{"command": "R", "segments": 15, "height": "H"}
+{"command": "O", "img": "farola", "step": 4.0, "offset": 0.0, "x": 1.4, "segments": 12, "random_step": 0.3}
+{"command": "O", "img": "farola.flip", "step": 4.0, "offset": 12.0, "x": -1.4, "segments": 15, "random_step": 0.3}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "R", "segments": 15, "height": "D"}
+{"command": "O", "img": "farola.flip", "step": 4.0, "offset": 0.0, "x": -1.4, "segments": 9, "random_step": 0.3}
+{"command": "O", "img": "farola", "step": 4.0, "offset": 9.0, "x": 1.4, "segments": 15, "random_step": 0.3}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "E", "segment": 12, "x_rel": -0.6, "speed": 9.0, "img": "enemigo.2"}
+{"command": "BMP", "repeats": 3, "segments": 4, "slope": 0.025}
+{"command": "O", "img": "farola", "step": 4.0, "offset": 0.0, "x": 1.4, "segments": 6, "random_step": 0.3}
+{"command": "O", "img": "farola.flip", "step": 4.0, "offset": 6.0, "x": -1.4, "segments": 18, "random_step": 0.3}
+{"command": "O", "img": "farola", "step": 4.0, "offset": 18.0, "x": 1.4, "segments": 24, "random_step": 0.3}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "R", "segments": 8}
+{"command": "O", "img": "farola", "step": 4.0, "offset": 0.0, "x": 1.4, "segments": 6, "random_step": 0.3}
+{"command": "O", "img": "farola.flip", "step": 4.0, "offset": 6.0, "x": -1.4, "segments": 8, "random_step": 0.3}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "R", "segments": 50, "curve": "CR"}
+{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": -1.3}
 {"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": -1.3, "profile": "poste"}
-{"command": "R", "segments": 35}
-{"command": "O", "img": "arbusto", "x": -1.7, "step": 7.0, "offset": 3.5, "random_x": -0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.7, "step": 7.0, "offset": 0.0, "random_x": 0.1, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -2.3, "step": 3.0, "offset": 0.0, "random_x": -0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": 2.3, "step": 3.0, "offset": 1.5, "random_x": 0.3, "random_step": 1.0}
-{"command": "O", "img": "arbol.2", "x": -3.2, "step": 4.5, "offset": 1.5, "random_x": -0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 3.2, "step": 4.5, "offset": 0.5, "random_x": 0.3, "random_step": 1.5, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.0, "step": 5.0, "offset": 2.0, "random_x": -0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.0, "step": 5.0, "offset": 0.0, "random_x": 0.8, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -9.0, "step": 6.0, "offset": 4.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 9.0, "step": 6.0, "offset": 1.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -13.0, "step": 8.0, "offset": 1.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 13.0, "step": 8.0, "offset": 5.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.0, "step": 35.0, "offset": 15.0, "random_x": -0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.0, "step": 35.0, "offset": 30.0, "random_x": 0.2, "random_step": 6.0, "profile": "piedra"}
-{"command": "E", "segment": -15, "x_rel": 0.3, "speed": 12.0, "img": "enemigo.1"}
-{"command": "block", "name": "meta_ultimo_tramo"}
-{"command": "R", "segments": 35, "curve": "CL"}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 7.5, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -11.0, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 11.0, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 6.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 12.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "E", "segment": 45, "x_rel": 0.6, "speed": 9.0, "img": "enemigo.1"}
+{"command": "block", "name": "bosque_2"}
+{"command": "R", "segments": 30}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 20, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 20, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 3.0, "offset": 0.0, "x": 3.8, "segments": 20, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 20.0, "x": -1.5, "segments": 30, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 21.0, "x": -2.4, "segments": 30, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 20.0, "x": 1.5, "segments": 30, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 21.0, "x": 2.4, "segments": 30, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "R", "segments": 50, "curve": "CL"}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 10, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 10, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 10, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 10, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 10.0, "x": 1.5, "segments": 30, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 11.0, "x": 2.4, "segments": 30, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 3.0, "offset": 10.0, "x": -3.8, "segments": 30, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 30.0, "x": -1.5, "segments": 50, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 31.0, "x": -2.4, "segments": 50, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 3.0, "offset": 30.0, "x": 3.8, "segments": 50, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 6.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 12.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "E", "segment": 45, "x_rel": 0.3, "speed": 7.0, "img": "camion", "tipo": "camion"}
+{"command": "R", "segments": 15, "curve": "CR"}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 15, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 15, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 15, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 15, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "curva.s", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 1000.0, "offset": 5.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 1000.0, "offset": 10.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva.s", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "R", "segments": 15, "curve": "CL"}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 5, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 5, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 5, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 5, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 5.0, "x": 1.5, "segments": 15, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 6.0, "x": 2.4, "segments": 15, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 3.0, "offset": 5.0, "x": -3.8, "segments": 15, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "R", "segments": 20}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 10, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 10, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 3.0, "offset": 0.0, "x": -3.8, "segments": 10, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 2.0, "offset": 10.0, "x": -1.5, "segments": 20, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.2", "step": 2.5, "offset": 11.0, "x": -2.4, "segments": 20, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 3.0, "offset": 10.0, "x": 3.8, "segments": 20, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.2", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "E", "segment": 4, "x_rel": 0.6, "speed": 9.0, "img": "enemigo.2"}
+{"command": "BMP", "repeats": 3, "segments": 4, "slope": 0.025}
+{"command": "O", "img": "farola.flip", "step": 4.0, "offset": 0.0, "x": -1.4, "segments": 12, "random_step": 0.3}
+{"command": "O", "img": "farola", "step": 4.0, "offset": 12.0, "x": 1.4, "segments": 24, "random_step": 0.3}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "R", "segments": 8}
+{"command": "O", "img": "farola.flip", "step": 4.0, "offset": 0.0, "x": -1.4, "segments": 8, "random_step": 0.3}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "R", "segments": 25, "curve": "CHL"}
+{"command": "O", "img": "quitamiedos", "step": 0.1, "offset": 0.03, "x": 1.3}
+{"command": "O", "img": "poste", "step": 1.0, "offset": 0.1, "x": 1.3, "profile": "poste"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 6.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 12.0, "x": 1.35, "collidable": true}
+{"command": "O", "img": "curva.flip", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "block", "name": "elev_pre_b3"}
+{"command": "R", "segments": 10, "height": "H"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "R", "segments": 10, "height": "D"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 2.0, "x": -3.6, "random_x": -0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 5.0, "x": -2.6, "random_x": -0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "O", "img": "vegetacion.1", "step": 10.0, "offset": 7.0, "x": 3.6, "random_x": 0.3, "random_step": 3.0, "collidable": false}
+{"command": "O", "img": "piedra", "step": 22.0, "offset": 15.0, "x": 2.6, "random_x": 0.3, "random_step": 6.0, "profile": "piedra"}
+{"command": "block", "name": "bosque_3"}
+{"command": "R", "segments": 40}
+{"command": "O", "img": "arbol.3", "step": 2.0, "offset": 0.0, "x": -1.5, "segments": 20, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.3", "step": 2.5, "offset": 1.0, "x": -2.4, "segments": 20, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 3.0, "offset": 0.0, "x": 3.8, "segments": 20, "random_x": 0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 2.0, "offset": 20.0, "x": -1.5, "segments": 40, "random_x": -0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.3", "step": 2.5, "offset": 21.0, "x": -2.4, "segments": 40, "random_x": -0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 2.0, "offset": 20.0, "x": 1.5, "segments": 40, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.3", "step": 2.5, "offset": 21.0, "x": 2.4, "segments": 40, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "block", "name": "elev_post_b3"}
+{"command": "R", "segments": 10, "height": "H"}
+{"command": "O", "img": "arbol.3", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 10, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.3", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 10, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 3.0, "offset": 0.0, "x": -3.8, "segments": 10, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "R", "segments": 10, "height": "D"}
+{"command": "O", "img": "arbol.3", "step": 2.0, "offset": 0.0, "x": 1.5, "segments": 10, "random_x": 0.15, "random_step": 0.5}
+{"command": "O", "img": "arbol.3", "step": 2.5, "offset": 1.0, "x": 2.4, "segments": 10, "random_x": 0.25, "random_step": 0.5, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 3.0, "offset": 0.0, "x": -3.8, "segments": 10, "random_x": -0.6, "random_step": 1.0, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 12.0, "offset": 3.0, "x": -7.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
+{"command": "O", "img": "arbol.3", "step": 12.0, "offset": 9.0, "x": 7.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
+{"command": "block", "name": "curva_final"}
+{"command": "R", "segments": 40, "curve": "CR"}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 6.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 12.0, "x": -1.35, "collidable": true}
+{"command": "O", "img": "curva", "step": 1000.0, "offset": 0.0, "x": 1.35, "collidable": true}
+{"command": "block", "name": "final_ensanche"}
 {"command": "R", "segments": 60, "w1": 2.0}
-{"command": "O", "img": "arbusto", "x": -2.9, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 2.9, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -4.6, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 4.6, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -3.5, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 3.5, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -7.1, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 7.1, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -7.6, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 7.6, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -8.6, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 8.6, "step": 8.0, "offset": 4.0, "random_x": 1.5, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": -12.1, "step": 9.0, "offset": 5.0, "random_x": -2.0, "random_step": 4.0, "collidable": false}
-{"command": "O", "img": "arbol.2", "x": 12.1, "step": 9.0, "offset": 0.0, "random_x": 2.0, "random_step": 4.0, "collidable": false}
 {"command": "MK", "segment": -40, "img": "flecha.1", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
 {"command": "MK", "segment": -41, "img": "flecha.2", "x": -0.25, "z": 0.0, "w": 0.5, "h": 1.0}
 {"command": "MK", "segment": -40, "img": "flecha.1", "x": -1.18, "z": 0.0, "w": 0.5, "h": 1.0}
 {"command": "MK", "segment": -41, "img": "flecha.2", "x": -1.18, "z": 0.0, "w": 0.5, "h": 1.0}
 {"command": "MK", "segment": -40, "img": "flecha.1", "x": 0.68, "z": 0.0, "w": 0.5, "h": 1.0}
 {"command": "MK", "segment": -41, "img": "flecha.2", "x": 0.68, "z": 0.0, "w": 0.5, "h": 1.0}
-{"command": "fork", "segments": 40, "curve": "CHR", "w": 1.0}
+{"command": "block", "name": "fork_final"}
+{"command": "fork", "segments": 52, "curve": "CF", "w": 1.0}
 {"command": "LOAD", "segment": 20, "z": 0.5, "next": {"1": "circuits/circuit2.jsonl", "-1": "circuits/circuit3.jsonl"}}
-{"command": "O", "segments": 40, "img": "arbol.3", "side": 1, "x": 2.0, "step": 9.0, "offset": 6.0, "random_x": 0.5, "random_step": 3.0}
-{"command": "O", "segments": 40, "img": "arbol.2", "side": 1, "x": 2.6, "step": 11.0, "offset": 10.0, "random_x": 0.6, "random_step": 4.0}
-{"command": "O", "segments": 40, "img": "arbol", "side": -1, "x": -2.5, "step": 10.0, "offset": 7.5, "random_x": 0.5, "random_step": 3.0}
-{"command": "O", "segments": 40, "img": "arbol.3", "side": -1, "x": -3.0, "step": 13.0, "offset": 12.0, "random_x": 0.6, "random_step": 4.0}
 {"command": "R", "segments": 30}
-{"command": "O", "img": "arbusto", "x": -1.8, "step": 12.0, "offset": 6.0, "random_x": -0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "arbusto", "x": 1.8, "step": 12.0, "offset": 0.0, "random_x": 0.1, "random_step": 3.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": -3.5, "step": 7.0, "offset": 0.0, "random_x": -0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "vegetacion.1", "x": 3.5, "step": 7.0, "offset": 3.5, "random_x": 0.2, "random_step": 2.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": -2.4, "step": 15.0, "offset": 7.0, "random_x": -0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": 2.4, "step": 15.0, "offset": 12.0, "random_x": 0.3, "random_step": 5.0, "profile": "piedra"}
-{"command": "O", "img": "piedra", "x": -6.0, "step": 18.0, "offset": 3.0, "random_x": -1.0, "random_step": 6.0, "collidable": false}
-{"command": "O", "img": "piedra", "x": 6.0, "step": 18.0, "offset": 10.0, "random_x": 1.0, "random_step": 6.0, "collidable": false}
 {"command": "O", "img": "arbol.2", "x": -6.5, "step": 12.0, "offset": 4.0, "random_x": -1.0, "random_step": 5.0, "collidable": false}
 {"command": "O", "img": "arbol.2", "x": 6.5, "step": 12.0, "offset": 10.0, "random_x": 1.0, "random_step": 5.0, "collidable": false}
 {"command": "O", "img": "arbol.2", "x": -7.5, "step": 8.0, "offset": 0.0, "random_x": -1.5, "random_step": 3.0, "collidable": false}

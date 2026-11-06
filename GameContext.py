@@ -46,7 +46,7 @@ class GameContext:
         #inicio
         self.countdown=0.0
         #game data
-        self.timer=60.0
+        self.timer=70.0
         self.score=0
         self.stage=1
         self.escenario.streamer.actualizar(self.road,self.road.segments[0].z)
@@ -137,7 +137,7 @@ class GameContext:
 
         parser = CircuitParser(
             self,
-            curves={"CR": R, "CL": L, "CHR": R_HARD, "CHL": L_HARD},
+            curves={"CR": R, "CL": L, "CHR": R_HARD, "CHL": L_HARD, "CF": 0.05},
             heights={"H": HILL, "D": DOWN, "HH": HILL_HARD, "DH": DOWN_HARD},
             profiles={
                 "default": default_profile,

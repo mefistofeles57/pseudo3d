@@ -30,8 +30,9 @@ FR_GIRO_MAX=20       # tope del contador: FR_GIRO_MAX-FR_GIRO_EXTREMO frames de 
 LUCES_DESPL=[
     (0,0),(-1,0),(-3,0),(1,0),(3,0),
     (0,-2),(-1,-2),(-1,-2),(1,-2),(1,-2),
-    (0,1),(0,1),(0,1),(0,1),(0,1)
+    (0,1),(-1,1),(-1,1),(1,1),(1,1)
 ]
+
 class Player(Car):
 
 
@@ -52,8 +53,7 @@ class Player(Car):
         self.prev_x_rel=0.0
         self.prev_c=0.0
         #cache para el coche
-        self.cache=ImageCache(ImageCache.getPlayerConfig(resize=self.context.gen_scale),context)
-
+        self.cache=ImageCache(ImageCache.getPlayerConfig(context.camera.player_z,resize=self.context.gen_scale),context)
 
         hoja=pygame.image.load(str(self.cache.base/"img"/"coche-anim.png")).convert_alpha()
         f=self.cache.load_frames(hoja,64,64)
@@ -76,7 +76,8 @@ class Player(Car):
                 capa.blit(patrones[k],(32+dxd,0),(32,0,32,64))
                 ruedas.append(capa)
 
-        self.cache.newAnimation("coche",coches+luces+ruedas,(0.5,1.0),True)
+        #con 2 muestras en la tabla el coche siempre usa scale_max: su tamaño en pantalla no depende del fov
+        self.cache.newAnimation("coche",coches+luces+ruedas,(0.5,1.0),True,0.35)
 
 
         self.load_metadata(self.cache)
@@ -102,7 +103,7 @@ class Player(Car):
         #cache para el humo
         #animaciones
         self.cache_humo=ImageCache(ImageCache.getHumoConfig(resize=self.context.gen_scale),context)
-        self.cache_humo.addAnimation("humo","humo.png",(0.0,1.0),True,False)
+        self.cache_humo.addAnimation("humo","humo.png",(0.0,1.0),0.182,True,False)
         profile=VisualObjProfile()
         profile.shadow_color=(0,0,0)
         profile.shadow_alpha=80
@@ -122,23 +123,25 @@ class Player(Car):
         self.p_acelerador=0.0
         self.p_freno=0.0
         #marchas (velocida,torque)
-        self.marchas=[[9.0,1.5],[16.0,0.8]]
+        self.marchas=[[10.0,1.5],[17.0,0.8]]
         self.marcha=0
         self.tecla_marcha=False
         #humo
         self.smoke_interval=0.1
         self.smoke_timer=0.0
         #params
-        self.PENALIZACION_CURVA=1.0
-        self.POTENCIA_MOTOR=4.0
-        self.FUERZA_FRENADO=6.0
+        self.PENALIZACION_CURVA=2.5
+        self.POTENCIA_MOTOR=5.0
+        self.FUERZA_FRENADO=5.0
         self.RESISTENCIA_AIRE=0.000015
-        self.FRENO_MOTOR=0.6
-        self.INTENSIDAD_CURVA=20.0
-        self.FUERZA_VOLANTE=3.0
+        self.FRENO_MOTOR=0.55
+        self.INTENSIDAD_CURVA=25.0
+        self.FUERZA_VOLANTE=2.8
         self.LIMITE_AGARRE=0.6
         #object
         self.type=Object.PLAYER
+        #feeling
+        self.TRAZADA=0.1
 
         #sonido
         self.engine = SonidoMotor(str(BASE/"sound/loop_5.wav"))
@@ -504,9 +507,9 @@ class Player(Car):
         centrifuga=curva_pista*factor_v*factor_v*self.INTENSIDAD_CURVA
 
 
-        #50% de la fuerza modificada por la trazada
-        centrifuga=centrifuga*0.5+centrifuga*x_ratio*0.5
-        
+        #la fuerza cambia con la trazada: 0.75 en el centro, menos por el interior y mas por el exterior
+        centrifuga=centrifuga*(0.75+self.TRAZADA*(2*x_ratio-1))
+                
         self.target_c=giro_player
         #si se suelta el acelerador el coche se agarra más
         if acelerador<0.1:
@@ -615,9 +618,7 @@ class Player(Car):
         return LUCES_DESPL[i]
     
     def despl_ruedas(self,i,fase):
-        # desplazamiento del patrón según el giro. La subida queda a cero hasta que se dibujen sus giros
-        if i>=FR_CAR:
-            return (0,0)
+        # desplazamiento del patrón según el giro
         giro=i%5
         if giro==0:
             return (0,0)

@@ -13,7 +13,6 @@ class CacheConfig:
         self.num_samples=150
         self.scale_max=1500*resize
         self.scale_min=10*resize
-        self.resize_at_1=1.25*resize
         self.distancia_vuelo=7.5
 
 class ImageCache:
@@ -22,15 +21,14 @@ class ImageCache:
     IMAGE=1
 
     @staticmethod
-    def getPlayerConfig(resize=1.0):
+    def getPlayerConfig(distancia,resize=1.0):
         c=CacheConfig()
-        c.distancia_vuelo=None
+        #el tope de la tabla es la escala real del coche, que va siempre a esta distancia de la camara
+        c.distancia_vuelo=distancia
         c.num_samples=2
-        c.scale_max=1500*resize
         c.scale_min=80*resize
-        c.resize_at_1=3*resize
         return c
-
+    
     @staticmethod
     def getHumoConfig(resize=1.0):
         c=CacheConfig()
@@ -38,7 +36,6 @@ class ImageCache:
         c.num_samples=20
         c.scale_max=1500*resize
         c.scale_min=20*resize
-        c.resize_at_1=7*resize
         return c
 
 
@@ -64,17 +61,12 @@ class ImageCache:
 
         self.getScaleTable()
 
-        #resize factor
-        #necesito la escala en (0,0,1)
-        p=context.camera.project(Point(0.0,0.0,1.0))
-        self.resizeFactor=p.z/self.config.resize_at_1
-
         self.base=BASE
 
-    def addAnimation(self,name,file,anchor,flip=True,shadow=False,ancho=32,alto=32):
+    def addAnimation(self,name,file,anchor,ancho_mundo,flip=True,shadow=False,ancho=32,alto=32):
         img=pygame.image.load(str(self.base/"img"/file)).convert_alpha()
         frames=self.load_frames(img, ancho, alto)
-        self.newAnimation(name,frames,anchor,shadow)
+        self.newAnimation(name,frames,anchor,shadow,ancho_mundo)
         if flip==True:
             img=pygame.image.load(str(self.base/"img"/file)).convert_alpha()
             img=pygame.transform.flip(img,True,False)
@@ -83,60 +75,65 @@ class ImageCache:
                 frames.append(item)
             anchor_x=anchor[0]
             anchor_y=anchor[1]
-            self.newAnimation(name+".flip",frames,(1-anchor_x,anchor_y),shadow)
+            self.newAnimation(name+".flip",frames,(1-anchor_x,anchor_y),shadow,ancho_mundo)
 
 
-    def addImage(self,name,file,anchor,flip=True,shadow=False):
+    def addImage(self,name,file,anchor,ancho_mundo,flip=True,shadow=False):
         img=pygame.image.load(str(self.base/"img"/file)).convert_alpha()
-        self.newImage(name,img,anchor,shadow)
+        self.newImage(name,img,anchor,shadow,ancho_mundo)
         if flip==True:
             img=pygame.transform.flip(img,True,False)
             anchor_x=anchor[0]
             anchor_y=anchor[1]
-            self.newImage(name+".flip",img,(1-anchor_x,anchor_y),shadow)
+            self.newImage(name+".flip",img,(1-anchor_x,anchor_y),shadow,ancho_mundo)
 
-    def newImage(self,name,img,anchor,shadow,escala=1.0):
-        for _ in self.generarImagen(name,img,anchor,shadow,escala):
+    def newImage(self,name,img,anchor,shadow,ancho_mundo):
+        for _ in self.generarImagen(name,img,anchor,shadow,ancho_mundo):
             pass
 
-    def generarImagen(self,name,img,anchor,shadow,escala=1.0):
+    def generarImagen(self,name,img,anchor,shadow,ancho_mundo):
         w=img.get_width()
         h=img.get_height()
         escalados=[]
         for scale in self.LUT:
-            resize=(scale/self.resizeFactor)*escala
-            new_img=pygame.transform.scale(img,(int(w*resize),int(h*resize)))
+            new_img=pygame.transform.scale(img,self.medida(w,h,ancho_mundo,scale))
             new_img.set_alpha(255, pygame.RLEACCEL)
             escalados.append(new_img)
             yield
         self.images[name]=escalados
-        self.originales[name]=(img,w,h,escala)
+        self.originales[name]=(img,w,h,ancho_mundo)
         self.metadata[name]=Image(name,anchor[0],anchor[1],shadow,ImageCache.IMAGE)
 
-
-    def newAnimation(self,name,frames,anchor,shadow,escala=1.0):
-        for _ in self.generarAnimacion(name,frames,anchor,shadow,escala):
+    def newAnimation(self,name,frames,anchor,shadow,ancho_mundo):
+        for _ in self.generarAnimacion(name,frames,anchor,shadow,ancho_mundo):
             pass
 
-    def generarAnimacion(self,name,frames,anchor,shadow,escala=1.0):
+    def generarAnimacion(self,name,frames,anchor,shadow,ancho_mundo):
         w=frames[0].get_width()
         h=frames[0].get_height()
         escalados=[]
         for scale in self.LUT:
-            resize=(scale/self.resizeFactor)*escala
+            medida=self.medida(w,h,ancho_mundo,scale)
             nuevos=[]
             for frame in frames:
-                nuevo=pygame.transform.scale(frame,(int(w*resize),int(h*resize)))
+                nuevo=pygame.transform.scale(frame,medida)
                 nuevo.set_alpha(255, pygame.RLEACCEL)
                 nuevos.append(nuevo)
             escalados.append(nuevos)
             yield
         self.animations[name]=escalados
-        self.originales[name]=(frames,w,h,escala)
+        self.originales[name]=(frames,w,h,ancho_mundo)
         metadata=Image(name,anchor[0],anchor[1],shadow,ImageCache.ANIMATION)
         metadata.frames=len(frames)
         self.metadata[name]=metadata
 
+
+    #tamaño en pantalla de una imagen de w x h pixeles que mide ancho_mundo unidades, a la escala de proyeccion dada
+    #el alto mantiene la proporcion de la imagen
+    def medida(self,w,h,ancho_mundo,escala):
+        ancho=ancho_mundo*escala
+        return (int(ancho),int(ancho*h/w))
+        
     def getScaleTable(self):
         num_samples=self.config.num_samples
         scale_max=self.scale_cache_max
@@ -152,13 +149,12 @@ class ImageCache:
         return round(math.log(escala/self.config.scale_min)*self.inv_log_ratio)
 
     def tamano(self,name,escala):
-        (original,w,h,escala_asset)=self.originales[name]
+        (original,w,h,ancho_mundo)=self.originales[name]
         if escala>self.scale_cache_max:
             s=escala
         else:
             s=self.LUT[self.indice(escala)]
-        resize=(s/self.resizeFactor)*escala_asset
-        return (int(w*resize),int(h*resize))
+        return self.medida(w,h,ancho_mundo,s)
 
     def nuevoFrame(self):
         self.memo.clear()

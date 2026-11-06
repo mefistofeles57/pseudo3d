@@ -11,7 +11,7 @@
    "shadow": true,
    "ancho": 486,
    "alto": 288,
-   "escala": 1.0
+   "escala": 0.494
   },
   {
    "name": "bandera.v",
@@ -24,7 +24,7 @@
    "shadow": true,
    "ancho": 486,
    "alto": 288,
-   "escala": 1.0
+   "escala": 0.494
   },
   {
    "name": "bandera.a",
@@ -37,7 +37,7 @@
    "shadow": true,
    "ancho": 486,
    "alto": 288,
-   "escala": 1.0
+   "escala": 0.494
   },
   {
    "name": "curva",
@@ -49,7 +49,7 @@
    ],
    "flip": true,
    "shadow": true,
-   "escala": 1.0
+   "escala": 0.3
   },
   {
    "name": "curva.s",
@@ -60,7 +60,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 0.3
   },
   {
    "name": "rasante",
@@ -71,7 +71,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 0.247
   },
   {
    "name": "arbol",
@@ -82,7 +82,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.756
   },
   {
    "name": "arbol.2",
@@ -93,7 +93,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.902
   },
   {
    "name": "arbol.3",
@@ -104,7 +104,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 1.158
   },
   {
    "name": "arbol.4",
@@ -115,7 +115,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.902
   },
   {
    "name": "arbusto",
@@ -125,7 +125,7 @@
     0.5,
     1.0
    ],
-   "escala": 12.0
+   "escala": 0.39
   },
   {
    "name": "farola",
@@ -137,7 +137,7 @@
    ],
    "flip": true,
    "shadow": true,
-   "escala": 8.0
+   "escala": 0.423
   },
   {
    "name": "palmera",
@@ -159,7 +159,7 @@
     0.5,
     1.0
    ],
-   "escala": 12.0
+   "escala": 0.39
   },
   {
    "name": "quitamiedos",
@@ -169,7 +169,7 @@
     0.5,
     2.0
    ],
-   "escala": 6.0
+   "escala": 0.073
   },
   {
    "name": "quitamiedos.down",
@@ -179,7 +179,7 @@
     0.5,
     1.0
    ],
-   "escala": 6.0
+   "escala": 0.073
   },
   {
    "name": "quitamiedos.doble",
@@ -189,7 +189,7 @@
     0.5,
     1.0
    ],
-   "escala": 6.0
+   "escala": 0.073
   },
   {
    "name": "poste",
@@ -201,7 +201,7 @@
    ],
    "flip": true,
    "shadow": true,
-   "escala": 1.0
+   "escala": 0.049
   },
   {
    "name": "checkpoint",
@@ -212,7 +212,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 0.448
   },
   {
    "name": "ruedas",
@@ -223,7 +223,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0
+   "escala": 0.163
   },
   {
    "name": "pitbox.1",
@@ -233,7 +233,7 @@
     0.5,
     1.0
    ],
-   "escala": 8.0
+   "escala": 1.057
   },
   {
    "name": "pitbox.2",
@@ -243,7 +243,7 @@
     0.5,
     1.0
    ],
-   "escala": 8.0
+   "escala": 1.057
   },
   {
    "name": "pitbox.3",
@@ -253,7 +253,7 @@
     0.5,
     1.0
    ],
-   "escala": 8.0
+   "escala": 1.057
   },
   {
    "name": "start",
@@ -263,7 +263,7 @@
     0.5,
     3.5
    ],
-   "escala": 1.0
+   "escala": 2.359
   },
   {
    "name": "column",
@@ -273,7 +273,7 @@
     0.5,
     1.0
    ],
-   "escala": 1.0
+   "escala": 0.174
   },
   {
    "name": "grada",
@@ -283,7 +283,7 @@
     0.0,
     1.0
    ],
-   "escala": 1.0
+   "escala": 2.295
   },
   {
    "name": "vegetacion.1",
@@ -293,7 +293,7 @@
     0.5,
     1.0
    ],
-   "escala": 12.0
+   "escala": 1.17
   },
   {
    "name": "vegetacion.2",
@@ -303,7 +303,7 @@
     0.5,
     1.0
    ],
-   "escala": 12.0
+   "escala": 1.17
   },
   {
    "name": "vegetacion.3",
@@ -313,7 +313,7 @@
     0.5,
     1.0
    ],
-   "escala": 12.0
+   "escala": 1.17
   },
   {
    "name": "mastil",
@@ -323,7 +323,7 @@
     1.0,
     0.85
    ],
-   "escala": 1.0
+   "escala": 0.073
   },
   {
    "name": "cartel.1",
@@ -334,7 +334,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 10.0
+   "escala": 0.325
   },
   {
    "name": "cartel.2",
@@ -345,7 +345,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 10.0
+   "escala": 0.325
   },
   {
    "name": "cartel.3",
@@ -356,7 +356,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 10.0
+   "escala": 0.325
   },
   {
    "name": "cartel.4",
@@ -367,7 +367,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 10.0
+   "escala": 0.325
   },
   {
    "name": "enemigo.1",
@@ -380,7 +380,7 @@
    "shadow": true,
    "ancho": 64,
    "alto": 33,
-   "escala": 7.0,
+   "escala": 0.4,
    "permanente": true
   },
   {
@@ -394,7 +394,7 @@
    "shadow": true,
    "ancho": 64,
    "alto": 33,
-   "escala": 7.0,
+   "escala": 0.4,
    "permanente": true
   },
   {
@@ -408,7 +408,7 @@
    "shadow": true,
    "ancho": 90,
    "alto": 109,
-   "escala": 8.0,
+   "escala": 0.731,
    "permanente": true
   },
   {
@@ -420,7 +420,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 12.0
+   "escala": 0.963
   },
   {
    "name": "desierto.rocas.lateral.der",
@@ -431,7 +431,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 12.0
+   "escala": 0.963
   },
   {
    "name": "desierto.cactus.1",
@@ -442,7 +442,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.293
   },
   {
    "name": "desierto.cactus.2",
@@ -453,7 +453,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.39
   },
   {
    "name": "desierto.roca.2",
@@ -464,7 +464,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.378
   },
   {
    "name": "desierto.arbusto",
@@ -475,7 +475,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.293
   },
   {
    "name": "desierto.roca.1",
@@ -486,7 +486,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.293
   },
   {
    "name": "obra.valla",
@@ -497,7 +497,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.39
   },
   {
    "name": "obra.cartel",
@@ -508,7 +508,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 20.0
+   "escala": 1.463
   },
   {
    "name": "obra.arena",
@@ -519,7 +519,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 12.0
+   "escala": 0.268
   },
   {
    "name": "obrero.2",
@@ -530,7 +530,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 12.0
+   "escala": 0.293
   },
   {
    "name": "pradera.vegetacion.1",
@@ -542,7 +542,7 @@
    ],
    "shadow": false,
    "flip": true,
-   "escala": 6.0
+   "escala": 0.78
   },
   {
    "name": "pradera.valla",
@@ -554,7 +554,7 @@
    ],
    "shadow": false,
    "flip": true,
-   "escala": 6.0
+   "escala": 0.195
   },
   {
    "name": "pradera.vegetacion.2",
@@ -566,7 +566,7 @@
    ],
    "shadow": false,
    "flip": true,
-   "escala": 6.0
+   "escala": 0.78
   },
   {
    "name": "pradera.posteluz",
@@ -577,7 +577,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 6.0
+   "escala": 0.195
   },
   {
    "name": "pradera.postevalla",
@@ -588,7 +588,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 6.0
+   "escala": 0.061
   },
   {
    "name": "cartel.cool",
@@ -599,7 +599,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 12.0
+   "escala": 1.146
   },
   {
    "name": "pradera.molino",
@@ -612,7 +612,7 @@
    "shadow": false,
    "ancho": 100,
    "alto": 150,
-   "escala": 12.0
+   "escala": 1.219
   },
   {
    "name": "pradera.vaca",
@@ -624,7 +624,7 @@
    ],
    "shadow": false,
    "flip": true,
-   "escala": 12.0
+   "escala": 0.512
   },
   {
    "name": "noche.farola",
@@ -636,7 +636,7 @@
    ],
    "flip": true,
    "shadow": true,
-   "escala": 16.0,
+   "escala": 0.423,
    "filtro": "noche",
    "conservar": [
     [
@@ -659,7 +659,7 @@
     0.5,
     2.0
    ],
-   "escala": 6.0,
+   "escala": 0.073,
    "filtro": "noche"
   },
   {
@@ -670,7 +670,7 @@
     0.5,
     1.0
    ],
-   "escala": 6.0,
+   "escala": 0.073,
    "filtro": "noche"
   },
   {
@@ -681,7 +681,7 @@
     0.5,
     1.0
    ],
-   "escala": 6.0,
+   "escala": 0.073,
    "filtro": "noche"
   },
   {
@@ -695,7 +695,7 @@
    "shadow": true,
    "ancho": 64,
    "alto": 33,
-   "escala": 7.0,
+   "escala": 0.4,
    "permanente": true,
    "filtro": "noche_color"
   },
@@ -710,7 +710,7 @@
    "shadow": true,
    "ancho": 64,
    "alto": 33,
-   "escala": 7.0,
+   "escala": 0.4,
    "permanente": true,
    "filtro": "noche_color"
   },
@@ -725,7 +725,7 @@
    "shadow": true,
    "ancho": 90,
    "alto": 109,
-   "escala": 8.0,
+   "escala": 0.5,
    "permanente": true,
    "filtro": "noche"
   },
@@ -739,7 +739,7 @@
    ],
    "flip": true,
    "shadow": true,
-   "escala": 1.0,
+   "escala": 0.049,
    "filtro": "noche"
   },
   {
@@ -751,7 +751,7 @@
     1.0
    ],
    "shadow": false,
-   "escala": 12.0,
+   "escala": 0.39,
    "flip": true
   },
   {
@@ -763,7 +763,7 @@
     1.0
    ],
    "shadow": true,
-   "escala": 1.0,
+   "escala": 0.448,
    "filtro": "noche",
    "conservar": [
     [

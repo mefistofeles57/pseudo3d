@@ -29,10 +29,10 @@ class Camera:
         self.pitch=0.0
         self.sin_pitch = 0.0
         self.cos_pitch = 0.0
-        self.setPitch(-0.04)
-        self.fov=55.0
+        self.setPitch(-0.05)
+        self.fov=70.0
         self.view_distance=25.0
-        self.height=0.3
+        self.height=0.35
         self.horizon=2*self.h/3
         self.y_move=0.0
 
